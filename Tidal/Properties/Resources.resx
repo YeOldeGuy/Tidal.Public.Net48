@@ -114,4 +114,928 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActivateNonHostError" xml:space="preserve">
+    <value>Attempted to activate a non-active host</value>
+  </data>
+  <data name="AddMagnetTitle" xml:space="preserve">
+    <value>Add Magnet Link</value>
+  </data>
+  <data name="AddTorrent_BadFile" xml:space="preserve">
+    <value>Poorly formed torrent file</value>
+  </data>
+  <data name="AddTorrent_CannotParse_1" xml:space="preserve">
+    <value>Cannot Parse {0}</value>
+    <comment>Parameter: file name that failed to parse</comment>
+  </data>
+  <data name="AddTorrent_DownloadHeader" xml:space="preserve">
+    <value>D/L?</value>
+  </data>
+  <data name="AddTorrent_FileName" xml:space="preserve">
+    <value>File Name</value>
+  </data>
+  <data name="AddTorrent_FileNameHeader" xml:space="preserve">
+    <value>File Name</value>
+  </data>
+  <data name="AddTorrent_FolderName" xml:space="preserve">
+    <value>Folder Name</value>
+  </data>
+  <data name="AddTorrent_SizeHeader" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="AddTorrentTitle" xml:space="preserve">
+    <value>Add Torrent</value>
+  </data>
+  <data name="AggroGCOff" xml:space="preserve">
+    <value>Let .NET GC do its thing</value>
+  </data>
+  <data name="AggroGCOn" xml:space="preserve">
+    <value>Perform GC every 30 seconds</value>
+  </data>
+  <data name="AltDownloadLimit" xml:space="preserve">
+    <value>Alternate download limit in KBps</value>
+  </data>
+  <data name="AltSchedBegins" xml:space="preserve">
+    <value>Begins at</value>
+    <comment>Header for a time picker</comment>
+  </data>
+  <data name="AltSchedDaysHeader" xml:space="preserve">
+    <value>Schedule on days selected</value>
+  </data>
+  <data name="AltSchedDisabled" xml:space="preserve">
+    <value>Alternate speed schedule disaabled</value>
+  </data>
+  <data name="AltSchedEnabled" xml:space="preserve">
+    <value>Alternate speed schedule enabled</value>
+  </data>
+  <data name="AltSchedEnds" xml:space="preserve">
+    <value>Ends at</value>
+    <comment>Header for a time picker</comment>
+  </data>
+  <data name="AltSchedFriday" xml:space="preserve">
+    <value>Fr</value>
+  </data>
+  <data name="AltSchedGroupHeader" xml:space="preserve">
+    <value>Alternate speed scheduling</value>
+    <comment>UPPERCASE</comment>
+  </data>
+  <data name="AltSchedMonday" xml:space="preserve">
+    <value>Mo</value>
+  </data>
+  <data name="AltSchedSaturday" xml:space="preserve">
+    <value>Sa</value>
+  </data>
+  <data name="AltSchedSunday" xml:space="preserve">
+    <value>Su</value>
+    <comment>Days of week need to be SHORT</comment>
+  </data>
+  <data name="AltSchedThursday" xml:space="preserve">
+    <value>Th</value>
+  </data>
+  <data name="AltSchedTuesday" xml:space="preserve">
+    <value>Tu</value>
+  </data>
+  <data name="AltSchedWednesday" xml:space="preserve">
+    <value>We</value>
+  </data>
+  <data name="AltSpeedDisabled" xml:space="preserve">
+    <value>Alternate speeds disabled</value>
+  </data>
+  <data name="AltSpeedEnabled" xml:space="preserve">
+    <value>Alternate speeds enabled</value>
+  </data>
+  <data name="AltSpeedGroupHeader" xml:space="preserve">
+    <value>Alternate Speed Limits</value>
+    <comment>UPPERCASE</comment>
+  </data>
+  <data name="AltUploadLimit" xml:space="preserve">
+    <value>Alternate upload limit in KBps</value>
+  </data>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Tidal</value>
+  </data>
+  <data name="ApplicationSettingsTitle" xml:space="preserve">
+    <value>Local Application Settings</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ClearSorting" xml:space="preserve">
+    <value>Clear sorting</value>
+  </data>
+  <data name="CompletedFilesSettings" xml:space="preserve">
+    <value>Completed Files Settings</value>
+    <comment>Gets converted to UPPERCASE</comment>
+  </data>
+  <data name="DefaultThemeHeader" xml:space="preserve">
+    <value>Default Theme</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DhtOff" xml:space="preserve">
+    <value>DHT Disabled</value>
+  </data>
+  <data name="DhtOn" xml:space="preserve">
+    <value>DHT Enabled</value>
+  </data>
+  <data name="DirectoryPathWatermark" xml:space="preserve">
+    <value>directory path</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Display Name</value>
+  </data>
+  <data name="DownloadComplete" xml:space="preserve">
+    <value>Download Complete</value>
+  </data>
+  <data name="DownloadComplete_1" xml:space="preserve">
+    <value>{0} download complete</value>
+    <comment>parameter = torrent name</comment>
+  </data>
+  <data name="DownloadDirectory" xml:space="preserve">
+    <value>Download Directory</value>
+  </data>
+  <data name="DownloadLimit" xml:space="preserve">
+    <value>Download limit in KBps</value>
+  </data>
+  <data name="DownloadLimited" xml:space="preserve">
+    <value>Download: Limited</value>
+  </data>
+  <data name="DownloadNoLimits" xml:space="preserve">
+    <value>Download: No Limits</value>
+  </data>
+  <data name="DownloadQueueHeader" xml:space="preserve">
+    <value>Download queue</value>
+    <comment>UPPERCASE</comment>
+  </data>
+  <data name="DownloadQueueLimit" xml:space="preserve">
+    <value>Queue Depth</value>
+  </data>
+  <data name="DownloadQueueOff" xml:space="preserve">
+    <value>No restriction</value>
+  </data>
+  <data name="DownloadQueueOn" xml:space="preserve">
+    <value>Limit number of downloads</value>
+  </data>
+  <data name="DownloadQueueSize" xml:space="preserve">
+    <value>Download Queue Size</value>
+  </data>
+  <data name="DownloadSettings" xml:space="preserve">
+    <value>Download Settings</value>
+  </data>
+  <data name="EncryptedConnection" xml:space="preserve">
+    <value>Encrypted Connection</value>
+  </data>
+  <data name="EncryptionGroupHeader" xml:space="preserve">
+    <value>Encryption Settings</value>
+  </data>
+  <data name="FileGrid_Friendly_Name" xml:space="preserve">
+    <value>File Name</value>
+  </data>
+  <data name="FileGrid_Friendly_Size" xml:space="preserve">
+    <value>File Size</value>
+  </data>
+  <data name="FileGrid_Friendly_Wanted" xml:space="preserve">
+    <value>File Wanted?</value>
+  </data>
+  <data name="FileGrid_NameHeader" xml:space="preserve">
+    <value>File Name</value>
+  </data>
+  <data name="FirstHostAccountHeader" xml:space="preserve">
+    <value>Account Name (user assigned)</value>
+  </data>
+  <data name="FirstHostAuthToggleOff" xml:space="preserve">
+    <value>Don't use authentication</value>
+  </data>
+  <data name="FirstHostAuthToggleOn" xml:space="preserve">
+    <value>Use authentication</value>
+  </data>
+  <data name="FirstHostIpAddress" xml:space="preserve">
+    <value>IP Address of host</value>
+  </data>
+  <data name="FirstHostPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="FirstHostPortNumber" xml:space="preserve">
+    <value>Port (normally 9091)</value>
+  </data>
+  <data name="FirstHostTitle" xml:space="preserve">
+    <value>First Host/Client</value>
+  </data>
+  <data name="FirstHostUserName" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="FromLocalFile" xml:space="preserve">
+    <value>from local file</value>
+    <comment>See #63</comment>
+  </data>
+  <data name="GeoDbFileAge_2" xml:space="preserve">
+    <value>{0} is {1} old</value>
+    <comment>P1: GeoDbFile name, P2: Age</comment>
+  </data>
+  <data name="GeoDBFileDownloading_1" xml:space="preserve">
+    <value>{0} downloading</value>
+  </data>
+  <data name="GeoDBFileNotFound_1" xml:space="preserve">
+    <value>{0} not found</value>
+  </data>
+  <data name="GeoService_CannotDelete_1" xml:space="preserve">
+    <value>Cannot delete {0}</value>
+    <comment>Arg 0: filename of file not deleted</comment>
+  </data>
+  <data name="GeoService_CannotWriteTempFile_1" xml:space="preserve">
+    <value>Cannot write {0}</value>
+    <comment>Arg 0: filename of file not written</comment>
+  </data>
+  <data name="GeoService_DownloadedGeoIP2" xml:space="preserve">
+    <value>Downloaded and processed the GeoLite2-City file</value>
+  </data>
+  <data name="GeoService_DownloadWarning_2" xml:space="preserve">
+    <value>Error Downloading {0}: {1}</value>
+    <comment>Arg 0: filename, Arg1: exception message</comment>
+  </data>
+  <data name="GeoService_FileError" xml:space="preserve">
+    <value>File I/O Error</value>
+  </data>
+  <data name="GeoService_FilesNeeded" xml:space="preserve">
+    <value>Need a '.mmdb.gz' or '.mmdb' file</value>
+  </data>
+  <data name="GeoService_StoredNewDBFile" xml:space="preserve">
+    <value>Stored new GeoIP2 database file</value>
+  </data>
+  <data name="GeoService_Successful" xml:space="preserve">
+    <value>Successful</value>
+  </data>
+  <data name="GeoService_UnknownCity" xml:space="preserve">
+    <value>Unknown City</value>
+  </data>
+  <data name="GeoService_UnknownFormat" xml:space="preserve">
+    <value>Unknown format</value>
+  </data>
+  <data name="GeoService_WriteError" xml:space="preserve">
+    <value>Write Error</value>
+  </data>
+  <data name="GetFromMaxMindButton" xml:space="preserve">
+    <value>Get from MaxMind</value>
+  </data>
+  <data name="GetMaxMindHeader" xml:space="preserve">
+    <value>Retrieve GeoLite2-City from MaxMind</value>
+  </data>
+  <data name="HostAddressEmptyError" xml:space="preserve">
+    <value>Address must not be empty</value>
+  </data>
+  <data name="HostNameEmptyError" xml:space="preserve">
+    <value>Name must not be empty</value>
+  </data>
+  <data name="HostPageAddress" xml:space="preserve">
+    <value>IP Address</value>
+  </data>
+  <data name="HostPageDeleteButton" xml:space="preserve">
+    <value>delete</value>
+  </data>
+  <data name="HostPageDeleteTooltip" xml:space="preserve">
+    <value>Remove the selected host</value>
+  </data>
+  <data name="HostPageHostName" xml:space="preserve">
+    <value>Host/Client Name</value>
+    <comment>user assigned</comment>
+  </data>
+  <data name="HostPageNewButton" xml:space="preserve">
+    <value>new</value>
+    <comment>lower case motif here</comment>
+  </data>
+  <data name="HostPageNewTooltip" xml:space="preserve">
+    <value>Add a new host</value>
+  </data>
+  <data name="HostPagePassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="HostPagePort" xml:space="preserve">
+    <value>Port Number</value>
+  </data>
+  <data name="HostPageRevertButton" xml:space="preserve">
+    <value>revert</value>
+  </data>
+  <data name="HostPageRevertTooltip" xml:space="preserve">
+    <value>Undo all changes since the last save</value>
+  </data>
+  <data name="HostPageSaveButton" xml:space="preserve">
+    <value>save</value>
+  </data>
+  <data name="HostPageSaveTooltip" xml:space="preserve">
+    <value>Save the hosts to the local storage</value>
+  </data>
+  <data name="HostPageSelectButton" xml:space="preserve">
+    <value>activate</value>
+  </data>
+  <data name="HostPageSelectTooltip" xml:space="preserve">
+    <value>Make the selected host the active one</value>
+  </data>
+  <data name="HostPageUseAuth" xml:space="preserve">
+    <value>Use Authentication</value>
+    <comment>checkbox content</comment>
+  </data>
+  <data name="HostPageUserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="HostTimeoutHeader_1" xml:space="preserve">
+    <value>Possible host failure at {0}</value>
+    <comment>parameter = time the message was posted</comment>
+  </data>
+  <data name="HostTimeoutMessage_1" xml:space="preserve">
+    <value>No peers seen in {0}</value>
+    <comment>parameter = timespan since last peer seen</comment>
+  </data>
+  <data name="HostUserColonError" xml:space="preserve">
+    <value>User name must not have the colon (:) character</value>
+  </data>
+  <data name="HostUserEmptyError" xml:space="preserve">
+    <value>User name must not be empty</value>
+  </data>
+  <data name="IncomingPort" xml:space="preserve">
+    <value>Incoming Port</value>
+  </data>
+  <data name="IncompleteDirectory" xml:space="preserve">
+    <value>Incomplete Downloads Directory</value>
+  </data>
+  <data name="IncompleteDirEnabledOff" xml:space="preserve">
+    <value>Don't use separate directory</value>
+    <comment>Toggle switch OFF content</comment>
+  </data>
+  <data name="IncompleteDirEnabledOn" xml:space="preserve">
+    <value>Use separate directory</value>
+    <comment>Toggle switch ON content</comment>
+  </data>
+  <data name="IncompleteFileSettings" xml:space="preserve">
+    <value>Incomplete file settings</value>
+    <comment>Get converted to UPPERCASE</comment>
+  </data>
+  <data name="InMinutes" xml:space="preserve">
+    <value>in minutes</value>
+  </data>
+  <data name="LoadMMDB_Button" xml:space="preserve">
+    <value>Load MMDB File</value>
+  </data>
+  <data name="LpdOff" xml:space="preserve">
+    <value>LPD Disabled</value>
+  </data>
+  <data name="LpdOn" xml:space="preserve">
+    <value>LPD Enabled</value>
+  </data>
+  <data name="MagnetLink" xml:space="preserve">
+    <value>Magnet Link</value>
+  </data>
+  <data name="MainPageTitle" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="MaxMindGroupHeader" xml:space="preserve">
+    <value>Location Lookup Settings</value>
+  </data>
+  <data name="MaxMindLicense" xml:space="preserve">
+    <value>License Key</value>
+  </data>
+  <data name="MaxMindLicenseWatermark" xml:space="preserve">
+    <value>license key received from MaxMind</value>
+  </data>
+  <data name="MaxMindLoginInfoHeader" xml:space="preserve">
+    <value>MaxMind Credentials</value>
+  </data>
+  <data name="MaxMindPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="MaxMindPasswordWatermark" xml:space="preserve">
+    <value>password for MaxMind (not the license)</value>
+  </data>
+  <data name="MaxMindPermaLink" xml:space="preserve">
+    <value>https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&amp;license_key=YOUR_LICENSE_KEY&amp;suffix=tar.gz</value>
+  </data>
+  <data name="MaxMindUserName" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="MaxMindUserNameWatermark" xml:space="preserve">
+    <value>the email you used to sign up</value>
+  </data>
+  <data name="MiscSettingsGroupHeader" xml:space="preserve">
+    <value>Miscellaneous Settings</value>
+  </data>
+  <data name="MMDB Status" xml:space="preserve">
+    <value>MMDB Status</value>
+  </data>
+  <data name="NetworkSettings" xml:space="preserve">
+    <value>Networking Settings</value>
+  </data>
+  <data name="NewHostName" xml:space="preserve">
+    <value>New Host/Client</value>
+  </data>
+  <data name="NoHostErrorHeader" xml:space="preserve">
+    <value>No Active Host Found</value>
+  </data>
+  <data name="NoHostErrorMessage" xml:space="preserve">
+    <value>Activate a running host, or enter a new one</value>
+  </data>
+  <data name="NoPeerTimeoutPart1" xml:space="preserve">
+    <value>No Peer Timeout</value>
+    <comment>Part 1 of explanation, this should be bold</comment>
+  </data>
+  <data name="NoPeerTimeoutPart2" xml:space="preserve">
+    <value>is the amount of time the app can go without seeing any peers and reporting a possible loss of connection to the internet.</value>
+    <comment>Part 2</comment>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OkToRemove" xml:space="preserve">
+    <value>Ok to remove the torrents?</value>
+  </data>
+  <data name="OpenMMDBFilePickerFilter" xml:space="preserve">
+    <value>MMDB Files (*.mmdb)|*.mmdb;*.mmdb.gz</value>
+    <comment>needs .mmdb and .mmdb.gz files</comment>
+  </data>
+  <data name="OpenMMDBFilePickerTitle" xml:space="preserve">
+    <value>Open GeoIP2 File</value>
+  </data>
+  <data name="OverallPeerLimit" xml:space="preserve">
+    <value>Overall Peer Limit</value>
+  </data>
+  <data name="ParsingError" xml:space="preserve">
+    <value>Parsing Error</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="PeerCollection_NoLocation" xml:space="preserve">
+    <value>No location found</value>
+  </data>
+  <data name="PeerGrid_Address" xml:space="preserve">
+    <value>Peer Address</value>
+  </data>
+  <data name="PeerGrid_AddressHeader" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="PeerGrid_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="PeerGrid_Completed" xml:space="preserve">
+    <value>completed</value>
+  </data>
+  <data name="PeerGrid_Friendly_Address" xml:space="preserve">
+    <value>IP Address</value>
+  </data>
+  <data name="PeerGrid_Friendly_DownloadRate" xml:space="preserve">
+    <value>Download Rate</value>
+  </data>
+  <data name="PeerGrid_Friendly_Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="PeerGrid_Friendly_UploadRate" xml:space="preserve">
+    <value>Upload Rate</value>
+  </data>
+  <data name="PeerGrid_LocationHeader" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="PeerGrid_PeerHas" xml:space="preserve">
+    <value>Peer has</value>
+    <comment>Will look like "Peer has 45.2% completed"</comment>
+  </data>
+  <data name="PeerGrid_RateHeader" xml:space="preserve">
+    <value>RATE</value>
+    <comment>Need to be uppercase to match default header style</comment>
+  </data>
+  <data name="PeerGrid_UnknownLocation" xml:space="preserve">
+    <value>Unknown Location</value>
+    <comment>Fallback value when location is null</comment>
+  </data>
+  <data name="PeerLimitsHeader" xml:space="preserve">
+    <value>Peer Limits</value>
+  </data>
+  <data name="PerTorrentPeerLimit" xml:space="preserve">
+    <value>Per Torrent Peer Limit</value>
+  </data>
+  <data name="PexOff" xml:space="preserve">
+    <value>PEX Disabled</value>
+  </data>
+  <data name="PexOn" xml:space="preserve">
+    <value>PEX Enabled</value>
+  </data>
+  <data name="PortDetails" xml:space="preserve">
+    <value>Incoming Port Details</value>
+    <comment>UPPERCASE</comment>
+  </data>
+  <data name="PortRandomizeOff" xml:space="preserve">
+    <value>Leave port alone on startup</value>
+  </data>
+  <data name="PortRandomizeOn" xml:space="preserve">
+    <value>Randomize port on startup</value>
+  </data>
+  <data name="Preferred" xml:space="preserve">
+    <value>Preferred</value>
+  </data>
+  <data name="PrimarySpeedLimits" xml:space="preserve">
+    <value>Primary Speed Limits</value>
+    <comment>UPPERCASEd</comment>
+  </data>
+  <data name="PropertySetFailHeader" xml:space="preserve">
+    <value>Fail to Set Property</value>
+  </data>
+  <data name="PropertySetFailWarning_1" xml:space="preserve">
+    <value>Unable to set value of {0}</value>
+    <comment>P1: property name</comment>
+  </data>
+  <data name="ProtocolHeader" xml:space="preserve">
+    <value>Protocol Modifiers</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+    <comment>Full caption: Refresh GeoLite2-City from local file</comment>
+  </data>
+  <data name="RemoveDataParameter" xml:space="preserve">
+    <value>removedata</value>
+  </data>
+  <data name="RemoveDataToo" xml:space="preserve">
+    <value>Remove data, too?</value>
+  </data>
+  <data name="RemoveTorrent_DataToo" xml:space="preserve">
+    <value>Remove Data</value>
+  </data>
+  <data name="RemoveTorrent_DataTooToolTip" xml:space="preserve">
+    <value>Remove torrent and associated data</value>
+  </data>
+  <data name="RemoveTorrent_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="RemoveTorrent_RemoveToolTip" xml:space="preserve">
+    <value>Remove just the torrents, not the data</value>
+  </data>
+  <data name="RemoveTorrents_Title" xml:space="preserve">
+    <value>Remove Torrents</value>
+  </data>
+  <data name="RemoveTorrentsDataToo" xml:space="preserve">
+    <value>data</value>
+  </data>
+  <data name="RemoveTorrentsNoData" xml:space="preserve">
+    <value>nodata</value>
+  </data>
+  <data name="RemoveTorrentsTitle" xml:space="preserve">
+    <value>Remove Torrents</value>
+  </data>
+  <data name="RenamePartialFilesOff" xml:space="preserve">
+    <value>Don't rename partial files</value>
+    <comment>Toggle switch OFF content</comment>
+  </data>
+  <data name="RenamePartialFilesOn" xml:space="preserve">
+    <value>Rename partial files (*.part)</value>
+    <comment>Toggle switch ON content</comment>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="RetrievePart1" xml:space="preserve">
+    <value>For information about getting the</value>
+  </data>
+  <data name="RetrievePart2" xml:space="preserve">
+    <value>GeoLite2-City files, visit the</value>
+  </data>
+  <data name="RetrievePart3" xml:space="preserve">
+    <value>site. If you sign up, enter the login information you get from them in the fields above, press the button, and with any luck, you'll get location information on displayed peers.</value>
+  </data>
+  <data name="SeedingComplete" xml:space="preserve">
+    <value>Seeding Complete</value>
+  </data>
+  <data name="SeedingComplete_1" xml:space="preserve">
+    <value>{0} seeding complete</value>
+    <comment>parameter = torrent name</comment>
+  </data>
+  <data name="SeedingPageTitle" xml:space="preserve">
+    <value>Seeding Settings</value>
+  </data>
+  <data name="SeedingRatioHeader" xml:space="preserve">
+    <value>Seeding Ratio Rules</value>
+    <comment>Gets UPPERCASEd</comment>
+  </data>
+  <data name="SeedingRatioLimitHeader" xml:space="preserve">
+    <value>Ratio Limit</value>
+  </data>
+  <data name="SeedingRatioOff" xml:space="preserve">
+    <value>No limit on ratio</value>
+  </data>
+  <data name="SeedingRatioOn" xml:space="preserve">
+    <value>Stop reaching ratio</value>
+  </data>
+  <data name="SeedingTimeHeader" xml:space="preserve">
+    <value>Seeding time rules</value>
+    <comment>UPPERCASE</comment>
+  </data>
+  <data name="SeedingTimeInMinutes" xml:space="preserve">
+    <value>Timeout in minutes</value>
+  </data>
+  <data name="SeedingTimeLimitOff" xml:space="preserve">
+    <value>No timeout limit</value>
+    <comment>Toggle switch OFF content</comment>
+  </data>
+  <data name="SeedingTimeLimitOn" xml:space="preserve">
+    <value>Stop after time reached</value>
+    <comment>Toggle switch ON content</comment>
+  </data>
+  <data name="ShellAddMagnet" xml:space="preserve">
+    <value>magnet</value>
+  </data>
+  <data name="ShellAddMagnetToolTip" xml:space="preserve">
+    <value>Add magnet link to client</value>
+  </data>
+  <data name="ShellAddTorrent" xml:space="preserve">
+    <value>torrent</value>
+  </data>
+  <data name="ShellAddTorrentToolTip" xml:space="preserve">
+    <value>Open and add a torrent file to the client</value>
+  </data>
+  <data name="ShellFreeSpace" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="ShellGoBackButton" xml:space="preserve">
+    <value>Go back</value>
+  </data>
+  <data name="ShellGoBackToolTip" xml:space="preserve">
+    <value>Go back</value>
+  </data>
+  <data name="ShellHosts" xml:space="preserve">
+    <value>Hosts</value>
+  </data>
+  <data name="ShellHostsToolTip" xml:space="preserve">
+    <value>Add, Delete, or Edit the host clients the app knows of</value>
+  </data>
+  <data name="ShellMain" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="ShellNoConnection" xml:space="preserve">
+    <value>No Connection</value>
+  </data>
+  <data name="ShellSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="ShellSettingsToolTip" xml:space="preserve">
+    <value>Change parameters on the host client or this application</value>
+  </data>
+  <data name="ShellStandby" xml:space="preserve">
+    <value>Standby...</value>
+  </data>
+  <data name="ShellUnlimited" xml:space="preserve">
+    <value>No Limit</value>
+  </data>
+  <data name="ShellViewFatality" xml:space="preserve">
+    <value>Fatality</value>
+    <comment>The error dialog header</comment>
+  </data>
+  <data name="ShellViewMode_NoHostTitle" xml:space="preserve">
+    <value>No Connection</value>
+  </data>
+  <data name="ShellViewMode_NormalTitle" xml:space="preserve">
+    <value>Tidal</value>
+  </data>
+  <data name="ShellVM_ActivatedHost" xml:space="preserve">
+    <value>Activated Host</value>
+  </data>
+  <data name="ShellVM_ActivatedHostDetail_2" xml:space="preserve">
+    <value>using {0} @ {1}</value>
+    <comment>using {active.Name} @ {active.Address}</comment>
+  </data>
+  <data name="ShellVM_Fatality" xml:space="preserve">
+    <value>Fatality</value>
+  </data>
+  <data name="ShellVM_UnknownHost" xml:space="preserve">
+    <value>No Host</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="ThemeDark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="ThemeLight" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="ThemeSystemDefault" xml:space="preserve">
+    <value>System Default</value>
+  </data>
+  <data name="TimeSpeedRestrictions" xml:space="preserve">
+    <value>Time/Speed Restrictions</value>
+  </data>
+  <data name="Tolerated" xml:space="preserve">
+    <value>Tolerated</value>
+  </data>
+  <data name="TorrentExists" xml:space="preserve">
+    <value>Torrent Exists</value>
+  </data>
+  <data name="TorrentExists_1" xml:space="preserve">
+    <value>{0} already exists on host</value>
+    <comment>parameter = torrent name</comment>
+  </data>
+  <data name="TorrentGrid_ActiveHeader" xml:space="preserve">
+    <value>Activity</value>
+  </data>
+  <data name="TorrentGrid_ActivityAdded" xml:space="preserve">
+    <value>Added</value>
+  </data>
+  <data name="TorrentGrid_ActivityFinished" xml:space="preserve">
+    <value>Finished</value>
+  </data>
+  <data name="TorrentGrid_ActivityLastActive" xml:space="preserve">
+    <value>Last Activity</value>
+  </data>
+  <data name="TorrentGrid_ActualRate" xml:space="preserve">
+    <value>Actual Rate</value>
+    <comment>As opposed to average rate</comment>
+  </data>
+  <data name="TorrentGrid_Complete" xml:space="preserve">
+    <value>Complete</value>
+    <comment>Like: "Downloading 94.5% Complete"</comment>
+  </data>
+  <data name="TorrentGrid_Downloading" xml:space="preserve">
+    <value>Downloading</value>
+    <comment>Like: "Downloading 94.5% Complete"</comment>
+  </data>
+  <data name="TorrentGrid_Downloads" xml:space="preserve">
+    <value>Downloads</value>
+  </data>
+  <data name="TorrentGrid_ETAHeader" xml:space="preserve">
+    <value>ETA</value>
+  </data>
+  <data name="TorrentGrid_ETATooltipHeader" xml:space="preserve">
+    <value>Estimated time to completion</value>
+  </data>
+  <data name="TorrentGrid_ETATooltipInactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="TorrentGrid_ETATooltipInactiveExplanation" xml:space="preserve">
+    <value>No active traffic</value>
+  </data>
+  <data name="TorrentGrid_ETATooltipUnlimited" xml:space="preserve">
+    <value>Unlimited</value>
+  </data>
+  <data name="TorrentGrid_ETATooltipUnlimitedExplanation" xml:space="preserve">
+    <value>No completion time</value>
+  </data>
+  <data name="TorrentGrid_Friendly_Activity" xml:space="preserve">
+    <value>Latest Activity</value>
+  </data>
+  <data name="TorrentGrid_Friendly_DownloadRate" xml:space="preserve">
+    <value>Download Speed</value>
+  </data>
+  <data name="TorrentGrid_Friendly_ETA" xml:space="preserve">
+    <value>Est. Time to Completion</value>
+  </data>
+  <data name="TorrentGrid_Friendly_Name" xml:space="preserve">
+    <value>Torrent Name</value>
+  </data>
+  <data name="TorrentGrid_Friendly_Peers" xml:space="preserve">
+    <value>Peers Connected</value>
+  </data>
+  <data name="TorrentGrid_Friendly_Size" xml:space="preserve">
+    <value>Total Size</value>
+  </data>
+  <data name="TorrentGrid_Friendly_UploadRate" xml:space="preserve">
+    <value>Upload Speed</value>
+  </data>
+  <data name="TorrentGrid_Friendly_UploadRatio" xml:space="preserve">
+    <value>Seeding Ratio</value>
+  </data>
+  <data name="TorrentGrid_Leeches" xml:space="preserve">
+    <value>Leeches</value>
+  </data>
+  <data name="TorrentGrid_NameHeader" xml:space="preserve">
+    <value>Name</value>
+    <comment>Grid header value</comment>
+  </data>
+  <data name="TorrentGrid_NormalSeedingItem" xml:space="preserve">
+    <value>Normal Seeding</value>
+  </data>
+  <data name="TorrentGrid_Peers" xml:space="preserve">
+    <value>Peers</value>
+  </data>
+  <data name="TorrentGrid_PeersHeader" xml:space="preserve">
+    <value>Peers</value>
+  </data>
+  <data name="TorrentGrid_PeersHeaderTooltip" xml:space="preserve">
+    <value>Peers + Seeds/Leeches</value>
+    <comment>tooltip for the header</comment>
+  </data>
+  <data name="TorrentGrid_PropertiesItem" xml:space="preserve">
+    <value>Properties...</value>
+  </data>
+  <data name="TorrentGrid_QuickMenu" xml:space="preserve">
+    <value>Quick Properties</value>
+    <comment>Submenu</comment>
+  </data>
+  <data name="TorrentGrid_RateHeader" xml:space="preserve">
+    <value>RATE</value>
+    <comment>This will be uppercased</comment>
+  </data>
+  <data name="TorrentGrid_RatioHeader" xml:space="preserve">
+    <value>Ratio</value>
+  </data>
+  <data name="TorrentGrid_ReannounceItem" xml:space="preserve">
+    <value>Reannouce (get more peers)</value>
+  </data>
+  <data name="TorrentGrid_RemoveItem" xml:space="preserve">
+    <value>Remove Torrent</value>
+    <comment>Still part of the context menu</comment>
+  </data>
+  <data name="TorrentGrid_Seeding" xml:space="preserve">
+    <value>Seeding</value>
+    <comment>Like: "Seeding 14.9% Complete"</comment>
+  </data>
+  <data name="TorrentGrid_Seeds" xml:space="preserve">
+    <value>Seeds</value>
+  </data>
+  <data name="TorrentGrid_SizeHeader" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="TorrentGrid_StartItem" xml:space="preserve">
+    <value>Start Torrent</value>
+    <comment>Part of the context menu for torrent items</comment>
+  </data>
+  <data name="TorrentGrid_StopItem" xml:space="preserve">
+    <value>Stop Torrent</value>
+  </data>
+  <data name="TorrentGrid_Target" xml:space="preserve">
+    <value>Target</value>
+  </data>
+  <data name="TorrentGrid_UnlimitedSeedingItem" xml:space="preserve">
+    <value>Unlimited Seeding</value>
+  </data>
+  <data name="TorrentGrid_Uploaded" xml:space="preserve">
+    <value>Uploaded</value>
+  </data>
+  <data name="TorrentParsingError_1" xml:space="preserve">
+    <value>Torrent file {0} couldn't be parsed</value>
+    <comment>parameter = file name</comment>
+  </data>
+  <data name="TorrentProps_DismissButton" xml:space="preserve">
+    <value>Dismiss</value>
+  </data>
+  <data name="TorrentProps_DownloadLimitedOff" xml:space="preserve">
+    <value>Unlimited download rate</value>
+  </data>
+  <data name="TorrentProps_DownloadLimitedOn" xml:space="preserve">
+    <value>Limit download rate</value>
+  </data>
+  <data name="TorrentProps_HonorGlobal" xml:space="preserve">
+    <value>Honor Global Settings</value>
+  </data>
+  <data name="TorrentProps_IdleGlobal" xml:space="preserve">
+    <value>Use Global Settings</value>
+    <comment>Seed ratio dropdown value</comment>
+  </data>
+  <data name="TorrentProps_IdleTorrent" xml:space="preserve">
+    <value>Use Torrent Settings</value>
+  </data>
+  <data name="TorrentProps_IdleUnlimited" xml:space="preserve">
+    <value>Unlimited Seeding</value>
+  </data>
+  <data name="TorrentProps_Override" xml:space="preserve">
+    <value>Override Global Settings</value>
+  </data>
+  <data name="TorrentProps_PeerLimitHeader" xml:space="preserve">
+    <value>Peers Allowed</value>
+  </data>
+  <data name="TorrentProps_SeedIdleHeader" xml:space="preserve">
+    <value>Seed Idle Limits in minutes</value>
+  </data>
+  <data name="TorrentProps_SeedRatioHeader" xml:space="preserve">
+    <value>Seed Ratio Limits</value>
+  </data>
+  <data name="TorrentProps_Title" xml:space="preserve">
+    <value>Torrent Properties</value>
+  </data>
+  <data name="TorrentProps_UploadLimitedOff" xml:space="preserve">
+    <value>Unlimited upload rate</value>
+  </data>
+  <data name="TorrentProps_UploadLimitedOn" xml:space="preserve">
+    <value>Limit upload rate</value>
+  </data>
+  <data name="TorrentsParameter" xml:space="preserve">
+    <value>torrents</value>
+  </data>
+  <data name="Trackers" xml:space="preserve">
+    <value>Trackers</value>
+  </data>
+  <data name="UnencryptedConnection" xml:space="preserve">
+    <value>Unencrypted Connection</value>
+  </data>
+  <data name="UploadLimit" xml:space="preserve">
+    <value>Upload limit in KBps</value>
+  </data>
+  <data name="UploadLimited" xml:space="preserve">
+    <value>Upload: Limited</value>
+  </data>
+  <data name="UploadNoLimits" xml:space="preserve">
+    <value>Upload: No Limits</value>
+  </data>
+  <data name="UseAggroGC" xml:space="preserve">
+    <value>Use aggressive garbage collection</value>
+  </data>
+  <data name="UtpOff" xml:space="preserve">
+    <value>UTP Disabled</value>
+  </data>
+  <data name="UtpOn" xml:space="preserve">
+    <value>UTP Enabled</value>
+  </data>
 </root>

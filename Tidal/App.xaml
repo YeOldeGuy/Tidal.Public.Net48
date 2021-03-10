@@ -1,9 +1,36 @@
-﻿<Application x:Class="Tidal.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Tidal"
-             StartupUri="MainWindow.xaml">
-    <Application.Resources>
+﻿<prism:PrismApplication x:Class="Tidal.App"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:prism="http://prismlibrary.com/"
+                        xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--
+                    MahApps.Metro resource dictionaries.
+                    Learn more about using MahApps.Metro at https://mahapps.com/
+                -->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+
+                <!--  Accent and AppTheme setting  -->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+
+
+                <ResourceDictionary Source="Styles/_FontSizes.xaml" />
+                <ResourceDictionary Source="Styles/_Thickness.xaml" />
+                <ResourceDictionary Source="Styles/MetroWindow.xaml" />
+                <ResourceDictionary Source="Styles/TextBlock.xaml" />
+                <ResourceDictionary Source="Styles/UserControl.xaml" />
+                <ResourceDictionary Source="Styles/Custom.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--  tooltip values  -->
+            <sys:Int32 x:Key="ShowDelay">100</sys:Int32>
+            <sys:Int32 x:Key="ShowDuration">12000</sys:Int32>
+            <sys:Int32 x:Key="LongShowDuration">60000</sys:Int32>
+
+        </ResourceDictionary>
     </Application.Resources>
-</Application>
+</prism:PrismApplication>

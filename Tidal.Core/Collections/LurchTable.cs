@@ -924,7 +924,7 @@ namespace Tidal.Core.Collections
         /// containing the values in the <see
         /// cref="T:System.Collections.Generic.IDictionary`2"/>.
         /// </summary>
-        public ValueCollection Values { get { return _valueCollection = _valueCollection ?? new ValueCollection(this); } }
+        public ValueCollection Values => _valueCollection = _valueCollection ?? new ValueCollection(this);
         [Obsolete] ICollection<TValue> IDictionary<TKey, TValue>.Values { get { return Values; } }
 
         #endregion

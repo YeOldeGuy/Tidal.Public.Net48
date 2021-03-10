@@ -8,9 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
-namespace Tidal.Properties
-{
+namespace Tidal.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -18,52 +19,2654 @@ namespace Tidal.Properties
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources
-    {
-
+    internal class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if ((resourceMan == null))
-                {
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Tidal.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attempted to activate a non-active host.
+        /// </summary>
+        internal static string ActivateNonHostError {
+            get {
+                return ResourceManager.GetString("ActivateNonHostError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Magnet Link.
+        /// </summary>
+        internal static string AddMagnetTitle {
+            get {
+                return ResourceManager.GetString("AddMagnetTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Poorly formed torrent file.
+        /// </summary>
+        internal static string AddTorrent_BadFile {
+            get {
+                return ResourceManager.GetString("AddTorrent_BadFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot Parse {0}.
+        /// </summary>
+        internal static string AddTorrent_CannotParse_1 {
+            get {
+                return ResourceManager.GetString("AddTorrent_CannotParse_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to D/L?.
+        /// </summary>
+        internal static string AddTorrent_DownloadHeader {
+            get {
+                return ResourceManager.GetString("AddTorrent_DownloadHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Name.
+        /// </summary>
+        internal static string AddTorrent_FileName {
+            get {
+                return ResourceManager.GetString("AddTorrent_FileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Name.
+        /// </summary>
+        internal static string AddTorrent_FileNameHeader {
+            get {
+                return ResourceManager.GetString("AddTorrent_FileNameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder Name.
+        /// </summary>
+        internal static string AddTorrent_FolderName {
+            get {
+                return ResourceManager.GetString("AddTorrent_FolderName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Size.
+        /// </summary>
+        internal static string AddTorrent_SizeHeader {
+            get {
+                return ResourceManager.GetString("AddTorrent_SizeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Torrent.
+        /// </summary>
+        internal static string AddTorrentTitle {
+            get {
+                return ResourceManager.GetString("AddTorrentTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Let .NET GC do its thing.
+        /// </summary>
+        internal static string AggroGCOff {
+            get {
+                return ResourceManager.GetString("AggroGCOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Perform GC every 30 seconds.
+        /// </summary>
+        internal static string AggroGCOn {
+            get {
+                return ResourceManager.GetString("AggroGCOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternate download limit in KBps.
+        /// </summary>
+        internal static string AltDownloadLimit {
+            get {
+                return ResourceManager.GetString("AltDownloadLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Begins at.
+        /// </summary>
+        internal static string AltSchedBegins {
+            get {
+                return ResourceManager.GetString("AltSchedBegins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schedule on days selected.
+        /// </summary>
+        internal static string AltSchedDaysHeader {
+            get {
+                return ResourceManager.GetString("AltSchedDaysHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternate speed schedule disaabled.
+        /// </summary>
+        internal static string AltSchedDisabled {
+            get {
+                return ResourceManager.GetString("AltSchedDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternate speed schedule enabled.
+        /// </summary>
+        internal static string AltSchedEnabled {
+            get {
+                return ResourceManager.GetString("AltSchedEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ends at.
+        /// </summary>
+        internal static string AltSchedEnds {
+            get {
+                return ResourceManager.GetString("AltSchedEnds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fr.
+        /// </summary>
+        internal static string AltSchedFriday {
+            get {
+                return ResourceManager.GetString("AltSchedFriday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternate speed scheduling.
+        /// </summary>
+        internal static string AltSchedGroupHeader {
+            get {
+                return ResourceManager.GetString("AltSchedGroupHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mo.
+        /// </summary>
+        internal static string AltSchedMonday {
+            get {
+                return ResourceManager.GetString("AltSchedMonday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sa.
+        /// </summary>
+        internal static string AltSchedSaturday {
+            get {
+                return ResourceManager.GetString("AltSchedSaturday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Su.
+        /// </summary>
+        internal static string AltSchedSunday {
+            get {
+                return ResourceManager.GetString("AltSchedSunday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Th.
+        /// </summary>
+        internal static string AltSchedThursday {
+            get {
+                return ResourceManager.GetString("AltSchedThursday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tu.
+        /// </summary>
+        internal static string AltSchedTuesday {
+            get {
+                return ResourceManager.GetString("AltSchedTuesday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We.
+        /// </summary>
+        internal static string AltSchedWednesday {
+            get {
+                return ResourceManager.GetString("AltSchedWednesday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternate speeds disabled.
+        /// </summary>
+        internal static string AltSpeedDisabled {
+            get {
+                return ResourceManager.GetString("AltSpeedDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternate speeds enabled.
+        /// </summary>
+        internal static string AltSpeedEnabled {
+            get {
+                return ResourceManager.GetString("AltSpeedEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternate Speed Limits.
+        /// </summary>
+        internal static string AltSpeedGroupHeader {
+            get {
+                return ResourceManager.GetString("AltSpeedGroupHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternate upload limit in KBps.
+        /// </summary>
+        internal static string AltUploadLimit {
+            get {
+                return ResourceManager.GetString("AltUploadLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tidal.
+        /// </summary>
+        internal static string AppDisplayName {
+            get {
+                return ResourceManager.GetString("AppDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local Application Settings.
+        /// </summary>
+        internal static string ApplicationSettingsTitle {
+            get {
+                return ResourceManager.GetString("ApplicationSettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear sorting.
+        /// </summary>
+        internal static string ClearSorting {
+            get {
+                return ResourceManager.GetString("ClearSorting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completed Files Settings.
+        /// </summary>
+        internal static string CompletedFilesSettings {
+            get {
+                return ResourceManager.GetString("CompletedFilesSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Theme.
+        /// </summary>
+        internal static string DefaultThemeHeader {
+            get {
+                return ResourceManager.GetString("DefaultThemeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DHT Disabled.
+        /// </summary>
+        internal static string DhtOff {
+            get {
+                return ResourceManager.GetString("DhtOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DHT Enabled.
+        /// </summary>
+        internal static string DhtOn {
+            get {
+                return ResourceManager.GetString("DhtOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to directory path.
+        /// </summary>
+        internal static string DirectoryPathWatermark {
+            get {
+                return ResourceManager.GetString("DirectoryPathWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display Name.
+        /// </summary>
+        internal static string DisplayName {
+            get {
+                return ResourceManager.GetString("DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Complete.
+        /// </summary>
+        internal static string DownloadComplete {
+            get {
+                return ResourceManager.GetString("DownloadComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} download complete.
+        /// </summary>
+        internal static string DownloadComplete_1 {
+            get {
+                return ResourceManager.GetString("DownloadComplete_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Directory.
+        /// </summary>
+        internal static string DownloadDirectory {
+            get {
+                return ResourceManager.GetString("DownloadDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download limit in KBps.
+        /// </summary>
+        internal static string DownloadLimit {
+            get {
+                return ResourceManager.GetString("DownloadLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download: Limited.
+        /// </summary>
+        internal static string DownloadLimited {
+            get {
+                return ResourceManager.GetString("DownloadLimited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download: No Limits.
+        /// </summary>
+        internal static string DownloadNoLimits {
+            get {
+                return ResourceManager.GetString("DownloadNoLimits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download queue.
+        /// </summary>
+        internal static string DownloadQueueHeader {
+            get {
+                return ResourceManager.GetString("DownloadQueueHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Queue Depth.
+        /// </summary>
+        internal static string DownloadQueueLimit {
+            get {
+                return ResourceManager.GetString("DownloadQueueLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No restriction.
+        /// </summary>
+        internal static string DownloadQueueOff {
+            get {
+                return ResourceManager.GetString("DownloadQueueOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Limit number of downloads.
+        /// </summary>
+        internal static string DownloadQueueOn {
+            get {
+                return ResourceManager.GetString("DownloadQueueOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Queue Size.
+        /// </summary>
+        internal static string DownloadQueueSize {
+            get {
+                return ResourceManager.GetString("DownloadQueueSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Settings.
+        /// </summary>
+        internal static string DownloadSettings {
+            get {
+                return ResourceManager.GetString("DownloadSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encrypted Connection.
+        /// </summary>
+        internal static string EncryptedConnection {
+            get {
+                return ResourceManager.GetString("EncryptedConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encryption Settings.
+        /// </summary>
+        internal static string EncryptionGroupHeader {
+            get {
+                return ResourceManager.GetString("EncryptionGroupHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Name.
+        /// </summary>
+        internal static string FileGrid_Friendly_Name {
+            get {
+                return ResourceManager.GetString("FileGrid_Friendly_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Size.
+        /// </summary>
+        internal static string FileGrid_Friendly_Size {
+            get {
+                return ResourceManager.GetString("FileGrid_Friendly_Size", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Wanted?.
+        /// </summary>
+        internal static string FileGrid_Friendly_Wanted {
+            get {
+                return ResourceManager.GetString("FileGrid_Friendly_Wanted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Name.
+        /// </summary>
+        internal static string FileGrid_NameHeader {
+            get {
+                return ResourceManager.GetString("FileGrid_NameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Name (user assigned).
+        /// </summary>
+        internal static string FirstHostAccountHeader {
+            get {
+                return ResourceManager.GetString("FirstHostAccountHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t use authentication.
+        /// </summary>
+        internal static string FirstHostAuthToggleOff {
+            get {
+                return ResourceManager.GetString("FirstHostAuthToggleOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use authentication.
+        /// </summary>
+        internal static string FirstHostAuthToggleOn {
+            get {
+                return ResourceManager.GetString("FirstHostAuthToggleOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP Address of host.
+        /// </summary>
+        internal static string FirstHostIpAddress {
+            get {
+                return ResourceManager.GetString("FirstHostIpAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string FirstHostPassword {
+            get {
+                return ResourceManager.GetString("FirstHostPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Port (normally 9091).
+        /// </summary>
+        internal static string FirstHostPortNumber {
+            get {
+                return ResourceManager.GetString("FirstHostPortNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Host/Client.
+        /// </summary>
+        internal static string FirstHostTitle {
+            get {
+                return ResourceManager.GetString("FirstHostTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name.
+        /// </summary>
+        internal static string FirstHostUserName {
+            get {
+                return ResourceManager.GetString("FirstHostUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to from local file.
+        /// </summary>
+        internal static string FromLocalFile {
+            get {
+                return ResourceManager.GetString("FromLocalFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is {1} old.
+        /// </summary>
+        internal static string GeoDbFileAge_2 {
+            get {
+                return ResourceManager.GetString("GeoDbFileAge_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} downloading.
+        /// </summary>
+        internal static string GeoDBFileDownloading_1 {
+            get {
+                return ResourceManager.GetString("GeoDBFileDownloading_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} not found.
+        /// </summary>
+        internal static string GeoDBFileNotFound_1 {
+            get {
+                return ResourceManager.GetString("GeoDBFileNotFound_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot delete {0}.
+        /// </summary>
+        internal static string GeoService_CannotDelete_1 {
+            get {
+                return ResourceManager.GetString("GeoService_CannotDelete_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot write {0}.
+        /// </summary>
+        internal static string GeoService_CannotWriteTempFile_1 {
+            get {
+                return ResourceManager.GetString("GeoService_CannotWriteTempFile_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloaded and processed the GeoLite2-City file.
+        /// </summary>
+        internal static string GeoService_DownloadedGeoIP2 {
+            get {
+                return ResourceManager.GetString("GeoService_DownloadedGeoIP2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error Downloading {0}: {1}.
+        /// </summary>
+        internal static string GeoService_DownloadWarning_2 {
+            get {
+                return ResourceManager.GetString("GeoService_DownloadWarning_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File I/O Error.
+        /// </summary>
+        internal static string GeoService_FileError {
+            get {
+                return ResourceManager.GetString("GeoService_FileError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Need a &apos;.mmdb.gz&apos; or &apos;.mmdb&apos; file.
+        /// </summary>
+        internal static string GeoService_FilesNeeded {
+            get {
+                return ResourceManager.GetString("GeoService_FilesNeeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stored new GeoIP2 database file.
+        /// </summary>
+        internal static string GeoService_StoredNewDBFile {
+            get {
+                return ResourceManager.GetString("GeoService_StoredNewDBFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successful.
+        /// </summary>
+        internal static string GeoService_Successful {
+            get {
+                return ResourceManager.GetString("GeoService_Successful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown City.
+        /// </summary>
+        internal static string GeoService_UnknownCity {
+            get {
+                return ResourceManager.GetString("GeoService_UnknownCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown format.
+        /// </summary>
+        internal static string GeoService_UnknownFormat {
+            get {
+                return ResourceManager.GetString("GeoService_UnknownFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Write Error.
+        /// </summary>
+        internal static string GeoService_WriteError {
+            get {
+                return ResourceManager.GetString("GeoService_WriteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get from MaxMind.
+        /// </summary>
+        internal static string GetFromMaxMindButton {
+            get {
+                return ResourceManager.GetString("GetFromMaxMindButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieve GeoLite2-City from MaxMind.
+        /// </summary>
+        internal static string GetMaxMindHeader {
+            get {
+                return ResourceManager.GetString("GetMaxMindHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address must not be empty.
+        /// </summary>
+        internal static string HostAddressEmptyError {
+            get {
+                return ResourceManager.GetString("HostAddressEmptyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name must not be empty.
+        /// </summary>
+        internal static string HostNameEmptyError {
+            get {
+                return ResourceManager.GetString("HostNameEmptyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP Address.
+        /// </summary>
+        internal static string HostPageAddress {
+            get {
+                return ResourceManager.GetString("HostPageAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to delete.
+        /// </summary>
+        internal static string HostPageDeleteButton {
+            get {
+                return ResourceManager.GetString("HostPageDeleteButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove the selected host.
+        /// </summary>
+        internal static string HostPageDeleteTooltip {
+            get {
+                return ResourceManager.GetString("HostPageDeleteTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Host/Client Name.
+        /// </summary>
+        internal static string HostPageHostName {
+            get {
+                return ResourceManager.GetString("HostPageHostName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new.
+        /// </summary>
+        internal static string HostPageNewButton {
+            get {
+                return ResourceManager.GetString("HostPageNewButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a new host.
+        /// </summary>
+        internal static string HostPageNewTooltip {
+            get {
+                return ResourceManager.GetString("HostPageNewTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string HostPagePassword {
+            get {
+                return ResourceManager.GetString("HostPagePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Port Number.
+        /// </summary>
+        internal static string HostPagePort {
+            get {
+                return ResourceManager.GetString("HostPagePort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to revert.
+        /// </summary>
+        internal static string HostPageRevertButton {
+            get {
+                return ResourceManager.GetString("HostPageRevertButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undo all changes since the last save.
+        /// </summary>
+        internal static string HostPageRevertTooltip {
+            get {
+                return ResourceManager.GetString("HostPageRevertTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to save.
+        /// </summary>
+        internal static string HostPageSaveButton {
+            get {
+                return ResourceManager.GetString("HostPageSaveButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save the hosts to the local storage.
+        /// </summary>
+        internal static string HostPageSaveTooltip {
+            get {
+                return ResourceManager.GetString("HostPageSaveTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to activate.
+        /// </summary>
+        internal static string HostPageSelectButton {
+            get {
+                return ResourceManager.GetString("HostPageSelectButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Make the selected host the active one.
+        /// </summary>
+        internal static string HostPageSelectTooltip {
+            get {
+                return ResourceManager.GetString("HostPageSelectTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Authentication.
+        /// </summary>
+        internal static string HostPageUseAuth {
+            get {
+                return ResourceManager.GetString("HostPageUseAuth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Name.
+        /// </summary>
+        internal static string HostPageUserName {
+            get {
+                return ResourceManager.GetString("HostPageUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Possible host failure at {0}.
+        /// </summary>
+        internal static string HostTimeoutHeader_1 {
+            get {
+                return ResourceManager.GetString("HostTimeoutHeader_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No peers seen in {0}.
+        /// </summary>
+        internal static string HostTimeoutMessage_1 {
+            get {
+                return ResourceManager.GetString("HostTimeoutMessage_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name must not have the colon (:) character.
+        /// </summary>
+        internal static string HostUserColonError {
+            get {
+                return ResourceManager.GetString("HostUserColonError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name must not be empty.
+        /// </summary>
+        internal static string HostUserEmptyError {
+            get {
+                return ResourceManager.GetString("HostUserEmptyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incoming Port.
+        /// </summary>
+        internal static string IncomingPort {
+            get {
+                return ResourceManager.GetString("IncomingPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incomplete Downloads Directory.
+        /// </summary>
+        internal static string IncompleteDirectory {
+            get {
+                return ResourceManager.GetString("IncompleteDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t use separate directory.
+        /// </summary>
+        internal static string IncompleteDirEnabledOff {
+            get {
+                return ResourceManager.GetString("IncompleteDirEnabledOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use separate directory.
+        /// </summary>
+        internal static string IncompleteDirEnabledOn {
+            get {
+                return ResourceManager.GetString("IncompleteDirEnabledOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incomplete file settings.
+        /// </summary>
+        internal static string IncompleteFileSettings {
+            get {
+                return ResourceManager.GetString("IncompleteFileSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to in minutes.
+        /// </summary>
+        internal static string InMinutes {
+            get {
+                return ResourceManager.GetString("InMinutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load MMDB File.
+        /// </summary>
+        internal static string LoadMMDB_Button {
+            get {
+                return ResourceManager.GetString("LoadMMDB_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LPD Disabled.
+        /// </summary>
+        internal static string LpdOff {
+            get {
+                return ResourceManager.GetString("LpdOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LPD Enabled.
+        /// </summary>
+        internal static string LpdOn {
+            get {
+                return ResourceManager.GetString("LpdOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Magnet Link.
+        /// </summary>
+        internal static string MagnetLink {
+            get {
+                return ResourceManager.GetString("MagnetLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Main.
+        /// </summary>
+        internal static string MainPageTitle {
+            get {
+                return ResourceManager.GetString("MainPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location Lookup Settings.
+        /// </summary>
+        internal static string MaxMindGroupHeader {
+            get {
+                return ResourceManager.GetString("MaxMindGroupHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License Key.
+        /// </summary>
+        internal static string MaxMindLicense {
+            get {
+                return ResourceManager.GetString("MaxMindLicense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to license key received from MaxMind.
+        /// </summary>
+        internal static string MaxMindLicenseWatermark {
+            get {
+                return ResourceManager.GetString("MaxMindLicenseWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MaxMind Credentials.
+        /// </summary>
+        internal static string MaxMindLoginInfoHeader {
+            get {
+                return ResourceManager.GetString("MaxMindLoginInfoHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string MaxMindPassword {
+            get {
+                return ResourceManager.GetString("MaxMindPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to password for MaxMind (not the license).
+        /// </summary>
+        internal static string MaxMindPasswordWatermark {
+            get {
+                return ResourceManager.GetString("MaxMindPasswordWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&amp;license_key=YOUR_LICENSE_KEY&amp;suffix=tar.gz.
+        /// </summary>
+        internal static string MaxMindPermaLink {
+            get {
+                return ResourceManager.GetString("MaxMindPermaLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name.
+        /// </summary>
+        internal static string MaxMindUserName {
+            get {
+                return ResourceManager.GetString("MaxMindUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the email you used to sign up.
+        /// </summary>
+        internal static string MaxMindUserNameWatermark {
+            get {
+                return ResourceManager.GetString("MaxMindUserNameWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Miscellaneous Settings.
+        /// </summary>
+        internal static string MiscSettingsGroupHeader {
+            get {
+                return ResourceManager.GetString("MiscSettingsGroupHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMDB Status.
+        /// </summary>
+        internal static string MMDB_Status {
+            get {
+                return ResourceManager.GetString("MMDB Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Networking Settings.
+        /// </summary>
+        internal static string NetworkSettings {
+            get {
+                return ResourceManager.GetString("NetworkSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Host/Client.
+        /// </summary>
+        internal static string NewHostName {
+            get {
+                return ResourceManager.GetString("NewHostName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Active Host Found.
+        /// </summary>
+        internal static string NoHostErrorHeader {
+            get {
+                return ResourceManager.GetString("NoHostErrorHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activate a running host, or enter a new one.
+        /// </summary>
+        internal static string NoHostErrorMessage {
+            get {
+                return ResourceManager.GetString("NoHostErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Peer Timeout.
+        /// </summary>
+        internal static string NoPeerTimeoutPart1 {
+            get {
+                return ResourceManager.GetString("NoPeerTimeoutPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to is the amount of time the app can go without seeing any peers and reporting a possible loss of connection to the internet..
+        /// </summary>
+        internal static string NoPeerTimeoutPart2 {
+            get {
+                return ResourceManager.GetString("NoPeerTimeoutPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        internal static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok to remove the torrents?.
+        /// </summary>
+        internal static string OkToRemove {
+            get {
+                return ResourceManager.GetString("OkToRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MMDB Files (*.mmdb)|*.mmdb;*.mmdb.gz.
+        /// </summary>
+        internal static string OpenMMDBFilePickerFilter {
+            get {
+                return ResourceManager.GetString("OpenMMDBFilePickerFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open GeoIP2 File.
+        /// </summary>
+        internal static string OpenMMDBFilePickerTitle {
+            get {
+                return ResourceManager.GetString("OpenMMDBFilePickerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overall Peer Limit.
+        /// </summary>
+        internal static string OverallPeerLimit {
+            get {
+                return ResourceManager.GetString("OverallPeerLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parsing Error.
+        /// </summary>
+        internal static string ParsingError {
+            get {
+                return ResourceManager.GetString("ParsingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pause.
+        /// </summary>
+        internal static string Pause {
+            get {
+                return ResourceManager.GetString("Pause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No location found.
+        /// </summary>
+        internal static string PeerCollection_NoLocation {
+            get {
+                return ResourceManager.GetString("PeerCollection_NoLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Peer Address.
+        /// </summary>
+        internal static string PeerGrid_Address {
+            get {
+                return ResourceManager.GetString("PeerGrid_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        internal static string PeerGrid_AddressHeader {
+            get {
+                return ResourceManager.GetString("PeerGrid_AddressHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client.
+        /// </summary>
+        internal static string PeerGrid_Client {
+            get {
+                return ResourceManager.GetString("PeerGrid_Client", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to completed.
+        /// </summary>
+        internal static string PeerGrid_Completed {
+            get {
+                return ResourceManager.GetString("PeerGrid_Completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP Address.
+        /// </summary>
+        internal static string PeerGrid_Friendly_Address {
+            get {
+                return ResourceManager.GetString("PeerGrid_Friendly_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Rate.
+        /// </summary>
+        internal static string PeerGrid_Friendly_DownloadRate {
+            get {
+                return ResourceManager.GetString("PeerGrid_Friendly_DownloadRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location.
+        /// </summary>
+        internal static string PeerGrid_Friendly_Location {
+            get {
+                return ResourceManager.GetString("PeerGrid_Friendly_Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload Rate.
+        /// </summary>
+        internal static string PeerGrid_Friendly_UploadRate {
+            get {
+                return ResourceManager.GetString("PeerGrid_Friendly_UploadRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location.
+        /// </summary>
+        internal static string PeerGrid_LocationHeader {
+            get {
+                return ResourceManager.GetString("PeerGrid_LocationHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Peer has.
+        /// </summary>
+        internal static string PeerGrid_PeerHas {
+            get {
+                return ResourceManager.GetString("PeerGrid_PeerHas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RATE.
+        /// </summary>
+        internal static string PeerGrid_RateHeader {
+            get {
+                return ResourceManager.GetString("PeerGrid_RateHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown Location.
+        /// </summary>
+        internal static string PeerGrid_UnknownLocation {
+            get {
+                return ResourceManager.GetString("PeerGrid_UnknownLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Peer Limits.
+        /// </summary>
+        internal static string PeerLimitsHeader {
+            get {
+                return ResourceManager.GetString("PeerLimitsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Per Torrent Peer Limit.
+        /// </summary>
+        internal static string PerTorrentPeerLimit {
+            get {
+                return ResourceManager.GetString("PerTorrentPeerLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PEX Disabled.
+        /// </summary>
+        internal static string PexOff {
+            get {
+                return ResourceManager.GetString("PexOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PEX Enabled.
+        /// </summary>
+        internal static string PexOn {
+            get {
+                return ResourceManager.GetString("PexOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incoming Port Details.
+        /// </summary>
+        internal static string PortDetails {
+            get {
+                return ResourceManager.GetString("PortDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leave port alone on startup.
+        /// </summary>
+        internal static string PortRandomizeOff {
+            get {
+                return ResourceManager.GetString("PortRandomizeOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Randomize port on startup.
+        /// </summary>
+        internal static string PortRandomizeOn {
+            get {
+                return ResourceManager.GetString("PortRandomizeOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preferred.
+        /// </summary>
+        internal static string Preferred {
+            get {
+                return ResourceManager.GetString("Preferred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Primary Speed Limits.
+        /// </summary>
+        internal static string PrimarySpeedLimits {
+            get {
+                return ResourceManager.GetString("PrimarySpeedLimits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fail to Set Property.
+        /// </summary>
+        internal static string PropertySetFailHeader {
+            get {
+                return ResourceManager.GetString("PropertySetFailHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to set value of {0}.
+        /// </summary>
+        internal static string PropertySetFailWarning_1 {
+            get {
+                return ResourceManager.GetString("PropertySetFailWarning_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Protocol Modifiers.
+        /// </summary>
+        internal static string ProtocolHeader {
+            get {
+                return ResourceManager.GetString("ProtocolHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        internal static string Refresh {
+            get {
+                return ResourceManager.GetString("Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to removedata.
+        /// </summary>
+        internal static string RemoveDataParameter {
+            get {
+                return ResourceManager.GetString("RemoveDataParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove data, too?.
+        /// </summary>
+        internal static string RemoveDataToo {
+            get {
+                return ResourceManager.GetString("RemoveDataToo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Data.
+        /// </summary>
+        internal static string RemoveTorrent_DataToo {
+            get {
+                return ResourceManager.GetString("RemoveTorrent_DataToo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove torrent and associated data.
+        /// </summary>
+        internal static string RemoveTorrent_DataTooToolTip {
+            get {
+                return ResourceManager.GetString("RemoveTorrent_DataTooToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string RemoveTorrent_Remove {
+            get {
+                return ResourceManager.GetString("RemoveTorrent_Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove just the torrents, not the data.
+        /// </summary>
+        internal static string RemoveTorrent_RemoveToolTip {
+            get {
+                return ResourceManager.GetString("RemoveTorrent_RemoveToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Torrents.
+        /// </summary>
+        internal static string RemoveTorrents_Title {
+            get {
+                return ResourceManager.GetString("RemoveTorrents_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to data.
+        /// </summary>
+        internal static string RemoveTorrentsDataToo {
+            get {
+                return ResourceManager.GetString("RemoveTorrentsDataToo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nodata.
+        /// </summary>
+        internal static string RemoveTorrentsNoData {
+            get {
+                return ResourceManager.GetString("RemoveTorrentsNoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Torrents.
+        /// </summary>
+        internal static string RemoveTorrentsTitle {
+            get {
+                return ResourceManager.GetString("RemoveTorrentsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t rename partial files.
+        /// </summary>
+        internal static string RenamePartialFilesOff {
+            get {
+                return ResourceManager.GetString("RenamePartialFilesOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename partial files (*.part).
+        /// </summary>
+        internal static string RenamePartialFilesOn {
+            get {
+                return ResourceManager.GetString("RenamePartialFilesOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required.
+        /// </summary>
+        internal static string Required {
+            get {
+                return ResourceManager.GetString("Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For information about getting the.
+        /// </summary>
+        internal static string RetrievePart1 {
+            get {
+                return ResourceManager.GetString("RetrievePart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GeoLite2-City files, visit the.
+        /// </summary>
+        internal static string RetrievePart2 {
+            get {
+                return ResourceManager.GetString("RetrievePart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to site. If you sign up, enter the login information you get from them in the fields above, press the button, and with any luck, you&apos;ll get location information on displayed peers..
+        /// </summary>
+        internal static string RetrievePart3 {
+            get {
+                return ResourceManager.GetString("RetrievePart3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seeding Complete.
+        /// </summary>
+        internal static string SeedingComplete {
+            get {
+                return ResourceManager.GetString("SeedingComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} seeding complete.
+        /// </summary>
+        internal static string SeedingComplete_1 {
+            get {
+                return ResourceManager.GetString("SeedingComplete_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seeding Settings.
+        /// </summary>
+        internal static string SeedingPageTitle {
+            get {
+                return ResourceManager.GetString("SeedingPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seeding Ratio Rules.
+        /// </summary>
+        internal static string SeedingRatioHeader {
+            get {
+                return ResourceManager.GetString("SeedingRatioHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ratio Limit.
+        /// </summary>
+        internal static string SeedingRatioLimitHeader {
+            get {
+                return ResourceManager.GetString("SeedingRatioLimitHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No limit on ratio.
+        /// </summary>
+        internal static string SeedingRatioOff {
+            get {
+                return ResourceManager.GetString("SeedingRatioOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop reaching ratio.
+        /// </summary>
+        internal static string SeedingRatioOn {
+            get {
+                return ResourceManager.GetString("SeedingRatioOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seeding time rules.
+        /// </summary>
+        internal static string SeedingTimeHeader {
+            get {
+                return ResourceManager.GetString("SeedingTimeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeout in minutes.
+        /// </summary>
+        internal static string SeedingTimeInMinutes {
+            get {
+                return ResourceManager.GetString("SeedingTimeInMinutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No timeout limit.
+        /// </summary>
+        internal static string SeedingTimeLimitOff {
+            get {
+                return ResourceManager.GetString("SeedingTimeLimitOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop after time reached.
+        /// </summary>
+        internal static string SeedingTimeLimitOn {
+            get {
+                return ResourceManager.GetString("SeedingTimeLimitOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to magnet.
+        /// </summary>
+        internal static string ShellAddMagnet {
+            get {
+                return ResourceManager.GetString("ShellAddMagnet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add magnet link to client.
+        /// </summary>
+        internal static string ShellAddMagnetToolTip {
+            get {
+                return ResourceManager.GetString("ShellAddMagnetToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to torrent.
+        /// </summary>
+        internal static string ShellAddTorrent {
+            get {
+                return ResourceManager.GetString("ShellAddTorrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open and add a torrent file to the client.
+        /// </summary>
+        internal static string ShellAddTorrentToolTip {
+            get {
+                return ResourceManager.GetString("ShellAddTorrentToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Free.
+        /// </summary>
+        internal static string ShellFreeSpace {
+            get {
+                return ResourceManager.GetString("ShellFreeSpace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go back.
+        /// </summary>
+        internal static string ShellGoBackButton {
+            get {
+                return ResourceManager.GetString("ShellGoBackButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go back.
+        /// </summary>
+        internal static string ShellGoBackToolTip {
+            get {
+                return ResourceManager.GetString("ShellGoBackToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hosts.
+        /// </summary>
+        internal static string ShellHosts {
+            get {
+                return ResourceManager.GetString("ShellHosts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add, Delete, or Edit the host clients the app knows of.
+        /// </summary>
+        internal static string ShellHostsToolTip {
+            get {
+                return ResourceManager.GetString("ShellHostsToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Main.
+        /// </summary>
+        internal static string ShellMain {
+            get {
+                return ResourceManager.GetString("ShellMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Connection.
+        /// </summary>
+        internal static string ShellNoConnection {
+            get {
+                return ResourceManager.GetString("ShellNoConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string ShellSettings {
+            get {
+                return ResourceManager.GetString("ShellSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change parameters on the host client or this application.
+        /// </summary>
+        internal static string ShellSettingsToolTip {
+            get {
+                return ResourceManager.GetString("ShellSettingsToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standby....
+        /// </summary>
+        internal static string ShellStandby {
+            get {
+                return ResourceManager.GetString("ShellStandby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Limit.
+        /// </summary>
+        internal static string ShellUnlimited {
+            get {
+                return ResourceManager.GetString("ShellUnlimited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fatality.
+        /// </summary>
+        internal static string ShellViewFatality {
+            get {
+                return ResourceManager.GetString("ShellViewFatality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Connection.
+        /// </summary>
+        internal static string ShellViewMode_NoHostTitle {
+            get {
+                return ResourceManager.GetString("ShellViewMode_NoHostTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tidal.
+        /// </summary>
+        internal static string ShellViewMode_NormalTitle {
+            get {
+                return ResourceManager.GetString("ShellViewMode_NormalTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activated Host.
+        /// </summary>
+        internal static string ShellVM_ActivatedHost {
+            get {
+                return ResourceManager.GetString("ShellVM_ActivatedHost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to using {0} @ {1}.
+        /// </summary>
+        internal static string ShellVM_ActivatedHostDetail_2 {
+            get {
+                return ResourceManager.GetString("ShellVM_ActivatedHostDetail_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fatality.
+        /// </summary>
+        internal static string ShellVM_Fatality {
+            get {
+                return ResourceManager.GetString("ShellVM_Fatality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Host.
+        /// </summary>
+        internal static string ShellVM_UnknownHost {
+            get {
+                return ResourceManager.GetString("ShellVM_UnknownHost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        internal static string Start {
+            get {
+                return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dark.
+        /// </summary>
+        internal static string ThemeDark {
+            get {
+                return ResourceManager.GetString("ThemeDark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Light.
+        /// </summary>
+        internal static string ThemeLight {
+            get {
+                return ResourceManager.GetString("ThemeLight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System Default.
+        /// </summary>
+        internal static string ThemeSystemDefault {
+            get {
+                return ResourceManager.GetString("ThemeSystemDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time/Speed Restrictions.
+        /// </summary>
+        internal static string TimeSpeedRestrictions {
+            get {
+                return ResourceManager.GetString("TimeSpeedRestrictions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tolerated.
+        /// </summary>
+        internal static string Tolerated {
+            get {
+                return ResourceManager.GetString("Tolerated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Torrent Exists.
+        /// </summary>
+        internal static string TorrentExists {
+            get {
+                return ResourceManager.GetString("TorrentExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} already exists on host.
+        /// </summary>
+        internal static string TorrentExists_1 {
+            get {
+                return ResourceManager.GetString("TorrentExists_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activity.
+        /// </summary>
+        internal static string TorrentGrid_ActiveHeader {
+            get {
+                return ResourceManager.GetString("TorrentGrid_ActiveHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Added.
+        /// </summary>
+        internal static string TorrentGrid_ActivityAdded {
+            get {
+                return ResourceManager.GetString("TorrentGrid_ActivityAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finished.
+        /// </summary>
+        internal static string TorrentGrid_ActivityFinished {
+            get {
+                return ResourceManager.GetString("TorrentGrid_ActivityFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Activity.
+        /// </summary>
+        internal static string TorrentGrid_ActivityLastActive {
+            get {
+                return ResourceManager.GetString("TorrentGrid_ActivityLastActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual Rate.
+        /// </summary>
+        internal static string TorrentGrid_ActualRate {
+            get {
+                return ResourceManager.GetString("TorrentGrid_ActualRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complete.
+        /// </summary>
+        internal static string TorrentGrid_Complete {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Complete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading.
+        /// </summary>
+        internal static string TorrentGrid_Downloading {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Downloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloads.
+        /// </summary>
+        internal static string TorrentGrid_Downloads {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Downloads", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ETA.
+        /// </summary>
+        internal static string TorrentGrid_ETAHeader {
+            get {
+                return ResourceManager.GetString("TorrentGrid_ETAHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estimated time to completion.
+        /// </summary>
+        internal static string TorrentGrid_ETATooltipHeader {
+            get {
+                return ResourceManager.GetString("TorrentGrid_ETATooltipHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inactive.
+        /// </summary>
+        internal static string TorrentGrid_ETATooltipInactive {
+            get {
+                return ResourceManager.GetString("TorrentGrid_ETATooltipInactive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No active traffic.
+        /// </summary>
+        internal static string TorrentGrid_ETATooltipInactiveExplanation {
+            get {
+                return ResourceManager.GetString("TorrentGrid_ETATooltipInactiveExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlimited.
+        /// </summary>
+        internal static string TorrentGrid_ETATooltipUnlimited {
+            get {
+                return ResourceManager.GetString("TorrentGrid_ETATooltipUnlimited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No completion time.
+        /// </summary>
+        internal static string TorrentGrid_ETATooltipUnlimitedExplanation {
+            get {
+                return ResourceManager.GetString("TorrentGrid_ETATooltipUnlimitedExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Latest Activity.
+        /// </summary>
+        internal static string TorrentGrid_Friendly_Activity {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Friendly_Activity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Speed.
+        /// </summary>
+        internal static string TorrentGrid_Friendly_DownloadRate {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Friendly_DownloadRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Est. Time to Completion.
+        /// </summary>
+        internal static string TorrentGrid_Friendly_ETA {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Friendly_ETA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Torrent Name.
+        /// </summary>
+        internal static string TorrentGrid_Friendly_Name {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Friendly_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Peers Connected.
+        /// </summary>
+        internal static string TorrentGrid_Friendly_Peers {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Friendly_Peers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Size.
+        /// </summary>
+        internal static string TorrentGrid_Friendly_Size {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Friendly_Size", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload Speed.
+        /// </summary>
+        internal static string TorrentGrid_Friendly_UploadRate {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Friendly_UploadRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seeding Ratio.
+        /// </summary>
+        internal static string TorrentGrid_Friendly_UploadRatio {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Friendly_UploadRatio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leeches.
+        /// </summary>
+        internal static string TorrentGrid_Leeches {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Leeches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string TorrentGrid_NameHeader {
+            get {
+                return ResourceManager.GetString("TorrentGrid_NameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Normal Seeding.
+        /// </summary>
+        internal static string TorrentGrid_NormalSeedingItem {
+            get {
+                return ResourceManager.GetString("TorrentGrid_NormalSeedingItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Peers.
+        /// </summary>
+        internal static string TorrentGrid_Peers {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Peers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Peers.
+        /// </summary>
+        internal static string TorrentGrid_PeersHeader {
+            get {
+                return ResourceManager.GetString("TorrentGrid_PeersHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Peers + Seeds/Leeches.
+        /// </summary>
+        internal static string TorrentGrid_PeersHeaderTooltip {
+            get {
+                return ResourceManager.GetString("TorrentGrid_PeersHeaderTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Properties....
+        /// </summary>
+        internal static string TorrentGrid_PropertiesItem {
+            get {
+                return ResourceManager.GetString("TorrentGrid_PropertiesItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quick Properties.
+        /// </summary>
+        internal static string TorrentGrid_QuickMenu {
+            get {
+                return ResourceManager.GetString("TorrentGrid_QuickMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RATE.
+        /// </summary>
+        internal static string TorrentGrid_RateHeader {
+            get {
+                return ResourceManager.GetString("TorrentGrid_RateHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ratio.
+        /// </summary>
+        internal static string TorrentGrid_RatioHeader {
+            get {
+                return ResourceManager.GetString("TorrentGrid_RatioHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reannouce (get more peers).
+        /// </summary>
+        internal static string TorrentGrid_ReannounceItem {
+            get {
+                return ResourceManager.GetString("TorrentGrid_ReannounceItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Torrent.
+        /// </summary>
+        internal static string TorrentGrid_RemoveItem {
+            get {
+                return ResourceManager.GetString("TorrentGrid_RemoveItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seeding.
+        /// </summary>
+        internal static string TorrentGrid_Seeding {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Seeding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seeds.
+        /// </summary>
+        internal static string TorrentGrid_Seeds {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Seeds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Size.
+        /// </summary>
+        internal static string TorrentGrid_SizeHeader {
+            get {
+                return ResourceManager.GetString("TorrentGrid_SizeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Torrent.
+        /// </summary>
+        internal static string TorrentGrid_StartItem {
+            get {
+                return ResourceManager.GetString("TorrentGrid_StartItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop Torrent.
+        /// </summary>
+        internal static string TorrentGrid_StopItem {
+            get {
+                return ResourceManager.GetString("TorrentGrid_StopItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target.
+        /// </summary>
+        internal static string TorrentGrid_Target {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Target", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlimited Seeding.
+        /// </summary>
+        internal static string TorrentGrid_UnlimitedSeedingItem {
+            get {
+                return ResourceManager.GetString("TorrentGrid_UnlimitedSeedingItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploaded.
+        /// </summary>
+        internal static string TorrentGrid_Uploaded {
+            get {
+                return ResourceManager.GetString("TorrentGrid_Uploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Torrent file {0} couldn&apos;t be parsed.
+        /// </summary>
+        internal static string TorrentParsingError_1 {
+            get {
+                return ResourceManager.GetString("TorrentParsingError_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dismiss.
+        /// </summary>
+        internal static string TorrentProps_DismissButton {
+            get {
+                return ResourceManager.GetString("TorrentProps_DismissButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlimited download rate.
+        /// </summary>
+        internal static string TorrentProps_DownloadLimitedOff {
+            get {
+                return ResourceManager.GetString("TorrentProps_DownloadLimitedOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Limit download rate.
+        /// </summary>
+        internal static string TorrentProps_DownloadLimitedOn {
+            get {
+                return ResourceManager.GetString("TorrentProps_DownloadLimitedOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Honor Global Settings.
+        /// </summary>
+        internal static string TorrentProps_HonorGlobal {
+            get {
+                return ResourceManager.GetString("TorrentProps_HonorGlobal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Global Settings.
+        /// </summary>
+        internal static string TorrentProps_IdleGlobal {
+            get {
+                return ResourceManager.GetString("TorrentProps_IdleGlobal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Torrent Settings.
+        /// </summary>
+        internal static string TorrentProps_IdleTorrent {
+            get {
+                return ResourceManager.GetString("TorrentProps_IdleTorrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlimited Seeding.
+        /// </summary>
+        internal static string TorrentProps_IdleUnlimited {
+            get {
+                return ResourceManager.GetString("TorrentProps_IdleUnlimited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Override Global Settings.
+        /// </summary>
+        internal static string TorrentProps_Override {
+            get {
+                return ResourceManager.GetString("TorrentProps_Override", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Peers Allowed.
+        /// </summary>
+        internal static string TorrentProps_PeerLimitHeader {
+            get {
+                return ResourceManager.GetString("TorrentProps_PeerLimitHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seed Idle Limits in minutes.
+        /// </summary>
+        internal static string TorrentProps_SeedIdleHeader {
+            get {
+                return ResourceManager.GetString("TorrentProps_SeedIdleHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seed Ratio Limits.
+        /// </summary>
+        internal static string TorrentProps_SeedRatioHeader {
+            get {
+                return ResourceManager.GetString("TorrentProps_SeedRatioHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Torrent Properties.
+        /// </summary>
+        internal static string TorrentProps_Title {
+            get {
+                return ResourceManager.GetString("TorrentProps_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlimited upload rate.
+        /// </summary>
+        internal static string TorrentProps_UploadLimitedOff {
+            get {
+                return ResourceManager.GetString("TorrentProps_UploadLimitedOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Limit upload rate.
+        /// </summary>
+        internal static string TorrentProps_UploadLimitedOn {
+            get {
+                return ResourceManager.GetString("TorrentProps_UploadLimitedOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to torrents.
+        /// </summary>
+        internal static string TorrentsParameter {
+            get {
+                return ResourceManager.GetString("TorrentsParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trackers.
+        /// </summary>
+        internal static string Trackers {
+            get {
+                return ResourceManager.GetString("Trackers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unencrypted Connection.
+        /// </summary>
+        internal static string UnencryptedConnection {
+            get {
+                return ResourceManager.GetString("UnencryptedConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload limit in KBps.
+        /// </summary>
+        internal static string UploadLimit {
+            get {
+                return ResourceManager.GetString("UploadLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload: Limited.
+        /// </summary>
+        internal static string UploadLimited {
+            get {
+                return ResourceManager.GetString("UploadLimited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload: No Limits.
+        /// </summary>
+        internal static string UploadNoLimits {
+            get {
+                return ResourceManager.GetString("UploadNoLimits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use aggressive garbage collection.
+        /// </summary>
+        internal static string UseAggroGC {
+            get {
+                return ResourceManager.GetString("UseAggroGC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UTP Disabled.
+        /// </summary>
+        internal static string UtpOff {
+            get {
+                return ResourceManager.GetString("UtpOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UTP Enabled.
+        /// </summary>
+        internal static string UtpOn {
+            get {
+                return ResourceManager.GetString("UtpOn", resourceCulture);
             }
         }
     }
