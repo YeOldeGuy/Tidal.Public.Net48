@@ -41,13 +41,15 @@ namespace Tidal.Core.Helpers
         /// </exception>
         public static TorrentMetadata Parse(Stream buffer)
         {
-            using var reader = new TorrentReader(buffer);
-            var builder = new StringBuilder();
+            using (var reader = new TorrentReader(buffer))
+            {
+                var builder = new StringBuilder();
 
-            var encoded = reader.Parse();
-            encoded.BuildJson(builder);
-            var meta = JsonSerializer.Deserialize<TorrentMetadata>(builder.ToString());
-            return meta;
+                var encoded = reader.Parse();
+                encoded.BuildJson(builder);
+                var meta = JsonSerializer.Deserialize<TorrentMetadata>(builder.ToString());
+                return meta;
+            }
         }
 
         /// <summary>
@@ -58,8 +60,8 @@ namespace Tidal.Core.Helpers
         /// <exception cref="InvalidDataException">Thrown if file cannot be parsed.</exception>
         public static TorrentMetadata Parse(string path)
         {
-            using FileStream stream = File.OpenRead(path);
-            return Parse(stream);
+            using (FileStream stream = File.OpenRead(path))
+                return Parse(stream);
         }
 
         /// <summary>

@@ -32,8 +32,8 @@ namespace Tidal.Core.Helpers
                                                     string fileToExtract,
                                                     bool setModDate = false)
         {
-            using var stream = File.OpenRead(filepath);
-            return ExtractSingleFileFromTar(stream, outputDir, fileToExtract, setModDate);
+            using (var stream = File.OpenRead(filepath))
+                return ExtractSingleFileFromTar(stream, outputDir, fileToExtract, setModDate);
         }
 
         /// <summary>

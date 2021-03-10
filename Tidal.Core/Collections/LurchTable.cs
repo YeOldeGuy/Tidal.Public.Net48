@@ -762,7 +762,7 @@ namespace Tidal.Core.Collections
         /// containing the keys of the <see
         /// cref="T:System.Collections.Generic.IDictionary`2"/>.
         /// </summary>
-        public KeyCollection Keys { get { return _keyCollection ??= new KeyCollection(this); } }
+        public KeyCollection Keys { get { return _keyCollection = _keyCollection ?? new KeyCollection(this); } }
         [Obsolete] ICollection<TKey> IDictionary<TKey, TValue>.Keys { get { return Keys; } }
         #endregion
 
@@ -924,7 +924,7 @@ namespace Tidal.Core.Collections
         /// containing the values in the <see
         /// cref="T:System.Collections.Generic.IDictionary`2"/>.
         /// </summary>
-        public ValueCollection Values { get { return _valueCollection ??= new ValueCollection(this); } }
+        public ValueCollection Values { get { return _valueCollection = _valueCollection ?? new ValueCollection(this); } }
         [Obsolete] ICollection<TValue> IDictionary<TKey, TValue>.Values { get { return Values; } }
 
         #endregion
