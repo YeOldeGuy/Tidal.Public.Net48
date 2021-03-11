@@ -5,10 +5,10 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:helpers="clr-namespace:Tidal.Helpers"
                       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-                      xmlns:local="clr-namespace:Tidal.Views"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notifications.Wpf"
                       xmlns:prism="http://prismlibrary.com/"
+                      xmlns:properties="clr-namespace:Tidal.Properties"
                       xmlns:viewmodels="clr-namespace:Tidal.ViewModels"
                       Title="ShellView"
                       Width="{helpers:SettingBinding Width}"
@@ -29,6 +29,46 @@
             <i:InvokeCommandAction Command="{Binding UnloadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+
+    <controls:MetroWindow.LeftWindowCommands>
+        <controls:WindowCommands>
+            <Button Command="{Binding GoBackCommand}"
+                    Content="{StaticResource BackArrow}"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="14"
+                    Style="{StaticResource MyTitleBarButton}" />
+        </controls:WindowCommands>
+    </controls:MetroWindow.LeftWindowCommands>
+
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button
+                    Style="{StaticResource MyTitleBarButton}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               FontSize="14"
+                               Text="{x:Static properties:Resources.Unicode_Settings}" />
+                    <Separator Width="3" />
+                    <TextBlock FontSize="12"
+                               Text="{x:Static properties:Resources.ShellSettings}" />
+
+                </StackPanel>
+            </Button>
+            
+            <Button Command="{Binding HostsCommand}"
+                    Style="{StaticResource MyTitleBarButton}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               FontSize="14"
+                               Text="{x:Static properties:Resources.Unicode_Network}" />
+                    <Separator Width="3" />
+                    <TextBlock FontSize="12"
+                               Text="{x:Static properties:Resources.ShellHosts}" />
+
+                </StackPanel>
+            </Button>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
 
 
     <controls:MetroWindow.Content>

@@ -1,0 +1,323 @@
+﻿<UserControl x:Class="Tidal.Views.HostView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:behaviors="clr-namespace:Tidal.Helpers"
+             xmlns:converters="clr-namespace:Tidal.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:Tidal.Models"
+             xmlns:properties="clr-namespace:Tidal.Properties"
+             xmlns:viewmodels="clr-namespace:Tidal.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:HostViewModel}"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <converters:VisibilityConverter x:Key="VisibilityConverter" />
+        <converters:VisibilityConverter x:Key="InvertVisibility"
+                                        FalseVisibility="Visible"
+                                        TrueVisibility="Collapsed" />
+        <SolidColorBrush x:Key="Overlay"
+                         Opacity="0.5"
+                         Color="{DynamicResource MahApps.Colors.Gray1}" />
+
+        <Style x:Key="header"
+               TargetType="TextBlock">
+            <Setter Property="FontSize"
+                    Value="14" />
+            <Setter Property="FontStyle"
+                    Value="Normal" />
+            <Setter Property="FontWeight"
+                    Value="Light" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource MahApps.Brushes.Text}" />
+        </Style>
+
+
+        <DataTemplate x:Key="serverTemplate"
+                      DataType="{x:Type models:Host}">
+            <StackPanel x:Name="panel"
+                        Margin="-5,0,0,0"
+                        Background="{DynamicResource MahApps.Brushes.Accent3}">
+                <Grid Margin="5,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="22"
+                                   FontWeight="Light"
+                                   Text="{Binding Name}" />
+                    </StackPanel>
+                    <TextBlock Grid.Column="1"
+                               VerticalAlignment="Center"
+                               FontFamily="Segoe MDL2 Assets"
+                               FontSize="18"
+                               Text="&#xE73E;"
+                               Visibility="{Binding Active,
+                                                    Converter={StaticResource VisibilityConverter}}" />
+                </Grid>
+                <StackPanel Margin="5,0,0,0"
+                            Orientation="Horizontal">
+                    <TextBlock Text="{Binding Address}" />
+                    <TextBlock Text=" : " />
+                    <TextBlock Opacity="0.6"
+                               Text="{Binding Port}" />
+                </StackPanel>
+                <Border Margin="5" />
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  Background="{DynamicResource MahApps.Brushes.Accent}">
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontSize"
+                                Value="12" />
+                        <Setter Property="Margin"
+                                Value="{StaticResource TitleBarMargin}" />
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Margin="10,0,0,0"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource SubTitleStyle}"
+                           Text="{Binding Title}" />
+
+                <StackPanel Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                    <Button Command="{Binding AddHost}"
+                            Style="{StaticResource MyStatusBarButton}"
+                            ToolTip="{x:Static properties:Resources.HostPageNewTooltip}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center"
+                                       FontFamily="Segoe MDL2 Assets"
+                                       Text="&#xED0E;" />
+                            <TextBlock Text="{x:Static properties:Resources.HostPageNewButton}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding RemoveHost}"
+                            Style="{StaticResource MyStatusBarButton}"
+                            ToolTip="{x:Static properties:Resources.HostPageDeleteTooltip}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center"
+                                       FontFamily="Segoe MDL2 Assets"
+                                       Text="&#xE74D;" />
+                            <TextBlock Text="{x:Static properties:Resources.HostPageDeleteButton}" />
+                        </StackPanel>
+                    </Button>
+
+                    <Rectangle Width="1"
+                               Height="20"
+                               Margin="{StaticResource TitleBarMargin}"
+                               StrokeThickness="1" />
+
+                    <Button Command="{Binding ActivateHost}"
+                            Style="{StaticResource MyStatusBarButton}"
+                            ToolTip="{x:Static properties:Resources.HostPageSelectTooltip}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center"
+                                       FontFamily="Segoe MDL2 Assets"
+                                       Text="&#xE73E;" />
+                            <TextBlock Text="{x:Static properties:Resources.HostPageSelectButton}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding SaveHosts}"
+                            Style="{StaticResource MyStatusBarButton}"
+                            ToolTip="{x:Static properties:Resources.HostPageSaveTooltip}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center"
+                                       FontFamily="Segoe MDL2 Assets"
+                                       Text="&#xE78C;" />
+                            <TextBlock Text="{x:Static properties:Resources.HostPageSaveButton}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding RevertChanges}"
+                            Style="{StaticResource MyStatusBarButton}"
+                            ToolTip="{x:Static properties:Resources.HostPageRevertTooltip}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center"
+                                       FontFamily="Segoe MDL2 Assets"
+                                       Text="&#xE7A7;" />
+                            <TextBlock Text="{x:Static properties:Resources.HostPageRevertButton}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+
+                <ListBox Grid.Column="0"
+                         Background="{DynamicResource MahApps.Brushes.Accent4}"
+                         ItemTemplate="{StaticResource serverTemplate}"
+                         ItemsSource="{Binding Hosts,
+                                               Mode=TwoWay}"
+                         SelectedItem="{Binding SelectedHost,
+                                                Mode=TwoWay}" />
+
+                <Rectangle Grid.Column="1"
+                           Fill="{DynamicResource MahApps.Brushes.Accent}" />
+
+                <Grid Grid.Column="2"
+                      Margin="24"
+                      IsEnabled="{Binding IsHostSelected,
+                                          Mode=OneWay}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="42" />
+                        <RowDefinition Height="42" />
+                        <RowDefinition Height="42" />
+                        <RowDefinition Height="42" />
+                        <RowDefinition Height="42" />
+                        <RowDefinition Height="42" />
+                        <RowDefinition Height="42" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource header}"
+                               Text="{x:Static properties:Resources.HostPageHostName}" />
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource header}"
+                               Text="{x:Static properties:Resources.HostPageAddress}" />
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource header}"
+                               Text="{x:Static properties:Resources.HostPagePort}" />
+                    <TextBlock Grid.Row="5"
+                               Grid.Column="0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource header}"
+                               Text="{x:Static properties:Resources.HostPageUserName}" />
+                    <TextBlock Grid.Row="6"
+                               Grid.Column="0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource header}"
+                               Text="{x:Static properties:Resources.HostPagePassword}" />
+
+                    <TextBox Grid.Row="0"
+                             Grid.Column="2"
+                             Width="250"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Center"
+                             mah:TextBoxHelper.ClearTextButton="True">
+                        <TextBox.Text>
+                            <Binding Mode="TwoWay"
+                                     Path="SelectedHost.Name"
+                                     UpdateSourceTrigger="PropertyChanged"
+                                     ValidatesOnNotifyDataErrors="True" />
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <TextBox Grid.Row="1"
+                             Grid.Column="2"
+                             Width="250"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Center"
+                             mah:TextBoxHelper.ClearTextButton="True">
+                        <TextBox.Text>
+                            <Binding Mode="TwoWay"
+                                     Path="SelectedHost.Address"
+                                     UpdateSourceTrigger="PropertyChanged"
+                                     ValidatesOnNotifyDataErrors="True" />
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <mah:NumericUpDown Grid.Row="2"
+                                       Grid.Column="2"
+                                       Width="120"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       FontSize="12"
+                                       Maximum="49151"
+                                       Minimum="1024"
+                                       Value="{Binding SelectedHost.Port,
+                                                       Mode=TwoWay,
+                                                       UpdateSourceTrigger=PropertyChanged}" />
+
+                    <CheckBox Grid.Row="4"
+                              Grid.Column="2"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Center"
+                              Content="{x:Static properties:Resources.HostPageUseAuth}"
+                              FontSize="13"
+                              FontWeight="Light"
+                              IsChecked="{Binding SelectedHost.UseAuthentication}" />
+
+
+                    <TextBox Grid.Row="5"
+                             Grid.Column="2"
+                             Width="250"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Center"
+                             mah:TextBoxHelper.ClearTextButton="True"
+                             IsEnabled="{Binding SelectedHost.UseAuthentication}">
+                        <TextBox.Text>
+                            <Binding Mode="TwoWay"
+                                     Path="SelectedHost.UserName"
+                                     UpdateSourceTrigger="PropertyChanged" />
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <!--
+                        !!! *** WATCH OUT *** !!!
+                        =========================
+                        When a page is navigated away from and everything is dismantled, the
+                        PasswordBox will empty out its contents (which makes sense). If you
+                        still have data bound to it, then that data will be cleared, too. This
+                        is probably not what you want, so in this case, just set SelectedHost
+                        to null to disconnect the bindings prior to the navigation call.
+                    -->
+                    <PasswordBox Grid.Row="6"
+                                 Grid.Column="2"
+                                 Width="250"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Center"
+                                 behaviors:PasswordBoxAssistant.BindPassword="True"
+                                 behaviors:PasswordBoxAssistant.BoundPassword="{Binding SelectedHost.Password,
+                                                                                        Mode=TwoWay,
+                                                                                        UpdateSourceTrigger=PropertyChanged}"
+                                 IsEnabled="{Binding SelectedHost.UseAuthentication}" />
+                </Grid>
+            </Grid>
+        </Grid>
+        <!--<Grid Background="{StaticResource Overlay}"
+              Visibility="{Binding IsOpen,
+                                   Converter={StaticResource InvertVisibility}}" />-->
+    </Grid>
+</UserControl>

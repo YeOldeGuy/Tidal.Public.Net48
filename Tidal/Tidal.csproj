@@ -151,9 +151,31 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Collections\GridViewCollection.cs" />
+    <Compile Include="Collections\ICustomSorter.cs" />
+    <Compile Include="Collections\ILiveSortColumns.cs" />
+    <Compile Include="Collections\MergeCollection.cs" />
     <Compile Include="Constants\MDLConsts.cs" />
     <Compile Include="Constants\PageKeys.cs" />
     <Compile Include="Constants\Regions.cs" />
+    <Compile Include="Converters\BoolToStrConverter.cs" />
+    <Compile Include="Converters\DateFormatConverter.cs" />
+    <Compile Include="Converters\ETAConverter.cs" />
+    <Compile Include="Converters\MultiplyConverter.cs" />
+    <Compile Include="Converters\PercentConverter.cs" />
+    <Compile Include="Converters\SizeConverter.cs" />
+    <Compile Include="Converters\SpeedConverter.cs" />
+    <Compile Include="Converters\TimeSpanConverter.cs" />
+    <Compile Include="Converters\ValueWhenConverter.cs" />
+    <Compile Include="Converters\VisibilityConverter.cs" />
+    <Compile Include="Dialogs\ViewModels\AddMagnetViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\AddTorrentDisposition.cs" />
+    <Compile Include="Dialogs\ViewModels\AddTorrentViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\FirstHostViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\RemoveTorrentViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\RetryCancelViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\TorrentDataDisposition.cs" />
+    <Compile Include="Dialogs\ViewModels\TorrentPropertiesViewModel.cs" />
     <Compile Include="Helpers\DataGridColumnInfo.cs" />
     <Compile Include="Helpers\DataGridUtils.cs" />
     <Compile Include="Helpers\DropDownButtonBehavior.cs" />
@@ -165,6 +187,24 @@
     <Compile Include="Helpers\PasswordBoxAssistant.cs" />
     <Compile Include="Helpers\ServiceResolver.cs" />
     <Compile Include="Helpers\SettingBindingExtension.cs" />
+    <Compile Include="Models\BrokerMessages\AddMagnetRequest.cs" />
+    <Compile Include="Models\BrokerMessages\AddTorrentRequest.cs" />
+    <Compile Include="Models\BrokerMessages\AddTorrentResponse.cs" />
+    <Compile Include="Models\BrokerMessages\BrokerRequestBase.cs" />
+    <Compile Include="Models\BrokerMessages\FreeSpaceRequest.cs" />
+    <Compile Include="Models\BrokerMessages\FreeSpaceResponse.cs" />
+    <Compile Include="Models\BrokerMessages\ReannounceTorrentsRequest.cs" />
+    <Compile Include="Models\BrokerMessages\RemoveTorrentsRequest.cs" />
+    <Compile Include="Models\BrokerMessages\SessionRequest.cs" />
+    <Compile Include="Models\BrokerMessages\SessionResponse.cs" />
+    <Compile Include="Models\BrokerMessages\SessionStatsRequest.cs" />
+    <Compile Include="Models\BrokerMessages\SessionStatsResponse.cs" />
+    <Compile Include="Models\BrokerMessages\SetSessionRequest.cs" />
+    <Compile Include="Models\BrokerMessages\SetTorrentsRequest.cs" />
+    <Compile Include="Models\BrokerMessages\StartTorrentsRequest.cs" />
+    <Compile Include="Models\BrokerMessages\StopTorrentsRequest.cs" />
+    <Compile Include="Models\BrokerMessages\TorrentRequest.cs" />
+    <Compile Include="Models\BrokerMessages\TorrentResponse.cs" />
     <Compile Include="Models\GeoLocation.cs" />
     <Compile Include="Models\Host.cs" />
     <Compile Include="Models\Messages\ErrorMessage.cs" />
@@ -181,13 +221,19 @@
     <Compile Include="Models\ScheduledTask.cs" />
     <Compile Include="Models\TorrentFileWanted.cs" />
     <Compile Include="Services\Abstract\IFileService.cs" />
+    <Compile Include="Services\Abstract\IHostService.cs" />
     <Compile Include="Services\Abstract\IMessenger.cs" />
     <Compile Include="Services\Abstract\ISettingsService.cs" />
     <Compile Include="Services\Actual\FileService.cs" />
+    <Compile Include="Services\Actual\HostService.cs" />
     <Compile Include="Services\Actual\Messenger.cs" />
     <Compile Include="Services\Actual\SettingsService.cs" />
+    <Compile Include="ViewModels\HostViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\HostView.xaml.cs">
+      <DependentUpon>HostView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -218,6 +264,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\HostView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -242,7 +292,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -269,9 +319,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Collections\" />
-    <Folder Include="Converters\" />
-    <Folder Include="Dialogs\ViewModels\" />
     <Folder Include="Dialogs\Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

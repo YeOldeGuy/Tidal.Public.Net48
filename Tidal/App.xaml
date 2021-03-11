@@ -1,6 +1,7 @@
 ﻿<prism:PrismApplication x:Class="Tidal.App"
                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:constants="clr-namespace:Tidal.Constants"
                         xmlns:prism="http://prismlibrary.com/"
                         xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
@@ -30,6 +31,39 @@
             <sys:Int32 x:Key="ShowDelay">100</sys:Int32>
             <sys:Int32 x:Key="ShowDuration">12000</sys:Int32>
             <sys:Int32 x:Key="LongShowDuration">60000</sys:Int32>
+
+            <x:Static x:Key="BackArrow"
+                      Member="constants:MDLConsts.BackArrow" />
+            <x:Static x:Key="OpenFile"
+                      Member="constants:MDLConsts.OpenFile" />
+            <x:Static x:Key="AddRemoteDevice"
+                      Member="constants:MDLConsts.AddRemoteDevice" />
+            <x:Static x:Key="Setting"
+                      Member="constants:MDLConsts.Setting" />
+            <x:Static x:Key="Network"
+                      Member="constants:MDLConsts.Network" />
+            <x:Static x:Key="Upload"
+                      Member="constants:MDLConsts.Upload" />
+            <x:Static x:Key="Download"
+                      Member="constants:MDLConsts.Download" />
+            <x:Static x:Key="Alert"
+                      Member="constants:MDLConsts.Alert" />
+            <x:Static x:Key="App"
+                      Member="constants:MDLConsts.App" />
+            <x:Static x:Key="Stopped"
+                      Member="constants:MDLConsts.Pause" />
+            <x:Static x:Key="Seeding"
+                      Member="constants:MDLConsts.Seeding" />
+            <x:Static x:Key="Downloading"
+                      Member="constants:MDLConsts.Downloading" />
+            <x:Static x:Key="Start"
+                      Member="constants:MDLConsts.Play" />
+            <x:Static x:Key="Pause"
+                      Member="constants:MDLConsts.Pause" />
+            <x:Static x:Key="Delete"
+                      Member="constants:MDLConsts.TrashCan" />
+            <x:Static x:Key="Share"
+                      Member="constants:MDLConsts.Share" />
 
         </ResourceDictionary>
     </Application.Resources>

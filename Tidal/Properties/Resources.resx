@@ -1038,4 +1038,12 @@
   <data name="UtpOn" xml:space="preserve">
     <value>UTP Enabled</value>
   </data>
+  <data name="Unicode_Network" xml:space="preserve">
+    <value></value>
+    <comment>\uE968</comment>
+  </data>
+  <data name="Unicode_Settings" xml:space="preserve">
+    <value></value>
+    <comment>\uE713</comment>
+  </data>
 </root>

@@ -81,9 +81,11 @@ namespace Tidal
             containerRegistry.RegisterSingleton<IMessenger, Messenger>();
             containerRegistry.RegisterSingleton<IFileService, FileService>();
             containerRegistry.RegisterSingleton<ISettingsService, SettingsService>();
+            containerRegistry.RegisterSingleton<IHostService, HostService>();
 
             // Views
             containerRegistry.RegisterForNavigation<ShellView, ShellViewModel>();
+            containerRegistry.RegisterForNavigation<HostView, HostViewModel>(PageKeys.Hosts);
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>(PageKeys.Main);
         }
 
