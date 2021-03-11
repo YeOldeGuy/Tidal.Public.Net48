@@ -9,8 +9,11 @@ using System.Windows;
 using System.Windows.Input;
 using Prism.Ioc;
 using Prism.Unity;
+using Tidal.Client;
 using Tidal.Client.Helpers;
 using Tidal.Constants;
+using Tidal.Dialogs.ViewModels;
+using Tidal.Dialogs.Views;
 using Tidal.Models.Messages;
 using Tidal.Services.Abstract;
 using Tidal.Services.Actual;
@@ -77,11 +80,22 @@ namespace Tidal
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            // Client Services
+            containerRegistry.RegisterSingleton<IClient, Client.Client>();
+
             // App Services
-            containerRegistry.RegisterSingleton<IMessenger, Messenger>();
+            containerRegistry.RegisterSingleton<IBrokerService, BrokerService>();
             containerRegistry.RegisterSingleton<IFileService, FileService>();
-            containerRegistry.RegisterSingleton<ISettingsService, SettingsService>();
+            containerRegistry.RegisterSingleton<IGeoService, GeoService>();
             containerRegistry.RegisterSingleton<IHostService, HostService>();
+            containerRegistry.RegisterSingleton<IMessenger, Messenger>();
+            containerRegistry.RegisterSingleton<INotificationService, NotificationService>();
+            containerRegistry.RegisterSingleton<ISettingsService, SettingsService>();
+            containerRegistry.RegisterSingleton<ITaskService, TaskService>();
+            containerRegistry.RegisterSingleton<ITorrentStatusService, TorrentStatusService>();
+
+            // Dialogs
+            containerRegistry.RegisterDialog<FirstHostView, FirstHostViewModel>(PageKeys.FirstHost);
 
             // Views
             containerRegistry.RegisterForNavigation<ShellView, ShellViewModel>();

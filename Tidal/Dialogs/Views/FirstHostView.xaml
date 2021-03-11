@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="Tidal.Dialogs.Views.FirstHostView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:helpers="clr-namespace:Tidal.Helpers"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:properties="clr-namespace:Tidal.Properties"
+             xmlns:viewmodels="clr-namespace:Tidal.Dialogs.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:FirstHostViewModel}"
+             d:DesignHeight="450"
+             d:DesignWidth="350"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Thickness x:Key="ControlMargin">0,5,0,0</Thickness>
+        <Thickness x:Key="BigControlMargin">0,15,0,0</Thickness>
+        <Thickness x:Key="BigNestedMargin">15,15,0,0</Thickness>
+        <Thickness x:Key="NestedMargin">15,5,0,0</Thickness>
+    </UserControl.Resources>
+
+    <prism:Dialog.WindowStyle>
+        <Style TargetType="Window">
+            <Setter Property="prism:Dialog.WindowStartupLocation"
+                    Value="CenterOwner" />
+            <Setter Property="ShowInTaskbar"
+                    Value="False" />
+            <Setter Property="ResizeMode"
+                    Value="NoResize" />
+            <Setter Property="SizeToContent"
+                    Value="WidthAndHeight" />
+        </Style>
+    </prism:Dialog.WindowStyle>
+
+    <Grid Width="350"
+          Height="450">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Margin="15">
+            <mah:MetroHeader Margin="{StaticResource ControlMargin}"
+                             Header="{x:Static properties:Resources.FirstHostAccountHeader}">
+                <TextBox HorizontalContentAlignment="Stretch"
+                         mah:TextBoxHelper.ClearTextButton="True"
+                         Text="{Binding SelectedHost.Name,
+                                        Mode=TwoWay}" />
+            </mah:MetroHeader>
+
+            <mah:MetroHeader Margin="{StaticResource ControlMargin}"
+                             Header="{x:Static properties:Resources.FirstHostIpAddress}">
+                <TextBox HorizontalContentAlignment="Stretch"
+                         mah:TextBoxHelper.ClearTextButton="True"
+                         mah:TextBoxHelper.Watermark="1.2.3.4 or mybigserver"
+                         Text="{Binding SelectedHost.Address,
+                                        Mode=TwoWay}" />
+            </mah:MetroHeader>
+
+            <mah:MetroHeader Margin="{StaticResource ControlMargin}"
+                             Header="{x:Static properties:Resources.FirstHostPortNumber}">
+                <mah:NumericUpDown Width="150"
+                                   HorizontalAlignment="Left"
+                                   mah:TextBoxHelper.ClearTextButton="False"
+                                   mah:TextBoxHelper.Watermark="9091"
+                                   Maximum="49151"
+                                   Minimum="1024"
+                                   Value="{Binding SelectedHost.Port,
+                                                   Mode=TwoWay}" />
+            </mah:MetroHeader>
+
+            <mah:ToggleSwitch Margin="{StaticResource BigControlMargin}"
+                              IsOn="{Binding SelectedHost.UseAuthentication,
+                                             Mode=TwoWay}"
+                              OffContent="{x:Static properties:Resources.FirstHostAuthToggleOff}"
+                              OnContent="{x:Static properties:Resources.FirstHostAuthToggleOn}"
+                              Style="{StaticResource MahApps.Styles.ToggleSwitch}" />
+
+            <mah:MetroHeader Margin="{StaticResource BigNestedMargin}"
+                             Header="{x:Static properties:Resources.FirstHostUserName}">
+                <TextBox HorizontalContentAlignment="Stretch"
+                         mah:TextBoxHelper.ClearTextButton="True"
+                         IsEnabled="{Binding SelectedHost.UseAuthentication,
+                                             Mode=OneWay}"
+                         Text="{Binding SelectedHost.UserName,
+                                        Mode=TwoWay}" />
+            </mah:MetroHeader>
+
+            <mah:MetroHeader Margin="{StaticResource NestedMargin}"
+                             Header="{x:Static properties:Resources.FirstHostPassword}">
+                <PasswordBox HorizontalContentAlignment="Stretch"
+                             helpers:PasswordBoxAssistant.BindPassword="True"
+                             helpers:PasswordBoxAssistant.BoundPassword="{Binding SelectedHost.Password,
+                                                                                  Mode=TwoWay}"
+                             mah:TextBoxHelper.ClearTextButton="True"
+                             IsEnabled="{Binding SelectedHost.UseAuthentication,
+                                                 Mode=OneWay}"
+                             Style="{StaticResource MahApps.Styles.PasswordBox.Button.Revealed}" />
+            </mah:MetroHeader>
+        </StackPanel>
+
+        <UniformGrid Grid.Row="1"
+                     Columns="2">
+            <Button Margin="15,5"
+                    Command="{Binding CloseCommand}"
+                    CommandParameter="{x:Static viewmodels:FirstHostDisposition.Add}"
+                    Content="{x:Static properties:Resources.OK}"
+                    IsDefault="True"
+                    Style="{StaticResource MahApps.Styles.Button.Flat}" />
+            <Button Margin="15,5"
+                    Command="{Binding CloseCommand}"
+                    CommandParameter="{x:Static viewmodels:FirstHostDisposition.Cancel}"
+                    Content="{x:Static properties:Resources.Cancel}"
+                    Style="{StaticResource MahApps.Styles.Button.Flat}" />
+        </UniformGrid>
+    </Grid>
+</UserControl>
