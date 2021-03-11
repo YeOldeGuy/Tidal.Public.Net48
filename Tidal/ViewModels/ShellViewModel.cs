@@ -26,6 +26,18 @@ using Tidal.Services.Abstract;
 
 namespace Tidal.ViewModels
 {
+    internal struct SpeedMenuSelector
+    {
+        public SpeedMenuSelector(long speed, bool selected)
+        {
+            Speed = speed;
+            Selected = selected;
+        }
+        public long Speed { get; }
+        public bool Selected { get; }
+    }
+
+
     class ShellViewModel : BindableBase
     {
         private readonly IRegionManager regionManager;
@@ -233,14 +245,18 @@ namespace Tidal.ViewModels
             {
                 Session.Assign(sessionResponse.Session);
                 messenger.Send(new FreeSpaceRequest(Session.DownloadDirectory));
-                //SetAltLabel(Session);
+                SetAltLabel(Session);
             });
         }
 
         private void OnSessionStats(SessionStatsResponse statsResponse)
         {
             SessionStats = SessionStats ?? new SessionStats();
-            UiInvoke(() => SessionStats.Assign(statsResponse.SessionStats));
+            UiInvoke(() =>
+            {
+                SessionStats.Assign(statsResponse.SessionStats);
+                SetTitle(SessionStats);
+            });
         }
 
         private void OnTorrents(TorrentResponse torrentResponse)
@@ -335,6 +351,216 @@ namespace Tidal.ViewModels
         public string AltModeGlyph { get => _AltModeGlyph; set => SetProperty(ref _AltModeGlyph, value); }
         #endregion
 
+        #region Helpers for Properties
+        private void SetTitle(SessionStats stats)
+        {
+            if (stats == null)
+            {
+                Title = Resources.ShellViewMode_NoHostTitle;
+                return;
+            }
+
+            long actual = stats.UploadSpeed + stats.DownloadSpeed;
+            long avgUp = stats.AverageUploadSpeed;
+            long avgDn = stats.AverageDownloadSpeed;
+
+            // Need to short circuit the display of up/down speed. We show the
+            // average, but that means that occasionally, the title will show an
+            // up/down speed when there aren't any peers. That's a little bit
+            // weird. It's like, *who* am I uploading at 15Kbps to? So, if the
+            // actual up/down speed are both zero, go back to the title.
+
+            if (actual != 0 && avgUp + avgDn > 0)
+                Title = string.Format("↑{0} ↓{1}", avgUp.HumanSpeed(), avgDn.HumanSpeed());
+            else
+                Title = $"{Resources.ShellViewMode_NormalTitle}-{hostService.ActiveHost.Name}";
+        }
+
+        private void SetAltLabel(Session session)
+        {
+            if (session is null)
+            {
+                AltModeLabel = Resources.ShellNoConnection;
+                IsAltModeEnabled = false;
+                AltModeGlyph = MDLConsts.LostComm;
+            }
+            else if (session.AltSpeedEnabled)
+            {
+                AltModeGlyph = MDLConsts.Play;
+                long upLimit = session.AltSpeedUp * 1000;
+                long downLimit = session.AltSpeedDown * 1000;
+                AltModeLabel = string.Format("{0}/{1}", upLimit.HumanSpeed(1), downLimit.HumanSpeed(1));
+                IsAltModeEnabled = true;
+            }
+            else
+            {
+                AltModeGlyph = MDLConsts.FastForward;
+                string up = Resources.ShellUnlimited;
+                string dn = Resources.ShellUnlimited;
+                if (session.SpeedLimitUpEnabled)
+                    up = (session.SpeedLimitUp * 1000).HumanSpeed(session.SpeedLimitUp > 1000 ? 2 : 0);
+
+                if (session.SpeedLimitDownEnabled)
+                    dn = (session.SpeedLimitDown * 1000).HumanSpeed(session.SpeedLimitDown > 1000 ? 2 : 0);
+
+                AltModeLabel = string.Format("{0}/{1}", up, dn);
+                IsAltModeEnabled = false;
+            }
+        }
+
+        private void AltModePause()
+        {
+            AltModeGlyph = MDLConsts.Updating;
+            AltModeLabel = Resources.ShellStandby;
+        }
+        #endregion
+
+        #region upload speed limit menu stuff
+        internal long UploadSpeedLimit
+        {
+            get => Session.SpeedLimitUpEnabled == false ? -1 : Session.SpeedLimitUp;
+        }
+
+        private IEnumerable<long> PresetUploadSpeeds
+        {
+            get
+            {
+                var vals = settingsService.UploadPresets.Split(',');
+                foreach (string val in vals)
+                {
+                    if (long.TryParse(val, out var speed))
+                        yield return speed;
+                }
+            }
+        }
+
+        private long selectedUpSpeed = 375;
+
+        /// <summary>
+        ///   Gets the preset upload speeds to display in a menu along with a
+        ///   flag indicating whether the speed is currently selected.
+        /// </summary>
+        /// <returns>
+        ///   An enumeration of tuples, each of a preset speed and a flag
+        ///   indicating if that speed is selected.
+        /// </returns>
+        internal IEnumerable<SpeedMenuSelector> GetUploadSpeeds()
+        {
+            selectedUpSpeed = UploadSpeedLimit;
+
+            // The -1 value is used as a flag to denote "unlimited"
+            yield return new SpeedMenuSelector(-1, selectedUpSpeed == -1);
+
+            var speeds = PresetUploadSpeeds.ToList();
+
+            // There is a possibility that the Upload speed might have been set
+            // to something odd, like 433, over in the settings, which is why we
+            // append the currently set upload speed limit, then blend it into
+            // the menu. Of course, it is most likely one of the same values as
+            // the presets, which is why there's a Distinct() filter at the end
+            // of the Linq statement.
+
+            if (!speeds.Contains(selectedUpSpeed) && selectedUpSpeed != -1)
+            {
+                speeds.Add(selectedUpSpeed);
+            }
+
+            foreach (var speed in speeds.OrderByDescending(x => x).Distinct())
+            {
+                yield return new SpeedMenuSelector(speed, speed == selectedUpSpeed);
+            }
+        }
+
+        internal void SetUploadSpeed(long bps)
+        {
+            var session = new SessionMutator { AltSpeedEnabled = false };
+            if (bps == -1)
+            {
+                session.SpeedLimitUpEnabled = false;
+            }
+            else
+            {
+                session.SpeedLimitUpEnabled = true;
+                session.SpeedLimitUp = bps;
+            }
+            selectedUpSpeed = bps;
+
+            AltModePause();
+            messenger.Send(new SetSessionRequest(session));
+        }
+        #endregion
+
+        #region download speed limit menu stuff
+        internal long DownloadSpeedLimit
+        {
+            get
+            {
+                return Session.SpeedLimitDownEnabled == false ? -1 : Session.SpeedLimitDown;
+            }
+        }
+
+        private IEnumerable<long> PresetDownloadSpeeds
+        {
+            get
+            {
+                var vals = settingsService.DownloadPresets.Split(new[] { ',' });
+                foreach (string val in vals)
+                {
+                    if (long.TryParse(val, out var speed))
+                        yield return speed;
+                }
+            }
+        }
+
+        private long selectedDownSpeed = 1000;
+
+        /// <summary>
+        ///   Gets the preset download speeds to display in a menu along with a
+        ///   flag indicating whether the speed is currently selected.
+        /// </summary>
+        /// <returns>
+        ///   An enumeration of tuples, each of a preset speed and a flag
+        ///   indicating if that speed is selected.
+        /// </returns>
+        internal IEnumerable<SpeedMenuSelector> GetDownloadSpeeds()
+        {
+            selectedDownSpeed = DownloadSpeedLimit;
+
+            // The -1 value is used as a flag to denote "unlimited"
+            yield return new SpeedMenuSelector(-1, selectedDownSpeed == -1);
+
+            var speeds = PresetDownloadSpeeds.ToList();
+
+            if (!speeds.Contains(selectedDownSpeed) && selectedDownSpeed != -1)
+            {
+                speeds.Add(selectedDownSpeed);
+            }
+
+            foreach (var speed in speeds.OrderByDescending(x => x).Distinct())
+            {
+                yield return new SpeedMenuSelector(speed, speed == selectedDownSpeed);
+            }
+        }
+
+        internal void SetDownloadSpeed(long bps)
+        {
+            var session = new SessionMutator { AltSpeedEnabled = false };
+            if (bps == -1)
+                session.SpeedLimitDownEnabled = false;
+            else
+            {
+                session.SpeedLimitDownEnabled = true;
+                session.SpeedLimitDown = bps;
+            }
+            selectedDownSpeed = bps;
+
+            AltModePause();
+            messenger.Send(new SetSessionRequest(session));
+        }
+        #endregion
+
+
+
         #region Navigation Methods
         private void OnMouseNav(MouseNavMessage navMsg)
         {
@@ -372,6 +598,7 @@ namespace Tidal.ViewModels
         private DelegateCommand _SettingsCommand;
         private DelegateCommand _AddTorrentCommand;
         private DelegateCommand _AddMagnetCommand;
+        private DelegateCommand _ToggleAltMode;
         #endregion
 
         /// <summary>
@@ -420,8 +647,20 @@ namespace Tidal.ViewModels
         public DelegateCommand SettingsCommand =>
             _SettingsCommand = _SettingsCommand ?? new DelegateCommand(() =>
             {
-                RequestNavigate(PageKeys.Settings);
+                var parameters = new NavigationParameters
+                {
+                    { SettingsViewModel.SettingsParameter, Session },
+                };
+                RequestNavigate(PageKeys.Settings, parameters);
             }, () => !IsOnPage(PageKeys.Settings));
+
+        public DelegateCommand ToggleAltMode => 
+            _ToggleAltMode = _ToggleAltMode ?? new DelegateCommand(() =>
+        {
+            IsAltModeEnabled = !IsAltModeEnabled;
+            AltModePause();
+            messenger.Send(new SetSessionRequest(nameof(SessionMutator.AltSpeedEnabled), IsAltModeEnabled));
+        }, () => true);
 
         private void DoAddTorrentDialog(string filename)
         {
@@ -513,7 +752,7 @@ namespace Tidal.ViewModels
         }, () => true);
 
 
-        public DelegateCommand AddMagnetCommand => 
+        public DelegateCommand AddMagnetCommand =>
             _AddMagnetCommand = _AddMagnetCommand ?? new DelegateCommand(() =>
         {
             dialogService.ShowDialog(PageKeys.AddMagnet, r =>

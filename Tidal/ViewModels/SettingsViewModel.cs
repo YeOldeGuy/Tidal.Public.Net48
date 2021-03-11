@@ -55,8 +55,8 @@ namespace Tidal.ViewModels
             disposables = new List<IDisposable>();
 
             var parameters = navigationContext.Parameters;
-            if (parameters.ContainsKey("session"))
-                Setter.Assign((Session)parameters["session"]);
+            if (parameters.ContainsKey(SettingsParameter))
+                Setter.Assign((Session)parameters[SettingsParameter]);
 
             Setter.PropertyChanged += Setter_PropertyChanged;
             disposables.Add(messenger.Subscribe<SessionResponse>(OnSession));

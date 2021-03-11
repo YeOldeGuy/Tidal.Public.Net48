@@ -2,20 +2,20 @@
 using Notification.Wpf;
 using Prism.Services.Dialogs;
 using Tidal.Constants;
+using Tidal.Properties;
 using Tidal.Dialogs.ViewModels;
 using Tidal.Services.Abstract;
+using Humanizer;
 
 namespace Tidal.Services.Actual
 {
     class NotificationService : INotificationService
     {
         private readonly INotificationManager manager;
-        private readonly IDialogService dialogService;
 
-        public NotificationService(IDialogService dialogService)
+        public NotificationService()
         {
-            this.dialogService = dialogService;
-            manager = new NotificationManager();
+            manager = manager ?? new NotificationManager();
         }
 
         public void ToastShowInfo(string message, string header = null, TimeSpan timeout = default)
@@ -61,40 +61,45 @@ namespace Tidal.Services.Actual
         public void ShowRetryCancel(string title, string message, string header,
                                     Action retryAction, Action cancelAction)
         {
-            DialogParameters parameters = new DialogParameters()
+            manager.Show(new NotificationContent
             {
-                { RetryCancelViewModel.TitleParameter, title },
-                { RetryCancelViewModel.HeaderParameter, header },
-                { RetryCancelViewModel.MessageParameter, message },
-            };
-
-            dialogService.ShowDialog(PageKeys.RetryCancel, parameters, r =>
-            {
-                if (r.Result == ButtonResult.OK)
-                    retryAction?.Invoke();
-                else if (r.Result == ButtonResult.Cancel)
-                    cancelAction?.Invoke();
-            }, PageKeys.NoTitleBarWindow);
+                LeftButtonAction = retryAction,
+                RightButtonAction = cancelAction,
+                LeftButtonContent = "Retry",
+                RightButtonContent = "Cancel",
+                Title = header,
+                Message = message,
+                Type = NotificationType.Error,
+            }, expirationTime: TimeSpan.MaxValue, areaName: Regions.NotifyArea);
         }
 
         public void ReportPossibleHostFailure(TimeSpan timeout)
         {
-            //hostFailure = Guid.NewGuid();
-            //manager.Show(hostFailure, new NotificationContent
-            //{
-            //    Message = string.Format(Resources.HostTimeoutMessage_1, timeout.Humanize()),
-            //    Title = string.Format(Resources.HostTimeoutHeader_1, DateTime.Now.ToString("G")),
-            //}, expirationTime: timeout, areaName: Regions.NotifyArea);
+            manager.Show(new NotificationContent
+            {
+                Message = string.Format(Resources.HostTimeoutMessage_1, timeout.Humanize()),
+                Title = string.Format(Resources.HostTimeoutHeader_1, DateTime.Now.ToString("G")),
+            }, expirationTime: timeout, areaName: Regions.NotifyArea);
         }
 
         public void ReportDownloadComplete(string torrentName)
         {
-            //await ToastShowInfo(string.Format(Resources.DownloadComplete_1, torrentName), Resources.DownloadComplete);
+            manager.Show(new NotificationContent
+            {
+                Title = Resources.DownloadComplete,
+                Message = torrentName,
+                Type = NotificationType.Success,
+            }, expirationTime: TimeSpan.MaxValue);
         }
 
         public void ReportSeedingComplete(string torrentName)
         {
-            //await ToastShowInfo(string.Format(Resources.SeedingComplete_1, torrentName), Resources.SeedingComplete);
+            manager.Show(new NotificationContent
+            {
+                Message = string.Format(Resources.SeedingComplete_1, torrentName),
+                Title = Resources.SeedingComplete,
+                Type = NotificationType.Success,
+            }, expirationTime: TimeSpan.MaxValue);
         }
     }
 }
