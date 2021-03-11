@@ -11,10 +11,10 @@ using MaxMind.GeoIP2.Exceptions;
 using Prism.Mvvm;
 using Tidal.Core.Collections;
 using Tidal.Core.Helpers;
-using Tidal.Services.Abstract;
 using Tidal.Models;
 using Tidal.Models.Messages;
 using Tidal.Properties;
+using Tidal.Services.Abstract;
 
 namespace Tidal.Services.Actual
 {
@@ -36,7 +36,7 @@ namespace Tidal.Services.Actual
         // location data from the mmdb file can be expensive, cache the latest
         // ones.
 
-        private readonly LurchTable<string, GeoLocation> geoCache = 
+        private readonly LurchTable<string, GeoLocation> geoCache =
             new LurchTable<string, GeoLocation>(LurchTableOrder.Access, 500);
 
 

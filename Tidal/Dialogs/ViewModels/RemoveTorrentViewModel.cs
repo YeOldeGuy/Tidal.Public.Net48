@@ -56,7 +56,7 @@ namespace Tidal.Dialogs.ViewModels
         }
 
         private DelegateCommand<TorrentDataDisposition?> _CloseCommand;
-        public DelegateCommand<TorrentDataDisposition?> CloseCommand => 
+        public DelegateCommand<TorrentDataDisposition?> CloseCommand =>
             _CloseCommand = _CloseCommand ?? new DelegateCommand<TorrentDataDisposition?>((p) =>
             {
                 CloseDialog(p);

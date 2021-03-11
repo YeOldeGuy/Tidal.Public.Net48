@@ -333,7 +333,7 @@ namespace Tidal.ViewModels
 
         #region Commands
         private DelegateCommand _LoadMMDBCommand;
-        public DelegateCommand LoadMMDBCommand => 
+        public DelegateCommand LoadMMDBCommand =>
             _LoadMMDBCommand = _LoadMMDBCommand ?? new DelegateCommand(async () =>
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -356,7 +356,7 @@ namespace Tidal.ViewModels
             !string.IsNullOrEmpty(MaxMindLicenseKey);
 
         private DelegateCommand _FetchMMDBCommand;
-        public DelegateCommand FetchMMDBCommand => 
+        public DelegateCommand FetchMMDBCommand =>
             _FetchMMDBCommand = _FetchMMDBCommand ?? new DelegateCommand(async () =>
         {
             FetchMMDBCommand.RaiseCanExecuteChanged();

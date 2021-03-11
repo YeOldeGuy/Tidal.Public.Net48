@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Tidal.Client;
-using Tidal.Services.Abstract;
 using Tidal.Helpers;
+using Tidal.Services.Abstract;
 
 namespace Tidal.Models.BrokerMessages
 {

@@ -5,8 +5,8 @@ using System.Windows.Controls;
 using MahApps.Metro.Controls;
 using Prism.Regions;
 using Tidal.Constants;
-using Tidal.ViewModels;
 using Tidal.Core.Helpers;
+using Tidal.ViewModels;
 
 namespace Tidal.Views
 {

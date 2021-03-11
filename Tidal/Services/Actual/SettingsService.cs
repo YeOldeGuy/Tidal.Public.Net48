@@ -4,11 +4,11 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Humanizer;
 using Prism.Mvvm;
-using Tidal.Services.Abstract;
+using Tidal.Client.Helpers;
 using Tidal.Helpers;
 using Tidal.Models;
 using Tidal.Models.Messages;
-using Tidal.Client.Helpers;
+using Tidal.Services.Abstract;
 
 namespace Tidal.Services.Actual
 {

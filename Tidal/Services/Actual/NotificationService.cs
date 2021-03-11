@@ -1,11 +1,9 @@
 ﻿using System;
+using Humanizer;
 using Notification.Wpf;
-using Prism.Services.Dialogs;
 using Tidal.Constants;
 using Tidal.Properties;
-using Tidal.Dialogs.ViewModels;
 using Tidal.Services.Abstract;
-using Humanizer;
 
 namespace Tidal.Services.Actual
 {

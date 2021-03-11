@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -654,7 +653,7 @@ namespace Tidal.ViewModels
                 RequestNavigate(PageKeys.Settings, parameters);
             }, () => !IsOnPage(PageKeys.Settings));
 
-        public DelegateCommand ToggleAltMode => 
+        public DelegateCommand ToggleAltMode =>
             _ToggleAltMode = _ToggleAltMode ?? new DelegateCommand(() =>
         {
             IsAltModeEnabled = !IsAltModeEnabled;

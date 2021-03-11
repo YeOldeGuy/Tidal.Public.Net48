@@ -111,7 +111,8 @@ namespace Tidal.Client
             // Make the request into some really cool JSON stuff
             string reqAsJson = req.Serialize();
 
-            using (var cts = new CancellationTokenSource(Timeout)) {
+            using (var cts = new CancellationTokenSource(Timeout))
+            {
                 await accessSemaphore.WaitAsync();
                 try
                 {

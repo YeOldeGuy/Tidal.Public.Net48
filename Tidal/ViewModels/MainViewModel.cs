@@ -295,7 +295,7 @@ namespace Tidal.ViewModels
             }, () => selectedTorrents?.Any(t => t.Status != TorrentStatus.Stopped) == true);
 
 
-        public DelegateCommand QuickUnlimitedCommand => 
+        public DelegateCommand QuickUnlimitedCommand =>
             _QuickUnlimitedCommand = _QuickUnlimitedCommand ?? new DelegateCommand(() =>
         {
             TorrentMutator mutator = new TorrentMutator()
@@ -308,7 +308,7 @@ namespace Tidal.ViewModels
         }, () => selectedTorrents?.Any() == true);
 
 
-        public DelegateCommand QuickNormalCommand => 
+        public DelegateCommand QuickNormalCommand =>
             _QuickNormalCommand = _QuickNormalCommand ?? new DelegateCommand(() =>
         {
             TorrentMutator mutator = new TorrentMutator()
@@ -321,7 +321,7 @@ namespace Tidal.ViewModels
         }, () => selectedTorrents?.Any() == true);
 
 
-        public DelegateCommand RemoveTorrentsCommand => 
+        public DelegateCommand RemoveTorrentsCommand =>
             _RemoveTorrentsCommand = _RemoveTorrentsCommand ?? new DelegateCommand(() =>
         {
             IDialogParameters parms = new DialogParameters
