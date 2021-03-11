@@ -151,13 +151,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Collections\FileCollection.cs" />
     <Compile Include="Collections\GridViewCollection.cs" />
     <Compile Include="Collections\ICustomSorter.cs" />
     <Compile Include="Collections\ILiveSortColumns.cs" />
     <Compile Include="Collections\MergeCollection.cs" />
+    <Compile Include="Collections\PeerCollection.cs" />
+    <Compile Include="Collections\TorrentCollection.cs" />
+    <Compile Include="Comparers\IpComparer.cs" />
+    <Compile Include="Comparers\LocationComparer.cs" />
     <Compile Include="Constants\MDLConsts.cs" />
     <Compile Include="Constants\PageKeys.cs" />
     <Compile Include="Constants\Regions.cs" />
+    <Compile Include="Controls\FileGrid.xaml.cs">
+      <DependentUpon>FileGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PeerGrid.xaml.cs">
+      <DependentUpon>PeerGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TorrentGrid.xaml.cs">
+      <DependentUpon>TorrentGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BoolToStrConverter.cs" />
     <Compile Include="Converters\DateFormatConverter.cs" />
     <Compile Include="Converters\ETAConverter.cs" />
@@ -265,6 +279,18 @@
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\FileGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PeerGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TorrentGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\Views\AddMagnetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

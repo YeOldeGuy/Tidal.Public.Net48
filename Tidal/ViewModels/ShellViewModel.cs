@@ -355,7 +355,6 @@ namespace Tidal.ViewModels
                 navigationService.RequestNavigate(target, parameters);
         }
 
-
         private void OnNavigated(object sender, RegionNavigationEventArgs e)
         {
             GoBackCommand.RaiseCanExecuteChanged();
@@ -364,7 +363,7 @@ namespace Tidal.ViewModels
         }
         #endregion
 
-        #region ICommands
+        #region ICommands and helpers
         #region ICommand Backing
         private DelegateCommand _UnloadedCommand;
         private DelegateCommand _LoadedCommand;
@@ -501,9 +500,11 @@ namespace Tidal.ViewModels
         public DelegateCommand AddTorrentCommand =>
             _AddTorrentCommand = _AddTorrentCommand ?? new DelegateCommand(() =>
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.DefaultExt = ".torrent";
-            openFileDialog.Filter = "Torrent Files (*.torrent)|*.torrent";
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                DefaultExt = ".torrent",
+                Filter = "Torrent Files (*.torrent)|*.torrent"
+            };
             if (openFileDialog.ShowDialog() == true)
             {
                 DoAddTorrentDialog(openFileDialog.FileName);

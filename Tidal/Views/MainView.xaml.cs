@@ -1,28 +1,77 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
+using Prism.Events;
+using Prism.Regions;
+using Tidal.Helpers;
+using Tidal.Models.Messages;
+using Tidal.Services.Abstract;
 
 namespace Tidal.Views
 {
-    /// <summary>
-    /// Interaction logic for MainView.xaml
-    /// </summary>
-    public partial class MainView : UserControl
+    public partial class MainView : UserControl, INavigationAware
     {
+        private ISettingsService settingsService;
+        private SubscriptionToken saveToken;
+        private readonly IMessenger Messenger;
+
         public MainView()
         {
             InitializeComponent();
+            settingsService = ServiceResolver.Resolve<ISettingsService>();
+            Messenger = ServiceResolver.Resolve<IMessenger>();
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext) => false;
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            saveToken = Messenger.Subscribe<SaveSettingsMessage>(OnSaveSettings, ThreadOption.PublisherThread);
+
+            settingsService = ServiceResolver.Resolve<ISettingsService>();
+
+            var info = settingsService.MainPageLayout;
+            if (info != null)
+            {
+                overall.RowDefinitions.Clear();
+                foreach (var rowdef in info.GetLayoutGrid(nameof(overall)).LayoutSpecs)
+                    overall.RowDefinitions.Add(rowdef.RowDefinition);
+
+                details.ColumnDefinitions.Clear();
+                foreach (var coldef in info.GetLayoutGrid(nameof(details)).LayoutSpecs)
+                    details.ColumnDefinitions.Add(coldef.ColumnDefinition);
+            }
+
+            torrentGrid.Deserialize(settingsService.TorrentGridInfo);
+            peerGrid.Deserialize(settingsService.PeerGridInfo);
+            fileGrid.Deserialize(settingsService.FileGridInfo);
+
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            saveToken.Dispose();
+            SerializeLayoutGrid(settingsService);
+            SerializeDataGrids(settingsService);
+        }
+
+        private void OnSaveSettings(SaveSettingsMessage saveMessage)
+        {
+            SerializeLayoutGrid(saveMessage.SettingsService);
+            SerializeDataGrids(saveMessage.SettingsService);
+        }
+
+        private void SerializeDataGrids(ISettingsService settings)
+        {
+            settings.TorrentGridInfo = torrentGrid.Serialize();
+            settings.PeerGridInfo = peerGrid.Serialize();
+            settings.FileGridInfo = fileGrid.Serialize();
+        }
+
+        private void SerializeLayoutGrid(ISettingsService settings)
+        {
+            var info = new LayoutInfo();
+            info.AddLayout(nameof(overall), overall.RowDefinitions);
+            info.AddLayout(nameof(details), details.ColumnDefinitions);
+            settings.MainPageLayout = info;
         }
     }
 }

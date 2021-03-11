@@ -1,0 +1,546 @@
+﻿<UserControl x:Name="grid"
+             x:Class="Tidal.Controls.TorrentGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:Tidal.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Tidal.Controls"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:properties="clr-namespace:Tidal.Properties"
+             d:DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <conv:MultiplyConverter x:Key="Multiply" />
+        <conv:PercentConverter x:Key="Percent" />
+        <conv:SpeedConverter x:Key="Speed" />
+        <conv:SizeConverter x:Key="Size" />
+        <conv:ETAConverter x:Key="ETA" />
+        <conv:DateFormatConverter x:Key="DateFormat" />
+        <conv:TimeSpanConverter x:Key="HumanTimeSpan"
+                                NearZero="Just a moment"
+                                Precision="3"
+                                Presentation="Humanize"
+                                Tolerance="5.0" />
+        <conv:VisibilityConverter x:Key="Visibility" />
+
+        <Style x:Key="StatusIconSelector"
+               TargetType="TextBlock">
+            <Setter Property="FontFamily"
+                    Value="Segoe MDL2 Assets" />
+            <Setter Property="FontSize"
+                    Value="14" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Status}"
+                             Value="Stopped">
+                    <Setter Property="Text"
+                            Value="{StaticResource Stopped}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Status}"
+                             Value="Seeding">
+                    <Setter Property="Text"
+                            Value="{StaticResource Seeding}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Status}"
+                             Value="Downloading">
+                    <Setter Property="Text"
+                            Value="{StaticResource Downloading}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <ContextMenu x:Key="TorrentPropertiesMenu">
+            <MenuItem Command="{Binding StartCommand}"
+                      Header="Start Torrent" />
+            <MenuItem Command="{Binding StopCommand}"
+                      Header="Stop Torrent" />
+            <MenuItem Header="Quick Properties">
+                <MenuItem Command="{Binding QuickUnlimitedCommand}"
+                          Header="Unlimited seeding" />
+                <MenuItem Command="{Binding QuickNormalCommand}"
+                          Header="Normal seeding" />
+            </MenuItem>
+            <Separator />
+            <MenuItem Command="{Binding RemoveCommand}"
+                      Header="Remove Torrent" />
+            <Separator />
+            <MenuItem Command="{Binding ReannounceCommand}"
+                      Header="Reannounce (get more peers)" />
+            <Separator />
+            <MenuItem Command="{Binding TorrentPropsCommand}"
+                      Header="Properties" />
+        </ContextMenu>
+
+        <ContextMenu x:Name="ColumnContextMenu"
+                     x:Key="ColumnHeaderMenu"
+                     Opened="ColumnHeaderMenuOpened">
+            <MenuItem Header="Prob filled in code-behind" />
+        </ContextMenu>
+
+        <Style x:Key="ColumnHeaderStyle"
+               BasedOn="{StaticResource MahApps.Styles.DataGridColumnHeader}"
+               TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="ContextMenu"
+                    Value="{StaticResource ColumnHeaderMenu}" />
+        </Style>
+
+        <Style x:Key="errorStyle"
+               BasedOn="{StaticResource MahApps.Styles.DataGridRow}"
+               TargetType="{x:Type DataGridRow}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding HasError,
+                                               Mode=OneWay}"
+                             Value="True">
+                    <Setter Property="Background"
+                            Value="#FF8B8B" />
+                    <Setter Property="Foreground"
+                            Value="DarkRed" />
+                </DataTrigger>
+                <!--  IsMouseOver  -->
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding HasError, Mode=OneWay}" Value="True" />
+                        <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Background"
+                            Value="#FFBDBD" />
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <DataGrid x:Name="torrentGrid"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserResizeColumns="True"
+                  ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
+                  ContextMenu="{StaticResource TorrentPropertiesMenu}"
+                  IsReadOnly="True"
+                  ItemsSource="{Binding Torrents.View,
+                                        ElementName=grid}"
+                  SelectionChanged="SelectionChanged"
+                  SelectionUnit="FullRow">
+
+            <DataGrid.Columns>
+                <!--  Name and progress column  -->
+                <DataGridTemplateColumn Width="*"
+                                        Header="Name/Info"
+                                        SortMemberPath="Name">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="2" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Margin="5,0,0,0"
+                                            Orientation="Horizontal">
+                                    <Grid Margin="0,6,0,0"
+                                          VerticalAlignment="Center">
+                                        <TextBlock Margin="0,0,3,5"
+                                                   Style="{StaticResource StatusIconSelector}" />
+                                        <Button Command="{Binding ToggleTorrentStatus,
+                                                                  ElementName=grid}"
+                                                CommandParameter="{Binding HashString}"
+                                                Opacity="0" />
+                                    </Grid>
+                                    <TextBlock Margin="3,0,0,0"
+                                               VerticalAlignment="Center"
+                                               FontSize="14"
+                                               Text="{Binding Name,
+                                                              Mode=OneWay}">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding HasError,
+                                                                                   Mode=OneWay}"
+                                                                 Value="True">
+                                                        <Setter Property="FontStyle"
+                                                                Value="Italic" />
+                                                        <Setter Property="FontWeight"
+                                                                Value="SemiBold" />
+                                                        <Setter Property="Foreground"
+                                                                Value="{StaticResource MahApps.Brushes.SystemControlErrorTextForeground}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </StackPanel>
+                                <mah:MetroProgressBar Grid.Row="1"
+                                                      Foreground="{StaticResource DownloadingProgressBrush}"
+                                                      Maximum="1.0"
+                                                      Minimum="0"
+                                                      Value="{Binding PercentDone,
+                                                                      Mode=OneWay}" />
+                                <mah:MetroProgressBar Grid.Row="1"
+                                                      Foreground="{StaticResource SeedingProgressBrush}"
+                                                      Maximum="1.0"
+                                                      Minimum="0"
+                                                      Value="{Binding SeedRatioProgress,
+                                                                      Mode=OneWay}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}"
+                               TargetType="DataGridCell">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock FontWeight="SemiBold"
+                                                   Text="{Binding Name}" />
+                                        <TextBlock Grid.Row="1"
+                                                   FontStyle="Italic"
+                                                   Foreground="Red"
+                                                   Text="{Binding ErrorString}"
+                                                   Visibility="{Binding Error,
+                                                                        Converter={StaticResource Visibility}}" />
+                                        <Rectangle Grid.Row="2"
+                                                   Height="1"
+                                                   Margin="0,3"
+                                                   Fill="{DynamicResource MahApps.Brushes.Accent2}" />
+                                        <TextBlock Grid.Row="3">
+                                            <Run Text="Downloading" />
+                                            <Run Text="{Binding PercentDone, Converter={StaticResource Percent}}" />
+                                            <Run Text="Complete" />
+                                        </TextBlock>
+                                        <TextBlock Grid.Row="4">
+                                            <Run Text="Seeding" />
+                                            <Run Text="{Binding SeedRatioProgress, Mode=OneWay, Converter={StaticResource Percent}}" />
+                                            <Run Text="Complete" />
+                                        </TextBlock>
+                                    </Grid>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="ToolTipService.ShowDuration"
+                                    Value="{StaticResource ShowDuration}" />
+                            <Setter Property="ToolTipService.InitialShowDelay"
+                                    Value="{StaticResource ShowDelay}" />
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+
+                </DataGridTemplateColumn>
+
+                <!--  Peers column  -->
+                <DataGridTemplateColumn Width="80"
+                                        Header="Peers"
+                                        SortMemberPath="PeersConnected">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Center"
+                                  VerticalAlignment="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontWeight="Bold">
+                                        <Run Text="Peers:" />
+                                        <Run Text="{Binding PeersConnected}" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1"
+                                            Orientation="Horizontal">
+                                    <TextBlock FontSize="11"
+                                               FontWeight="DemiBold"
+                                               Text="S:" />
+                                    <TextBlock FontSize="11"
+                                               Text="{Binding SeederCount}" />
+                                    <TextBlock FontSize="11"
+                                               FontWeight="DemiBold"
+                                               Text="/L:" />
+                                    <TextBlock FontSize="11"
+                                               Text="{Binding LeecherCount}" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--  Seed ratio column  -->
+                <DataGridTemplateColumn Width="Auto"
+                                        Header="Seed Ratio"
+                                        SortMemberPath="UploadRatio">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding UploadRatio,
+                                                      StringFormat='{}{0:0.00}'}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--  Upload rate column  -->
+                <DataGridTemplateColumn Width="80"
+                                        SortMemberPath="AverageRateUpload">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style BasedOn="{StaticResource ColumnHeaderStyle}"
+                               TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <StackPanel>
+                                        <TextBlock VerticalAlignment="Center"
+                                                   Text="Moving average upload rate" />
+                                    </StackPanel>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="0"
+                                       VerticalAlignment="Center"
+                                       FontFamily="Segoe MDL2 Assets"
+                                       Text="{x:Static properties:Resources.Unicode_Upload}" />
+                            <TextBlock Text="RATE" />
+                        </StackPanel>
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding AverageRateUpload,
+                                                      Converter={StaticResource Speed},
+                                                      ConverterParameter=2}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}"
+                               TargetType="DataGridCell">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <StackPanel>
+                                        <TextBlock>
+                                            <Run FontWeight="DemiBold"
+                                                 Text="Actual Rate" />
+                                            <Run Text="{Binding RateUpload, Converter={StaticResource Speed}, ConverterParameter=2}" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="ToolTipService.ShowDuration"
+                                    Value="{StaticResource ShowDuration}" />
+                            <Setter Property="ToolTipService.InitialShowDelay"
+                                    Value="{StaticResource ShowDelay}" />
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                </DataGridTemplateColumn>
+
+                <!--  Download rate column  -->
+                <DataGridTemplateColumn Width="80"
+                                        SortMemberPath="AverageRateDownload">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style BasedOn="{StaticResource ColumnHeaderStyle}"
+                               TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <StackPanel>
+                                        <TextBlock VerticalAlignment="Center"
+                                                   Text="Moving average download rate" />
+                                    </StackPanel>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="0"
+                                       VerticalAlignment="Center"
+                                       FontFamily="Segoe MDL2 Assets"
+                                       Text="{x:Static properties:Resources.Unicode_Download}" />
+                            <TextBlock Text="RATE" />
+                        </StackPanel>
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding AverageRateDownload,
+                                                      Converter={StaticResource Speed},
+                                                      ConverterParameter=2}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}"
+                               TargetType="DataGridCell">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <StackPanel>
+                                        <TextBlock>
+                                            <Run FontWeight="DemiBold"
+                                                 Text="Actual Rate" />
+                                            <Run Text="{Binding RateDownload, Converter={StaticResource Speed}, ConverterParameter=2}" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="ToolTipService.ShowDuration"
+                                    Value="{StaticResource ShowDuration}" />
+                            <Setter Property="ToolTipService.InitialShowDelay"
+                                    Value="{StaticResource ShowDelay}" />
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                </DataGridTemplateColumn>
+
+                <!--  Torrent Size Column  -->
+                <DataGridTemplateColumn Width="70"
+                                        Header="Size"
+                                        SortMemberPath="TotalSize">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center"
+                                       Text="{Binding TotalSize,
+                                                      Converter={StaticResource Size},
+                                                      ConverterParameter=2}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--  ETA Column  -->
+                <DataGridTemplateColumn Width="70"
+                                        Header="ETA"
+                                        SortMemberPath="ETA">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style BasedOn="{StaticResource ColumnHeaderStyle}"
+                               TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="DemiBold"
+                                                   Text="Estimated time to completion" />
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Margin="10,0"
+                                                       Text="Unlimited" />
+                                            <TextBlock Grid.Column="1"
+                                                       Text="No completion time" />
+                                            <TextBlock Grid.Row="1"
+                                                       Margin="10,0"
+                                                       Text="Inactive" />
+                                            <TextBlock Grid.Row="1"
+                                                       Grid.Column="1"
+                                                       Text="No active traffic" />
+                                        </Grid>
+                                    </StackPanel>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock VerticalAlignment="Center"
+                                       Text="{Binding ETA,
+                                                      Converter={StaticResource ETA},
+                                                      NotifyOnTargetUpdated=True}"
+                                       TextAlignment="Center" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--  Activity Column  -->
+                <DataGridTemplateColumn Width="80"
+                                        Header="Active"
+                                        SortMemberPath="ActivityDate">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style BasedOn="{StaticResource ColumnHeaderStyle}"
+                               TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <TextBlock VerticalAlignment="Center"
+                                               Text="Last Activity" />
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock VerticalAlignment="Center"
+                                           Text="{Binding ActivityDate,
+                                                          Converter={StaticResource DateFormat},
+                                                          ConverterParameter='d'}"
+                                           TextAlignment="Center" />
+                                <TextBlock VerticalAlignment="Center"
+                                           FontSize="11"
+                                           Text="{Binding ActivityDate,
+                                                          Converter={StaticResource DateFormat},
+                                                          ConverterParameter='T'}"
+                                           TextAlignment="Center" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}"
+                               TargetType="DataGridCell">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <StackPanel>
+                                        <TextBlock>
+                                            <Run FontWeight="DemiBold"
+                                                 Text="Added:" />
+                                            <Run FontWeight="Normal"
+                                                 Text="{Binding AddedDate,
+                                                                Mode=OneWay,
+                                                                Converter={StaticResource DateFormat},
+                                                                ConverterParameter='G'}" />
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Run FontWeight="DemiBold"
+                                                 Text="Finished:" />
+                                            <Run FontWeight="Normal"
+                                                 Text="{Binding DoneDate,
+                                                                Mode=OneWay,
+                                                                Converter={StaticResource DateFormat},
+                                                                ConverterParameter='G'}" />
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Run FontWeight="DemiBold"
+                                                 Text="Latest D/L or Seed Activity:" />
+                                            <LineBreak />
+                                            <Run FontWeight="Normal"
+                                                 Text="{Binding ActivityDate,
+                                                                Mode=OneWay,
+                                                                Converter={StaticResource DateFormat},
+                                                                ConverterParameter='G'}" />
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Run Text="{Binding TimeSinceActive, Mode=OneWay, Converter={StaticResource HumanTimeSpan}}" />
+                                            <Run Text="ago" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="ToolTipService.ShowDuration"
+                                    Value="{StaticResource ShowDuration}" />
+                            <Setter Property="ToolTipService.InitialShowDelay"
+                                    Value="{StaticResource ShowDelay}" />
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,253 @@
+﻿<UserControl x:Name="grid"
+             x:Class="Tidal.Controls.PeerGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:comparers="clr-namespace:Tidal.Comparers"
+             xmlns:conv="clr-namespace:Tidal.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Tidal.Controls"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:properties="clr-namespace:Tidal.Properties"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             d:DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <conv:SpeedConverter x:Key="BpsConverter" />
+        <conv:PercentConverter x:Key="PercentConverter" />
+        <comparers:LocationComparer x:Key="LocationComparer" />
+        <comparers:IpComparer x:Key="IpComparer" />
+
+
+        <conv:ValueWhenConverter x:Key="BoolToItalic">
+            <conv:ValueWhenConverter.When>
+                <sys:Boolean>True</sys:Boolean>
+            </conv:ValueWhenConverter.When>
+            <conv:ValueWhenConverter.Value>
+                <FontStyle>Normal</FontStyle>
+            </conv:ValueWhenConverter.Value>
+            <conv:ValueWhenConverter.Otherwise>
+                <FontStyle>Italic</FontStyle>
+            </conv:ValueWhenConverter.Otherwise>
+        </conv:ValueWhenConverter>
+
+        <conv:ValueWhenConverter x:Key="BoolToEncryptedString">
+            <conv:ValueWhenConverter.When>
+                <sys:Boolean>True</sys:Boolean>
+            </conv:ValueWhenConverter.When>
+            <conv:ValueWhenConverter.Value>
+                <sys:String>Encrypted Connection</sys:String>
+            </conv:ValueWhenConverter.Value>
+            <conv:ValueWhenConverter.Otherwise>
+                <sys:String>Unencrypted Connection</sys:String>
+            </conv:ValueWhenConverter.Otherwise>
+        </conv:ValueWhenConverter>
+
+        <ContextMenu x:Name="ColumnContextMenu"
+                     x:Key="ColumnHeaderMenu"
+                     Opened="ColumnHeaderMenuOpened">
+            <MenuItem Header="Prob filled in code-behind" />
+        </ContextMenu>
+
+        <Style x:Key="ColumnHeaderStyle"
+               BasedOn="{StaticResource MahApps.Styles.DataGridColumnHeader}"
+               TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="ContextMenu"
+                    Value="{StaticResource ColumnHeaderMenu}" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <DataGrid x:Name="peerGrid"
+                  AutoGenerateColumns="False"
+                  CanUserResizeColumns="True"
+                  CanUserSortColumns="True"
+                  ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
+                  FontSize="11.5"
+                  FontWeight="Light"
+                  IsReadOnly="True"
+                  IsTabStop="False"
+                  ItemsSource="{Binding Peers.View,
+                                        ElementName=grid}"
+                  RowHeight="20"
+                  Sorting="HandleSorting">
+
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="100"
+                                        Header="Address"
+                                        SortMemberPath="Address">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontStyle="{Binding IsEncrypted,
+                                                           Converter={StaticResource BoolToItalic}}"
+                                       Text="{Binding Address}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}"
+                               TargetType="DataGridCell">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <StackPanel>
+                                        <TextBlock HorizontalAlignment="Left"
+                                                   VerticalAlignment="Center"
+                                                   FontWeight="DemiBold"
+                                                   Text="{Binding OwnerName}" />
+                                        <TextBlock HorizontalAlignment="Left"
+                                                   VerticalAlignment="Center"
+                                                   Text="{Binding IsEncrypted,
+                                                                  Converter={StaticResource BoolToEncryptedString}}" />
+                                    </StackPanel>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="ToolTipService.ShowDuration"
+                                    Value="{StaticResource ShowDuration}" />
+                            <Setter Property="ToolTipService.InitialShowDelay"
+                                    Value="{StaticResource ShowDelay}" />
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="*"
+                                        Header="Location"
+                                        SortMemberPath="Location">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="2" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Margin="5,0,0,0"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding Location,
+                                                          FallbackValue='Unknown Location'}"
+                                           TextTrimming="CharacterEllipsis" />
+                                <mah:MetroProgressBar Grid.Row="1"
+                                                      Foreground="{StaticResource DownloadingProgressBrush}"
+                                                      Maximum="1"
+                                                      Minimum="0"
+                                                      Value="{Binding Progress}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}"
+                               TargetType="DataGridCell">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="DemiBold">
+                                            <Run Text="Peer has" />
+                                            <Run Text="{Binding Progress, Converter={StaticResource PercentConverter}}" />
+                                            <Run Text="Completed" />
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Run Text="Peer Client:" />
+                                            <Run FontStyle="Italic"
+                                                 Text="{Binding ClientName}" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="ToolTipService.ShowDuration"
+                                    Value="{StaticResource ShowDuration}" />
+                            <Setter Property="ToolTipService.InitialShowDelay"
+                                    Value="{StaticResource ShowDelay}" />
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                </DataGridTemplateColumn>
+
+                <!--  Upload Rate Column  -->
+                <DataGridTemplateColumn Width="80"
+                                        SortMemberPath="AverageToPeer">
+                    <DataGridTemplateColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="0"
+                                       VerticalAlignment="Center"
+                                       FontFamily="Segoe MDL2 Assets"
+                                       Text="{x:Static properties:Resources.Unicode_Upload}" />
+                            <TextBlock Text="RATE" />
+                        </StackPanel>
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding AverageToPeer,
+                                                      Converter={StaticResource BpsConverter},
+                                                      ConverterParameter=2}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}"
+                               TargetType="DataGridCell">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <StackPanel>
+                                        <TextBlock>
+                                            <Run FontWeight="DemiBold"
+                                                 Text="Actual Rate" />
+                                            <Run Text="{Binding RateToPeer, Converter={StaticResource BpsConverter}, ConverterParameter=2}" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="ToolTipService.ShowDuration"
+                                    Value="{StaticResource ShowDuration}" />
+                            <Setter Property="ToolTipService.InitialShowDelay"
+                                    Value="{StaticResource ShowDelay}" />
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                </DataGridTemplateColumn>
+
+                <!--  Download Rate Column  -->
+                <DataGridTemplateColumn Width="80"
+                                        SortMemberPath="AverageToClient">
+                    <DataGridTemplateColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="0"
+                                       VerticalAlignment="Center"
+                                       FontFamily="Segoe MDL2 Assets"
+                                       Text="{x:Static properties:Resources.Unicode_Download}" />
+                            <TextBlock Text="RATE" />
+                        </StackPanel>
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding AverageToClient,
+                                                      Converter={StaticResource BpsConverter},
+                                                      ConverterParameter=2}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}"
+                               TargetType="DataGridCell">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <StackPanel>
+                                        <TextBlock>
+                                            <Run FontWeight="DemiBold"
+                                                 Text="Actual Rate" />
+                                            <Run Text="{Binding RateToClient, Converter={StaticResource BpsConverter}, ConverterParameter=2}" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="ToolTipService.ShowDuration"
+                                    Value="{StaticResource ShowDuration}" />
+                            <Setter Property="ToolTipService.InitialShowDelay"
+                                    Value="{StaticResource ShowDelay}" />
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

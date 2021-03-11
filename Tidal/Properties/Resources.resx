@@ -1054,4 +1054,12 @@
     <value></value>
     <comment>\uE8E5</comment>
   </data>
+  <data name="Unicode_Upload" xml:space="preserve">
+    <value></value>
+    <comment>\uE898</comment>
+  </data>
+  <data name="Unicode_Download" xml:space="preserve">
+    <value></value>
+    <comment>\uE896</comment>
+  </data>
 </root>

@@ -1,0 +1,151 @@
+﻿<UserControl x:Name="grid"
+             x:Class="Tidal.Controls.FileGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:Tidal.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Tidal.Controls"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             d:DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <conv:ValueWhenConverter x:Key="Bool2Wanted">
+            <conv:ValueWhenConverter.When>
+                <sys:Boolean>True</sys:Boolean>
+            </conv:ValueWhenConverter.When>
+            <conv:ValueWhenConverter.Value>
+                <sys:String>Wanted</sys:String>
+            </conv:ValueWhenConverter.Value>
+            <conv:ValueWhenConverter.Otherwise>
+                <sys:String>Skip</sys:String>
+            </conv:ValueWhenConverter.Otherwise>
+        </conv:ValueWhenConverter>
+
+        <conv:SizeConverter x:Key="Size" />
+        <conv:PercentConverter x:Key="Percent" />
+
+        <ContextMenu x:Name="ColumnContextMenu"
+                     x:Key="ColumnHeaderMenu"
+                     Opened="ColumnHeaderMenuOpened">
+            <MenuItem Header="Prob filled in code-behind" />
+        </ContextMenu>
+
+        <Style x:Key="ColumnHeaderStyle"
+               BasedOn="{StaticResource MahApps.Styles.DataGridColumnHeader}"
+               TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="ContextMenu"
+                    Value="{StaticResource ColumnHeaderMenu}" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <DataGrid x:Name="fileGrid"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserResizeColumns="True"
+                  CanUserSortColumns="True"
+                  ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
+                  FontSize="11.5"
+                  FontWeight="Light"
+                  IsReadOnly="False"
+                  IsTabStop="False"
+                  ItemsSource="{Binding Files.View,
+                                        ElementName=grid}"
+                  RowHeight="20"
+                  Sorting="HandleSorting">
+            <DataGrid.Columns>
+                <!--  Wanted Column  -->
+                <DataGridTemplateColumn CanUserSort="False"
+                                        Header="D/L?">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      IsChecked="{Binding Wanted,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}"
+                               TargetType="DataGridCell">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <TextBlock Text="{Binding Wanted, Converter={StaticResource Bool2Wanted}}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="ToolTipService.ShowDuration"
+                                    Value="{StaticResource ShowDuration}" />
+                            <Setter Property="ToolTipService.InitialShowDelay"
+                                    Value="{StaticResource ShowDelay}" />
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                </DataGridTemplateColumn>
+
+                <!--  File Name Column  -->
+                <DataGridTemplateColumn Width="*"
+                                        Header="Name/Completion"
+                                        IsReadOnly="True"
+                                        SortMemberPath="Name">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="2" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Margin="5,0">
+                                    <TextBlock Text="{Binding Name}" />
+                                </StackPanel>
+                                <mah:MetroProgressBar Grid.Row="1"
+                                                      Foreground="DarkGreen"
+                                                      Maximum="1.0"
+                                                      Minimum="0"
+                                                      Value="{Binding Progress,
+                                                                      Mode=OneWay}" />
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style BasedOn="{StaticResource MahApps.Styles.DataGridCell}"
+                               TargetType="DataGridCell">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <StackPanel>
+                                        <TextBlock>
+                                            <Run Text="Progress" />
+                                            <Run Text="{Binding Progress, Mode=OneWay, Converter={StaticResource Percent}}" />
+                                            <Run Text="Complete" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                </DataGridTemplateColumn>
+
+                <!--  Size Column  -->
+                <DataGridTemplateColumn Width="90"
+                                        Header="Size"
+                                        IsReadOnly="True"
+                                        SortMemberPath="Length">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding Length,
+                                                      Mode=OneWay,
+                                                      Converter={StaticResource Size},
+                                                      ConverterParameter=2}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
