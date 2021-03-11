@@ -1046,4 +1046,12 @@
     <value></value>
     <comment>\uE713</comment>
   </data>
+  <data name="Unicode_AddMagnet" xml:space="preserve">
+    <value></value>
+    <comment>\uE836</comment>
+  </data>
+  <data name="Unicode_AddTorrent" xml:space="preserve">
+    <value></value>
+    <comment>\uE8E5</comment>
+  </data>
 </root>

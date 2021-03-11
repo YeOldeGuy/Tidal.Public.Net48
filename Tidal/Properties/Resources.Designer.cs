@@ -2617,6 +2617,24 @@ namespace Tidal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Unicode_AddMagnet {
+            get {
+                return ResourceManager.GetString("Unicode_AddMagnet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Unicode_AddTorrent {
+            get {
+                return ResourceManager.GetString("Unicode_AddTorrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         public static string Unicode_Network {

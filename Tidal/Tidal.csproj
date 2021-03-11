@@ -176,8 +176,20 @@
     <Compile Include="Dialogs\ViewModels\RetryCancelViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\TorrentDataDisposition.cs" />
     <Compile Include="Dialogs\ViewModels\TorrentPropertiesViewModel.cs" />
+    <Compile Include="Dialogs\Views\AddMagnetView.xaml.cs">
+      <DependentUpon>AddMagnetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Views\AddTorrentView.xaml.cs">
+      <DependentUpon>AddTorrentView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Views\FirstHostView.xaml.cs">
       <DependentUpon>FirstHostView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Views\RemoveTorrentView.xaml.cs">
+      <DependentUpon>RemoveTorrentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Views\TorrentPropertiesView.xaml.cs">
+      <DependentUpon>TorrentPropertiesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DataGridColumnInfo.cs" />
     <Compile Include="Helpers\DataGridUtils.cs" />
@@ -253,7 +265,23 @@
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Dialogs\Views\AddMagnetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Views\AddTorrentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\Views\FirstHostView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Views\RemoveTorrentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Views\TorrentPropertiesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

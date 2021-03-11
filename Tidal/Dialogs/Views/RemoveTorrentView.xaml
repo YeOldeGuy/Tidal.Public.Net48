@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="Tidal.Dialogs.Views.RemoveTorrentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:Tidal.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Tidal.Dialogs.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:Tidal.Client.Models;assembly=Tidal.Client"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:properties="clr-namespace:Tidal.Properties"
+             xmlns:viewmodels="clr-namespace:Tidal.Dialogs.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:RemoveTorrentViewModel}"
+             d:DesignHeight="500"
+             d:DesignWidth="350"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <converters:SizeConverter x:Key="Size" />
+        <DataTemplate x:Key="DeleteTorrentItem"
+                      DataType="{x:Type models:Torrent}">
+            <StackPanel>
+                <TextBlock FontSize="12"
+                           FontWeight="DemiBold"
+                           Text="{Binding Name}" />
+                <TextBlock Margin="10,0"
+                           FontSize="10">
+                    <Run Text="Size:" />
+                    <Run Text="{Binding TotalSize, Converter={StaticResource Size}}" />
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <prism:Dialog.WindowStyle>
+        <Style TargetType="Window">
+            <Setter Property="prism:Dialog.WindowStartupLocation"
+                    Value="CenterOwner" />
+            <Setter Property="ShowInTaskbar"
+                    Value="False" />
+            <Setter Property="ResizeMode"
+                    Value="NoResize" />
+            <Setter Property="SizeToContent"
+                    Value="WidthAndHeight" />
+        </Style>
+    </prism:Dialog.WindowStyle>
+
+
+    <Grid Width="350"
+          Height="500">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Margin="10"
+                   FontSize="15"
+                   FontWeight="Light"
+                   Foreground="{DynamicResource MahApps.Brushes.Text}"
+                   Text="{x:Static properties:Resources.OkToRemove}" />
+
+        <Grid Grid.Row="1"
+              Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock FontSize="12"
+                       FontWeight="Light"
+                       Foreground="{DynamicResource MahApps.Brushes.MenuItem.Foreground.Disabled}"
+                       Text="Torrents" />
+            <ListView Grid.Row="1"
+                      BorderBrush="{DynamicResource MahApps.Brushes.Accent2}"
+                      BorderThickness="1"
+                      ItemTemplate="{StaticResource DeleteTorrentItem}"
+                      ItemsSource="{Binding Torrents}" />
+        </Grid>
+
+
+        <UniformGrid Grid.Row="2"
+                     Margin="5"
+                     Columns="3">
+            <Button Margin="5"
+                    Command="{Binding CloseCommand}"
+                    CommandParameter="{x:Static viewmodels:TorrentDataDisposition.KeepData}"
+                    Content="{x:Static properties:Resources.RemoveTorrent_Remove}"
+                    IsDefault="True"
+                    Style="{DynamicResource MahApps.Styles.Button.Flat}"
+                    ToolTip="{x:Static properties:Resources.RemoveTorrent_RemoveToolTip}" />
+            <Button Margin="5"
+                    Command="{Binding CloseCommand}"
+                    CommandParameter="{x:Static viewmodels:TorrentDataDisposition.RemoveData}"
+                    Content="{x:Static properties:Resources.RemoveTorrent_DataToo}"
+                    IsDefault="False"
+                    Style="{DynamicResource MahApps.Styles.Button.Flat}"
+                    ToolTip="{x:Static properties:Resources.RemoveTorrent_DataTooToolTip}" />
+            <Button Margin="5"
+                    Command="{Binding CloseCommand}"
+                    CommandParameter="{x:Static viewmodels:TorrentDataDisposition.NoAction}"
+                    Content="{x:Static properties:Resources.Cancel}"
+                    IsCancel="True"
+                    Style="{DynamicResource MahApps.Styles.Button.Flat}" />
+        </UniformGrid>
+
+    </Grid>
+</UserControl>

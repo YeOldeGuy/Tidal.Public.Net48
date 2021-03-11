@@ -1,0 +1,178 @@
+﻿<UserControl x:Class="Tidal.Dialogs.Views.TorrentPropertiesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:Tidal.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:props="clr-namespace:Tidal.Properties"
+             xmlns:viewmodels="clr-namespace:Tidal.Dialogs.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:TorrentPropertiesViewModel}"
+             d:DesignHeight="550"
+             d:DesignWidth="400"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d">
+
+    <prism:Dialog.WindowStyle>
+        <Style TargetType="Window">
+            <Setter Property="prism:Dialog.WindowStartupLocation"
+                    Value="CenterOwner" />
+            <Setter Property="ShowInTaskbar"
+                    Value="False" />
+            <Setter Property="ResizeMode"
+                    Value="NoResize" />
+            <Setter Property="SizeToContent"
+                    Value="WidthAndHeight" />
+        </Style>
+    </prism:Dialog.WindowStyle>
+
+
+    <UserControl.Resources>
+        <conv:TimeSpanConverter x:Key="TimeSpanConverter"
+                                Precision="2"
+                                Presentation="Humanize" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Margin="10">
+            <mah:MetroHeader Margin="10,15,0,0"
+                             Header="{x:Static props:Resources.TorrentProps_PeerLimitHeader}">
+                <mah:NumericUpDown Width="100"
+                                   HorizontalAlignment="Left"
+                                   Maximum="50"
+                                   Minimum="10"
+                                   Value="{Binding Torrent.PeerLimit}" />
+            </mah:MetroHeader>
+            <mah:ToggleSwitch Margin="10,15,0,5"
+                              IsOn="{Binding Torrent.HonorsSessionLimits,
+                                             Mode=TwoWay}"
+                              OffContent="{x:Static props:Resources.TorrentProps_Override}"
+                              OnContent="{x:Static props:Resources.TorrentProps_HonorGlobal}" />
+
+            <Rectangle Height="1"
+                       Margin="15,10"
+                       Fill="{DynamicResource MahApps.Brushes.Gray5}" />
+
+            <mah:ToggleSwitch Margin="10,0"
+                              IsOn="{Binding Torrent.DownloadLimited,
+                                             Mode=TwoWay}"
+                              OffContent="{x:Static props:Resources.TorrentProps_DownloadLimitedOff}"
+                              OnContent="{x:Static props:Resources.TorrentProps_DownloadLimitedOn}" />
+            <mah:NumericUpDown Width="150"
+                               Margin="50,5"
+                               HorizontalAlignment="Left"
+                               Interval="50"
+                               IsEnabled="{Binding Torrent.DownloadLimited,
+                                                   Mode=OneWay,
+                                                   UpdateSourceTrigger=LostFocus}"
+                               Maximum="7500"
+                               Minimum="50"
+                               Value="{Binding Torrent.DownloadLimit,
+                                               Mode=TwoWay}" />
+
+            <Rectangle Height="1"
+                       Margin="15,10"
+                       Fill="{DynamicResource MahApps.Brushes.Gray5}" />
+
+            <mah:ToggleSwitch Margin="10,0"
+                              IsOn="{Binding Torrent.UploadLimited,
+                                             Mode=TwoWay}"
+                              OffContent="{x:Static props:Resources.TorrentProps_UploadLimitedOff}"
+                              OnContent="{x:Static props:Resources.TorrentProps_UploadLimitedOn}" />
+            <mah:NumericUpDown Width="150"
+                               Margin="50,5"
+                               HorizontalAlignment="Left"
+                               Interval="50"
+                               IsEnabled="{Binding Torrent.UploadLimited,
+                                                   Mode=OneWay}"
+                               Maximum="2000"
+                               Minimum="50"
+                               Value="{Binding Torrent.UploadLimit,
+                                               Mode=TwoWay,
+                                               UpdateSourceTrigger=LostFocus}" />
+
+            <Rectangle Height="1"
+                       Margin="15,10"
+                       Fill="{DynamicResource MahApps.Brushes.Gray5}" />
+
+            <mah:MetroHeader Margin="10,0,0,0"
+                             Header="{x:Static props:Resources.TorrentProps_SeedIdleHeader}">
+                <StackPanel>
+                    <ComboBox Width="150"
+                              Margin="20,0"
+                              HorizontalAlignment="Left"
+                              ItemsSource="{Binding SeedIdleSettings,
+                                                    Mode=OneWay}"
+                              SelectedIndex="{Binding SeedIdleSelectedIndex,
+                                                      Mode=TwoWay}" />
+                    <StackPanel Margin="20,5"
+                                Orientation="Horizontal">
+                        <mah:NumericUpDown Width="150"
+                                           Interval="15"
+                                           IsEnabled="{Binding SeedIdleModeChangable,
+                                                               Mode=OneWay}"
+                                           Maximum="600"
+                                           Minimum="0"
+                                           Value="{Binding Torrent.SeedIdleLimitMinutes,
+                                                           Mode=TwoWay}" />
+                        <TextBlock Margin="5,0"
+                                   VerticalAlignment="Center"
+                                   FontSize="12"
+                                   Text="{Binding Torrent.SeedIdleLimit,
+                                                  Converter={StaticResource TimeSpanConverter}}" />
+                    </StackPanel>
+                </StackPanel>
+            </mah:MetroHeader>
+
+            <mah:MetroHeader Margin="10,0,0,0"
+                             Header="{x:Static props:Resources.TorrentProps_SeedRatioHeader}">
+                <StackPanel>
+                    <ComboBox Width="150"
+                              Margin="20,0"
+                              HorizontalAlignment="Left"
+                              ItemsSource="{Binding SeedIdleSettings,
+                                                    Mode=OneWay}"
+                              SelectedIndex="{Binding SeedRatioSelectedIndex,
+                                                      Mode=TwoWay}" />
+                    <StackPanel Margin="20,5"
+                                Orientation="Horizontal">
+                        <mah:NumericUpDown Width="150"
+                                           IsEnabled="{Binding SeedRatioModeChangable,
+                                                               Mode=OneWay}"
+                                           StringFormat="{}{0:n2}"
+                                           Value="{Binding Torrent.SeedRatioLimit,
+                                                           Mode=TwoWay}" />
+                    </StackPanel>
+                </StackPanel>
+            </mah:MetroHeader>
+        </StackPanel>
+
+        <UniformGrid Grid.Row="1"
+                     Columns="2">
+            <!--
+                Note the button is hidden. It's just a place holder to push the dismiss
+                button over to the right.
+            -->
+            <Button Margin="15,5"
+                    Command="{Binding CloseCommand}"
+                    CommandParameter="{x:Static viewmodels:TorrentPropsDisposition.OK}"
+                    Content="{x:Static props:Resources.OK}"
+                    IsDefault="False"
+                    Style="{StaticResource MahApps.Styles.Button.Flat}"
+                    Visibility="Hidden" />
+
+            <!--  Both buttons return OK. Changes are made on the fly  -->
+            <Button Margin="15,5"
+                    Command="{Binding CloseCommand}"
+                    CommandParameter="{x:Static viewmodels:TorrentPropsDisposition.OK}"
+                    Content="{x:Static props:Resources.TorrentProps_DismissButton}"
+                    IsDefault="True"
+                    Style="{StaticResource MahApps.Styles.Button.Flat}" />
+        </UniformGrid>
+    </Grid>
+</UserControl>

@@ -96,6 +96,10 @@ namespace Tidal
 
             // Dialogs
             containerRegistry.RegisterDialog<FirstHostView, FirstHostViewModel>(PageKeys.FirstHost);
+            containerRegistry.RegisterDialog<AddMagnetView, AddMagnetViewModel>(PageKeys.AddMagnet);
+            containerRegistry.RegisterDialog<AddTorrentView, AddTorrentViewModel>(PageKeys.AddTorrent);
+            containerRegistry.RegisterDialog<RemoveTorrentView, RemoveTorrentViewModel>(PageKeys.RemoveTorrents);
+            containerRegistry.RegisterDialog<TorrentPropertiesView, TorrentPropertiesViewModel>(PageKeys.TorrentProperties);
 
             // Views
             containerRegistry.RegisterForNavigation<ShellView, ShellViewModel>();

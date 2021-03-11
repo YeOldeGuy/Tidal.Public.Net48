@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using ControlzEx.Theming;
 using Humanizer;
+using Microsoft.Win32;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -18,6 +21,7 @@ using Tidal.Dialogs.ViewModels;
 using Tidal.Models;
 using Tidal.Models.BrokerMessages;
 using Tidal.Models.Messages;
+using Tidal.Properties;
 using Tidal.Services.Abstract;
 
 namespace Tidal.ViewModels
@@ -31,7 +35,11 @@ namespace Tidal.ViewModels
         private readonly ITaskService taskService;
         private readonly IDialogService dialogService;
         private readonly IHostService hostService;
+        private readonly ITorrentStatusService torrentStatusService;
+        private readonly INotificationService notificationService;
+        private readonly SynchronizationContext context;
         private IRegionNavigationService navigationService;
+        private bool inFatality;
 
 
         public ShellViewModel(IRegionManager regionManager,
@@ -40,6 +48,8 @@ namespace Tidal.ViewModels
                               IDialogService dialogService,
                               ITaskService taskService,
                               IHostService hostService,
+                              INotificationService notificationService,
+                              ITorrentStatusService torrentStatusService,
                               ISettingsService settingsService)
         {
             this.regionManager = regionManager;
@@ -48,7 +58,11 @@ namespace Tidal.ViewModels
             this.settingsService = settingsService;
             this.brokerService = brokerService;
             this.taskService = taskService;
+            this.torrentStatusService = torrentStatusService;
+            this.notificationService = notificationService;
             this.messenger = messenger;
+
+            context = SynchronizationContext.Current;
 
             // Sync the theme with the system no matter the setting. This will
             // make the theme manager pick up the current color. Otherwise, the
@@ -79,10 +93,29 @@ namespace Tidal.ViewModels
 
             messenger.Subscribe<ShutdownMessage>((p) => { taskService.Stop(); brokerService.Stop(); });
 
+            // Misc subscriptions
             messenger.Subscribe<StartupMessage>(OnStartup);
             messenger.Subscribe<MouseNavMessage>(OnMouseNav);
+            messenger.Subscribe<HostChangedMessage>(OnHostChanged);
+
+            // Error subscriptions
+            messenger.Subscribe<FatalMessage>(OnFatalError);
+            messenger.Subscribe<WarningMessage>(OnWarning);
+            messenger.Subscribe<InfoMessage>(OnInfo);
+
+            // Client subscriptions
+            messenger.Subscribe<SessionResponse>(OnSession);
+            messenger.Subscribe<SessionStatsResponse>(OnSessionStats);
+            messenger.Subscribe<TorrentResponse>(OnTorrents);
+            messenger.Subscribe<FreeSpaceResponse>(OnFreeSpace);
         }
 
+        private void UiInvoke(Action action)
+        {
+            context.Post(o => action.Invoke(), null);
+        }
+
+        #region Startup Stuff
         private async void OnStartup(StartupMessage startupMessage)
         {
             if (startupMessage.IsFirstRun)
@@ -145,12 +178,13 @@ namespace Tidal.ViewModels
                 }
             }
         }
+        #endregion
 
         #region Scheduled Tasks
         private void SetupPeriodicTasks()
         {
-            taskService.Add(nameof(RequestSessionTask), RequestSessionTask, TimeSpan.FromSeconds(2));
-            taskService.Add(nameof(RequestStatsTask), RequestStatsTask, TimeSpan.FromSeconds(2.5));
+            taskService.Add(nameof(RequestSessionTask), RequestSessionTask, TimeSpan.FromSeconds(2.9));
+            taskService.Add(nameof(RequestStatsTask), RequestStatsTask, TimeSpan.FromSeconds(3.1));
             taskService.Add(nameof(RequestAllTorrents), RequestAllTorrents, TimeSpan.FromSeconds(3.0));
 
             taskService.Add(nameof(RequestGC), RequestGC, 30.Seconds());
@@ -191,6 +225,93 @@ namespace Tidal.ViewModels
         }
         #endregion
 
+        #region Client Subscriptions
+        private void OnSession(SessionResponse sessionResponse)
+        {
+            Session = Session ?? new Session();
+            UiInvoke(() =>
+            {
+                Session.Assign(sessionResponse.Session);
+                messenger.Send(new FreeSpaceRequest(Session.DownloadDirectory));
+                //SetAltLabel(Session);
+            });
+        }
+
+        private void OnSessionStats(SessionStatsResponse statsResponse)
+        {
+            SessionStats = SessionStats ?? new SessionStats();
+            UiInvoke(() => SessionStats.Assign(statsResponse.SessionStats));
+        }
+
+        private void OnTorrents(TorrentResponse torrentResponse)
+        {
+            torrentStatusService.CheckStatus(torrentResponse.Torrents);
+            torrentStatusService.CheckForConnection(torrentResponse.Torrents);
+        }
+
+        private void OnFreeSpace(FreeSpaceResponse freeSpace)
+        {
+            UiInvoke(() => FreeSpace = freeSpace.FreeSpace);
+        }
+        #endregion
+
+        #region Error Subscriptions and handling
+        private async void RestartAfterFailure()
+        {
+            inFatality = false;
+
+            IsOpen = await brokerService.OpenAsync(hostService.ActiveHost);
+            messenger.Send(new ResumeMessage());
+        }
+
+        private void OnFatalError(FatalMessage fatalMessage)
+        {
+            if (inFatality)
+                return;
+
+            inFatality = true;
+            messenger.Send(new HaltMessage());
+
+            IsOpen = false;
+
+            // These assignments will force the display to zero out:
+            SessionStats.AverageUploadSpeed = SessionStats.UploadSpeed = 0;
+            SessionStats.AverageDownloadSpeed = SessionStats.DownloadSpeed = 0;
+            Session.Version = Resources.ShellVM_UnknownHost;
+            FreeSpace = 0;
+
+            notificationService.ShowRetryCancel(Resources.ShellVM_Fatality,
+                                                fatalMessage.Message,
+                                                fatalMessage.Header,
+                                                retryAction: () => RestartAfterFailure(),
+                                                cancelAction: () => inFatality = false);
+        }
+
+        private void OnError(ErrorMessage errorMessage)
+        {
+            OnFatalError(new FatalMessage(errorMessage.Message, errorMessage.Header));
+        }
+
+        private void OnWarning(WarningMessage warningMessage)
+        {
+            notificationService.ShowWarning(warningMessage.Message, warningMessage.Header);
+        }
+
+        private void OnInfo(InfoMessage infoMessage)
+        {
+            notificationService.ShowInfo(infoMessage.Message, infoMessage.Header, infoMessage.Timeout);
+        }
+        #endregion
+
+        #region Other Subscriptions
+        private async void OnHostChanged(HostChangedMessage hostChangedMessage)
+        {
+            var host = hostService.GetHost(hostChangedMessage.ActiveId);
+            if (host != null)
+                IsOpen = await brokerService.OpenAsync(host);
+        }
+
+        #endregion
 
         #region Properties Visible to XAML
         #region Backing Store
@@ -213,7 +334,6 @@ namespace Tidal.ViewModels
         public bool IsAltModeEnabled { get => _IsAltModeEnabled; set => SetProperty(ref _IsAltModeEnabled, value); }
         public string AltModeGlyph { get => _AltModeGlyph; set => SetProperty(ref _AltModeGlyph, value); }
         #endregion
-
 
         #region Navigation Methods
         private void OnMouseNav(MouseNavMessage navMsg)
@@ -251,6 +371,8 @@ namespace Tidal.ViewModels
         private DelegateCommand _GoBackCommand;
         private DelegateCommand _HostsCommand;
         private DelegateCommand _SettingsCommand;
+        private DelegateCommand _AddTorrentCommand;
+        private DelegateCommand _AddMagnetCommand;
         #endregion
 
         /// <summary>
@@ -301,6 +423,116 @@ namespace Tidal.ViewModels
             {
                 RequestNavigate(PageKeys.Settings);
             }, () => !IsOnPage(PageKeys.Settings));
+
+        private void DoAddTorrentDialog(string filename)
+        {
+            if (TorrentReader.TryParse(filename, out var meta))
+            {
+                // Should I try to describe the Prism Dialog service here? Well,
+                // here and in AddTorrentViewModel, too. Future Keith needs
+                // this.
+                //
+                // The first thing to remember is that Prism creates its own
+                // window and puts your dialog inside it; your dialog is just
+                // another UserControl. Not a Page, nor a Window; just a
+                // UserControl. Of course, that limits you to the system look
+                // for the dialog window, but that can be remedied, too.
+                //
+                // To call the dialog, first create an instance of
+                // IDialogParameters, like I do here (unless the dialog doesn't
+                // need any information, but that'd be weird). This is a simple
+                // extension of a KeyValuePair list, so feel free to put any
+                // sort of value inside.
+                var parms = new DialogParameters()
+                {
+                    // Naturally, the order of the parameters, since this is a
+                    // key-value enumeration, order isn't important, but
+                    // consistent use of the keys is. Don't use literals for the
+                    // keys. You'll mistype something and everything will fall
+                    // apart. You know you will.
+                    //
+                    // The data passed can be anything, too. Not just strings or
+                    // simple values, but things like the MetaParameter, which
+                    // is an instance of TorrentMetadata, are fine. They're just
+                    // objects and not passed across any kind of marshaling 
+                    // barrier, so feel free to use anything.
+
+                    { AddTorrentViewModel.PathParameter, filename },
+                    { AddTorrentViewModel.MetaParameter, meta },
+                    { AddTorrentViewModel.IsValidParameter, true },
+                };
+
+                // Call the dialog service's ShowDialog method with the dialog
+                // page key and the parameters just created.The third parameter
+                // in this call is a callback, specified as an Action with an
+                // IDialogResult parameter. The IDialogResult has the result of
+                // the dialog, like OK, Cancel, or whatever. Normal dialog
+                // results. It also has the dialog's own set of parameters to
+                // give back any data necessary.
+                dialogService.ShowDialog(PageKeys.AddTorrent, parms, (IDialogResult r) =>
+                {
+                    if (r.Result == ButtonResult.OK)
+                    {
+                        // All of the data from the call to the dialog is
+                        // returned via an instance of IDialogParameters, just
+                        // like when you specified your data for the dialog.
+                        //
+                        // The only way to get at this data is through the
+                        // GetValue<T> method, which needs a key to access the
+                        // value, natch.
+
+                        var action = r.Parameters.GetValue<AddTorrentDisposition>(AddTorrentViewModel.ActionParameter);
+                        var path = r.Parameters.GetValue<string>(AddTorrentViewModel.PathParameter);
+                        var unwanted = r.Parameters.GetValue<IEnumerable<int>>(AddTorrentViewModel.UnwantedParameter);
+                        var paused = action == AddTorrentDisposition.Pause;
+
+                        messenger.Send(new AddTorrentRequest(path, unwanted, paused));
+                    }
+                });
+            }
+            else
+            {
+                string message = string.Format(Resources.TorrentParsingError_1, Path.GetFileName(filename));
+                string header = Resources.ParsingError;
+                notificationService.ShowInfo(message, header, 10.Seconds());
+            }
+        }
+
+        public DelegateCommand AddTorrentCommand =>
+            _AddTorrentCommand = _AddTorrentCommand ?? new DelegateCommand(() =>
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.DefaultExt = ".torrent";
+            openFileDialog.Filter = "Torrent Files (*.torrent)|*.torrent";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                DoAddTorrentDialog(openFileDialog.FileName);
+            }
+            openFileDialog = null;
+        }, () => true);
+
+
+        public DelegateCommand AddMagnetCommand => 
+            _AddMagnetCommand = _AddMagnetCommand ?? new DelegateCommand(() =>
+        {
+            dialogService.ShowDialog(PageKeys.AddMagnet, r =>
+            {
+                if (r.Result == ButtonResult.OK)
+                {
+                    // The response from the AddMagnet dialog should be two
+                    // parameters, the first with the key "action", the second
+                    // keyed with "link" The "action" key value will be "start",
+                    // "pause", or "cancel". It shouldn't ever be "cancel" at
+                    // this point since the Result won't be ButtonResult.OK
+
+                    var action = r.Parameters.GetValue<AddTorrentDisposition>(AddMagnetViewModel.ActionParameter);
+                    var link = r.Parameters.GetValue<string>(AddMagnetViewModel.LinkParameter);
+
+                    messenger.Send(new AddMagnetRequest(link, action == AddTorrentDisposition.Pause));
+                }
+            });
+        }, () => true);
+
         #endregion
     }
 }
