@@ -1,0 +1,189 @@
+﻿<Page x:Class="Tidal.Views.SettingsPages.RestrictionsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:properties="clr-namespace:Tidal.Properties"
+      xmlns:viewmodels="clr-namespace:Tidal.ViewModels"
+      Title="RestrictionsPage"
+      d:DataContext="{d:DesignInstance Type=viewmodels:SettingsViewModel}"
+      d:DesignHeight="650"
+      d:DesignWidth="800"
+      mc:Ignorable="d">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center"
+                       FontFamily="Segoe MDL2 Assets"
+                       FontSize="20"
+                       Text="{x:Static properties:Resources.Unicode_Alert}" />
+            <TextBlock FontSize="20"
+                       FontWeight="Thin"
+                       Foreground="{DynamicResource MahApps.Brushes.Text}"
+                       Text="{x:Static properties:Resources.TimeSpeedRestrictions}" />
+        </StackPanel>
+
+        <Rectangle Grid.Row="1"
+                   Height="1"
+                   Margin="10"
+                   Fill="{DynamicResource MahApps.Brushes.Accent3}" />
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <GroupBox Grid.Row="0"
+                      Grid.Column="0"
+                      Margin="10"
+                      Header="{x:Static properties:Resources.PrimarySpeedLimits}">
+                <StackPanel Margin="10,0">
+                    <mah:ToggleSwitch IsOn="{Binding Setter.SpeedLimitDownEnabled,
+                                                     Mode=TwoWay}"
+                                      OffContent="{x:Static properties:Resources.DownloadNoLimits}"
+                                      OnContent="{x:Static properties:Resources.DownloadLimited}" />
+                    <mah:MetroHeader Margin="5"
+                                     Header="{x:Static properties:Resources.DownloadLimit}">
+                        <mah:NumericUpDown Width="150"
+                                           Margin="10,0"
+                                           HorizontalAlignment="Left"
+                                           IsEnabled="{Binding Setter.SpeedLimitDownEnabled,
+                                                               Mode=OneWay}"
+                                           Value="{Binding Setter.SpeedLimitDown}" />
+                    </mah:MetroHeader>
+
+                    <mah:ToggleSwitch IsOn="{Binding Setter.SpeedLimitUpEnabled,
+                                                     Mode=TwoWay}"
+                                      OffContent="{x:Static properties:Resources.UploadNoLimits}"
+                                      OnContent="{x:Static properties:Resources.UploadLimited}" />
+                    <mah:MetroHeader Margin="5"
+                                     Header="{x:Static properties:Resources.UploadLimit}">
+                        <mah:NumericUpDown Width="150"
+                                           Margin="10,0"
+                                           HorizontalAlignment="Left"
+                                           IsEnabled="{Binding Setter.SpeedLimitUpEnabled,
+                                                               Mode=OneWay}"
+                                           Value="{Binding Setter.SpeedLimitUp,
+                                                           Mode=TwoWay}" />
+                    </mah:MetroHeader>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Grid.Row="1"
+                      Grid.Column="0"
+                      Margin="10"
+                      Header="{x:Static properties:Resources.AltSpeedGroupHeader}">
+                <StackPanel Margin="10,0">
+                    <mah:ToggleSwitch IsOn="{Binding Setter.AltSpeedEnabled,
+                                                     Mode=TwoWay}"
+                                      OffContent="{x:Static properties:Resources.AltSpeedDisabled}"
+                                      OnContent="{x:Static properties:Resources.AltSpeedEnabled}" />
+
+                    <mah:MetroHeader Margin="5"
+                                     Header="{x:Static properties:Resources.AltDownloadLimit}">
+                        <mah:NumericUpDown Width="150"
+                                           Margin="10,0,10,5"
+                                           HorizontalAlignment="Left"
+                                           Interval="5"
+                                           IsEnabled="{Binding Setter.AltSpeedEnabled,
+                                                               Mode=OneWay}"
+                                           Value="{Binding Setter.AltSpeedDown}" />
+                    </mah:MetroHeader>
+                    <mah:MetroHeader Margin="5,0"
+                                     Header="{x:Static properties:Resources.AltUploadLimit}">
+                        <mah:NumericUpDown Width="150"
+                                           Margin="10,0,10,5"
+                                           HorizontalAlignment="Left"
+                                           Interval="5"
+                                           IsEnabled="{Binding Setter.AltSpeedEnabled,
+                                                               Mode=OneWay}"
+                                           Value="{Binding Setter.AltSpeedUp}" />
+                    </mah:MetroHeader>
+                </StackPanel>
+
+            </GroupBox>
+            <GroupBox Grid.Row="0"
+                      Grid.Column="1"
+                      Margin="10"
+                      Header="{x:Static properties:Resources.AltSchedGroupHeader}">
+                <StackPanel Margin="10,0">
+                    <mah:ToggleSwitch IsOn="{Binding Setter.AltScheduleEnabled,
+                                                     Mode=TwoWay}"
+                                      OffContent="{x:Static properties:Resources.AltSchedDisabled}"
+                                      OnContent="{x:Static properties:Resources.AltSchedEnabled}" />
+
+                    <UniformGrid Margin="5"
+                                 Columns="2">
+                        <mah:MetroHeader Margin="5,0"
+                                         Header="{x:Static properties:Resources.AltSchedBegins}">
+                            <mah:TimePicker IsEnabled="{Binding Setter.AltScheduleEnabled,
+                                                                Mode=OneWay}"
+                                            SelectedDateTime="{Binding Setter.AltScheduleBegin}"
+                                            SelectedTimeFormat="Short" />
+                        </mah:MetroHeader>
+                        <mah:MetroHeader Margin="5,0"
+                                         Header="{x:Static properties:Resources.AltSchedEnds}">
+                            <mah:TimePicker IsEnabled="{Binding Setter.AltScheduleEnabled,
+                                                                Mode=OneWay}"
+                                            SelectedDateTime="{Binding Setter.AltScheduleEnd}"
+                                            SelectedTimeFormat="Short" />
+                        </mah:MetroHeader>
+                    </UniformGrid>
+
+                    <mah:MetroHeader Margin="10"
+                                     Header="{x:Static properties:Resources.AltSchedDaysHeader}"
+                                     IsEnabled="{Binding Setter.AltScheduleEnabled,
+                                                         Mode=OneWay}">
+                        <UniformGrid Columns="7">
+                            <ToggleButton Content="{x:Static properties:Resources.AltSchedSunday}"
+                                          FontSize="11"
+                                          IsChecked="{Binding AltSpeedDays[0],
+                                                              Mode=TwoWay}"
+                                          Style="{DynamicResource MahApps.Styles.ToggleButton.Flat}" />
+                            <ToggleButton Content="{x:Static properties:Resources.AltSchedMonday}"
+                                          FontSize="11"
+                                          IsChecked="{Binding AltSpeedDays[1],
+                                                              Mode=TwoWay}"
+                                          Style="{DynamicResource MahApps.Styles.ToggleButton.Flat}" />
+                            <ToggleButton Content="{x:Static properties:Resources.AltSchedTuesday}"
+                                          FontSize="11"
+                                          IsChecked="{Binding AltSpeedDays[2],
+                                                              Mode=TwoWay}"
+                                          Style="{DynamicResource MahApps.Styles.ToggleButton.Flat}" />
+                            <ToggleButton Content="{x:Static properties:Resources.AltSchedWednesday}"
+                                          FontSize="11"
+                                          IsChecked="{Binding AltSpeedDays[3],
+                                                              Mode=TwoWay}"
+                                          Style="{DynamicResource MahApps.Styles.ToggleButton.Flat}" />
+                            <ToggleButton Content="{x:Static properties:Resources.AltSchedThursday}"
+                                          FontSize="11"
+                                          IsChecked="{Binding AltSpeedDays[4],
+                                                              Mode=TwoWay}"
+                                          Style="{DynamicResource MahApps.Styles.ToggleButton.Flat}" />
+                            <ToggleButton Content="{x:Static properties:Resources.AltSchedFriday}"
+                                          FontSize="11"
+                                          IsChecked="{Binding AltSpeedDays[5],
+                                                              Mode=TwoWay}"
+                                          Style="{DynamicResource MahApps.Styles.ToggleButton.Flat}" />
+                            <ToggleButton Content="{x:Static properties:Resources.AltSchedSaturday}"
+                                          FontSize="11"
+                                          IsChecked="{Binding AltSpeedDays[6],
+                                                              Mode=TwoWay}"
+                                          Style="{DynamicResource MahApps.Styles.ToggleButton.Flat}" />
+                        </UniformGrid>
+                    </mah:MetroHeader>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Page>

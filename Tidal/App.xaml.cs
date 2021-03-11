@@ -105,6 +105,7 @@ namespace Tidal
             containerRegistry.RegisterForNavigation<ShellView, ShellViewModel>();
             containerRegistry.RegisterForNavigation<HostView, HostViewModel>(PageKeys.Hosts);
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>(PageKeys.Main);
+            containerRegistry.RegisterForNavigation<SettingsView, SettingsViewModel>(PageKeys.Settings);
         }
 
         private static async Task SendArgs(string[] args)

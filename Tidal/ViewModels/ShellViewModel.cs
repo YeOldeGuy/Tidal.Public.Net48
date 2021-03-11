@@ -169,12 +169,12 @@ namespace Tidal.ViewModels
                 {
                     var oldClip = Clipboard.GetText();
                     Clipboard.SetText(arg0);
-                    //AddMagnetCommand.Execute();
+                    AddMagnetCommand.Execute();
                     Clipboard.SetText(oldClip);
                 }
                 else
                 {
-                    //DoAddTorrentDialog(arg0);
+                    DoAddTorrentDialog(arg0);
                 }
             }
         }

@@ -1,0 +1,112 @@
+﻿<Page x:Class="Tidal.Views.SettingsPages.SeedingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Tidal.Views.SettingsPages"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:properties="clr-namespace:Tidal.Properties"
+      xmlns:viewmodels="clr-namespace:Tidal.ViewModels"
+      Title="SeedingPage"
+      d:DataContext="{d:DesignInstance Type=viewmodels:SettingsViewModel}"
+      d:DesignHeight="650"
+      d:DesignWidth="800"
+      mc:Ignorable="d">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center"
+                       FontFamily="Segoe MDL2 Assets"
+                       FontSize="20"
+                       Text="{x:Static properties:Resources.Unicode_Sharing}" />
+            <TextBlock FontSize="20"
+                       FontWeight="Thin"
+                       Foreground="{DynamicResource MahApps.Brushes.Text}"
+                       Text="{x:Static properties:Resources.SeedingPageTitle}" />
+        </StackPanel>
+
+        <Rectangle Grid.Row="1"
+                   Height="1"
+                   Margin="10"
+                   Fill="{DynamicResource MahApps.Brushes.Accent3}" />
+
+        <Grid Grid.Row="2"
+              Margin="10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <GroupBox Margin="10"
+                      Header="{x:Static properties:Resources.SeedingRatioHeader}">
+                <StackPanel>
+                    <mah:ToggleSwitch Margin="0,10,0,0"
+                                      IsOn="{Binding Setter.SeedRatioLimited,
+                                                     Mode=TwoWay}"
+                                      OffContent="{x:Static properties:Resources.SeedingRatioOff}"
+                                      OnContent="{x:Static properties:Resources.SeedingRatioOn}" />
+                    <mah:MetroHeader Margin="10"
+                                     Header="{x:Static properties:Resources.SeedingRatioLimitHeader}">
+                        <mah:NumericUpDown Width="150"
+                                           HorizontalAlignment="Left"
+                                           IsEnabled="{Binding Setter.SeedRatioLimited}"
+                                           StringFormat="{}{0:N2}"
+                                           Value="{Binding Setter.SeedRatioLimit,
+                                                           Mode=TwoWay}" />
+                    </mah:MetroHeader>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Grid.Row="1"
+                      Margin="10"
+                      Header="{x:Static properties:Resources.SeedingTimeHeader}">
+                <StackPanel>
+                    <mah:ToggleSwitch Margin="0,10,0,0"
+                                      IsOn="{Binding Setter.IdleSeedingLimitEnabled,
+                                                     Mode=TwoWay}"
+                                      OffContent="{x:Static properties:Resources.SeedingTimeLimitOff}"
+                                      OnContent="{x:Static properties:Resources.SeedingTimeLimitOn}" />
+                    <mah:MetroHeader Margin="10"
+                                     Header="{x:Static properties:Resources.SeedingTimeInMinutes}">
+                        <mah:NumericUpDown Width="150"
+                                           Margin="10,0"
+                                           HorizontalAlignment="Left"
+                                           IsEnabled="{Binding Setter.IdleSeedingLimitEnabled}"
+                                           Value="{Binding Setter.IdleSeedingLimitMinutes,
+                                                           Mode=TwoWay}" />
+                    </mah:MetroHeader>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Grid.Column="1"
+                      Margin="10"
+                      Header="{x:Static properties:Resources.DownloadQueueHeader}">
+                <StackPanel>
+                    <mah:ToggleSwitch Margin="0,10,0,0"
+                                      IsOn="{Binding Setter.DownloadQueueEnabled,
+                                                     Mode=TwoWay}"
+                                      OffContent="{x:Static properties:Resources.DownloadQueueOff}"
+                                      OnContent="{x:Static properties:Resources.DownloadQueueOn}" />
+                    <mah:MetroHeader Margin="10"
+                                     Header="{x:Static properties:Resources.DownloadQueueLimit}">
+                        <mah:NumericUpDown Width="150"
+                                           Margin="10,0"
+                                           HorizontalAlignment="Left"
+                                           IsEnabled="{Binding Setter.DownloadQueueEnabled}"
+                                           Value="{Binding Setter.DownloadQueueSize,
+                                                           Mode=TwoWay}" />
+                    </mah:MetroHeader>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Page>

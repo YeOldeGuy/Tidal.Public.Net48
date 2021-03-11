@@ -2635,6 +2635,24 @@ namespace Tidal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Unicode_Alert {
+            get {
+                return ResourceManager.GetString("Unicode_Alert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Unicode_App {
+            get {
+                return ResourceManager.GetString("Unicode_App", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         public static string Unicode_Download {
@@ -2658,6 +2676,15 @@ namespace Tidal.Properties {
         public static string Unicode_Settings {
             get {
                 return ResourceManager.GetString("Unicode_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Unicode_Sharing {
+            get {
+                return ResourceManager.GetString("Unicode_Sharing", resourceCulture);
             }
         }
         

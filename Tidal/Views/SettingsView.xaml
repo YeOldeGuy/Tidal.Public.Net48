@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="Tidal.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:constants="clr-namespace:Tidal.Constants"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Tidal.Views"
+             xmlns:properties="clr-namespace:Tidal.Properties"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:viewmodels="clr-namespace:Tidal.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:SettingsViewModel}"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <x:Static x:Key="Seeding"
+                  Member="constants:MDLConsts.Share" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0"
+                    Background="{DynamicResource MahApps.Brushes.Accent4}">
+            <RadioButton Name="downloading"
+                         Checked="DownloadingPressed"
+                         Content="Download Settings"
+                         GroupName="menu"
+                         IsChecked="True"
+                         Style="{StaticResource HamburgerRadioStyle}">
+                <RadioButton.Tag>
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               FontSize="20"
+                               Text="{x:Static properties:Resources.Unicode_Download}" />
+                </RadioButton.Tag>
+            </RadioButton>
+            <RadioButton Name="networking"
+                         Checked="NetworkPressed"
+                         Content="{x:Static properties:Resources.NetworkSettings}"
+                         GroupName="menu"
+                         IsChecked="False"
+                         Style="{StaticResource HamburgerRadioStyle}">
+                <RadioButton.Tag>
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               FontSize="20"
+                               Text="{x:Static properties:Resources.Unicode_Network}" />
+                </RadioButton.Tag>
+            </RadioButton>
+            <RadioButton Content="Seeding Related"
+                         Name="seeding"
+                         Checked="SeedingPressed"
+                         GroupName="menu"
+                         IsChecked="False"
+                         Style="{StaticResource HamburgerRadioStyle}">
+                <RadioButton.Tag>
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               FontSize="20"
+                               Text="{x:Static properties:Resources.Unicode_Sharing}" />
+                </RadioButton.Tag>
+            </RadioButton>
+            <RadioButton Content="{x:Static properties:Resources.TimeSpeedRestrictions}"
+                         Name="restrictions"
+                         Checked="RestrictionsPressed"
+                         GroupName="menu"
+                         IsChecked="False"
+                         Style="{StaticResource HamburgerRadioStyle}">
+                <RadioButton.Tag>
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               FontSize="20"
+                               Text="{x:Static properties:Resources.Unicode_Alert}" />
+                </RadioButton.Tag>
+            </RadioButton>
+            <RadioButton Name="application"
+                         Checked="ApplicationPressed"
+                         Content="Application Settings"
+                         GroupName="menu"
+                         IsChecked="False"
+                         Style="{StaticResource HamburgerRadioStyle}">
+                <RadioButton.Tag>
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               FontSize="20"
+                               Text="{x:Static properties:Resources.Unicode_App}" />
+                </RadioButton.Tag>
+            </RadioButton>
+        </StackPanel>
+
+        <Rectangle Grid.Column="1"
+                   Fill="{DynamicResource MahApps.Brushes.Accent}" />
+
+        <Frame x:Name="contentFrame"
+               Grid.Column="2"
+               DataContextChanged="Frame_DataContextChanged"
+               LoadCompleted="Frame_LoadCompleted"
+               NavigationUIVisibility="Hidden" />
+    </Grid>
+</UserControl>

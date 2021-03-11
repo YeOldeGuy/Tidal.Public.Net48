@@ -49,9 +49,10 @@ namespace Tidal.Services.Actual
 
         public void Save()
         {
-            string json = Json.ToJSON(persist);
-            fileService.WriteAllText(json, settingsFile, storageStrategy);
+            var bytes = Json.ToJSONBytes(persist);
+            fileService.WriteAllBytes(bytes, settingsFile, storageStrategy);
         }
+
         public async Task SaveAsync()
         {
             byte[] json = Json.ToJSONBytes(persist);

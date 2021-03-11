@@ -1062,4 +1062,16 @@
     <value></value>
     <comment>\uE896</comment>
   </data>
+  <data name="Unicode_Sharing" xml:space="preserve">
+    <value></value>
+    <comment>\uE72D</comment>
+  </data>
+  <data name="Unicode_Alert" xml:space="preserve">
+    <value></value>
+    <comment>\uE7BA</comment>
+  </data>
+  <data name="Unicode_App" xml:space="preserve">
+    <value></value>
+    <comment>\uE71D</comment>
+  </data>
 </root>
