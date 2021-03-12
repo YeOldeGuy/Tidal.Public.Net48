@@ -20,6 +20,7 @@ namespace Tidal.Views
             Messenger = ServiceResolver.Resolve<IMessenger>();
         }
 
+        #region INavigationAware Methods
         public bool IsNavigationTarget(NavigationContext navigationContext) => false;
 
         public void OnNavigatedTo(NavigationContext navigationContext)
@@ -52,7 +53,9 @@ namespace Tidal.Views
             SerializeLayoutGrid(settingsService);
             SerializeDataGrids(settingsService);
         }
+        #endregion
 
+        #region Persistence Methods
         private void OnSaveSettings(SaveSettingsMessage saveMessage)
         {
             SerializeLayoutGrid(saveMessage.SettingsService);
@@ -73,5 +76,6 @@ namespace Tidal.Views
             info.AddLayout(nameof(details), details.ColumnDefinitions);
             settings.MainPageLayout = info;
         }
+        #endregion
     }
 }

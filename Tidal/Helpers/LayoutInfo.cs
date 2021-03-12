@@ -18,6 +18,10 @@ namespace Tidal.Helpers
         [DataMember]
         public IList<LayoutGrid> LayoutGrids { get; set; }
 
+        /// <summary>
+        /// Create an instance of <see cref="LayoutInfo"/>, which can
+        /// hold a number of <see cref="LayoutGrid"/>s.
+        /// </summary>
         public LayoutInfo()
         {
             LayoutGrids = new List<LayoutGrid>();

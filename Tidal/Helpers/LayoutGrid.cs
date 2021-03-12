@@ -4,6 +4,10 @@ using System.Windows.Controls;
 
 namespace Tidal.Helpers
 {
+    /// <summary>
+    /// Holds enough data from a <see cref="Grid"/> to allow restoring
+    /// it to a previous state.
+    /// </summary>
     public class LayoutGrid
     {
         public LayoutGrid() { }

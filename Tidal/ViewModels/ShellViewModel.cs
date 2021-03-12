@@ -103,11 +103,12 @@ namespace Tidal.ViewModels
             messenger.Subscribe<WarningMessage>(OnWarning);
             messenger.Subscribe<InfoMessage>(OnInfo);
 
-            // Client subscriptions
+            // Client (via the Broker) subscriptions
             messenger.Subscribe<SessionResponse>(OnSession);
             messenger.Subscribe<SessionStatsResponse>(OnSessionStats);
             messenger.Subscribe<TorrentResponse>(OnTorrents);
             messenger.Subscribe<FreeSpaceResponse>(OnFreeSpace);
+            messenger.Subscribe<AddTorrentResponse>(OnTorrentAdded);
         }
 
         #region Startup Stuff
@@ -261,6 +262,19 @@ namespace Tidal.ViewModels
         private void OnFreeSpace(FreeSpaceResponse freeSpace)
         {
             UiInvoke(() => FreeSpace = freeSpace.FreeSpace);
+        }
+
+        private void OnTorrentAdded(AddTorrentResponse response)
+        {
+            if (response.IsDuplicate)
+            {
+                UiInvoke(() =>
+                {
+                    var msg = string.Format(Resources.TorrentExists_1, response.Name);
+                    var hdr = Resources.TorrentExists;
+                    notificationService.ShowInfo(msg, hdr, 10.Seconds());
+                });
+            }
         }
         #endregion
 
