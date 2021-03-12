@@ -5,11 +5,18 @@ VisualStudioVersion = 16.0.31025.218
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tidal", "Tidal\Tidal.csproj", "{8655AE4B-F077-4A3F-B82A-0CA31BE7BD9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tidal.Core", "Tidal.Core\Tidal.Core.csproj", "{B0B9E7F8-0107-4FEC-A1D8-529C1D12B20E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tidal.Core", "Tidal.Core\Tidal.Core.csproj", "{B0B9E7F8-0107-4FEC-A1D8-529C1D12B20E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tidal.Client", "Tidal.Client\Tidal.Client.csproj", "{FBBA0550-C6F9-4227-B898-8B7D23ABE056}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tidal.Client", "Tidal.Client\Tidal.Client.csproj", "{FBBA0550-C6F9-4227-B898-8B7D23ABE056}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidationModel", "ValidationModel\ValidationModel.csproj", "{FD7CB599-D419-4F34-8C60-C39626A2DC52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValidationModel", "ValidationModel\ValidationModel.csproj", "{FD7CB599-D419-4F34-8C60-C39626A2DC52}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{37B04E78-9E2B-4970-8A97-40C4BD44FB26}"
+	ProjectSection(SolutionItems) = preProject
+		Tidal.iss = Tidal.iss
+		Transmission.ico = Transmission.ico
+		Transmission.png = Transmission.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

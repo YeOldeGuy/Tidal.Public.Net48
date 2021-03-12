@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -25,18 +26,21 @@ namespace Tidal
 
         private TinyMessageBus listener;
         private Mutex globalMutex;
+        private string[] Args;
 
         protected override Window CreateShell() => Container.Resolve<ShellView>();
 
 
-        protected override async void OnInitialized()
+        protected override void OnInitialized()
         {
+            Container.Resolve<IMessenger>().Send(new StartupMessage(Args, true));
             base.OnInitialized();
-            await Task.CompletedTask;
         }
 
         protected override async void OnStartup(StartupEventArgs e)
         {
+            Args = e.Args;
+
             // Try to create a global mutex. If this is the first instance then
             // the thisIsTheFirstInstance param will be true. If it's not, then
             // we need to send the command line arguments through to the
@@ -59,9 +63,14 @@ namespace Tidal
                                               UIElement.PreviewMouseUpEvent,
                                               new MouseButtonEventHandler(OnPreviewMouseUp));
 
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.UnhandledException += (s, args) =>
+            {
+                var ex = (Exception)args.ExceptionObject;
+                MessageBox.Show(ex.Message, "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                Shutdown();
+            };
             base.OnStartup(e);
-
-            Container.Resolve<IMessenger>().Send(new StartupMessage(e.Args, true));
         }
 
         protected override void OnExit(ExitEventArgs e)

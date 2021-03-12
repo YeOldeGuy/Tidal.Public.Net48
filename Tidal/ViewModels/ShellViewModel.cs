@@ -131,6 +131,27 @@ namespace Tidal.ViewModels
         {
             if (startupMessage.IsFirstRun)
                 await PerformStartup(startupMessage);
+            else
+                ProcessCommandLine(startupMessage);
+        }
+
+        private void ProcessCommandLine(StartupMessage startupMessage)
+        {
+            if (startupMessage.Args != null && startupMessage.Args.Length > 0)
+            {
+                string arg0 = startupMessage.Args[0];
+                if (MagnetUtils.IsValidMagnetUrl(arg0))
+                {
+                    var oldClip = Clipboard.GetText();
+                    Clipboard.SetText(arg0);
+                    AddMagnetCommand.Execute();
+                    Clipboard.SetText(oldClip);
+                }
+                else
+                {
+                    DoAddTorrentDialog(arg0);
+                }
+            }
         }
 
         private async Task PerformStartup(StartupMessage startupMessage)
@@ -175,18 +196,7 @@ namespace Tidal.ViewModels
 
             if (IsOpen && startupMessage.Args != null && startupMessage.Args.Length > 0)
             {
-                var arg0 = startupMessage.Args[0];
-                if (MagnetUtils.IsValidMagnetUrl(arg0))
-                {
-                    var oldClip = Clipboard.GetText();
-                    Clipboard.SetText(arg0);
-                    AddMagnetCommand.Execute();
-                    Clipboard.SetText(oldClip);
-                }
-                else
-                {
-                    DoAddTorrentDialog(arg0);
-                }
+                ProcessCommandLine(startupMessage);
             }
         }
         #endregion
