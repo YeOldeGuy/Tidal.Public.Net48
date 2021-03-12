@@ -25,18 +25,6 @@ using Tidal.Services.Abstract;
 
 namespace Tidal.ViewModels
 {
-    internal struct SpeedMenuSelector
-    {
-        public SpeedMenuSelector(long speed, bool selected)
-        {
-            Speed = speed;
-            Selected = selected;
-        }
-        public long Speed { get; }
-        public bool Selected { get; }
-    }
-
-
     class ShellViewModel : BindableBase
     {
         private readonly IRegionManager regionManager;
@@ -119,11 +107,6 @@ namespace Tidal.ViewModels
             messenger.Subscribe<SessionStatsResponse>(OnSessionStats);
             messenger.Subscribe<TorrentResponse>(OnTorrents);
             messenger.Subscribe<FreeSpaceResponse>(OnFreeSpace);
-        }
-
-        private void UiInvoke(Action action)
-        {
-            context.Post(o => action.Invoke(), null);
         }
 
         #region Startup Stuff
@@ -363,6 +346,11 @@ namespace Tidal.ViewModels
         #endregion
 
         #region Helpers for Properties
+        private void UiInvoke(Action action)
+        {
+            context.Post(o => action.Invoke(), null);
+        }
+
         private void SetTitle(SessionStats stats)
         {
             if (stats == null)

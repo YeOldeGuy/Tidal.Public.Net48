@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows;
 using ControlzEx.Theming;
 using Humanizer;
@@ -26,6 +27,7 @@ namespace Tidal.ViewModels
         private readonly IGeoService geoService;
         private readonly IFileService fileService;
         private readonly IMessenger messenger;
+        private SynchronizationContext context;
         private bool _IsOpen;
 
         public const string SettingsParameter = "settings";
@@ -41,15 +43,18 @@ namespace Tidal.ViewModels
             this.messenger = messenger;
         }
 
-        public Session Setter { get; set; }
+        private void UiInvoke(Action action)
+        {
+            context.Post(o => action.Invoke(), null);
+        }
 
-        public bool IsOpen { get => _IsOpen; set => SetProperty(ref _IsOpen, value); }
-
+        #region INavigationAware Methods
         public bool IsNavigationTarget(NavigationContext navigationContext) => true;
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             IsOpen = true;
+            context = SynchronizationContext.Current;
 
             Setter = new Session();
             disposables = new List<IDisposable>();
@@ -75,16 +80,7 @@ namespace Tidal.ViewModels
             foreach (var disposable in disposables)
                 disposable.Dispose();
         }
-
-        private void WatchForDLComplete(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(IGeoService.IsDownloading))
-            {
-                FetchMMDBCommand.RaiseCanExecuteChanged();
-                LoadMMDBCommand.RaiseCanExecuteChanged();
-            }
-        }
-
+        #endregion
 
         #region Message handlers
         private void OnSession(SessionResponse obj)
@@ -112,7 +108,16 @@ namespace Tidal.ViewModels
         }
         #endregion
 
-        private void Setter_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        #region Property Helpers
+        private void WatchForDLComplete(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(IGeoService.IsDownloading))
+            {
+                FetchMMDBCommand.RaiseCanExecuteChanged();
+                LoadMMDBCommand.RaiseCanExecuteChanged();
+            }
+        }
+       private void Setter_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Setter.AltScheduleDays))
                 RaisePropertyChanged(nameof(AltSpeedDays));
@@ -136,24 +141,42 @@ namespace Tidal.ViewModels
 
         private void GetMMDBStatus()
         {
-            if (geoService.IsDownloading)
+            UiInvoke(() =>
             {
-                MMDBStatusReport = string.Format(Resources.GeoDBFileDownloading_1, settingsService.GeoDbFileName);
-            }
-            else if (fileService.FileExists(settingsService.GeoDbFileName, StorageStrategy.Local))
-            {
-                var age = fileService.GetFileAge(settingsService.GeoDbFileName, StorageStrategy.Local);
-                var hum = age.Humanize(2, minUnit: Humanizer.Localisation.TimeUnit.Minute);
-                MMDBStatusReport = string.Format(Resources.GeoDbFileAge_2, settingsService.GeoDbFileName, hum);
-            }
-            else
-            {
-                MMDBStatusReport = string.Format(Resources.GeoDBFileNotFound_1, settingsService.GeoDbFileName);
-            }
+                if (geoService.IsDownloading)
+                {
+                    MMDBStatusReport = string.Format(Resources.GeoDBFileDownloading_1, settingsService.GeoDbFileName);
+                }
+                else if (fileService.FileExists(settingsService.GeoDbFileName, StorageStrategy.Local))
+                {
+                    var age = fileService.GetFileAge(settingsService.GeoDbFileName, StorageStrategy.Local);
+                    var hum = age.Humanize(2, minUnit: Humanizer.Localisation.TimeUnit.Minute);
+                    MMDBStatusReport = string.Format(Resources.GeoDbFileAge_2, settingsService.GeoDbFileName, hum);
+                }
+                else
+                {
+                    MMDBStatusReport = string.Format(Resources.GeoDBFileNotFound_1, settingsService.GeoDbFileName);
+                }
+            });
         }
+        #endregion
 
         #region Visible Properties
         private string _MMDBStatusReport;
+        private DateTime _IdleTime;
+        private bool _EncryptionIsRequired;
+        private bool _EncryptionIsPreferred;
+        private bool _EncryptionIsTolerated;
+        private ObservableCollection<bool> _AltSpeedDays;
+        private DateTime _AltSpeedTimeBegin;
+        private DateTime _AltSpeedTimeEnd;
+        #region Backing Store
+        #endregion
+
+        public Session Setter { get; set; }
+
+        public bool IsOpen { get => _IsOpen; set => SetProperty(ref _IsOpen, value); }
+
         public string MMDBStatusReport
         {
             get => _MMDBStatusReport;
@@ -198,13 +221,7 @@ namespace Tidal.ViewModels
             }
         }
 
-        private DateTime _IdleTime;
         public DateTime IdleTime { get => _IdleTime; set => SetProperty(ref _IdleTime, value); }
-
-
-        private bool _EncryptionIsRequired;
-        private bool _EncryptionIsPreferred;
-        private bool _EncryptionIsTolerated;
 
         public bool EncryptionIsRequired
         {
@@ -215,6 +232,7 @@ namespace Tidal.ViewModels
                     Setter.Encryption = EncryptionLevel.Required;
             }
         }
+
         public bool EncryptionIsPreferred
         {
             get => _EncryptionIsPreferred;
@@ -224,6 +242,7 @@ namespace Tidal.ViewModels
                     Setter.Encryption = EncryptionLevel.Preferred;
             }
         }
+
         public bool EncryptionIsTolerated
         {
             get => _EncryptionIsTolerated;
@@ -233,11 +252,6 @@ namespace Tidal.ViewModels
                     Setter.Encryption = EncryptionLevel.Tolerated;
             }
         }
-
-
-        private ObservableCollection<bool> _AltSpeedDays;
-        private DateTime _AltSpeedTimeBegin;
-        private DateTime _AltSpeedTimeEnd;
 
         public DateTime AltSpeedTimeBegin
         {
@@ -328,11 +342,15 @@ namespace Tidal.ViewModels
                 FetchMMDBCommand.RaiseCanExecuteChanged();
             }
         }
-
         #endregion
 
         #region Commands
+        #region Backing Store
         private DelegateCommand _LoadMMDBCommand;
+        private DelegateCommand _FetchMMDBCommand;
+        private DelegateCommand<string> _VisitUrl;
+        #endregion
+
         public DelegateCommand LoadMMDBCommand =>
             _LoadMMDBCommand = _LoadMMDBCommand ?? new DelegateCommand(async () =>
         {
@@ -355,7 +373,6 @@ namespace Tidal.ViewModels
             !string.IsNullOrEmpty(MaxMindPassword) &&
             !string.IsNullOrEmpty(MaxMindLicenseKey);
 
-        private DelegateCommand _FetchMMDBCommand;
         public DelegateCommand FetchMMDBCommand =>
             _FetchMMDBCommand = _FetchMMDBCommand ?? new DelegateCommand(async () =>
         {
@@ -366,7 +383,6 @@ namespace Tidal.ViewModels
         }, () => !geoService.IsDownloading && HasMMInfo);
 
 
-        private DelegateCommand<string> _VisitUrl;
         public DelegateCommand<string> VisitUrl =>
             _VisitUrl = _VisitUrl ?? new DelegateCommand<string>((uri) =>
         {
