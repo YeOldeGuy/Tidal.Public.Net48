@@ -338,6 +338,7 @@ namespace Tidal.ViewModels
         private string _AltModeLabel;
         private bool _IsAltModeEnabled;
         private string _AltModeGlyph;
+        private bool _CanGoBack;
         #endregion
 
         public string Title { get => _Title; set => SetProperty(ref _Title, value); }
@@ -348,6 +349,7 @@ namespace Tidal.ViewModels
         public string AltModeLabel { get => _AltModeLabel; set => SetProperty(ref _AltModeLabel, value); }
         public bool IsAltModeEnabled { get => _IsAltModeEnabled; set => SetProperty(ref _IsAltModeEnabled, value); }
         public string AltModeGlyph { get => _AltModeGlyph; set => SetProperty(ref _AltModeGlyph, value); }
+        public bool CanGoBack { get => _CanGoBack; set => SetProperty(ref _CanGoBack, value); }
         #endregion
 
         #region Helpers for Properties
@@ -558,8 +560,6 @@ namespace Tidal.ViewModels
         }
         #endregion
 
-
-
         #region Navigation Methods
         private void OnMouseNav(MouseNavMessage navMsg)
         {
@@ -585,6 +585,7 @@ namespace Tidal.ViewModels
             GoBackCommand.RaiseCanExecuteChanged();
             HostsCommand.RaiseCanExecuteChanged();
             SettingsCommand.RaiseCanExecuteChanged();
+            CanGoBack = navigationService.Journal.CanGoBack;
         }
         #endregion
 

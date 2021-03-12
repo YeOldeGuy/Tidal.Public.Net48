@@ -10,8 +10,9 @@
                       xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notifications.Wpf"
                       xmlns:prism="http://prismlibrary.com/"
                       xmlns:properties="clr-namespace:Tidal.Properties"
+                      xmlns:sys="clr-namespace:System;assembly=mscorlib"
                       xmlns:viewmodels="clr-namespace:Tidal.ViewModels"
-                      Title="ShellView"
+                      Title="{Binding Title}"
                       Width="{helpers:SettingBinding Width}"
                       Height="{helpers:SettingBinding Height}"
                       MinWidth="500"
@@ -25,6 +26,17 @@
     <Window.Resources>
         <conv:SizeConverter x:Key="sizeConverter" />
         <conv:SpeedConverter x:Key="speedConverter" />
+        <conv:ValueWhenConverter x:Key="Bool2Vis">
+            <conv:ValueWhenConverter.When>
+                <sys:Boolean>True</sys:Boolean>
+            </conv:ValueWhenConverter.When>
+            <conv:ValueWhenConverter.Value>
+                <Visibility>Visible</Visibility>
+            </conv:ValueWhenConverter.Value>
+            <conv:ValueWhenConverter.Otherwise>
+                <Visibility>Collapsed</Visibility>
+            </conv:ValueWhenConverter.Otherwise>
+        </conv:ValueWhenConverter>
     </Window.Resources>
 
 
@@ -40,10 +52,12 @@
     <controls:MetroWindow.LeftWindowCommands>
         <controls:WindowCommands>
             <Button Command="{Binding GoBackCommand}"
-                    Content="{StaticResource BackArrow}"
+                    Content="{x:Static properties:Resources.Unicode_BackArrow}"
                     FontFamily="Segoe MDL2 Assets"
                     FontSize="14"
-                    Style="{StaticResource MyTitleBarButton}" />
+                    Style="{StaticResource MyTitleBarButton}"
+                    Visibility="{Binding CanGoBack,
+                                         Converter={StaticResource Bool2Vis}}" />
         </controls:WindowCommands>
     </controls:MetroWindow.LeftWindowCommands>
 
@@ -176,7 +190,7 @@
                                 <TextBlock Margin="0"
                                            VerticalAlignment="Center"
                                            FontFamily="Segoe MDL2 Assets"
-                                           Text="{StaticResource Upload}" />
+                                           Text="{x:Static properties:Resources.Unicode_Upload}" />
                                 <TextBlock Tag="wrap"
                                            Text="{Binding SessionStats.AverageUploadSpeed,
                                                           FallbackValue='0 Bps',
@@ -202,7 +216,7 @@
                                 <TextBlock Margin="0"
                                            VerticalAlignment="Center"
                                            FontFamily="Segoe MDL2 Assets"
-                                           Text="{StaticResource Download}" />
+                                           Text="{x:Static properties:Resources.Unicode_Download}" />
                                 <TextBlock Margin="0"
                                            Text="{Binding SessionStats.AverageDownloadSpeed,
                                                           FallbackValue='0 Bps',

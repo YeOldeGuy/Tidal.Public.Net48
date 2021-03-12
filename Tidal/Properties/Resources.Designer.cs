@@ -2653,6 +2653,15 @@ namespace Tidal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Unicode_BackArrow {
+            get {
+                return ResourceManager.GetString("Unicode_BackArrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         public static string Unicode_Download {
