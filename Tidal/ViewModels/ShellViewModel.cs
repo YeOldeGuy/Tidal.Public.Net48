@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -343,6 +344,17 @@ namespace Tidal.ViewModels
         public bool IsAltModeEnabled { get => _IsAltModeEnabled; set => SetProperty(ref _IsAltModeEnabled, value); }
         public string AltModeGlyph { get => _AltModeGlyph; set => SetProperty(ref _AltModeGlyph, value); }
         public bool CanGoBack { get => _CanGoBack; set => SetProperty(ref _CanGoBack, value); }
+        public string AssemblyVersion
+        {
+            get
+            {
+                Assembly assembly = typeof(ShellViewModel).Assembly;
+                AssemblyName assemblyName = assembly.GetName();
+                Version version = assemblyName.Version;
+
+                return $"Tidal - {version}";
+            }
+        }
         #endregion
 
         #region Helpers for Properties

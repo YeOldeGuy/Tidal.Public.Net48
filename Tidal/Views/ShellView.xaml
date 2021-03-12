@@ -152,6 +152,9 @@
                                 </TextBlock>
                             </StackPanel>
                         </Button.Content>
+                        <Button.ToolTip>
+                            <TextBlock Text="{Binding AssemblyVersion}" />
+                        </Button.ToolTip>
                     </Button>
 
                     <!--  Free space  -->

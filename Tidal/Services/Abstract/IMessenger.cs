@@ -3,6 +3,10 @@ using Prism.Events;
 
 namespace Tidal.Services.Abstract
 {
+    /// <summary>
+    /// An easier-to-use interface to the rather baroque Prism publish/subscribe
+    /// event aggregator.
+    /// </summary>
     public interface IMessenger
     {
         /// <summary>
@@ -17,11 +21,12 @@ namespace Tidal.Services.Abstract
         /// <param name="message">
         ///   A message instance of type <typeparamref name="T"/>.
         /// </param>
-        void Send<T>(T message);
+        void Send<T>(T message) 
+            where T : class;
 
         /// <summary>
-        /// Tells the message system to invoke the <paramref name="action"/>
-        /// when the message of type <typeparamref name="T"/> is sent.
+        /// Attach a delegate to the specified message type. When a publisher
+        /// sends out a matching message, this action will be invoked.
         /// </summary>
         /// <typeparam name="T">
         ///   The type of the message.
@@ -30,7 +35,8 @@ namespace Tidal.Services.Abstract
         /// <param name="action">An <see cref="Action"/> to invoke when the message is sent.</param>
         /// <param name="threadOption">One of the <see cref="ThreadOption"/> values.</param>
         /// <returns>A token to make disposal of the action easier.</returns>
-        SubscriptionToken Subscribe<T>(Action<T> action, ThreadOption threadOption = ThreadOption.UIThread);
+        SubscriptionToken Subscribe<T>(Action<T> action, ThreadOption threadOption = ThreadOption.UIThread)
+            where T : class;
 
         /// <summary>
         /// Tell the message system to stop sending messages. Normally, this is
@@ -41,6 +47,7 @@ namespace Tidal.Services.Abstract
         ///   A <see cref="SubscriptionToken"/> value, returned from a call to
         ///   <see cref="Subscribe{T}(Action{T}, ThreadOption)"/>
         /// </param>
-        void Unsubscribe<T>(SubscriptionToken token);
+        void Unsubscribe<T>(SubscriptionToken token)
+            where T : class;
     }
 }
