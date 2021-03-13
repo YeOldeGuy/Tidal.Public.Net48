@@ -25,6 +25,8 @@ namespace Tidal.Views
             vm = DataContext as ShellViewModel;
         }
 
+        // Everything here is for the two speed menus
+
         private static void MenuOpened(ContextMenu menu,
                            Func<IEnumerable<SpeedMenuSelector>> getSpeeds,
                            RoutedEventHandler handler)

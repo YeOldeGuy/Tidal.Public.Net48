@@ -57,7 +57,7 @@
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets"
-                                       Text="{StaticResource Start}" />
+                                       Text="{x:Static properties:Resources.Unicode_Start}" />
                             <TextBlock Text="{x:Static properties:Resources.Start}" />
                         </StackPanel>
                     </Button.Content>
@@ -68,7 +68,7 @@
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets"
-                                       Text="{StaticResource Pause}" />
+                                       Text="{x:Static properties:Resources.Unicode_Pause}" />
                             <TextBlock Text="{x:Static properties:Resources.Pause}" />
                         </StackPanel>
                     </Button.Content>
@@ -86,7 +86,7 @@
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets"
-                                       Text="{StaticResource Delete}" />
+                                       Text="{x:Static properties:Resources.Unicode_Delete}" />
                             <TextBlock Text="{x:Static properties:Resources.Delete}" />
                         </StackPanel>
                     </Button.Content>

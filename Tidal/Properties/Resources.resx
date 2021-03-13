@@ -1078,4 +1078,20 @@
     <value></value>
     <comment>\uE72B</comment>
   </data>
+  <data name="Unicode_Start" xml:space="preserve">
+    <value></value>
+    <comment>\uE768</comment>
+  </data>
+  <data name="Unicode_Pause" xml:space="preserve">
+    <value></value>
+    <comment>\uE769</comment>
+  </data>
+  <data name="Unicode_Delete" xml:space="preserve">
+    <value></value>
+    <comment>\uE74D</comment>
+  </data>
+  <data name="Unicode_Link" xml:space="preserve">
+    <value></value>
+    <comment>\uE71B</comment>
+  </data>
 </root>

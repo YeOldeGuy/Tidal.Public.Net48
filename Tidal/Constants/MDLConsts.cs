@@ -20,6 +20,7 @@
         public const string Share = "\uE72D";
         public const string Alert = "\uE7BA";
         public const string App = "\uE71D";
+        public const string Link = "\uE71B";
 
         public const string Pause = "\uE769";
         public const string Play = "\uE768";

@@ -80,7 +80,7 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock FontFamily="Segoe MDL2 Assets"
                                FontSize="14"
-                               Text="{x:Static properties:Resources.Unicode_AddMagnet}" />
+                               Text="{x:Static properties:Resources.Unicode_Link}" />
                     <Separator Width="3" />
                     <TextBlock FontSize="12"
                                Text="{x:Static properties:Resources.ShellAddMagnet}" />
