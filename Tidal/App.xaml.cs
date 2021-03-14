@@ -16,6 +16,7 @@ using Tidal.Services.Actual;
 using Tidal.ViewModels;
 using Tidal.Views;
 using TinyIpc.Messaging;
+using Utf8Json;
 
 namespace Tidal
 {
@@ -133,12 +134,16 @@ namespace Tidal
             // work), and send the args to the first instance.
             Current.Dispatcher.Invoke(() =>
             {
-                var args = Json.ToObject<string[]>(e.Message);
-                if (args != null && args.Length > 0)
-                    Container.Resolve<IMessenger>().Send(new StartupMessage(args, false));
+                try
+                {
+                    var args = Json.ToObject<string[]>(e.Message);
+                    if (args != null && args.Length > 0)
+                        Container.Resolve<IMessenger>().Send(new StartupMessage(args, false));
+                }
+                catch (JsonParsingException) { /* don't care */ }
 
                 if (Current.MainWindow.WindowState == WindowState.Minimized)
-                    Current.MainWindow.WindowState = WindowState.Normal; //despite saying Normal this actually will restore
+                    Current.MainWindow.WindowState = WindowState.Normal;
                 Current.MainWindow.Activate(); //now activate window
             });
         }

@@ -50,23 +50,23 @@ namespace Tidal.Services.Actual
             // my general lack o'smarts, I have to subscribe to each of the
             // different requests separately then queue them.
 
-            disposables.Add(messenger.Subscribe<AddMagnetRequest>(this.QueueRequest, ThreadOption.PublisherThread));
-            disposables.Add(messenger.Subscribe<AddTorrentRequest>(this.QueueRequest, ThreadOption.PublisherThread));
-            disposables.Add(messenger.Subscribe<ReannounceTorrentsRequest>(this.QueueRequest, ThreadOption.PublisherThread));
-            disposables.Add(messenger.Subscribe<RemoveTorrentsRequest>(this.QueueRequest, ThreadOption.PublisherThread));
-            disposables.Add(messenger.Subscribe<SessionRequest>(this.QueueRequest, ThreadOption.PublisherThread));
-            disposables.Add(messenger.Subscribe<SessionStatsRequest>(this.QueueRequest, ThreadOption.PublisherThread));
-            disposables.Add(messenger.Subscribe<SetSessionRequest>(this.QueueRequest, ThreadOption.PublisherThread));
-            disposables.Add(messenger.Subscribe<SetTorrentsRequest>(this.QueueRequest, ThreadOption.PublisherThread));
-            disposables.Add(messenger.Subscribe<StartTorrentsRequest>(this.QueueRequest, ThreadOption.PublisherThread));
-            disposables.Add(messenger.Subscribe<StopTorrentsRequest>(this.QueueRequest, ThreadOption.PublisherThread));
-            disposables.Add(messenger.Subscribe<TorrentRequest>(this.QueueRequest, ThreadOption.PublisherThread));
-            disposables.Add(messenger.Subscribe<FreeSpaceRequest>(this.QueueRequest, ThreadOption.PublisherThread));
+            disposables.Add(messenger.Subscribe<AddMagnetRequest>(QueueRequest, ThreadOption.PublisherThread));
+            disposables.Add(messenger.Subscribe<AddTorrentRequest>(QueueRequest, ThreadOption.PublisherThread));
+            disposables.Add(messenger.Subscribe<ReannounceTorrentsRequest>(QueueRequest, ThreadOption.PublisherThread));
+            disposables.Add(messenger.Subscribe<RemoveTorrentsRequest>(QueueRequest, ThreadOption.PublisherThread));
+            disposables.Add(messenger.Subscribe<SessionRequest>(QueueRequest, ThreadOption.PublisherThread));
+            disposables.Add(messenger.Subscribe<SessionStatsRequest>(QueueRequest, ThreadOption.PublisherThread));
+            disposables.Add(messenger.Subscribe<SetSessionRequest>(QueueRequest, ThreadOption.PublisherThread));
+            disposables.Add(messenger.Subscribe<SetTorrentsRequest>(QueueRequest, ThreadOption.PublisherThread));
+            disposables.Add(messenger.Subscribe<StartTorrentsRequest>(QueueRequest, ThreadOption.PublisherThread));
+            disposables.Add(messenger.Subscribe<StopTorrentsRequest>(QueueRequest, ThreadOption.PublisherThread));
+            disposables.Add(messenger.Subscribe<TorrentRequest>(QueueRequest, ThreadOption.PublisherThread));
+            disposables.Add(messenger.Subscribe<FreeSpaceRequest>(QueueRequest, ThreadOption.PublisherThread));
 
             // This is separate from the others above. This message we listen
             // for then change the host parameters when we get it. The others
             // are simply queued up.
-            disposables.Add(messenger.Subscribe<HostChangedMessage>(this.OnHostChanged));
+            disposables.Add(messenger.Subscribe<HostChangedMessage>(OnHostChanged));
 
             disposables.Add(messenger.Subscribe<ShutdownMessage>((m) => cts?.Cancel(), ThreadOption.PublisherThread));
         }

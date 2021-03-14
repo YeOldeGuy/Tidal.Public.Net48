@@ -18,11 +18,11 @@ namespace Tidal.Models.BrokerMessages
     /// </remarks>
     internal abstract class BrokerRequestBase
     {
-        private readonly IMessenger messenger;
+        private static IMessenger messenger;
 
         protected BrokerRequestBase()
         {
-            messenger = ServiceResolver.Resolve<IMessenger>();
+            messenger = messenger ?? ServiceResolver.Resolve<IMessenger>();
         }
 
         protected IMessenger Messenger => messenger;

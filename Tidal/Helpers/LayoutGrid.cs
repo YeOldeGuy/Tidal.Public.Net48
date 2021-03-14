@@ -20,9 +20,9 @@ namespace Tidal.Helpers
         public LayoutGrid(string name, RowDefinitionCollection rowDefs)
         {
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentException("Need name in LayoutGrid cons");
+                throw new ArgumentNullException("Need name in LayoutGrid cons");
             if (rowDefs == null)
-                throw new ArgumentException("Row definitions is null in LayoutGrid constructor");
+                throw new ArgumentNullException("Row definitions is null in LayoutGrid constructor");
 
             GridName = name;
             LayoutSpecs = new List<LayoutGridInfo>();
@@ -40,9 +40,9 @@ namespace Tidal.Helpers
         public LayoutGrid(string name, ColumnDefinitionCollection colDefs)
         {
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentException("Need name in LayoutGrid constructor");
+                throw new ArgumentNullException("Need name in LayoutGrid constructor");
             if (colDefs == null)
-                throw new ArgumentException("Column definitions is null in LayoutGrid constructor");
+                throw new ArgumentNullException("Column definitions is null in LayoutGrid constructor");
 
             GridName = name;
             LayoutSpecs = new List<LayoutGridInfo>();
