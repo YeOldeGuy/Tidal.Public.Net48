@@ -22,7 +22,7 @@ namespace Tidal
 {
     public partial class App : PrismApplication
     {
-        private const string MutexName = @"Global\Tidal.Public.Net48";
+        private const string MutexName = @"Local\Tidal.Public.Net48";
         private const string IpcChannel = "Tidal.Public.Net48.IpcChannel";
 
         private TinyMessageBus listener;
