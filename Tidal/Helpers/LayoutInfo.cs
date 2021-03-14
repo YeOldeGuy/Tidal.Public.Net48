@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Windows.Controls;
+using Tidal.Properties;
 
 namespace Tidal.Helpers
 {
@@ -35,9 +36,9 @@ namespace Tidal.Helpers
         public void AddLayout(string layoutGridName, RowDefinitionCollection rows)
         {
             if (string.IsNullOrEmpty(layoutGridName))
-                throw new ArgumentException("Grid name is empty in LayoutInfo.AddLayout");
+                throw new ArgumentNullException(Resources.LayoutInfo_GridNameException);
             if (rows == null)
-                throw new ArgumentException("Rows are null in LayoutInfo.AddLayout");
+                throw new ArgumentNullException(Resources.LayoutInfo_DefinitionNullException);
 
             LayoutGrids.Add(new LayoutGrid(layoutGridName, rows));
         }
@@ -50,9 +51,9 @@ namespace Tidal.Helpers
         public void AddLayout(string layoutGridName, ColumnDefinitionCollection cols)
         {
             if (string.IsNullOrEmpty(layoutGridName))
-                throw new ArgumentException("Grid name is empty in LayoutInfo.AddLayout");
+                throw new ArgumentNullException(Resources.LayoutInfo_GridNameException);
             if (cols == null)
-                throw new ArgumentException("Columns are null in LayoutInfo.AddLayout");
+                throw new ArgumentNullException(Resources.LayoutInfo_DefinitionNullException);
 
             LayoutGrids.Add(new LayoutGrid(layoutGridName, cols));
         }
@@ -60,7 +61,7 @@ namespace Tidal.Helpers
         public LayoutGrid GetLayoutGrid(string layoutGridName)
         {
             if (string.IsNullOrEmpty(layoutGridName))
-                throw new ArgumentException("Layout Grid Name is null or empty in GetLayoutGrid");
+                throw new ArgumentNullException(Resources.LayoutInfo_GridNameException);
 
             return LayoutGrids.FirstOrDefault(g => g.GridName.ToLower() == layoutGridName.ToLower());
         }

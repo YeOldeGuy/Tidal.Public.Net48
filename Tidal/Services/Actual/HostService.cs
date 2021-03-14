@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Tidal.Models;
+using Tidal.Properties;
 using Tidal.Services.Abstract;
 
 namespace Tidal.Services.Actual
 {
+    // This is, I admit, a bunch of crap. I don't like it, but it's simple and
+    // it works, so I leave it alone.
+
     internal class HostService : IHostService
     {
         private readonly ISettingsService settingsService;
@@ -61,7 +65,7 @@ namespace Tidal.Services.Actual
             activeId = Hosts.Where(a => a.Active).Select(b => b.Id).FirstOrDefault();
 
             if (Count > 0 && activeId == Guid.Empty)
-                throw new InvalidOperationException("Must define at least one account as active");
+                throw new InvalidOperationException(Resources.HostService_NoActiveException);
         }
 
         public void Save()

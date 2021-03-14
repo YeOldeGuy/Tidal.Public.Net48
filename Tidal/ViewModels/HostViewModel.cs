@@ -10,6 +10,7 @@ using Prism.Regions;
 using Tidal.Collections;
 using Tidal.Models;
 using Tidal.Models.Messages;
+using Tidal.Properties;
 using Tidal.Services.Abstract;
 using ValidationModel;
 
@@ -110,7 +111,7 @@ namespace Tidal.ViewModels
             if (!Hosts.Any())
             {
                 AddHost.Execute();
-                Title = "New Host Added";
+                Title = Resources.HostVM_NewHostAdded;
                 Hosts.First().Active = true;
             }
             else
@@ -226,7 +227,7 @@ namespace Tidal.ViewModels
                 revertList.Add(acct.Clone());
             }
             listChanged = false;
-            Messenger.Send(new InfoMessage("Hosts saved", null, TimeSpan.FromSeconds(3)));
+            Messenger.Send(new InfoMessage(Resources.HostVM_HostsSaved, null, TimeSpan.FromSeconds(3)));
             RaiseStatusChanged();
         }, () => IsDirty || listChanged);
 

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Controls;
 using Tidal.Client.Helpers;
+using Tidal.Properties;
 
 namespace Tidal.Helpers
 {
     public static class DataGridUtils
     {
-        public static IEnumerable<DataGridColumn> GetHeaderMenuInfo(DataGrid grid)
+        public static IEnumerable<DataGridColumn> GetHeaderMenuInfo(this DataGrid grid)
         {
             foreach (var column in grid.Columns)
                 yield return column;
@@ -25,7 +26,7 @@ namespace Tidal.Helpers
                 return;
 
             if (columnInfo.Count != grid.Columns.Count)
-                throw new InvalidOperationException("grid column count != save column count");
+                throw new InvalidOperationException(Resources.DataGridUtils_UnequalColumnCountException);
 
             var widthConverter = new DataGridLengthConverter();
 

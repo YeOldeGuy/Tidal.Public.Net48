@@ -376,6 +376,15 @@ namespace Tidal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to grid column count != save column count.
+        /// </summary>
+        public static string DataGridUtils_UnequalColumnCountException {
+            get {
+                return ResourceManager.GetString("DataGridUtils_UnequalColumnCountException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Default Theme.
         /// </summary>
         public static string DefaultThemeHeader {
@@ -979,6 +988,15 @@ namespace Tidal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Must define at least one account as active.
+        /// </summary>
+        public static string HostService_NoActiveException {
+            get {
+                return ResourceManager.GetString("HostService_NoActiveException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Possible host failure at {0}.
         /// </summary>
         public static string HostTimeoutHeader_1 {
@@ -1011,6 +1029,24 @@ namespace Tidal.Properties {
         public static string HostUserEmptyError {
             get {
                 return ResourceManager.GetString("HostUserEmptyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hosts saved.
+        /// </summary>
+        public static string HostVM_HostsSaved {
+            get {
+                return ResourceManager.GetString("HostVM_HostsSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Host Added.
+        /// </summary>
+        public static string HostVM_NewHostAdded {
+            get {
+                return ResourceManager.GetString("HostVM_NewHostAdded", resourceCulture);
             }
         }
         
@@ -1065,6 +1101,42 @@ namespace Tidal.Properties {
         public static string InMinutes {
             get {
                 return ResourceManager.GetString("InMinutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Row or column definition is null in LayoutGrid constructor.
+        /// </summary>
+        public static string LayoutGrid_DefinitionNullException {
+            get {
+                return ResourceManager.GetString("LayoutGrid_DefinitionNullException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Need name in LayoutGrid constructor.
+        /// </summary>
+        public static string LayoutGrid_NoNameException {
+            get {
+                return ResourceManager.GetString("LayoutGrid_NoNameException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rows or columns are null in LayoutInfo.AddLayout.
+        /// </summary>
+        public static string LayoutInfo_DefinitionNullException {
+            get {
+                return ResourceManager.GetString("LayoutInfo_DefinitionNullException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grid name is empty in LayoutInfo.AddLayout.
+        /// </summary>
+        public static string LayoutInfo_GridNameException {
+            get {
+                return ResourceManager.GetString("LayoutInfo_GridNameException", resourceCulture);
             }
         }
         

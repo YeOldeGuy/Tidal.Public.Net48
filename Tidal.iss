@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Tidal"
-#define MyAppVersion "1.0.1.1"
+#define MyAppVersion "1.0.1.2"
 #define MyAppPublisher "Keith Walker"
 #define MyAppExeName "Tidal.exe"
 #define BinDir ".\Tidal\bin\Release"

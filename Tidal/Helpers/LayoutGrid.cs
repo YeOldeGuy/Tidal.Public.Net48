@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using Tidal.Properties;
 
 namespace Tidal.Helpers
 {
@@ -20,9 +21,9 @@ namespace Tidal.Helpers
         public LayoutGrid(string name, RowDefinitionCollection rowDefs)
         {
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentNullException("Need name in LayoutGrid cons");
+                throw new ArgumentNullException(Resources.LayoutGrid_NoNameException);
             if (rowDefs == null)
-                throw new ArgumentNullException("Row definitions is null in LayoutGrid constructor");
+                throw new ArgumentNullException(Resources.LayoutGrid_DefinitionNullException);
 
             GridName = name;
             LayoutSpecs = new List<LayoutGridInfo>();
@@ -40,9 +41,9 @@ namespace Tidal.Helpers
         public LayoutGrid(string name, ColumnDefinitionCollection colDefs)
         {
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentNullException("Need name in LayoutGrid constructor");
+                throw new ArgumentNullException(Resources.LayoutGrid_NoNameException);
             if (colDefs == null)
-                throw new ArgumentNullException("Column definitions is null in LayoutGrid constructor");
+                throw new ArgumentNullException(Resources.LayoutGrid_DefinitionNullException);
 
             GridName = name;
             LayoutSpecs = new List<LayoutGridInfo>();

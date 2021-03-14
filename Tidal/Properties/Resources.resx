@@ -1094,4 +1094,28 @@
     <value></value>
     <comment>\uE71B</comment>
   </data>
+  <data name="HostService_NoActiveException" xml:space="preserve">
+    <value>Must define at least one account as active</value>
+  </data>
+  <data name="HostVM_NewHostAdded" xml:space="preserve">
+    <value>New Host Added</value>
+  </data>
+  <data name="HostVM_HostsSaved" xml:space="preserve">
+    <value>Hosts saved</value>
+  </data>
+  <data name="LayoutGrid_NoNameException" xml:space="preserve">
+    <value>Need name in LayoutGrid constructor</value>
+  </data>
+  <data name="LayoutGrid_DefinitionNullException" xml:space="preserve">
+    <value>Row or column definition is null in LayoutGrid constructor</value>
+  </data>
+  <data name="LayoutInfo_GridNameException" xml:space="preserve">
+    <value>Grid name is empty in LayoutInfo.AddLayout</value>
+  </data>
+  <data name="LayoutInfo_DefinitionNullException" xml:space="preserve">
+    <value>Rows or columns are null in LayoutInfo.AddLayout</value>
+  </data>
+  <data name="DataGridUtils_UnequalColumnCountException" xml:space="preserve">
+    <value>grid column count != save column count</value>
+  </data>
 </root>

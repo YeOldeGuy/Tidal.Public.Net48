@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using System.Windows;
 using System.Windows.Controls;
+using Tidal.Properties;
 
 namespace Tidal.Helpers
 {
@@ -19,7 +20,7 @@ namespace Tidal.Helpers
         public LayoutGridInfo(RowDefinition rowDef)
         {
             if (rowDef == null)
-                throw new ArgumentException("RowDefinition is null in LayoutGridInfo");
+                throw new ArgumentNullException(Resources.LayoutGrid_DefinitionNullException);
 
             UnitType = rowDef.Height.GridUnitType;
             Length = rowDef.Height.Value;
@@ -32,7 +33,7 @@ namespace Tidal.Helpers
         public LayoutGridInfo(ColumnDefinition colDef)
         {
             if (colDef == null)
-                throw new ArgumentException("ColumnDefinition is null in LayoutGridInfo");
+                throw new ArgumentNullException(Resources.LayoutGrid_DefinitionNullException);
 
             UnitType = colDef.Width.GridUnitType;
             Length = colDef.Width.Value;

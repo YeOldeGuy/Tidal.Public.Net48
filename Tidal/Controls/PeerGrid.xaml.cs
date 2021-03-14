@@ -112,7 +112,7 @@ namespace Tidal.Controls
                 menu.Items.Add(clearItem);
                 menu.Items.Add(new Separator());
 
-                foreach (var column in DataGridUtils.GetHeaderMenuInfo(peerGrid))
+                foreach (var column in peerGrid.GetHeaderMenuInfo())
                 {
                     var header = column.SortMemberPath;
                     columnsMap.TryGetValue(column.SortMemberPath, out header);

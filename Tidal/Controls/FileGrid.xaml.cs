@@ -105,7 +105,7 @@ namespace Tidal.Controls
                 menu.Items.Add(clearItem);
                 menu.Items.Add(new Separator());
 
-                foreach (var column in DataGridUtils.GetHeaderMenuInfo(fileGrid))
+                foreach (var column in fileGrid.GetHeaderMenuInfo())
                 {
                     var header = column.SortMemberPath;
                     columnsMap.TryGetValue(column.SortMemberPath, out header);

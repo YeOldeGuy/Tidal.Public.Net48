@@ -138,7 +138,7 @@ namespace Tidal.Controls
                 menu.Items.Add(clearItem);
                 menu.Items.Add(new Separator());
 
-                foreach (var column in DataGridUtils.GetHeaderMenuInfo(torrentGrid))
+                foreach (var column in torrentGrid.GetHeaderMenuInfo())
                 {
                     var header = column.SortMemberPath;
                     columnsMap.TryGetValue(column.SortMemberPath, out header);
