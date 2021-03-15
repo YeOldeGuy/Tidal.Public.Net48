@@ -22,8 +22,8 @@ namespace Tidal
 {
     public partial class App : PrismApplication
     {
-        private const string MutexName = @"Local\Tidal.Public.Net48";
-        private const string IpcChannel = "Tidal.Public.Net48.IpcChannel";
+        private const string MutexName = @"Local\Tidal.{9C444F80-D4BC-4969-9547-C9E26992613F}.Net48";
+        private const string IpcChannel = "Tidal.{940B2629-ABE4-4141-86D5-D07DE397F8D9}.Net48.IpcChannel";
 
         private TinyMessageBus listener;
         private Mutex globalMutex;
@@ -42,10 +42,10 @@ namespace Tidal
         {
             Args = e.Args;
 
-            // Try to create a global mutex. If this is the first instance then
-            // the thisIsTheFirstInstance param will be true. If it's not, then
-            // we need to send the command line arguments through to the
-            // existing instance then GTFO.
+            // Try to create a mutex. If this is the first instance then the
+            // thisIsTheFirstInstance param will be true. If it's not, then we
+            // need to send the command line arguments through to the existing
+            // instance and GTFO.
             globalMutex = new Mutex(true, MutexName, out var thisIsTheFirstInstance);
             if (!thisIsTheFirstInstance)
             {

@@ -110,34 +110,22 @@ namespace Tidal.Core.Helpers
             StringBuilder timeSpanBuilder = new StringBuilder(50);
 
             if (t.Days > 0)
-            {
-                timeSpanBuilder.Append(t.Days);
-                timeSpanBuilder.Append('d');
-            }
+                timeSpanBuilder.Append(t.Days).Append('d');
 
             if (t.Hours > 0)
-            {
-                timeSpanBuilder.Append(t.Hours);
-                timeSpanBuilder.Append('h');
-            }
+                timeSpanBuilder.Append(t.Hours).Append('h');
 
             if (t.Days > 0 && t.Hours > 0)
                 return timeSpanBuilder.ToString();
 
             if (t.Minutes > 0)
-            {
-                timeSpanBuilder.Append(t.Minutes);
-                timeSpanBuilder.Append('m');
-            }
+                timeSpanBuilder.Append(t.Minutes).Append('m');
 
             if (t.Hours > 0 && t.Minutes > 0)
                 return timeSpanBuilder.ToString();
 
             if (t.Days <= 0 && t.Seconds != 0)
-            {
-                timeSpanBuilder.Append(t.Seconds);
-                timeSpanBuilder.Append('s');
-            }
+                timeSpanBuilder.Append(t.Seconds).Append('s');
 
             return timeSpanBuilder.ToString();
         }
