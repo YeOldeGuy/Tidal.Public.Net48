@@ -766,7 +766,8 @@ namespace Tidal.ViewModels
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 DefaultExt = ".torrent",
-                Filter = "Torrent Files (*.torrent)|*.torrent"
+                Filter = "Torrent Files (*.torrent)|*.torrent",
+                Multiselect = false,
             };
             if (openFileDialog.ShowDialog() == true)
             {

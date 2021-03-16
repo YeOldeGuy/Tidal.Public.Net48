@@ -170,8 +170,8 @@ namespace Tidal.ViewModels
                                               where t.HashString == h || t.HashString == addedTorrentHashString
                                               select t);
 
-                    if (!string.IsNullOrEmpty(addedTorrentHashString))
-                        settingsService.SelectedHashes = selectedTorrents.Select(t => t.HashString).ToList();
+                    // persist the list again in case there's an added torrent in it now
+                    settingsService.SelectedHashes = selectedTorrents.Select(t => t.HashString).ToList();
 
                     messenger.Send(new RestoreSelectionsMessage(settingsService.SelectedHashes));
                     needsSelectionsRefreshed = false;
