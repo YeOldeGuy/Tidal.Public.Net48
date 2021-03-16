@@ -89,7 +89,7 @@ namespace Tidal.ViewModels
             disposables.Add(messenger.Subscribe<HaltMessage>(OnHalt, ThreadOption.PublisherThread));
             disposables.Add(messenger.Subscribe<ResumeMessage>(OnResume, ThreadOption.PublisherThread));
             disposables.Add(messenger.Subscribe<HostChangedMessage>(OnHostChanged, ThreadOption.PublisherThread));
-            disposables.Add(messenger.Subscribe<AddTorrentResponse>(OnAddTorrent, ThreadOption.PublisherThread));
+            disposables.Add(messenger.Subscribe<AddTorrentResponse>(OnAddTorrent));
 
             Files.ItemPropertyChanged += Files_ItemPropertyChanged;
 
@@ -169,6 +169,10 @@ namespace Tidal.ViewModels
                                               from t in Torrents
                                               where t.HashString == h || t.HashString == addedTorrentHashString
                                               select t);
+
+                    if (!string.IsNullOrEmpty(addedTorrentHashString))
+                        settingsService.SelectedHashes = selectedTorrents.Select(t => t.HashString).ToList();
+
                     messenger.Send(new RestoreSelectionsMessage(settingsService.SelectedHashes));
                     needsSelectionsRefreshed = false;
                     addedTorrentHashString = string.Empty;
