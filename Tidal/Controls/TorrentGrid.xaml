@@ -8,6 +8,7 @@
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:properties="clr-namespace:Tidal.Properties"
+             xmlns:viewmodels="clr-namespace:Tidal.ViewModels"
              d:DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="450"
              d:DesignWidth="800"
@@ -66,13 +67,13 @@
                           Header="Normal seeding" />
             </MenuItem>
             <Separator />
-            <MenuItem Command="{Binding RemoveCommand}"
+            <MenuItem Command="{Binding RemoveTorrentsCommand}"
                       Header="Remove Torrent" />
             <Separator />
             <MenuItem Command="{Binding ReannounceCommand}"
                       Header="Reannounce (get more peers)" />
             <Separator />
-            <MenuItem Command="{Binding TorrentPropsCommand}"
+            <MenuItem Command="{Binding TorrentPropertiesCommand}"
                       Header="Properties" />
         </ContextMenu>
 

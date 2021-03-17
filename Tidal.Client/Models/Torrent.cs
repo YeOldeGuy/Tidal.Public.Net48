@@ -44,7 +44,7 @@ namespace Tidal.Client.Models
         private long _DownloadedEver;
         private long _DownloadLimit;
         private bool _DownloadLimited;
-        private string _HashString;
+        private string _HashString = string.Empty; // gets used in IEquatable methods
         private string _Name;
         private long _TotalSize;
         private IList<int> _Priorities;

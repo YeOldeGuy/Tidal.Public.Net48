@@ -338,12 +338,12 @@ namespace Tidal.ViewModels
 
         #region Properties Visible to XAML
         #region Backing Store
-        private string _Title;
+        private string _Title = "Tidal";
         private bool _IsOpen;
         private SessionStats _SessionStats;
         private Session _Session;
         private long _FreeSpace;
-        private string _AltModeLabel;
+        private string _AltModeLabel = "no connection";
         private bool _IsAltModeEnabled;
         private string _AltModeGlyph;
         private bool _CanGoBack;

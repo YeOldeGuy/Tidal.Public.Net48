@@ -34,7 +34,7 @@
                                 Presentation="Humanize" />
     </UserControl.Resources>
 
-    <Grid>
+    <Grid MinWidth="400">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -171,6 +171,7 @@
                     Command="{Binding CloseCommand}"
                     CommandParameter="{x:Static viewmodels:TorrentPropsDisposition.OK}"
                     Content="{x:Static props:Resources.TorrentProps_DismissButton}"
+                    IsCancel="True"
                     IsDefault="True"
                     Style="{StaticResource MahApps.Styles.Button.Flat}" />
         </UniformGrid>

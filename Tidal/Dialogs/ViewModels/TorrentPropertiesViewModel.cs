@@ -18,14 +18,14 @@ namespace Tidal.Dialogs.ViewModels
     }
 
 
-    class TorrentPropertiesViewModel : BindableBase, IDialogAware
+    public class TorrentPropertiesViewModel : BindableBase, IDialogAware
     {
         private readonly IMessenger messenger;
         private Torrent _Torrent;
-        private string _Title;
+        private string _Title = string.Empty;
         private bool _SeedIdleModeChangable;
         private bool _SeedRatioModeChangable;
-        private DelegateCommand<TorrentPropsDisposition> _CloseCommand;
+        private DelegateCommand<TorrentPropsDisposition?> _CloseCommand;
 
 
         public const string TorrentParameter = "torrent";
@@ -33,6 +33,7 @@ namespace Tidal.Dialogs.ViewModels
         public TorrentPropertiesViewModel(IMessenger messenger)
         {
             this.messenger = messenger;
+            Torrent = new Torrent();
         }
 
 
@@ -62,6 +63,9 @@ namespace Tidal.Dialogs.ViewModels
                     return;
                 Torrent.Assign(torrentParameter);
                 Title = Torrent.Name;
+
+                RaisePropertyChanged(nameof(SeedIdleSelectedIndex));
+                RaisePropertyChanged(nameof(SeedRatioSelectedIndex));
             }
         }
         #endregion
@@ -80,7 +84,7 @@ namespace Tidal.Dialogs.ViewModels
         /// </summary>
         public int SeedIdleSelectedIndex
         {
-            get => (int)Torrent.SeedIdleMode;
+            get => Torrent != null ? (int)Torrent.SeedIdleMode : 0;
             set
             {
                 Torrent.SeedIdleMode = (SeedLimitMode)value;
@@ -103,7 +107,7 @@ namespace Tidal.Dialogs.ViewModels
         /// </summary>
         public int SeedRatioSelectedIndex
         {
-            get => (int)Torrent.SeedRatioMode;
+            get => Torrent != null ? (int)Torrent.SeedRatioMode : 0;
             set
             {
                 Torrent.SeedRatioMode = (SeedLimitMode)value;
@@ -138,14 +142,14 @@ namespace Tidal.Dialogs.ViewModels
             }
         }
 
-        protected virtual void CloseDialog(TorrentPropsDisposition disposition)
+        protected virtual void CloseDialog(TorrentPropsDisposition? disposition)
         {
             ButtonResult result = disposition == TorrentPropsDisposition.OK ? ButtonResult.OK : ButtonResult.Cancel;
             RaiseRequestClose(new DialogResult(result));
         }
 
-        public DelegateCommand<TorrentPropsDisposition> CloseCommand =>
-            _CloseCommand = _CloseCommand ?? new DelegateCommand<TorrentPropsDisposition>((p) =>
+        public DelegateCommand<TorrentPropsDisposition?> CloseCommand =>
+            _CloseCommand = _CloseCommand ?? new DelegateCommand<TorrentPropsDisposition?>((p) =>
             {
                 CloseDialog(p);
             }, (p) => true);

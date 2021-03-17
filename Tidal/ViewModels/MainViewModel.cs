@@ -328,11 +328,11 @@ namespace Tidal.ViewModels
         public DelegateCommand RemoveTorrentsCommand =>
             _RemoveTorrentsCommand = _RemoveTorrentsCommand ?? new DelegateCommand(() =>
         {
-            IDialogParameters parms = new DialogParameters
-                {
-                    { RemoveTorrentViewModel.TorrentsParameter, selectedTorrents },
-                };
-            dialogService.ShowDialog(PageKeys.RemoveTorrents, parms, r =>
+            IDialogParameters parameters = new DialogParameters
+            {
+                { RemoveTorrentViewModel.TorrentsParameter, selectedTorrents },
+            };
+            dialogService.ShowDialog(PageKeys.RemoveTorrents, parameters, r =>
             {
                 // Closing the dialog by clicking the exit button on the title
                 // bar will yield a ButtonResult.None.
@@ -344,6 +344,24 @@ namespace Tidal.ViewModels
                 messenger.Send(new RemoveTorrentsRequest(selectedTorrents, removeData == TorrentDataDisposition.RemoveData));
             });
         });
+
+        private DelegateCommand _TorrentPropertiesCommand;
+        public DelegateCommand TorrentPropertiesCommand =>
+            _TorrentPropertiesCommand = _TorrentPropertiesCommand ?? new DelegateCommand(() =>
+            {
+                Torrent selected = selectedTorrents.FirstOrDefault();
+
+                IDialogParameters parameters = new DialogParameters
+                {
+                    { TorrentPropertiesViewModel.TorrentParameter, selected },
+                };
+                dialogService.ShowDialog(PageKeys.TorrentProperties, parameters, r =>
+                {
+                    // There isn't any OK returned from the properties dialog,
+                    // it simply makes the changes as they're selected by the
+                    // user. The only button is "Dismiss"
+                });
+            }, () => selectedTorrents?.Any() == true);
         #endregion
     }
 }
