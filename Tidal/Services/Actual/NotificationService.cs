@@ -1,5 +1,6 @@
 ﻿using System;
 using Humanizer;
+using Microsoft.Toolkit.Uwp.Notifications;
 using Notification.Wpf;
 using Tidal.Constants;
 using Tidal.Properties;
@@ -18,12 +19,19 @@ namespace Tidal.Services.Actual
 
         public void ToastShowInfo(string message, string header = null, TimeSpan timeout = default)
         {
-            manager.Show(new NotificationContent
-            {
-                Message = message,
-                Title = header ?? "Info",
-                Type = NotificationType.Information,
-            }, expirationTime: timeout == default ? TimeSpan.MaxValue : timeout);
+            new ToastContentBuilder()
+                .AddText(header)
+                .AddText(message)
+                .AddButton(new ToastButton().SetDismissActivation())
+                .SetToastDuration(ToastDuration.Short)
+                .Show();
+
+            //manager.Show(new NotificationContent
+            //{
+            //    Message = message,
+            //    Title = header ?? "Info",
+            //    Type = NotificationType.Information,
+            //}, expirationTime: timeout == default ? TimeSpan.MaxValue : timeout);
         }
 
         public void ShowInfo(string message, string header = null, TimeSpan timeout = default)
@@ -73,31 +81,31 @@ namespace Tidal.Services.Actual
 
         public void ReportPossibleHostFailure(TimeSpan timeout)
         {
-            manager.Show(new NotificationContent
-            {
-                Message = string.Format(Resources.HostTimeoutMessage_1, timeout.Humanize()),
-                Title = string.Format(Resources.HostTimeoutHeader_1, DateTime.Now.ToString("G")),
-            }, expirationTime: timeout, areaName: Regions.NotifyArea);
+            new ToastContentBuilder()
+                .AddText(string.Format(Resources.HostTimeoutHeader_1, DateTime.Now.ToString("G")), AdaptiveTextStyle.Title)
+                .AddText(string.Format(Resources.HostTimeoutMessage_1, timeout.Humanize()))
+                .AddButton(new ToastButton().SetDismissActivation())
+                .Show();
         }
 
         public void ReportDownloadComplete(string torrentName)
         {
-            manager.Show(new NotificationContent
-            {
-                Title = Resources.DownloadComplete,
-                Message = torrentName,
-                Type = NotificationType.Success,
-            }, expirationTime: TimeSpan.MaxValue);
+            new ToastContentBuilder()
+                .AddText(Resources.DownloadComplete, AdaptiveTextStyle.Header)
+                .AddText(torrentName, AdaptiveTextStyle.Body)
+                .AddButton(new ToastButton().SetDismissActivation())
+                .SetToastDuration(ToastDuration.Long)
+                .Show();
         }
 
         public void ReportSeedingComplete(string torrentName)
         {
-            manager.Show(new NotificationContent
-            {
-                Message = string.Format(Resources.SeedingComplete_1, torrentName),
-                Title = Resources.SeedingComplete,
-                Type = NotificationType.Success,
-            }, expirationTime: TimeSpan.MaxValue);
+            new ToastContentBuilder()
+                .AddText(Resources.SeedingComplete, AdaptiveTextStyle.Title)
+                .AddText(string.Format(Resources.SeedingComplete_1, torrentName), AdaptiveTextStyle.Body)
+                .AddButton(new ToastButton().SetDismissActivation())
+                .SetToastDuration(ToastDuration.Long)
+                .Show();
         }
     }
 }
