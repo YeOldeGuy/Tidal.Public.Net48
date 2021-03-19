@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.Toolkit.Uwp.Notifications;
 using Prism.Ioc;
 using Prism.Unity;
 using Tidal.Client;
@@ -76,6 +77,7 @@ namespace Tidal
 
         protected override void OnExit(ExitEventArgs e)
         {
+            ToastNotificationManagerCompat.Uninstall();
             Container.Resolve<IMessenger>().Send(new ShutdownMessage());
             listener.MessageReceived -= Listener_MessageReceived;
             listener.Dispose();

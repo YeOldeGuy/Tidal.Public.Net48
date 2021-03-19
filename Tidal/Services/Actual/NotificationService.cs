@@ -25,13 +25,6 @@ namespace Tidal.Services.Actual
                 .AddButton(new ToastButton().SetDismissActivation())
                 .SetToastDuration(ToastDuration.Short)
                 .Show();
-
-            //manager.Show(new NotificationContent
-            //{
-            //    Message = message,
-            //    Title = header ?? "Info",
-            //    Type = NotificationType.Information,
-            //}, expirationTime: timeout == default ? TimeSpan.MaxValue : timeout);
         }
 
         public void ShowInfo(string message, string header = null, TimeSpan timeout = default)
