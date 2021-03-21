@@ -79,6 +79,12 @@ namespace Tidal.Controls
         public void Deserialize(string json)
         {
             torrentGrid.Deserialize(json);
+
+            // Special treatment for the star column
+            var width = torrentGrid.Columns[0].Width.Value;
+            var namecol = torrentGrid.Columns.Where(c => c.SortMemberPath == nameof(Torrent.Name)).FirstOrDefault();
+            if (namecol != null)
+                namecol.Width = new DataGridLength(width, DataGridLengthUnitType.Star);
         }
 
         /// <summary>

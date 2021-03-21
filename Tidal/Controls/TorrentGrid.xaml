@@ -124,6 +124,7 @@
                   ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
                   ContextMenu="{StaticResource TorrentPropertiesMenu}"
                   IsReadOnly="True"
+                  IsTabStop="False"
                   ItemsSource="{Binding Torrents.View,
                                         ElementName=grid}"
                   SelectionChanged="SelectionChanged"
@@ -462,7 +463,7 @@
                 </DataGridTemplateColumn>
 
                 <!--  Activity Column  -->
-                <DataGridTemplateColumn Width="80"
+                <DataGridTemplateColumn Width="*"
                                         Header="Active"
                                         SortMemberPath="ActivityDate">
                     <DataGridTemplateColumn.HeaderStyle>

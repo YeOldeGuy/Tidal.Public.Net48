@@ -55,9 +55,21 @@ namespace Tidal.Controls
                                         typeof(PeerGrid),
                                         new PropertyMetadata(null));
 
-        public void Deserialize(string json) => peerGrid.Deserialize(json);
+        public void Deserialize(string json)
+        {
+            peerGrid.Deserialize(json);
 
-        public string Serialize() => peerGrid.Serialize();
+            // Special treatment for the star column
+            var width = peerGrid.Columns[0].Width.Value;
+            var namecol = peerGrid.Columns.Where(c => c.SortMemberPath == nameof(Peer.Location)).FirstOrDefault();
+            if (namecol != null)
+                namecol.Width = new DataGridLength(width, DataGridLengthUnitType.Star);
+        }
+
+        public string Serialize()
+        {
+            return peerGrid.Serialize();
+        }
 
         private void AttachCustomSorters()
         {

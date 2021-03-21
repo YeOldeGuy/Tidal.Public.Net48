@@ -59,6 +59,13 @@ namespace Tidal.Controls
             if (string.IsNullOrWhiteSpace(json))
                 return;
             fileGrid.Deserialize(json);
+
+            // Special treatment for the star column
+            var width = fileGrid.Columns[0].Width.Value;
+            var namecol = fileGrid.Columns.Where(c => c.SortMemberPath == nameof(FileSummary.Name)).FirstOrDefault();
+            if (namecol != null)
+                namecol.Width = new DataGridLength(width, DataGridLengthUnitType.Star);
+
         }
 
         public string Serialize()
