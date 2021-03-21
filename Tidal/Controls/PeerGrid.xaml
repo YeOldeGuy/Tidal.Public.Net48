@@ -171,6 +171,7 @@
                             <TextBlock Margin="0"
                                        VerticalAlignment="Center"
                                        FontFamily="Segoe MDL2 Assets"
+                                       FontWeight="Normal"
                                        Text="{x:Static properties:Resources.Unicode_Upload}" />
                             <TextBlock Text="RATE" />
                         </StackPanel>
@@ -214,6 +215,7 @@
                             <TextBlock Margin="0"
                                        VerticalAlignment="Center"
                                        FontFamily="Segoe MDL2 Assets"
+                                       FontWeight="Normal"
                                        Text="{x:Static properties:Resources.Unicode_Download}" />
                             <TextBlock Text="RATE" />
                         </StackPanel>
