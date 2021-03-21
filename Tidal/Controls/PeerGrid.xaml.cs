@@ -59,11 +59,7 @@ namespace Tidal.Controls
         {
             peerGrid.Deserialize(json);
 
-            // Special treatment for the star column
-            var width = peerGrid.Columns[0].Width.Value;
-            var namecol = peerGrid.Columns.Where(c => c.SortMemberPath == nameof(Peer.Location)).FirstOrDefault();
-            if (namecol != null)
-                namecol.Width = new DataGridLength(width, DataGridLengthUnitType.Star);
+            DataGridUtils.FixStarColumn(peerGrid, nameof(Peer.Location));
         }
 
         public string Serialize()
