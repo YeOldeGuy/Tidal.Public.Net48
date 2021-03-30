@@ -4,18 +4,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:conv="clr-namespace:Tidal.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Tidal.Controls"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:properties="clr-namespace:Tidal.Properties"
-             xmlns:viewmodels="clr-namespace:Tidal.ViewModels"
              d:DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="450"
              d:DesignWidth="800"
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <conv:MultiplyConverter x:Key="Multiply" />
         <conv:PercentConverter x:Key="Percent" />
         <conv:SpeedConverter x:Key="Speed" />
         <conv:SizeConverter x:Key="Size" />
@@ -84,7 +81,7 @@
         </ContextMenu>
 
         <Style x:Key="ColumnHeaderStyle"
-               BasedOn="{StaticResource MahApps.Styles.DataGridColumnHeader}"
+               BasedOn="{StaticResource GridColumnHeader}"
                TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="ContextMenu"
                     Value="{StaticResource ColumnHeaderMenu}" />
@@ -113,6 +110,7 @@
                 </MultiDataTrigger>
             </Style.Triggers>
         </Style>
+
     </UserControl.Resources>
 
     <Grid>
@@ -310,8 +308,11 @@
                                        VerticalAlignment="Center"
                                        FontFamily="Segoe MDL2 Assets"
                                        FontWeight="Normal"
+                                       Foreground="{DynamicResource MahApps.Brushes.Gray1}"
                                        Text="{x:Static properties:Resources.Unicode_Upload}" />
-                            <TextBlock Text="RATE" />
+                            <TextBlock FontSize="11"
+                                       Foreground="{DynamicResource MahApps.Brushes.Gray1}"
+                                       Text="Rate" />
                         </StackPanel>
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
@@ -367,8 +368,11 @@
                                        VerticalAlignment="Center"
                                        FontFamily="Segoe MDL2 Assets"
                                        FontWeight="Normal"
+                                       Foreground="{DynamicResource MahApps.Brushes.Gray1}"
                                        Text="{x:Static properties:Resources.Unicode_Download}" />
-                            <TextBlock Text="RATE" />
+                            <TextBlock FontSize="11"
+                                       Foreground="{DynamicResource MahApps.Brushes.Gray1}"
+                                       Text="Rate" />
                         </StackPanel>
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
@@ -421,7 +425,7 @@
                                         Header="ETA"
                                         SortMemberPath="ETA">
                     <DataGridTemplateColumn.HeaderStyle>
-                        <Style BasedOn="{StaticResource ColumnHeaderStyle}"
+                        <Style BasedOn="{StaticResource GridColumnHeader}"
                                TargetType="DataGridColumnHeader">
                             <Setter Property="ToolTip">
                                 <Setter.Value>
@@ -469,7 +473,7 @@
                                         Header="Active"
                                         SortMemberPath="ActivityDate">
                     <DataGridTemplateColumn.HeaderStyle>
-                        <Style BasedOn="{StaticResource ColumnHeaderStyle}"
+                        <Style BasedOn="{StaticResource GridColumnHeader}"
                                TargetType="DataGridColumnHeader">
                             <Setter Property="ToolTip">
                                 <Setter.Value>

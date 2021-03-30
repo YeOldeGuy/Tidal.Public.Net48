@@ -35,8 +35,8 @@
             <MenuItem Header="Prob filled in code-behind" />
         </ContextMenu>
 
-        <Style x:Key="ColumnHeaderStyle"
-               BasedOn="{StaticResource MahApps.Styles.DataGridColumnHeader}"
+        <Style x:Key="FileGridHeaderStyle"
+               BasedOn="{StaticResource GridColumnHeader}"
                TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="ContextMenu"
                     Value="{StaticResource ColumnHeaderMenu}" />
@@ -49,7 +49,7 @@
                   CanUserAddRows="False"
                   CanUserResizeColumns="True"
                   CanUserSortColumns="True"
-                  ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}"
+                  ColumnHeaderStyle="{StaticResource FileGridHeaderStyle}"
                   FontSize="11.5"
                   FontWeight="Light"
                   IsReadOnly="False"

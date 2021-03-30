@@ -53,7 +53,7 @@
         </ContextMenu>
 
         <Style x:Key="ColumnHeaderStyle"
-               BasedOn="{StaticResource MahApps.Styles.DataGridColumnHeader}"
+               BasedOn="{StaticResource GridColumnHeader}"
                TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="ContextMenu"
                     Value="{StaticResource ColumnHeaderMenu}" />
@@ -173,7 +173,7 @@
                                        FontFamily="Segoe MDL2 Assets"
                                        FontWeight="Normal"
                                        Text="{x:Static properties:Resources.Unicode_Upload}" />
-                            <TextBlock Text="RATE" />
+                            <TextBlock Text="Rate" />
                         </StackPanel>
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
@@ -217,7 +217,7 @@
                                        FontFamily="Segoe MDL2 Assets"
                                        FontWeight="Normal"
                                        Text="{x:Static properties:Resources.Unicode_Download}" />
-                            <TextBlock Text="RATE" />
+                            <TextBlock Text="Rate" />
                         </StackPanel>
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
