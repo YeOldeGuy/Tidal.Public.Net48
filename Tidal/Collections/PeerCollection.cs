@@ -51,7 +51,7 @@ namespace Tidal.Collections
             if (geoService != null)
             {
                 var location = await geoService.GetRawLocationAsync(item.Address);
-                item.Location = geoService.GetFullLocation(location);
+                item.Location = geoService.LocationToString(location);
             }
         }
 
@@ -64,25 +64,25 @@ namespace Tidal.Collections
             // update, then this is a good time to try and get the location
             // again.
             //
+            if (geoService is null)
+                return;
+
             try
             {
-                foreach (var peer in this)
+                foreach (var peer in this.Where(p => !p.LocationValid))
                 {
-                    if (!peer.LocationValid && geoService != null)
+                    var location = geoService.GetRawLocation(peer.Address);
+                    if (location != null)
                     {
-                        var location = geoService.GetRawLocation(peer.Address);
-                        if (location != null)
-                        {
-                            peer.LocationValid = true;
-                            peer.Geo = location;
-                            peer.Location = geoService.GetFullLocation(location);
-                        }
-                        else
-                        {
-                            peer.Location = Resources.PeerCollection_NoLocation;
-                            peer.LocationValid = false;
-                            peer.Geo = null;
-                        }
+                        peer.LocationValid = true;
+                        peer.Geo = location;
+                        peer.Location = geoService.LocationToString(location);
+                    }
+                    else
+                    {
+                        peer.Location = Resources.PeerCollection_NoLocation;
+                        peer.LocationValid = false;
+                        peer.Geo = null;
                     }
                 }
             }

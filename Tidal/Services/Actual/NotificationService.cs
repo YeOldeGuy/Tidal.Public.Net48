@@ -19,12 +19,12 @@ namespace Tidal.Services.Actual
 
         public void ToastShowInfo(string message, string header = null, TimeSpan timeout = default)
         {
+            DateTime expiry = timeout == default ? DateTime.Now + 1.Days() : DateTime.Now + timeout;
             new ToastContentBuilder()
                 .AddText(header)
                 .AddText(message)
                 .AddButton(new ToastButton().SetDismissActivation())
-                .SetToastDuration(ToastDuration.Short)
-                .Show();
+                .Show(toast => toast.ExpirationTime = expiry);
         }
 
         public void ShowInfo(string message, string header = null, TimeSpan timeout = default)
@@ -39,12 +39,13 @@ namespace Tidal.Services.Actual
 
         public void ToastShowWarning(string message, string header = null, TimeSpan timeout = default)
         {
-            manager.Show(new NotificationContent
-            {
-                Message = message,
-                Title = header ?? "Warning",
-                Type = NotificationType.Warning,
-            }, expirationTime: timeout == default ? TimeSpan.MaxValue : timeout);
+            DateTime expiry = timeout == default ? DateTime.Now + 1.Days() : DateTime.Now + timeout;
+            new ToastContentBuilder()
+                .AddText(header)
+                .AddText(message)
+                .AddButton(new ToastButton().SetDismissActivation())
+                .SetToastDuration(ToastDuration.Short)
+                .Show(toast => toast.ExpirationTime = expiry);
         }
 
         public void ShowWarning(string message, string header = null, TimeSpan timeout = default)

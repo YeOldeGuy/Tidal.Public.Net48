@@ -154,7 +154,7 @@
                     </StatusBar.Resources>
 
                     <!--  Transmission version  -->
-                    <Button Style="{StaticResource LocalNPC}">
+                    <Button Style="{StaticResource LocalNPC}" Command="{Binding TestInfo}" >
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock>

@@ -177,7 +177,7 @@ namespace Tidal.Services.Actual
         ///   A <see cref="CityResponse"/> from the GeoIP2 methods.
         /// </param>
         /// <returns>A location string value.</returns>
-        public string GetFullLocation(GeoLocation geo)
+        public string LocationToString(GeoLocation geo)
         {
             CheckDisposed();
 
@@ -315,13 +315,13 @@ namespace Tidal.Services.Actual
         {
             CheckDisposed();
 
-            return GetFullLocation(await GetRawLocationAsync(ipAddress));
+            return LocationToString(await GetRawLocationAsync(ipAddress));
         }
 
         public string GetFormattedLocation(string ipAddress)
         {
             if (dbreader != null)
-                return GetFullLocation(GetRawLocation(ipAddress));
+                return LocationToString(GetRawLocation(ipAddress));
             return "";
         }
 

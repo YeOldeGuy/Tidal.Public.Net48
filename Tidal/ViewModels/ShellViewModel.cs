@@ -780,7 +780,6 @@ namespace Tidal.ViewModels
                 }
             });
         }, () => true);
-
         #endregion
     }
 }

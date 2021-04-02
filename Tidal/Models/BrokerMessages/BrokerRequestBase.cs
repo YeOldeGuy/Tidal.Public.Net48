@@ -31,6 +31,13 @@ namespace Tidal.Models.BrokerMessages
         /// Send a request to the <see cref="IClient"/> instance and if
         /// appropriate, create an appropriate response and broadcast that.
         /// </summary>
+        /// <remarks>
+        /// Every implementor must override this, naturally. The code should
+        /// invoke the necessary method on the <see cref="IClient"/>, then
+        /// process the result, sending out the response returned. Not all
+        /// requests have responses, see <see cref="StartTorrentsRequest"/> for
+        /// example; most do, though.
+        /// </remarks>
         /// <param name="client">An instance of the <see cref="IClient"/>.</param>
         public abstract Task Invoke(IClient client);
 

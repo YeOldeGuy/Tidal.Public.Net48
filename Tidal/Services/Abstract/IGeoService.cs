@@ -103,7 +103,7 @@ namespace Tidal.Services.Abstract
         ///   A string with the form of <c>"City, Country"</c> or <c>"City,
         ///   State, Country"</c> for locations in the US or Canada.
         /// </returns>
-        string GetFullLocation(GeoLocation location);
+        string LocationToString(GeoLocation location);
 
         /// <summary>
         /// Asynchronously gets the <see cref="GeoLocation"/> information

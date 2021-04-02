@@ -89,3 +89,6 @@ aspect of the app that talks to the actual client, handling just
 one request/response pairing at a time, obviating the age-old
 problem of handling reentrancy. One point of contact.
 
+### Attributions
+
+Some icons are from [Freepik](https://www.freepik.com)
