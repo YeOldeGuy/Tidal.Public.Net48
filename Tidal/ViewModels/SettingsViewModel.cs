@@ -27,7 +27,6 @@ namespace Tidal.ViewModels
         private readonly IGeoService geoService;
         private readonly IFileService fileService;
         private readonly IMessenger messenger;
-        private SynchronizationContext context;
         private bool _IsOpen;
 
         public const string SettingsParameter = "settings";
@@ -43,18 +42,12 @@ namespace Tidal.ViewModels
             this.messenger = messenger;
         }
 
-        private void UiInvoke(Action action)
-        {
-            context.Post(o => action.Invoke(), null);
-        }
-
         #region INavigationAware Methods
         public bool IsNavigationTarget(NavigationContext navigationContext) => true;
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             IsOpen = true;
-            context = SynchronizationContext.Current;
 
             Setter = new Session();
             disposables = new List<IDisposable>();
@@ -117,7 +110,7 @@ namespace Tidal.ViewModels
                 LoadMMDBCommand.RaiseCanExecuteChanged();
             }
         }
-       private void Setter_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Setter_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Setter.AltScheduleDays))
                 RaisePropertyChanged(nameof(AltSpeedDays));
@@ -141,23 +134,20 @@ namespace Tidal.ViewModels
 
         private void GetMMDBStatus()
         {
-            UiInvoke(() =>
+            if (geoService.IsDownloading)
             {
-                if (geoService.IsDownloading)
-                {
-                    MMDBStatusReport = string.Format(Resources.GeoDBFileDownloading_1, settingsService.GeoDbFileName);
-                }
-                else if (fileService.FileExists(settingsService.GeoDbFileName, StorageStrategy.Local))
-                {
-                    var age = fileService.GetFileAge(settingsService.GeoDbFileName, StorageStrategy.Local);
-                    var hum = age.Humanize(2, minUnit: Humanizer.Localisation.TimeUnit.Minute);
-                    MMDBStatusReport = string.Format(Resources.GeoDbFileAge_2, settingsService.GeoDbFileName, hum);
-                }
-                else
-                {
-                    MMDBStatusReport = string.Format(Resources.GeoDBFileNotFound_1, settingsService.GeoDbFileName);
-                }
-            });
+                MMDBStatusReport = string.Format(Resources.GeoDBFileDownloading_1, settingsService.GeoDbFileName);
+            }
+            else if (fileService.FileExists(settingsService.GeoDbFileName, StorageStrategy.Local))
+            {
+                var age = fileService.GetFileAge(settingsService.GeoDbFileName, StorageStrategy.Local);
+                var hum = age.Humanize(2, minUnit: Humanizer.Localisation.TimeUnit.Minute);
+                MMDBStatusReport = string.Format(Resources.GeoDbFileAge_2, settingsService.GeoDbFileName, hum);
+            }
+            else
+            {
+                MMDBStatusReport = string.Format(Resources.GeoDBFileNotFound_1, settingsService.GeoDbFileName);
+            }
         }
         #endregion
 

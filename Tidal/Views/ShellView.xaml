@@ -131,7 +131,8 @@
                   Height="28">
                 <StatusBar Background="{DynamicResource MahApps.Brushes.Accent}">
                     <StatusBar.Resources>
-                        <Style BasedOn="{StaticResource MyStatusBarButton}"
+                        <Style x:Key="LocalSBB"
+                               BasedOn="{StaticResource MyStatusBarButton}"
                                TargetType="Button">
                             <Setter Property="FontSize"
                                     Value="12" />
@@ -140,10 +141,20 @@
                             <Setter Property="Padding"
                                     Value="5,3" />
                         </Style>
+                        <Style x:Key="LocalNPC"
+                               BasedOn="{StaticResource LocalSBB}"
+                               TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background"
+                                            Value="Transparent" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
                     </StatusBar.Resources>
 
                     <!--  Transmission version  -->
-                    <Button>
+                    <Button Style="{StaticResource LocalNPC}">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock>
@@ -158,7 +169,7 @@
                     </Button>
 
                     <!--  Free space  -->
-                    <Button>
+                    <Button Style="{StaticResource LocalNPC}">
                         <Button.Content>
                             <TextBlock>
                                 <Run Text="{x:Static properties:Resources.ShellFreeSpace}" />
@@ -168,7 +179,8 @@
                     </Button>
 
                     <!--  Alt Mode Button  -->
-                    <Button Command="{Binding ToggleAltMode}">
+                    <Button Command="{Binding ToggleAltMode}"
+                            Style="{StaticResource LocalSBB}">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Margin="0,0,3,1"
@@ -184,7 +196,8 @@
                     </Button>
 
                     <Button x:Name="uploadButton"
-                            IsEnabled="{Binding IsOpen}">
+                            IsEnabled="{Binding IsOpen}"
+                            Style="{StaticResource LocalSBB}">
                         <i:Interaction.Behaviors>
                             <helpers:DropDownButtonBehavior />
                         </i:Interaction.Behaviors>
@@ -210,7 +223,8 @@
                     </Button>
 
                     <Button x:Name="downloadButton"
-                            IsEnabled="{Binding IsOpen}">
+                            IsEnabled="{Binding IsOpen}"
+                            Style="{StaticResource LocalSBB}">
                         <i:Interaction.Behaviors>
                             <helpers:DropDownButtonBehavior />
                         </i:Interaction.Behaviors>

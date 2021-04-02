@@ -27,6 +27,9 @@
     <SolidColorBrush x:Key="SeedingProgressBrush"
                      Color="LightGreen" />
 
+    <SolidColorBrush x:Key="HeaderTextBrush"
+                     Color="{DynamicResource MahApps.Colors.Gray2}" />
+
     <Style x:Key="GridColumnHeader"
            BasedOn="{StaticResource MahApps.Styles.DataGridColumnHeader}"
            TargetType="{x:Type DataGridColumnHeader}">
@@ -35,7 +38,7 @@
         <Setter Property="FontSize"
                 Value="11" />
         <Setter Property="Foreground"
-                Value="{DynamicResource MahApps.Brushes.Gray1}" />
+                Value="{StaticResource HeaderTextBrush}" />
     </Style>
 
 
@@ -94,6 +97,17 @@
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Background"
                         Value="{DynamicResource MahApps.Brushes.AccentBase}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="StausBarNonOperativeButton"
+           BasedOn="{StaticResource MyStatusBarButton}"
+           TargetType="{x:Type Button}">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background"
+                        Value="Transparent" />
             </Trigger>
         </Style.Triggers>
     </Style>

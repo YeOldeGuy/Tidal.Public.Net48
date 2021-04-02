@@ -37,7 +37,6 @@ namespace Tidal.ViewModels
         private readonly IHostService hostService;
         private readonly ITorrentStatusService torrentStatusService;
         private readonly INotificationService notificationService;
-        private readonly SynchronizationContext context;
         private IRegionNavigationService navigationService;
         private bool inFatality;
 
@@ -61,8 +60,6 @@ namespace Tidal.ViewModels
             this.torrentStatusService = torrentStatusService;
             this.notificationService = notificationService;
             this.messenger = messenger;
-
-            context = SynchronizationContext.Current;
 
             // Sync the theme with the system no matter the setting. This will
             // make the theme manager pick up the current color. Otherwise, the
@@ -235,22 +232,16 @@ namespace Tidal.ViewModels
         private void OnSession(SessionResponse sessionResponse)
         {
             Session = Session ?? new Session();
-            UiInvoke(() =>
-            {
-                Session.Assign(sessionResponse.Session);
-                messenger.Send(new FreeSpaceRequest(Session.DownloadDirectory));
-                SetAltLabel(Session);
-            });
+            Session.Assign(sessionResponse.Session);
+            messenger.Send(new FreeSpaceRequest(Session.DownloadDirectory));
+            SetAltLabel(Session);
         }
 
         private void OnSessionStats(SessionStatsResponse statsResponse)
         {
             SessionStats = SessionStats ?? new SessionStats();
-            UiInvoke(() =>
-            {
-                SessionStats.Assign(statsResponse.SessionStats);
-                SetTitle(SessionStats);
-            });
+            SessionStats.Assign(statsResponse.SessionStats);
+            SetTitle(SessionStats);
         }
 
         private void OnTorrents(TorrentResponse torrentResponse)
@@ -261,19 +252,16 @@ namespace Tidal.ViewModels
 
         private void OnFreeSpace(FreeSpaceResponse freeSpace)
         {
-            UiInvoke(() => FreeSpace = freeSpace.FreeSpace);
+            FreeSpace = freeSpace.FreeSpace;
         }
 
         private void OnTorrentAdded(AddTorrentResponse response)
         {
             if (response.IsDuplicate)
             {
-                UiInvoke(() =>
-                {
-                    var msg = string.Format(Resources.TorrentExists_1, response.Name);
-                    var hdr = Resources.TorrentExists;
-                    notificationService.ShowInfo(msg, hdr, 10.Seconds());
-                });
+                var msg = string.Format(Resources.TorrentExists_1, response.Name);
+                var hdr = Resources.TorrentExists;
+                notificationService.ShowInfo(msg, hdr, 10.Seconds());
             }
         }
         #endregion
@@ -372,11 +360,6 @@ namespace Tidal.ViewModels
         #endregion
 
         #region Helpers for Properties
-        private void UiInvoke(Action action)
-        {
-            context.Post(o => action.Invoke(), null);
-        }
-
         private void SetTitle(SessionStats stats)
         {
             if (stats == null)

@@ -28,7 +28,6 @@ namespace Tidal.ViewModels
 
         private List<IDisposable> disposables;
         private List<Torrent> selectedTorrents;
-        private SynchronizationContext context;
         private bool needsSelectionsRefreshed;
 
         public MainViewModel(ISettingsService settingsService,
@@ -74,7 +73,6 @@ namespace Tidal.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            context = SynchronizationContext.Current;
             needsSelectionsRefreshed = true;
 
             disposables = new List<IDisposable>();
@@ -127,12 +125,9 @@ namespace Tidal.ViewModels
         #region Subscription Handlers
         private void ClearCollections()
         {
-            UiInvoke(() =>
-            {
-                Torrents.Clear();
-                Peers.Clear();
-                Files.Clear();
-            });
+            Torrents.Clear();
+            Peers.Clear();
+            Files.Clear();
         }
 
         private void OnHalt(HaltMessage haltMessage)
@@ -159,26 +154,23 @@ namespace Tidal.ViewModels
             if (Torrents == null || torrentResponse?.Torrents == null)
                 return;
 
-            UiInvoke(() =>
+            Torrents.Merge(torrentResponse.Torrents);
+            if (needsSelectionsRefreshed)
             {
-                Torrents.Merge(torrentResponse.Torrents);
-                if (needsSelectionsRefreshed)
-                {
-                    selectedTorrents.Clear();
-                    selectedTorrents.AddRange(from h in settingsService.SelectedHashes
-                                              from t in Torrents
-                                              where t.HashString == h || t.HashString == addedTorrentHashString
-                                              select t);
+                selectedTorrents.Clear();
+                selectedTorrents.AddRange(from h in settingsService.SelectedHashes
+                                          from t in Torrents
+                                          where t.HashString == h || t.HashString == addedTorrentHashString
+                                          select t);
 
-                    // persist the list again in case there's an added torrent in it now
-                    settingsService.SelectedHashes = selectedTorrents.Select(t => t.HashString).ToList();
+                // persist the list again in case there's an added torrent in it now
+                settingsService.SelectedHashes = selectedTorrents.Select(t => t.HashString).ToList();
 
-                    messenger.Send(new RestoreSelectionsMessage(settingsService.SelectedHashes));
-                    needsSelectionsRefreshed = false;
-                    addedTorrentHashString = string.Empty;
-                }
-                UpdateFromSelected();
-            });
+                messenger.Send(new RestoreSelectionsMessage(settingsService.SelectedHashes));
+                needsSelectionsRefreshed = false;
+                addedTorrentHashString = string.Empty;
+            }
+            UpdateFromSelected();
         }
 
         private void OnAddTorrent(AddTorrentResponse addTorrentResponse)
@@ -218,26 +210,18 @@ namespace Tidal.ViewModels
         #endregion
 
         #region Helpers
-        private void UiInvoke(Action action)
-        {
-            context.Post(o => action.Invoke(), null);
-        }
-
         private void UpdateFromSelected()
         {
             var sels = selectedTorrents;
             if (Peers == null || Files == null)
                 return;
 
-            UiInvoke(() =>
-            {
-                Peers.UpdateFromCollection(sels);
-                Files.UpdateFromCollection(sels);
+            Peers.UpdateFromCollection(sels);
+            Files.UpdateFromCollection(sels);
 
-                SetTitle();
+            SetTitle();
 
-                RaiseCanExecuteChanged();
-            });
+            RaiseCanExecuteChanged();
         }
 
         private void SetTitle()
@@ -246,7 +230,7 @@ namespace Tidal.ViewModels
 
             if (Torrents is null || !Torrents.Any())
             {
-                UiInvoke(() => Title = "No Torrents");
+                Title = "No Torrents";
                 return;
             }
 
@@ -255,7 +239,7 @@ namespace Tidal.ViewModels
                         .Append(selectedTorrents.Count.ToWords().Titleize())
                         .Append(" Selected");
 
-            UiInvoke(() => Title = titleBuilder.ToString());
+            Title = titleBuilder.ToString();
         }
 
         private void RaiseCanExecuteChanged()

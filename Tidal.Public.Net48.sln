@@ -13,6 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValidationModel", "Validati
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{37B04E78-9E2B-4970-8A97-40C4BD44FB26}"
 	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
 		Tidal.iss = Tidal.iss
 		Transmission.ico = Transmission.ico
 		Transmission.png = Transmission.png

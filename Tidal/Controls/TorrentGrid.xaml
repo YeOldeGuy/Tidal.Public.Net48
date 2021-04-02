@@ -308,10 +308,10 @@
                                        VerticalAlignment="Center"
                                        FontFamily="Segoe MDL2 Assets"
                                        FontWeight="Normal"
-                                       Foreground="{DynamicResource MahApps.Brushes.Gray1}"
+                                       Foreground="{StaticResource HeaderTextBrush}"
                                        Text="{x:Static properties:Resources.Unicode_Upload}" />
                             <TextBlock FontSize="11"
-                                       Foreground="{DynamicResource MahApps.Brushes.Gray1}"
+                                       Foreground="{StaticResource HeaderTextBrush}"
                                        Text="Rate" />
                         </StackPanel>
                     </DataGridTemplateColumn.Header>
@@ -368,10 +368,10 @@
                                        VerticalAlignment="Center"
                                        FontFamily="Segoe MDL2 Assets"
                                        FontWeight="Normal"
-                                       Foreground="{DynamicResource MahApps.Brushes.Gray1}"
+                                       Foreground="{StaticResource HeaderTextBrush}"
                                        Text="{x:Static properties:Resources.Unicode_Download}" />
                             <TextBlock FontSize="11"
-                                       Foreground="{DynamicResource MahApps.Brushes.Gray1}"
+                                       Foreground="{StaticResource HeaderTextBrush}"
                                        Text="Rate" />
                         </StackPanel>
                     </DataGridTemplateColumn.Header>

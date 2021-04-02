@@ -36,7 +36,6 @@ namespace Tidal.ViewModels
         private List<Host> revertList;
         private bool listChanged;
         private Host activeHostAtStart;
-        private SynchronizationContext context;
 
 
         public HostViewModel(IHostService hostService, IMessenger messenger)
@@ -44,12 +43,6 @@ namespace Tidal.ViewModels
             this.hostService = hostService;
             this.Messenger = messenger;
         }
-
-        private void UiInvoke(Action action)
-        {
-            context.Post(o => action.Invoke(), null);
-        }
-
 
         #region Properties Visible to XAML
         public ObservableItemCollection<Host> Hosts { get => _Hosts; set => SetProperty(ref _Hosts, value); }
@@ -87,7 +80,6 @@ namespace Tidal.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             IsOpen = true;
-            context = SynchronizationContext.Current;
 
             disposables = new List<IDisposable>();
 
@@ -177,22 +169,18 @@ namespace Tidal.ViewModels
 
         private void SetTitle()
         {
-            UiInvoke(() =>
-                Title = "Host".ToQuantity(Hosts.Count, ShowQuantityAs.Words).ApplyCase(LetterCasing.Sentence));
+            Title = "Host".ToQuantity(Hosts.Count, ShowQuantityAs.Words).ApplyCase(LetterCasing.Sentence);
         }
         #endregion
 
         #region Commands
         public DelegateCommand AddHost => _AddHost = _AddHost ?? new DelegateCommand(() =>
         {
-            UiInvoke(() =>
-            {
-                var host = new Host();
-                Hosts.Add(host);
-                SelectedHost = host;
-                SetTitle();
-                RaiseStatusChanged();
-            });
+            var host = new Host();
+            Hosts.Add(host);
+            SelectedHost = host;
+            SetTitle();
+            RaiseStatusChanged();
         }, () => true);
 
         public DelegateCommand ActivateHost => _ActivateHost = _ActivateHost ?? new DelegateCommand(() =>
@@ -204,14 +192,11 @@ namespace Tidal.ViewModels
 
         public DelegateCommand RemoveHost => _RemoveHost = _RemoveHost ?? new DelegateCommand(() =>
         {
-            UiInvoke(() =>
-            {
-                Hosts.Remove(SelectedHost);
-                SelectedHost = Hosts.FirstOrDefault();
-                listChanged = true;
-                SetTitle();
-                RaiseStatusChanged();
-            });
+            Hosts.Remove(SelectedHost);
+            SelectedHost = Hosts.FirstOrDefault();
+            listChanged = true;
+            SetTitle();
+            RaiseStatusChanged();
         }, () => SelectedHost != null && !SelectedHost.Active);
 
         public DelegateCommand SaveHosts => _SaveHosts = _SaveHosts ?? new DelegateCommand(() =>
@@ -233,22 +218,19 @@ namespace Tidal.ViewModels
 
         public DelegateCommand RevertChanges => _RevertChanges = _RevertChanges ?? new DelegateCommand(() =>
         {
-            UiInvoke(() =>
+            var selectedId = SelectedHost?.Id ?? Guid.Empty;
+            Hosts.Clear();
+            foreach (var acct in revertList)
             {
-                var selectedId = SelectedHost?.Id ?? Guid.Empty;
-                Hosts.Clear();
-                foreach (var acct in revertList)
-                {
-                    Hosts.Add(acct.Clone());
-                }
+                Hosts.Add(acct.Clone());
+            }
 
-                SelectedHost = Hosts.FirstOrDefault(a => a.Id == selectedId);
-                if (SelectedHost == null && Hosts.Any())
-                    SelectedHost = Hosts.First();
+            SelectedHost = Hosts.FirstOrDefault(a => a.Id == selectedId);
+            if (SelectedHost == null && Hosts.Any())
+                SelectedHost = Hosts.First();
 
-                listChanged = false;
-                RaiseStatusChanged();
-            });
+            listChanged = false;
+            RaiseStatusChanged();
             SetTitle();
         }, () => IsDirty || listChanged);
         #endregion
