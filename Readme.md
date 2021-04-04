@@ -87,8 +87,6 @@ request to come in. It puts it in a queue, then a background
 task processes it. The ```IBrokerService``` is the **only**
 aspect of the app that talks to the actual client, handling just
 one request/response pairing at a time, obviating the age-old
-problem of handling reentrancy. One point of contact.
+problem of handling reentrancy. One point of contact, and one
+request at a time.
 
-### Attributions
-
-Some icons are from [Freepik](https://www.freepik.com)

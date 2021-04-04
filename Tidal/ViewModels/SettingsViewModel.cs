@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Threading;
 using System.Windows;
 using ControlzEx.Theming;
 using Humanizer;

@@ -108,8 +108,17 @@ namespace Tidal.Controls
 
                 foreach (var column in fileGrid.GetHeaderMenuInfo())
                 {
+                    // It seems particularly difficult to get the first column's
+                    // menu selection text. Why is SortMemberPath not set here if
+                    // the XAML has it? WPF has many mysteries.
+
                     var header = column.SortMemberPath;
                     columnsMap.TryGetValue(column.SortMemberPath, out header);
+
+                    // Very much a kludge:
+                    if (string.IsNullOrEmpty(header) && column == fileGrid.Columns[0])
+                        header = columnsMap[nameof(FileSummary.Wanted)];
+
                     var item = new MenuItem
                     {
                         Header = header,

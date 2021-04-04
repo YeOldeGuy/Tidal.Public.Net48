@@ -134,6 +134,7 @@ namespace Tidal
             // args might be empty, but we don't worry about that here, we
             // simply try to bring the MainWindow to the front (doesn't always
             // work), and send the args to the first instance.
+
             Current.Dispatcher.Invoke(() =>
             {
                 try

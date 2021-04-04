@@ -21,7 +21,7 @@ namespace Tidal.Services.Abstract
         /// <param name="message">
         ///   A message instance of type <typeparamref name="T"/>.
         /// </param>
-        void Send<T>(T message) 
+        void Send<T>(T message)
             where T : class;
 
         /// <summary>

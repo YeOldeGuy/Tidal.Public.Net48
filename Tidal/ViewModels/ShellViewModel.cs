@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using ControlzEx.Theming;
@@ -140,7 +139,7 @@ namespace Tidal.ViewModels
         {
             Host active = hostService.ActiveHost;
 
-            if (active == null)
+            if (active is null)
             {
                 dialogService.ShowDialog(PageKeys.FirstHost, r =>
                 {
@@ -184,6 +183,11 @@ namespace Tidal.ViewModels
         #endregion
 
         #region Scheduled Tasks
+        //
+        // These methods are called by the TaskService. All they do is send
+        // requests to the client via the BrokerService to fetch various
+        // data.
+        //
         private void SetupPeriodicTasks()
         {
             taskService.Add(nameof(RequestSessionTask), RequestSessionTask, TimeSpan.FromSeconds(2.9));
@@ -229,6 +233,11 @@ namespace Tidal.ViewModels
         #endregion
 
         #region Client Subscriptions
+        //
+        // All of these methods are called in response to subscription
+        // notification. Recall that all of these subscriptions are invoked in
+        // the UI thread, so they don't need a UI invocation wrapper.
+        //
         private void OnSession(SessionResponse sessionResponse)
         {
             Session = Session ?? new Session();
@@ -250,9 +259,9 @@ namespace Tidal.ViewModels
             torrentStatusService.CheckForConnection(torrentResponse.Torrents);
         }
 
-        private void OnFreeSpace(FreeSpaceResponse freeSpace)
+        private void OnFreeSpace(FreeSpaceResponse freeSpaceResponse)
         {
-            FreeSpace = freeSpace.FreeSpace;
+            FreeSpace = freeSpaceResponse.FreeSpace;
         }
 
         private void OnTorrentAdded(AddTorrentResponse response)
@@ -267,6 +276,12 @@ namespace Tidal.ViewModels
         #endregion
 
         #region Error Subscriptions and handling
+        //
+        // Methods that are called in response to error handling subscriptions.
+        // Some errors are minor, nothing more than an advisory that a torrent
+        // file couldn't be parsed. Others are more serious, like a lack of comm
+        // to the client.
+        //
         private async void RestartAfterFailure()
         {
             inFatality = false;
@@ -386,7 +401,7 @@ namespace Tidal.ViewModels
 
         private void SetAltLabel(Session session)
         {
-            if (session is null)
+            if (session is null || !IsOpen)
             {
                 AltModeLabel = Resources.ShellNoConnection;
                 IsAltModeEnabled = false;
@@ -570,6 +585,11 @@ namespace Tidal.ViewModels
         #region Navigation Methods
         private void OnMouseNav(MouseNavMessage navMsg)
         {
+            // Over in App.xaml.cs, there's a method that intercepts the
+            // mouse clicks, and if the click is one of the back or forward
+            // buttons that most modern mice have, sends out a message that
+            // we act on here.
+
             switch (navMsg.Direction)
             {
                 case MouseNavDirection.GoBack when navigationService.Journal.CanGoBack:
@@ -634,6 +654,8 @@ namespace Tidal.ViewModels
         public DelegateCommand UnloadedCommand =>
             _UnloadedCommand = _UnloadedCommand ?? new DelegateCommand(() =>
             {
+                // This never gets called, IRL. But we do the right thing
+                // anyway.
                 regionManager.Regions.Remove(Regions.Main);
                 navigationService.Navigated -= OnNavigated;
             });
@@ -707,6 +729,10 @@ namespace Tidal.ViewModels
                     { AddTorrentViewModel.IsValidParameter, true },
                 };
 
+                // The dialog must have been registered over in App.xaml.cs down
+                // around line 105 or so. You'll see it. This is how Prism finds
+                // the dialog's view and viewmodel. 
+                //
                 // Call the dialog service's ShowDialog method with the dialog
                 // page key and the parameters just created.The third parameter
                 // in this call is a callback, specified as an Action with an

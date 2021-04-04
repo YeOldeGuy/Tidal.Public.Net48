@@ -61,7 +61,8 @@
             <DataGrid.Columns>
                 <!--  Wanted Column  -->
                 <DataGridTemplateColumn CanUserSort="False"
-                                        Header="D/L?">
+                                        Header="D/L?"
+                                        SortMemberPath="Wanted">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <CheckBox HorizontalAlignment="Center"
