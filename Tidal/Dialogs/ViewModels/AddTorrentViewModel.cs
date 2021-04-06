@@ -76,14 +76,34 @@ namespace Tidal.Dialogs.ViewModels
             CloseDialogCommand.RaiseCanExecuteChanged();
         }
 
+        private bool inIPC = false;
+
         private void Files_ItemPropertyChanged(object sender, ItemPropertyChangedEventArgs e)
         {
-            if (!(e.ChangedItem is TorrentFileWanted changedItem))
+            if (inIPC || !(e.ChangedItem is TorrentFileWanted changedItem))
                 return;
 
-            if (e.PropertyChangedArgs.PropertyName == nameof(TorrentFileWanted.Files))
+            inIPC = true;
+            try
             {
-                changedItem.Wanted = !changedItem.Files.All(t => !t.Wanted);
+                if (e.PropertyChangedArgs.PropertyName == nameof(TorrentFileWanted.Wanted))
+                {
+                    foreach (var f in changedItem.Files)
+                        f.Wanted = changedItem.Wanted == true;
+                }
+                else if (e.PropertyChangedArgs.PropertyName == nameof(TorrentFileWanted.Files))
+                {
+                    if (changedItem.Files.All(t => t.Wanted))
+                        changedItem.Wanted = true;
+                    else if (changedItem.Files.All(t => !t.Wanted))
+                        changedItem.Wanted = false;
+                    else
+                        changedItem.Wanted = true;
+                }
+            }
+            finally
+            {
+                inIPC = false;
             }
         }
 
