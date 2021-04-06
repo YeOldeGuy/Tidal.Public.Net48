@@ -134,6 +134,12 @@ namespace ValidationModel
         protected override void ClearItems()
         {
             UnRegisterPropertyChanged(this);
+            foreach (var item in Items)
+            {
+                if (item is IDisposable disposable)
+                    disposable.Dispose();
+            }
+
             base.ClearItems();
         }
 
@@ -160,10 +166,8 @@ namespace ValidationModel
             }
         }
 
-        // This code added to correctly implement the disposable pattern.
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
         }
         #endregion

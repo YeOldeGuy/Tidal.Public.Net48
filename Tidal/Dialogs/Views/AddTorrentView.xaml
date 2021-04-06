@@ -4,6 +4,7 @@
              xmlns:converters="clr-namespace:Tidal.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:Tidal.Models"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:properties="clr-namespace:Tidal.Properties"
              xmlns:viewmodels="clr-namespace:Tidal.Dialogs.ViewModels"
@@ -15,6 +16,68 @@
 
     <UserControl.Resources>
         <converters:SizeConverter x:Key="SizeConverter" />
+
+        <DataTemplate x:Key="SubFile"
+                      DataType="{x:Type models:TorrentSubFile}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="6*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <CheckBox Grid.Column="0"
+                          IsChecked="{Binding Wanted,
+                                              Mode=TwoWay}" />
+                <TextBlock Grid.Column="1"
+                           FontSize="11"
+                           Text="{Binding Name,
+                                          Mode=OneWay}" />
+                <TextBlock Grid.Column="2"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           FontSize="11"
+                           Text="{Binding Length,
+                                          Mode=OneWay,
+                                          Converter={StaticResource SizeConverter}}" />
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="FileWanted"
+                      DataType="{x:Type models:TorrentFileWanted}">
+            <Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Grid.Column="0"
+                                  IsChecked="{Binding Wanted,
+                                                      Mode=TwoWay}" />
+                        <TextBlock Grid.Column="1"
+                                   VerticalAlignment="Center"
+                                   Text="{Binding Name,
+                                                  Mode=OneWay}" />
+                        <TextBlock Grid.Column="2"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   Text="{Binding Size,
+                                                  Mode=OneWay,
+                                                  Converter={StaticResource SizeConverter}}" />
+                    </Grid>
+                    <ListView Grid.Row="1"
+                              Margin="15,0"
+                              ItemTemplate="{StaticResource SubFile}"
+                              ItemsSource="{Binding Files,
+                                                    Mode=TwoWay}" />
+                </Grid>
+            </Grid>
+        </DataTemplate>
     </UserControl.Resources>
 
     <prism:Dialog.WindowStyle>
@@ -41,76 +104,32 @@
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="1" />
-            <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Margin="10">
-            <TextBlock Text="{Binding FileHeader, FallbackValue='File Name'}" />
-            <TextBox Margin="10,5"
-                     IsEnabled="False"
-                     Text="{Binding FileName}" />
+            <TextBlock Margin="0,10"
+                       FontSize="18"
+                       Text="Files" />
+            <ListView BorderBrush="Gray"
+                      BorderThickness="1"
+                      ItemTemplate="{StaticResource FileWanted}"
+                      ItemsSource="{Binding Files,
+                                            Mode=TwoWay,
+                                            UpdateSourceTrigger=PropertyChanged}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
         </StackPanel>
 
-        <Rectangle Grid.Row="1"
-                   Margin="10,0"
-                   Fill="{DynamicResource MahApps.Brushes.Accent3}" />
 
-        <DataGrid x:Name="filesGrid"
-                  Grid.Row="2"
-                  Margin="10"
-                  AutoGenerateColumns="False"
-                  BorderBrush="{DynamicResource MahApps.Brushes.Accent3}"
-                  BorderThickness="1"
-                  FontSize="12"
-                  ItemsSource="{Binding FilesInTorrent}"
-                  RowHeight="32">
-            <DataGrid.Columns>
-
-                <!--  Wanted Column  -->
-                <DataGridTemplateColumn CanUserSort="False"
-                                        Header="{x:Static properties:Resources.AddTorrent_DownloadHeader}">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"
-                                      IsChecked="{Binding Wanted,
-                                                          Mode=TwoWay,
-                                                          UpdateSourceTrigger=PropertyChanged}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-                <!--  File Name Column  -->
-                <DataGridTextColumn Width="*"
-                                    Binding="{Binding Name}"
-                                    CanUserResize="False"
-                                    Header="{x:Static properties:Resources.AddTorrent_FileNameHeader}"
-                                    IsReadOnly="True"
-                                    SortMemberPath="Name" />
-
-                <!--  File Size Column  -->
-                <DataGridTemplateColumn Width="70"
-                                        Header="{x:Static properties:Resources.AddTorrent_SizeHeader}"
-                                        IsReadOnly="True"
-                                        SortMemberPath="Size">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock VerticalAlignment="Center"
-                                       Foreground="{DynamicResource MahApps.Brushes.Text}"
-                                       Text="{Binding Size,
-                                                      Converter={StaticResource SizeConverter}}"
-                                       TextAlignment="Center" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-
-
-        <UniformGrid Grid.Row="3"
+        <UniformGrid Grid.Row="2"
                      Margin="5"
                      Columns="3">
             <Button Margin="6"
