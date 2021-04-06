@@ -130,7 +130,7 @@ namespace Tidal.ViewModels
                 }
                 else
                 {
-                    DoAddTorrentDialog(arg0);
+                    DoAddTorrentDialog(startupMessage.Args);
                 }
             }
         }
@@ -691,81 +691,40 @@ namespace Tidal.ViewModels
             messenger.Send(new SetSessionRequest(nameof(SessionMutator.AltSpeedEnabled), IsAltModeEnabled));
         }, () => true);
 
-        private void DoAddTorrentDialog(string filename)
+
+
+        private void DoAddTorrentDialog(IEnumerable<string> filenames)
         {
-            if (TorrentReader.TryParse(filename, out var meta))
+            IEnumerable<TorrentFileWanted> ParseTorrentFiles(IEnumerable<string> files)
             {
-                // Should I try to describe the Prism Dialog service here? Well,
-                // here and in AddTorrentViewModel, too. Future Keith needs
-                // this.
-                //
-                // The first thing to remember is that Prism creates its own
-                // window and puts your dialog inside it; your dialog is just
-                // another UserControl. Not a Page, nor a Window; just a
-                // UserControl. Of course, that limits you to the system look
-                // for the dialog window, but that can be remedied, too.
-                //
-                // To call the dialog, first create an instance of
-                // IDialogParameters, like I do here (unless the dialog doesn't
-                // need any information, but that'd be weird). This is a simple
-                // extension of a KeyValuePair list, so feel free to put any
-                // sort of value inside.
-                var parms = new DialogParameters()
+                foreach (var file in files)
                 {
-                    // Naturally, the order of the parameters, since this is a
-                    // key-value enumeration, order isn't important, but
-                    // consistent use of the keys is. Don't use literals for the
-                    // keys. You'll mistype something and everything will fall
-                    // apart. You know you will.
-                    //
-                    // The data passed can be anything, too. Not just strings or
-                    // simple values, but things like the MetaParameter, which
-                    // is an instance of TorrentMetadata, are fine. They're just
-                    // objects and not passed across any kind of marshaling 
-                    // barrier, so feel free to use anything.
+                    if (TorrentReader.TryParse(file, out var meta))
+                        yield return new TorrentFileWanted(file, meta);
+                }
+            }
 
-                    { AddTorrentViewModel.PathParameter, filename },
-                    { AddTorrentViewModel.MetaParameter, meta },
-                    { AddTorrentViewModel.IsValidParameter, true },
+            var metadata = ParseTorrentFiles(filenames);
+            if (metadata.Any())
+            {
+                var pararmeters = new DialogParameters()
+                {
+                    { AddTorrentViewModel.MetaParameter, metadata },
                 };
-
-                // The dialog must have been registered over in App.xaml.cs down
-                // around line 105 or so. You'll see it. This is how Prism finds
-                // the dialog's view and viewmodel. 
-                //
-                // Call the dialog service's ShowDialog method with the dialog
-                // page key and the parameters just created.The third parameter
-                // in this call is a callback, specified as an Action with an
-                // IDialogResult parameter. The IDialogResult has the result of
-                // the dialog, like OK, Cancel, or whatever. Normal dialog
-                // results. It also has the dialog's own set of parameters to
-                // give back any data necessary.
-                dialogService.ShowDialog(PageKeys.AddTorrent, parms, (IDialogResult r) =>
+                dialogService.ShowDialog(PageKeys.AddTorrent, pararmeters, (IDialogResult r) =>
                 {
                     if (r.Result == ButtonResult.OK)
                     {
-                        // All of the data from the call to the dialog is
-                        // returned via an instance of IDialogParameters, just
-                        // like when you specified your data for the dialog.
-                        //
-                        // The only way to get at this data is through the
-                        // GetValue<T> method, which needs a key to access the
-                        // value, natch.
-
                         var action = r.Parameters.GetValue<AddTorrentDisposition>(AddTorrentViewModel.ActionParameter);
-                        var path = r.Parameters.GetValue<string>(AddTorrentViewModel.PathParameter);
-                        var unwanted = r.Parameters.GetValue<IEnumerable<int>>(AddTorrentViewModel.UnwantedParameter);
                         var paused = action == AddTorrentDisposition.Pause;
+                        var files = r.Parameters.GetValue<IEnumerable<AddTorrentInfo>>(AddTorrentViewModel.FilesParameter);
 
-                        messenger.Send(new AddTorrentRequest(path, unwanted, paused));
+                        foreach (var file in files)
+                        {
+                            messenger.Send(new AddTorrentRequest(file.Path, file.UnwantedIndexes, paused));
+                        }
                     }
                 });
-            }
-            else
-            {
-                string message = string.Format(Resources.TorrentParsingError_1, Path.GetFileName(filename));
-                string header = Resources.ParsingError;
-                notificationService.ShowInfo(message, header, 10.Seconds());
             }
         }
 
@@ -776,11 +735,11 @@ namespace Tidal.ViewModels
             {
                 DefaultExt = ".torrent",
                 Filter = "Torrent Files (*.torrent)|*.torrent",
-                Multiselect = false,
+                Multiselect = true,
             };
             if (openFileDialog.ShowDialog() == true)
             {
-                DoAddTorrentDialog(openFileDialog.FileName);
+                DoAddTorrentDialog(openFileDialog.FileNames);
             }
             openFileDialog = null;
         }, () => true);
