@@ -81,17 +81,9 @@ namespace Tidal.Dialogs.ViewModels
             if (!(e.ChangedItem is TorrentFileWanted changedItem))
                 return;
 
-            if (e.PropertyChangedArgs.PropertyName == nameof(TorrentFileWanted.Wanted))
+            if (e.PropertyChangedArgs.PropertyName == nameof(TorrentFileWanted.Files))
             {
-                foreach (var f in changedItem.Files)
-                    f.Wanted = changedItem.Wanted == true;
-            }
-            else if (e.PropertyChangedArgs.PropertyName == nameof(TorrentFileWanted.Files))
-            {
-                if (changedItem.Files.All(t => t.Wanted))
-                    changedItem.Wanted = true;
-                else if (changedItem.Files.All(t => !t.Wanted))
-                    changedItem.Wanted = false;
+                changedItem.Wanted = !changedItem.Files.All(t => !t.Wanted);
             }
         }
 
@@ -101,6 +93,9 @@ namespace Tidal.Dialogs.ViewModels
         {
             foreach (var file in Files)
             {
+                if (!file.Wanted)
+                    continue;
+
                 var info = new AddTorrentInfo()
                 {
                     Path = file.FilePath,

@@ -691,17 +691,19 @@ namespace Tidal.ViewModels
             messenger.Send(new SetSessionRequest(nameof(SessionMutator.AltSpeedEnabled), IsAltModeEnabled));
         }, () => true);
 
-        private IEnumerable<TorrentFileWanted> ParseTorrentFiles(IEnumerable<string> files)
-        {
-            foreach (var file in files)
-            {
-                if (TorrentReader.TryParse(file, out var meta))
-                    yield return new TorrentFileWanted(file, meta);
-            }
-        }
+
 
         private void DoAddTorrentDialog(IEnumerable<string> filenames)
         {
+            IEnumerable<TorrentFileWanted> ParseTorrentFiles(IEnumerable<string> files)
+            {
+                foreach (var file in files)
+                {
+                    if (TorrentReader.TryParse(file, out var meta))
+                        yield return new TorrentFileWanted(file, meta);
+                }
+            }
+
             var metadata = ParseTorrentFiles(filenames);
             if (metadata.Any())
             {
