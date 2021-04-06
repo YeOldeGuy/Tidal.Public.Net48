@@ -13,7 +13,13 @@ namespace Tidal.Dialogs.ViewModels
     public class AddTorrentInfo
     {
         public string Path { get; set; }
-        public IEnumerable<int> UnwantedIndexes { get; set; }
+        public int[] UnwantedIndexes { get; set; }
+
+        public override string ToString()
+        {
+            var indexes = string.Join(",", UnwantedIndexes.Select(p => p.ToString()).ToArray());
+            return $"{Path}: [{indexes}]";
+        }
     }
 
 
@@ -98,7 +104,7 @@ namespace Tidal.Dialogs.ViewModels
                 var info = new AddTorrentInfo()
                 {
                     Path = file.FilePath,
-                    UnwantedIndexes = file.Files.Where(f => !f.Wanted).Select(g => g.Index),
+                    UnwantedIndexes = file.Files.Where(f => !f.Wanted).Select(g => g.Index).ToArray(),
                 };
                 yield return info;
             }
