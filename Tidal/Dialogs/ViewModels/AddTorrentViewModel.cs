@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
+using Tidal.Core.Helpers;
 using Tidal.Models;
+using Tidal.Models.Messages;
 using Tidal.Properties;
+using Tidal.Services.Abstract;
 using ValidationModel;
 
 namespace Tidal.Dialogs.ViewModels
@@ -33,8 +37,15 @@ namespace Tidal.Dialogs.ViewModels
         public const string IsValidParameter = "isvalid";
         public const string UnwantedParameter = "unwanted";
 
+        private readonly IMessenger messenger;
+        private SubscriptionToken AddToken;
         private DelegateCommand<AddTorrentDisposition?> _CloseDialogCommand;
         private bool _IsValid;
+
+        public AddTorrentViewModel(IMessenger messenger)
+        {
+            this.messenger = messenger;
+        }
 
         private ObservableItemCollection<TorrentFileWanted> _Files;
         public ObservableItemCollection<TorrentFileWanted> Files
@@ -57,12 +68,15 @@ namespace Tidal.Dialogs.ViewModels
 
         public void OnDialogClosed()
         {
+            AddToken.Dispose();
             Files.ItemPropertyChanged -= Files_ItemPropertyChanged;
             Files.Dispose();
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
+            AddToken = messenger.Subscribe<StartupMessage>(OnStartupMessage);
+
             Files = new ObservableItemCollection<TorrentFileWanted>();
             Files.ItemPropertyChanged += Files_ItemPropertyChanged;
 
@@ -74,6 +88,15 @@ namespace Tidal.Dialogs.ViewModels
                 IsValid = true;
             }
             CloseDialogCommand.RaiseCanExecuteChanged();
+        }
+
+        private void OnStartupMessage(StartupMessage startupMessage)
+        {
+            var path = startupMessage.Args[0];
+            if (TorrentReader.TryParse(path, out var meta))
+            {
+                Files.Add(new TorrentFileWanted(path, meta));
+            }
         }
 
         private bool inIPC = false;

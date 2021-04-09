@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +12,7 @@ using Tidal.Client.Helpers;
 using Tidal.Constants;
 using Tidal.Dialogs.ViewModels;
 using Tidal.Dialogs.Views;
+using Tidal.Helpers;
 using Tidal.Models.Messages;
 using Tidal.Services.Abstract;
 using Tidal.Services.Actual;
@@ -18,6 +20,7 @@ using Tidal.ViewModels;
 using Tidal.Views;
 using TinyIpc.Messaging;
 using Utf8Json;
+using Utf8Json.Resolvers;
 
 namespace Tidal
 {
@@ -26,9 +29,30 @@ namespace Tidal
         private const string MutexName = @"Local\Tidal.{9C444F80-D4BC-4969-9547-C9E26992613F}.Net48";
         private const string IpcChannel = "Tidal.{940B2629-ABE4-4141-86D5-D07DE397F8D9}.Net48.IpcChannel";
 
-        private TinyMessageBus listener;
-        private Mutex globalMutex;
-        private string[] Args;
+        private readonly TinyMessageBus listener;
+        private readonly Mutex globalMutex;
+        private readonly string[] Args;
+
+
+        public App()
+        {
+            // I was doing all this in the OnStartup method, but occasionally
+            // I'd get two instances running. Maybe doing it earlier will help.
+
+            Args = Environment.GetCommandLineArgs();
+            globalMutex = new Mutex(true, MutexName, out var isOnlyInstance);
+            if (!isOnlyInstance)
+            {
+                AsyncUtils.RunSync(() => SendArgs(new StartupMessage(Args, firstRun: false)));
+                Current.Shutdown();
+            }
+
+            // This is where we set up the side of the channel that the second
+            // instance will talk to. Set this up as early as possible.
+            listener = new TinyMessageBus(IpcChannel);
+            listener.MessageReceived += Listener_MessageReceived;
+        }
+
 
         protected override Window CreateShell() => Container.Resolve<ShellView>();
 
@@ -39,26 +63,8 @@ namespace Tidal
             base.OnInitialized();
         }
 
-        protected override async void OnStartup(StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
-            Args = e.Args;
-
-            // Try to create a mutex. If this is the first instance then the
-            // thisIsTheFirstInstance param will be true. If it's not, then we
-            // need to send the command line arguments through to the existing
-            // instance and GTFO.
-            globalMutex = new Mutex(true, MutexName, out var thisIsTheFirstInstance);
-            if (!thisIsTheFirstInstance)
-            {
-                await SendArgs(e.Args);
-                Current.Shutdown();
-            }
-
-            // This is where we set up the side of the channel that the second
-            // instance will talk to.
-            listener = new TinyMessageBus(IpcChannel);
-            listener.MessageReceived += Listener_MessageReceived;
-
             // Intercept mouse-up events and map the forward and back buttons to
             // navigation commands
             EventManager.RegisterClassHandler(typeof(Window),
@@ -115,7 +121,7 @@ namespace Tidal
             containerRegistry.RegisterForNavigation<SettingsView, SettingsViewModel>(PageKeys.Settings);
         }
 
-        private static async Task SendArgs(string[] args)
+        private static async Task SendArgs(StartupMessage startupMessage)
         {
             // This is called only by the secondary instance and does nothing
             // more than send the current command line args to the first
@@ -123,7 +129,7 @@ namespace Tidal
 
             using (TinyMessageBus bus = new TinyMessageBus(IpcChannel))
             {
-                byte[] argsAsJsonBytes = Json.ToJSONBytes(args);
+                byte[] argsAsJsonBytes = JsonSerializer.Serialize(startupMessage);
                 await bus.PublishAsync(argsAsJsonBytes);
             }
         }
@@ -139,9 +145,10 @@ namespace Tidal
             {
                 try
                 {
-                    var args = Json.ToObject<string[]>(e.Message);
-                    if (args != null && args.Length > 0)
-                        Container.Resolve<IMessenger>().Send(new StartupMessage(args, false));
+                    var json = Encoding.UTF8.GetString(e.Message);
+                    var message = JsonSerializer.Deserialize<StartupMessage>(e.Message, StandardResolver.ExcludeNull);
+                    if (message != null)
+                        Container.Resolve<IMessenger>().Send(message);
                 }
                 catch (JsonParsingException) { /* don't care */ }
 

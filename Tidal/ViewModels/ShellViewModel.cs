@@ -118,6 +118,24 @@ namespace Tidal.ViewModels
 
         private void ProcessCommandLine(StartupMessage startupMessage)
         {
+            // Okay, here's the thing. I've figured out that unless you actually
+            // use the command line, you know, like type the command in, Windows
+            // handles the activation of your app rather oddly in the case where
+            // you've selected say five torrents, then right clicked "Open" in
+            // the shell.
+            //
+            // At this point, Windows will simply activate your app five times,
+            // each with a single argument on the "command line". Also, there's
+            // a built-in limit (15, I think) items that will be allowed; beyond
+            // that limit, I'm not sure. Does the shell simply drop the ones in
+            // excess, or skip it altogether? ¯\_(ツ)_/¯
+            //
+            // I guess I can understand Windows trying to keep someone from
+            // selecting 200 files, then clicking "open," bringing the system to
+            // its knees, but it is weird.
+            //
+            // So anyway, here's Wonderwall.
+            //
             if (startupMessage.Args != null && startupMessage.Args.Length > 0)
             {
                 string arg0 = startupMessage.Args[0];
@@ -693,16 +711,22 @@ namespace Tidal.ViewModels
 
 
 
+        private IEnumerable<TorrentFileWanted> ParseTorrentFiles(IEnumerable<string> files)
+        {
+            foreach (var file in files)
+            {
+                if (TorrentReader.TryParse(file, out var meta))
+                    yield return new TorrentFileWanted(file, meta);
+            }
+        }
+
+        private bool isInAddTorrentDialog = false;
+
         private void DoAddTorrentDialog(IEnumerable<string> filenames)
         {
-            IEnumerable<TorrentFileWanted> ParseTorrentFiles(IEnumerable<string> files)
-            {
-                foreach (var file in files)
-                {
-                    if (TorrentReader.TryParse(file, out var meta))
-                        yield return new TorrentFileWanted(file, meta);
-                }
-            }
+            if (isInAddTorrentDialog)
+                return;
+            isInAddTorrentDialog = true;
 
             var metadata = ParseTorrentFiles(filenames);
             if (metadata.Any())
@@ -724,6 +748,7 @@ namespace Tidal.ViewModels
                             messenger.Send(new AddTorrentRequest(file.Path, file.UnwantedIndexes, paused));
                         }
                     }
+                    isInAddTorrentDialog = false;
                 });
             }
         }

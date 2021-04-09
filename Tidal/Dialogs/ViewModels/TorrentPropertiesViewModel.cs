@@ -66,6 +66,9 @@ namespace Tidal.Dialogs.ViewModels
 
                 RaisePropertyChanged(nameof(SeedIdleSelectedIndex));
                 RaisePropertyChanged(nameof(SeedRatioSelectedIndex));
+
+                SeedRatioModeChangable = Torrent.SeedRatioMode == SeedLimitMode.OverrideGlobalSettings;
+                SeedIdleModeChangable = Torrent.SeedIdleMode == SeedLimitMode.OverrideGlobalSettings;
             }
         }
         #endregion
