@@ -143,6 +143,7 @@
     <Compile Include="Helpers\DataGridUtils.cs" />
     <Compile Include="Helpers\DropDownButtonBehavior.cs" />
     <Compile Include="Helpers\GridExtensions.cs" />
+    <Compile Include="Helpers\InfoDisplayStack.cs" />
     <Compile Include="Helpers\IRegionNavigationServiceExtensions.cs" />
     <Compile Include="Helpers\LayoutGrid.cs" />
     <Compile Include="Helpers\LayoutGridInfo.cs" />

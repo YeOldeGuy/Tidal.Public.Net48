@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using ControlzEx.Theming;
@@ -17,6 +18,7 @@ using Tidal.Client.Models;
 using Tidal.Constants;
 using Tidal.Core.Helpers;
 using Tidal.Dialogs.ViewModels;
+using Tidal.Helpers;
 using Tidal.Models;
 using Tidal.Models.BrokerMessages;
 using Tidal.Models.Messages;
@@ -36,7 +38,9 @@ namespace Tidal.ViewModels
         private readonly IHostService hostService;
         private readonly ITorrentStatusService torrentStatusService;
         private readonly INotificationService notificationService;
+        private readonly InfoDisplayStack displayStack;
         private IRegionNavigationService navigationService;
+        private readonly SynchronizationContext context;
         private bool inFatality;
 
 
@@ -59,6 +63,9 @@ namespace Tidal.ViewModels
             this.torrentStatusService = torrentStatusService;
             this.notificationService = notificationService;
             this.messenger = messenger;
+
+            context = SynchronizationContext.Current;
+            displayStack = new InfoDisplayStack((s) => UiInvoke(() => StatusInfo = s));
 
             // Sync the theme with the system no matter the setting. This will
             // make the theme manager pick up the current color. Otherwise, the
@@ -98,6 +105,7 @@ namespace Tidal.ViewModels
             messenger.Subscribe<FatalMessage>(OnFatalError);
             messenger.Subscribe<WarningMessage>(OnWarning);
             messenger.Subscribe<InfoMessage>(OnInfo);
+            messenger.Subscribe<StatusInfoMessage>(OnStatusInfo);
 
             // Client (via the Broker) subscriptions
             messenger.Subscribe<SessionResponse>(OnSession);
@@ -105,6 +113,11 @@ namespace Tidal.ViewModels
             messenger.Subscribe<TorrentResponse>(OnTorrents);
             messenger.Subscribe<FreeSpaceResponse>(OnFreeSpace);
             messenger.Subscribe<AddTorrentResponse>(OnTorrentAdded);
+        }
+
+        private void UiInvoke(Action action)
+        {
+            context.Post(o => action.Invoke(), null);
         }
 
         #region Startup Stuff
@@ -345,6 +358,12 @@ namespace Tidal.ViewModels
         {
             notificationService.ShowInfo(infoMessage.Message, infoMessage.Header, infoMessage.Timeout);
         }
+
+        private void OnStatusInfo(StatusInfoMessage info)
+        {
+            displayStack.AddMessage(info.Message, info.Timeout);
+        }
+
         #endregion
 
         #region Other Subscriptions
@@ -368,17 +387,69 @@ namespace Tidal.ViewModels
         private bool _IsAltModeEnabled;
         private string _AltModeGlyph;
         private bool _CanGoBack;
+        private string _StatusInfo;
         #endregion
 
-        public string Title { get => _Title; set => SetProperty(ref _Title, value); }
-        public bool IsOpen { get => _IsOpen; set => SetProperty(ref _IsOpen, value); }
-        public Session Session { get => _Session; set => SetProperty(ref _Session, value); }
-        public SessionStats SessionStats { get => _SessionStats; set => SetProperty(ref _SessionStats, value); }
-        public long FreeSpace { get => _FreeSpace; set => SetProperty(ref _FreeSpace, value); }
-        public string AltModeLabel { get => _AltModeLabel; set => SetProperty(ref _AltModeLabel, value); }
-        public bool IsAltModeEnabled { get => _IsAltModeEnabled; set => SetProperty(ref _IsAltModeEnabled, value); }
-        public string AltModeGlyph { get => _AltModeGlyph; set => SetProperty(ref _AltModeGlyph, value); }
-        public bool CanGoBack { get => _CanGoBack; set => SetProperty(ref _CanGoBack, value); }
+        public string Title
+        {
+            get => _Title;
+            set => SetProperty(ref _Title, value);
+        }
+
+        public bool IsOpen
+        {
+            get => _IsOpen;
+            set => SetProperty(ref _IsOpen, value);
+        }
+
+        public Session Session
+        {
+            get => _Session;
+            set => SetProperty(ref _Session, value);
+        }
+
+        public SessionStats SessionStats
+        {
+            get => _SessionStats;
+            set => SetProperty(ref _SessionStats, value);
+        }
+
+        public long FreeSpace
+        {
+            get => _FreeSpace;
+            set => SetProperty(ref _FreeSpace, value);
+        }
+
+        public string AltModeLabel
+        {
+            get => _AltModeLabel;
+            set => SetProperty(ref _AltModeLabel, value);
+        }
+
+        public bool IsAltModeEnabled
+        {
+            get => _IsAltModeEnabled;
+            set => SetProperty(ref _IsAltModeEnabled, value);
+        }
+
+        public string AltModeGlyph
+        {
+            get => _AltModeGlyph;
+            set => SetProperty(ref _AltModeGlyph, value);
+        }
+
+        public bool CanGoBack
+        {
+            get => _CanGoBack;
+            set => SetProperty(ref _CanGoBack, value);
+        }
+
+        public string StatusInfo
+        {
+            get => _StatusInfo;
+            set => SetProperty(ref _StatusInfo, value);
+        }
+
         public string AssemblyVersion
         {
             get
