@@ -41,7 +41,7 @@ namespace Tidal.Helpers
         {
             messageStack = new ConcurrentStack<DisplayMessage>();
             DisplayAction = displayAction;
-            ClearAction = clearAction is null ? ClearAll : clearAction;
+            ClearAction = clearAction is null ? (() => DisplayAction(string.Empty)) : clearAction;
 
             timer = new DispatcherTimer
             {
@@ -51,12 +51,11 @@ namespace Tidal.Helpers
             timer.Start();
         }
 
-        private void ClearAll()
+        public void ClearAll()
         {
             messageStack.Clear();
             DisplayAction.Invoke(string.Empty);
         }
-
 
         /// <summary>
         /// Add a new message to be displayed (or whatever your Action was at
