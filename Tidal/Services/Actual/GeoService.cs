@@ -11,6 +11,7 @@ using MaxMind.GeoIP2.Exceptions;
 using Prism.Mvvm;
 using Tidal.Core.Collections;
 using Tidal.Core.Helpers;
+using Tidal.Helpers;
 using Tidal.Models;
 using Tidal.Models.Messages;
 using Tidal.Properties;
@@ -53,7 +54,7 @@ namespace Tidal.Services.Actual
 
             taskService.Add(nameof(CheckMMDB), CheckIfCurrent, TimeSpan.FromDays(1));
 
-            InitializeAsync(); // very much a fire-and-forget kinda thing.
+            InitializeAsync();
         }
 
         private async Task CheckIfCurrent()

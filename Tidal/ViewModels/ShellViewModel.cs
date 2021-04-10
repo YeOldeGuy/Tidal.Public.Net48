@@ -134,7 +134,7 @@ namespace Tidal.ViewModels
             // Okay, here's the thing. I've figured out that unless you actually
             // use the command line, you know, like type the command in, Windows
             // handles the activation of your app rather oddly in the case where
-            // you've selected say five torrents, then right clicked "Open" in
+            // you've selected say, five torrents, then right clicked "Open" in
             // the shell.
             //
             // At this point, Windows will simply activate your app five times,
@@ -145,7 +145,10 @@ namespace Tidal.ViewModels
             //
             // I guess I can understand Windows trying to keep someone from
             // selecting 200 files, then clicking "open," bringing the system to
-            // its knees, but it is weird.
+            // its knees, but it is weird. I always figured that the shell would
+            // simply build a long command line and pass that to the app. That
+            // there might be one duplicate activation, but not 15. Like I said,
+            // weird.
             //
             // So anyway, here's Wonderwall.
             //

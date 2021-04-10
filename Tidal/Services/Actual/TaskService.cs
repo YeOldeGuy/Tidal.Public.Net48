@@ -99,7 +99,8 @@ namespace Tidal.Services.Actual
             TimeSpan interval = GetTimeToNextTask();
 
             // This is meant to be run in a separate thread as the call to
-            // WaitOne will block until interval has elapsed.
+            // WaitOne will block until interval has elapsed or the token
+            // is canceled.
 
             while (!token.WaitHandle.WaitOne(interval))
             {
@@ -132,7 +133,7 @@ namespace Tidal.Services.Actual
                 return TimeSpan.FromSeconds(3.0);
 
             var nextTask = tasks.Values.OrderBy(t => t.NextRun).FirstOrDefault();
-            if (nextTask == null)
+            if (nextTask is null)
                 return TimeSpan.FromSeconds(1.0);
 
             var interval = nextTask.NextRun - DateTime.Now;
@@ -142,7 +143,7 @@ namespace Tidal.Services.Actual
         private void CheckDisposed()
         {
             if (disposedValue)
-                throw new ObjectDisposedException(this.GetType().FullName);
+                throw new ObjectDisposedException(GetType().FullName);
         }
 
         #region IDisposable Support
