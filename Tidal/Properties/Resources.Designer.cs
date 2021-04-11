@@ -1879,7 +1879,7 @@ namespace Tidal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to magnet.
+        ///   Looks up a localized string similar to Magnet.
         /// </summary>
         public static string ShellAddMagnet {
             get {
@@ -1897,7 +1897,7 @@ namespace Tidal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to torrent.
+        ///   Looks up a localized string similar to Torrent.
         /// </summary>
         public static string ShellAddTorrent {
             get {
@@ -1942,7 +1942,7 @@ namespace Tidal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hosts.
+        ///   Looks up a localized string similar to Clients.
         /// </summary>
         public static string ShellHosts {
             get {
@@ -1951,7 +1951,7 @@ namespace Tidal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add, Delete, or Edit the host clients the app knows of.
+        ///   Looks up a localized string similar to Add, Delete, or Edit the clients the app knows of.
         /// </summary>
         public static string ShellHostsToolTip {
             get {
@@ -1987,7 +1987,7 @@ namespace Tidal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change parameters on the host client or this application.
+        ///   Looks up a localized string similar to Change parameters on the client or this application.
         /// </summary>
         public static string ShellSettingsToolTip {
             get {

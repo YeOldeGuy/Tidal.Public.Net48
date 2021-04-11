@@ -112,13 +112,7 @@ namespace Tidal.Client.Models
         [IgnoreDataMember]
         public long AverageToClient
         {
-            get
-            {
-                if (_AverageToClient == 0 && RateToClient > 0)
-                    return RateToClient;
-                return _AverageToClient;
-            }
-
+            get => _AverageToClient == 0 && RateToClient > 0 ? RateToClient : _AverageToClient;
             set => SetProperty(ref _AverageToClient, value);
         }
 
@@ -129,13 +123,7 @@ namespace Tidal.Client.Models
         [IgnoreDataMember]
         public long AverageToPeer
         {
-            get
-            {
-                if (_AverageToPeer == 0 && RateToPeer > 0)
-                    return RateToPeer;
-                return _AverageToPeer;
-            }
-
+            get => _AverageToPeer == 0 && RateToPeer > 0 ? RateToPeer : _AverageToPeer;
             set => SetProperty(ref _AverageToPeer, value);
         }
 

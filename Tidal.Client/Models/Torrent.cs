@@ -53,6 +53,8 @@ namespace Tidal.Client.Models
         private bool _UploadLimited;
         private double _UploadRatio;
         //private IList<FileSummary> _FileSummaries;
+        private long _AverageRateDownload;
+        private long _AverageRateUpload;
         #endregion
 
         protected override void AssignInternal(Torrent other)
@@ -237,28 +239,60 @@ namespace Tidal.Client.Models
         }
 
         [DataMember(Name = RpcConstants.ErrorString)]
-        public string ErrorString { get => _ErrorString; set => SetProperty(ref _ErrorString, value); }
+        public string ErrorString
+        {
+            get => _ErrorString;
+            set => SetProperty(ref _ErrorString, value);
+        }
 
         [DataMember(Name = RpcConstants.HonorsSessionLimits)]
-        public bool HonorsSessionLimits { get => _HonorsSessionLimits; set => SetProperty(ref _HonorsSessionLimits, value); }
+        public bool HonorsSessionLimits
+        {
+            get => _HonorsSessionLimits;
+            set => SetProperty(ref _HonorsSessionLimits, value);
+        }
 
         [DataMember(Name = RpcConstants.IsFinished)]
-        public bool IsFinished { get => _IsFinished; set => SetProperty(ref _IsFinished, value); }
+        public bool IsFinished
+        {
+            get => _IsFinished;
+            set => SetProperty(ref _IsFinished, value);
+        }
 
         [DataMember(Name = RpcConstants.PeerLimit)]
-        public int PeerLimit { get => _PeerLimit; set => SetProperty(ref _PeerLimit, value); }
+        public int PeerLimit
+        {
+            get => _PeerLimit;
+            set => SetProperty(ref _PeerLimit, value);
+        }
 
         [DataMember(Name = RpcConstants.PeersConnected)]
-        public int PeersConnected { get => _PeersConnected; set => SetProperty(ref _PeersConnected, value); }
+        public int PeersConnected
+        {
+            get => _PeersConnected;
+            set => SetProperty(ref _PeersConnected, value);
+        }
 
         [DataMember(Name = RpcConstants.PercentDone)]
-        public double PercentDone { get => _PercentDone; set => SetProperty(ref _PercentDone, value); }
+        public double PercentDone
+        {
+            get => _PercentDone;
+            set => SetProperty(ref _PercentDone, value);
+        }
 
         [DataMember(Name = RpcConstants.RateDownload)]
-        public long RateDownload { get => _RateDownload; set => SetProperty(ref _RateDownload, value); }
+        public long RateDownload
+        {
+            get => _RateDownload;
+            set => SetProperty(ref _RateDownload, value);
+        }
 
         [DataMember(Name = RpcConstants.RateUpload)]
-        public long RateUpload { get => _RateUpload; set => SetProperty(ref _RateUpload, value); }
+        public long RateUpload
+        {
+            get => _RateUpload;
+            set => SetProperty(ref _RateUpload, value);
+        }
 
 
         /// <summary>
@@ -530,11 +564,19 @@ namespace Tidal.Client.Models
         }
 
 
-        private long _AverageRateDownload;
-        public long AverageRateDownload { get => _AverageRateDownload; set => SetProperty(ref _AverageRateDownload, value); }
+        [IgnoreDataMember]
+        public long AverageRateDownload
+        {
+            get => _AverageRateDownload == 0 && RateDownload > 0 ? RateDownload : _AverageRateDownload;
+            set => SetProperty(ref _AverageRateDownload, value);
+        }
 
-        private long _AverageRateUpload;
-        public long AverageRateUpload { get => _AverageRateUpload; set => SetProperty(ref _AverageRateUpload, value); }
+        [IgnoreDataMember]
+        public long AverageRateUpload
+        {
+            get => _AverageRateUpload == 0 && RateUpload > 0 ? RateUpload : _AverageRateUpload;
+            set => SetProperty(ref _AverageRateUpload, value);
+        }
 
         #endregion
 

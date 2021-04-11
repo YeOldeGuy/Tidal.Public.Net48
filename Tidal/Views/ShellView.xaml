@@ -25,6 +25,8 @@
 
     <Window.Resources>
         <conv:SizeConverter x:Key="sizeConverter" />
+        <conv:SizeConverter x:Key="TiBConverter"
+                            Suffix="Binary" />
         <conv:SpeedConverter x:Key="speedConverter" />
         <conv:ValueWhenConverter x:Key="Bool2Vis">
             <conv:ValueWhenConverter.When>
@@ -64,7 +66,8 @@
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <Button Command="{Binding AddTorrentCommand}"
-                    Style="{StaticResource MyTitleBarButton}">
+                    Style="{StaticResource MyTitleBarButton}"
+                    ToolTip="{x:Static properties:Resources.ShellAddTorrentToolTip}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock FontFamily="Segoe MDL2 Assets"
                                FontSize="14"
@@ -76,7 +79,8 @@
             </Button>
 
             <Button Command="{Binding AddMagnetCommand}"
-                    Style="{StaticResource MyTitleBarButton}">
+                    Style="{StaticResource MyTitleBarButton}"
+                    ToolTip="{x:Static properties:Resources.ShellAddMagnetToolTip}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock FontFamily="Segoe MDL2 Assets"
                                FontSize="14"
@@ -88,7 +92,8 @@
             </Button>
 
             <Button Command="{Binding SettingsCommand}"
-                    Style="{StaticResource MyTitleBarButton}">
+                    Style="{StaticResource MyTitleBarButton}"
+                    ToolTip="{x:Static properties:Resources.ShellSettingsToolTip}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock FontFamily="Segoe MDL2 Assets"
                                FontSize="14"
@@ -101,7 +106,8 @@
             </Button>
 
             <Button Command="{Binding HostsCommand}"
-                    Style="{StaticResource MyTitleBarButton}">
+                    Style="{StaticResource MyTitleBarButton}"
+                    ToolTip="{x:Static properties:Resources.ShellHostsToolTip}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock FontFamily="Segoe MDL2 Assets"
                                FontSize="14"
@@ -180,9 +186,12 @@
                         <Button.Content>
                             <TextBlock>
                                 <Run Text="{x:Static properties:Resources.ShellFreeSpace}" />
-                                <Run Text="{Binding FreeSpace, Converter={StaticResource sizeConverter}, Mode=OneWay}" />
+                                <Run Text="{Binding FreeSpace, Converter={StaticResource sizeConverter}}" />
                             </TextBlock>
                         </Button.Content>
+                        <Button.ToolTip>
+                            <TextBlock Text="{Binding FreeSpace, Converter={StaticResource TiBConverter}}" />
+                        </Button.ToolTip>
                     </Button>
 
                     <!--  Alt Mode Button  -->

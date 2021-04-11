@@ -736,13 +736,13 @@
     <comment>Toggle switch ON content</comment>
   </data>
   <data name="ShellAddMagnet" xml:space="preserve">
-    <value>magnet</value>
+    <value>Magnet</value>
   </data>
   <data name="ShellAddMagnetToolTip" xml:space="preserve">
     <value>Add magnet link to client</value>
   </data>
   <data name="ShellAddTorrent" xml:space="preserve">
-    <value>torrent</value>
+    <value>Torrent</value>
   </data>
   <data name="ShellAddTorrentToolTip" xml:space="preserve">
     <value>Open and add a torrent file to the client</value>
@@ -757,10 +757,10 @@
     <value>Go back</value>
   </data>
   <data name="ShellHosts" xml:space="preserve">
-    <value>Hosts</value>
+    <value>Clients</value>
   </data>
   <data name="ShellHostsToolTip" xml:space="preserve">
-    <value>Add, Delete, or Edit the host clients the app knows of</value>
+    <value>Add, Delete, or Edit the clients the app knows of</value>
   </data>
   <data name="ShellMain" xml:space="preserve">
     <value>Main</value>
@@ -772,7 +772,7 @@
     <value>Settings</value>
   </data>
   <data name="ShellSettingsToolTip" xml:space="preserve">
-    <value>Change parameters on the host client or this application</value>
+    <value>Change parameters on the client or this application</value>
   </data>
   <data name="ShellStandby" xml:space="preserve">
     <value>Standby...</value>
