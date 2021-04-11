@@ -131,6 +131,7 @@
                   Height="28">
                 <StatusBar Background="{DynamicResource MahApps.Brushes.Accent}">
                     <StatusBar.Resources>
+                        <!--  a style to get the margins correct for a button on the status bar  -->
                         <Style x:Key="LocalSBB"
                                BasedOn="{StaticResource MyStatusBarButton}"
                                TargetType="Button">
@@ -141,6 +142,12 @@
                             <Setter Property="Padding"
                                     Value="5,3" />
                         </Style>
+
+                        <!--
+                            Some of the buttons on the status bar aren't really buttons, but
+                            need to have the same formatting, so this turns the mouseover color
+                            to transparent, making the button look and act like plain text.
+                        -->
                         <Style x:Key="LocalNPC"
                                BasedOn="{StaticResource LocalSBB}"
                                TargetType="{x:Type Button}">
@@ -159,7 +166,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock>
                                     <Run Text="Transmission" />
-                                    <Run Text="{Binding Session.Version, FallbackValue='2.94fb'}" />
+                                    <Run Text="{Binding Session.Version, FallbackValue='2.94fb', Mode=OneWay}" />
                                 </TextBlock>
                             </StackPanel>
                         </Button.Content>
@@ -173,7 +180,7 @@
                         <Button.Content>
                             <TextBlock>
                                 <Run Text="{x:Static properties:Resources.ShellFreeSpace}" />
-                                <Run Text="{Binding FreeSpace, Converter={StaticResource sizeConverter}}" />
+                                <Run Text="{Binding FreeSpace, Converter={StaticResource sizeConverter}, Mode=OneWay}" />
                             </TextBlock>
                         </Button.Content>
                     </Button>
@@ -187,9 +194,11 @@
                                            VerticalAlignment="Bottom"
                                            FontFamily="Segoe MDL2 Assets"
                                            Text="{Binding AltModeGlyph,
+                                                          Mode=OneWay,
                                                           FallbackValue='&#xEB9D;'}" />
                                 <TextBlock Margin="0"
                                            Text="{Binding AltModeLabel,
+                                                          Mode=OneWay,
                                                           FallbackValue='250 KBps/Unlimited'}" />
                             </StackPanel>
                         </Button.Content>
@@ -209,6 +218,7 @@
                                            Text="{x:Static properties:Resources.Unicode_Upload}" />
                                 <TextBlock Tag="wrap"
                                            Text="{Binding SessionStats.AverageUploadSpeed,
+                                                          Mode=OneWay,
                                                           FallbackValue='0 Bps',
                                                           Converter={StaticResource speedConverter},
                                                           ConverterParameter=2}" />
@@ -236,6 +246,7 @@
                                            Text="{x:Static properties:Resources.Unicode_Download}" />
                                 <TextBlock Margin="0"
                                            Text="{Binding SessionStats.AverageDownloadSpeed,
+                                                          Mode=OneWay,
                                                           FallbackValue='0 Bps',
                                                           Converter={StaticResource speedConverter},
                                                           ConverterParameter=2}" />
@@ -251,7 +262,8 @@
 
                     <!--  A little spot for reporting status info and shit  -->
                     <StatusBarItem>
-                        <TextBlock Text="{Binding StatusInfo}"
+                        <TextBlock Text="{Binding StatusInfo,
+                                                  Mode=OneWay}"
                                    TextTrimming="CharacterEllipsis"
                                    TextWrapping="NoWrap" />
                     </StatusBarItem>
