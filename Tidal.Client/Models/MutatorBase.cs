@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Tidal.Client.Contracts;
 
 namespace Tidal.Client.Models
 {
@@ -13,6 +14,8 @@ namespace Tidal.Client.Models
         {
             SetValue(this, propertyName, value);
             RaisePropertyChanged(propertyName);
+            if (this is IIsChanged changable)
+                changable.IsChanged = true;
         }
 
         /// <summary>
@@ -30,7 +33,7 @@ namespace Tidal.Client.Models
             if (propertyInfo == null)
                 return;
 
-            //find the property type
+            // find the property type
             Type propertyType = propertyInfo.PropertyType;
 
             // Convert.ChangeType does not handle conversion to nullable types

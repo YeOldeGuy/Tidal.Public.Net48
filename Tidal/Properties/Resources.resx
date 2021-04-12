@@ -634,10 +634,10 @@
     <comment>UPPERCASEd</comment>
   </data>
   <data name="PropertySetFailHeader" xml:space="preserve">
-    <value>Fail to Set Property</value>
+    <value>Fail to Change Property</value>
   </data>
   <data name="PropertySetFailWarning_1" xml:space="preserve">
-    <value>Unable to set value of {0}</value>
+    <value>Unable to change value of {0}</value>
     <comment>P1: property name</comment>
   </data>
   <data name="ProtocolHeader" xml:space="preserve">
@@ -1117,5 +1117,13 @@
   </data>
   <data name="DataGridUtils_UnequalColumnCountException" xml:space="preserve">
     <value>grid column count != save column count</value>
+  </data>
+  <data name="Clearing" xml:space="preserve">
+    <value>Clearing</value>
+    <comment>As in "Clearing Bool Value"</comment>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>Setting</value>
+    <comment>As in "Setting Bool Value"</comment>
   </data>
 </root>

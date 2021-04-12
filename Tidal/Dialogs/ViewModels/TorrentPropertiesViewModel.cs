@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
+using System.Web.Routing;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -140,19 +142,25 @@ namespace Tidal.Dialogs.ViewModels
         {
             if (sender is Torrent torrent)
             {
-                var info = torrent.GetType().GetProperty(e.PropertyName);
-                var desc = PropertyHelpers.GetPropertyAttribute
-                                <TorrentMutator, DescriptionAttribute>(e.PropertyName, a => a.Description);
-
-                var value = info.GetValue(torrent);
-                var mutator = new TorrentMutator(e.PropertyName, value);
-
-                if (value is bool b && !b)
-                    messenger.Send(new StatusInfoMessage($"Clearing {desc}", TimeSpan.FromSeconds(1)));
+                PropertyInfo info = torrent.GetType().GetProperty(e.PropertyName);
+                if (info is null)
+                {
+                    messenger.Send(new WarningMessage(string.Format(Resources.PropertySetFailWarning_1, e.PropertyName),
+                                                      Resources.PropertySetFailHeader,
+                                                      TimeSpan.FromSeconds(10)));
+                }
                 else
-                    messenger.Send(new StatusInfoMessage($"Setting {desc}", TimeSpan.FromSeconds(1)));
+                {
+                    string desc = PropertyHelpers.GetDescription<TorrentMutator>(e.PropertyName);
 
-                messenger.Send(new SetTorrentsRequest(torrent.Id, mutator));
+                    var value = info.GetValue(torrent);
+                    var mutator = new TorrentMutator(e.PropertyName, value);
+
+                    var verb = (value is bool b && !b) ? Resources.Clearing : Resources.Setting;
+                    messenger.Send(new StatusInfoMessage($"{verb} {desc}", TimeSpan.FromSeconds(1)));
+
+                    messenger.Send(new SetTorrentsRequest(torrent.Id, mutator));
+                }
             }
         }
 

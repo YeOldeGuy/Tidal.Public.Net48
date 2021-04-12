@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 
 namespace Tidal.Helpers
@@ -17,6 +18,11 @@ namespace Tidal.Helpers
                 return selector((TAttr)attrs[0]);
             }
             return propertyName;
+        }
+
+        public static string GetDescription<TObj>(string propertyName)
+        {
+            return GetPropertyAttribute<TObj, DescriptionAttribute>(propertyName, a => a.Description);
         }
     }
 }

@@ -119,27 +119,24 @@ namespace Tidal.ViewModels
             if (sender is Session session)
             {
                 var info = session.GetType().GetProperty(e.PropertyName);
-                if (info != null)
-                {
-                    var value = info.GetValue(session);
-                    var desc = PropertyHelpers.GetPropertyAttribute
-                                  <SessionMutator, DescriptionAttribute>(e.PropertyName, a => a.Description);
-
-                    // Special case for properties that are booleans to show
-                    // what is actually happening to the value
-
-                    if (value is bool b && !b)
-                        messenger.Send(new StatusInfoMessage($"Clearing {desc}", 1.Seconds()));
-                    else
-                        messenger.Send(new StatusInfoMessage($"Setting {desc}", 1.Seconds()));
-
-                    messenger.Send(new SetSessionRequest(e.PropertyName, value));
-                }
-                else
+                if (info is null)
                 {
                     messenger.Send(new WarningMessage(string.Format(Resources.PropertySetFailWarning_1, e.PropertyName),
                                                       Resources.PropertySetFailHeader,
                                                       TimeSpan.FromSeconds(10)));
+                }
+                else
+                {
+                    var value = info.GetValue(session);
+                    string desc = PropertyHelpers.GetDescription<SessionMutator>(e.PropertyName);
+
+                    // Special case for properties that are booleans to show
+                    // what is actually happening to the value
+
+                    var verb = (value is bool b && !b) ? Resources.Clearing : Resources.Setting;
+                    messenger.Send(new StatusInfoMessage($"{verb} {desc}", TimeSpan.FromSeconds(1)));
+
+                    messenger.Send(new SetSessionRequest(e.PropertyName, value));
                 }
             }
         }

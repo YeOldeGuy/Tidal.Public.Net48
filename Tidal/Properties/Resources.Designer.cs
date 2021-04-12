@@ -358,6 +358,15 @@ namespace Tidal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clearing.
+        /// </summary>
+        public static string Clearing {
+            get {
+                return ResourceManager.GetString("Clearing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear sorting.
         /// </summary>
         public static string ClearSorting {
@@ -1600,7 +1609,7 @@ namespace Tidal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fail to Set Property.
+        ///   Looks up a localized string similar to Fail to Change Property.
         /// </summary>
         public static string PropertySetFailHeader {
             get {
@@ -1609,7 +1618,7 @@ namespace Tidal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to set value of {0}.
+        ///   Looks up a localized string similar to Unable to change value of {0}.
         /// </summary>
         public static string PropertySetFailWarning_1 {
             get {
@@ -1875,6 +1884,15 @@ namespace Tidal.Properties {
         public static string SeedingTimeLimitOn {
             get {
                 return ResourceManager.GetString("SeedingTimeLimitOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting.
+        /// </summary>
+        public static string Setting {
+            get {
+                return ResourceManager.GetString("Setting", resourceCulture);
             }
         }
         
