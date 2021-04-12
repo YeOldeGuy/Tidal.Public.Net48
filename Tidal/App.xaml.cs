@@ -8,7 +8,6 @@ using Microsoft.Toolkit.Uwp.Notifications;
 using Prism.Ioc;
 using Prism.Unity;
 using Tidal.Client;
-using Tidal.Client.Helpers;
 using Tidal.Constants;
 using Tidal.Dialogs.ViewModels;
 using Tidal.Dialogs.Views;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.Serialization;
 using Tidal.Client.Constants;
 using Tidal.Client.Contracts;
@@ -110,7 +111,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// Set the <see cref="BandwidthPriority"/> of the <see cref="Torrent"/>.
         /// </summary>
-        [DataMember(Name = RpcConstants.BandwidthPriority)]
+        [DataMember(Name = RpcConstants.BandwidthPriority), Description("Bandwidth Priority")]
         public BandwidthPriority? BandwidthPriority
         {
             get => _BandwidthPriority;
@@ -121,7 +122,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// Change the maximum download speed a torrent can achieve.
         /// </summary>
-        [DataMember(Name = RpcConstants.DownloadLimit)]
+        [DataMember(Name = RpcConstants.DownloadLimit), Description("Download Limit")]
         public long? DownloadLimit
         {
             get => _DownloadLimit;
@@ -132,7 +133,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// Is the download speed of this <see cref="Torrent"/> limited?
         /// </summary>
-        [DataMember(Name = RpcConstants.DownloadLimited)]
+        [DataMember(Name = RpcConstants.DownloadLimited), Description("Download Limit Enabled")]
         public bool? DownloadLimited
         {
             get => _DownloadLimited;
@@ -145,7 +146,7 @@ namespace Tidal.Client.Models
         /// downloaded. Zero-based, naturally, and the index values are
         /// derived from the order listed in <see cref="Torrent.Files"/>.
         /// </summary>
-        [DataMember(Name = RpcConstants.FilesWanted)]
+        [DataMember(Name = RpcConstants.FilesWanted), Description("Files Wanted")]
         public IList<int> FilesWanted
         {
             get => _FilesWanted;
@@ -158,7 +159,7 @@ namespace Tidal.Client.Models
         /// be downloaded. Zero-based, naturally, and the index values are
         /// derived from the order listed in <see cref="Torrent.Files"/>.
         /// </summary>
-        [DataMember(Name = RpcConstants.FilesUnwanted)]
+        [DataMember(Name = RpcConstants.FilesUnwanted), Description("Files Unwanted")]
         public IList<int> FilesUnwanted
         {
             get => _FilesUnwanted;
@@ -176,7 +177,7 @@ namespace Tidal.Client.Models
         /// langword="false"/> and even the alternative mode will have no effect
         /// on the download speed.
         /// </remarks>
-        [DataMember(Name = RpcConstants.HonorsSessionLimits)]
+        [DataMember(Name = RpcConstants.HonorsSessionLimits), Description("Honors Session Limits")]
         public bool? HonorsSessionLimits
         {
             get => _HonorsSessionLimits;
@@ -213,7 +214,7 @@ namespace Tidal.Client.Models
         /// <see cref="Torrent"/>. 
         /// </summary>
         /// <seealso cref="HonorsSessionLimits"/>
-        [DataMember(Name = RpcConstants.PeerLimit)]
+        [DataMember(Name = RpcConstants.PeerLimit), Description("Peer Limit")]
         public int? PeerLimit
         {
             get => _PeerLimit;
@@ -261,7 +262,7 @@ namespace Tidal.Client.Models
         /// The value used by the client to set the <see cref="SeedIdleMode"/>
         /// of the torrent, as it balks at enumerations.
         /// </summary>
-        [DataMember(Name = RpcConstants.SeedIdleMode)]
+        [DataMember(Name = RpcConstants.SeedIdleMode), Description("Seed Idle Mode")]
         public int? SeedIdleModeRaw
         {
             get => _SeedIdleMode;
@@ -281,7 +282,7 @@ namespace Tidal.Client.Models
         }
 
 
-        [DataMember(Name = RpcConstants.SeedRatioMode)]
+        [DataMember(Name = RpcConstants.SeedRatioMode), Description("Seeding Ratio Mode")]
         public int? SeedRatioModeRaw
         {
             get => _SeedRatioMode;
@@ -300,7 +301,7 @@ namespace Tidal.Client.Models
         }
 
 
-        [DataMember(Name = RpcConstants.SeedIdleLimit)]
+        [DataMember(Name = RpcConstants.SeedIdleLimit), Description("Seed Idle Limit")]
         public long? SeedIdleLimitRaw
         {
             get => _SeedIdleLimit;
@@ -323,7 +324,7 @@ namespace Tidal.Client.Models
         /// The seed ratio (amount uploaded / amount downloaded) that when reached
         /// will makke the torrent automatically pause.
         /// </summary>
-        [DataMember(Name = RpcConstants.SeedRatioLimit)]
+        [DataMember(Name = RpcConstants.SeedRatioLimit), Description("Seed Ratio Limit")]
         public double? SeedRatioLimit
         {
             get => _SeedRatioLimit;
@@ -334,7 +335,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// Maximum upload speed.
         /// </summary>
-        [DataMember(Name = RpcConstants.UploadLimit)]
+        [DataMember(Name = RpcConstants.UploadLimit), Description("Upload Speed Limit")]
         public long? UploadLimit
         {
             get => _UploadLimit;
@@ -346,7 +347,7 @@ namespace Tidal.Client.Models
         /// If <see langword="true"/>, the torrent will not exceed the <see
         /// cref="UploadLimit"/> value.
         /// </summary>
-        [DataMember(Name = RpcConstants.UploadLimited)]
+        [DataMember(Name = RpcConstants.UploadLimited), Description("Upload Speed Limited")]
         public bool? UploadLimited
         {
             get => _UploadLimited;

@@ -20,7 +20,7 @@ namespace Tidal.Client.Helpers
          * from it.
          * 
          * Usage: 
-         * var fields = GetFieldNames<Torrent, JsonPropertyNameAttribute>(a => a.Name);
+         * var fields = GetFieldNames<Torrent, DataMemberAttribute>(a => a.Name);
          * 
          * This will return an IEnumerable<string> with all properties marked
          * with [DataMember(Name = something)].

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Tidal.Client.Models;
+using Tidal.Helpers;
 using Tidal.Models.BrokerMessages;
 using Tidal.Models.Messages;
 using Tidal.Properties;
@@ -133,14 +135,23 @@ namespace Tidal.Dialogs.ViewModels
         public Torrent Torrent { get => _Torrent; set => SetProperty(ref _Torrent, value); }
         #endregion
 
-        private void Torrent_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+
+        private void Torrent_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (sender is Torrent torrent)
             {
                 var info = torrent.GetType().GetProperty(e.PropertyName);
+                var desc = PropertyHelpers.GetPropertyAttribute
+                                <TorrentMutator, DescriptionAttribute>(e.PropertyName, a => a.Description);
 
-                var mutator = new TorrentMutator(e.PropertyName, info.GetValue(torrent));
-                messenger.Send(new StatusInfoMessage($"Setting {e.PropertyName}", TimeSpan.FromSeconds(1)));
+                var value = info.GetValue(torrent);
+                var mutator = new TorrentMutator(e.PropertyName, value);
+
+                if (value is bool b && !b)
+                    messenger.Send(new StatusInfoMessage($"Clearing {desc}", TimeSpan.FromSeconds(1)));
+                else
+                    messenger.Send(new StatusInfoMessage($"Setting {desc}", TimeSpan.FromSeconds(1)));
+
                 messenger.Send(new SetTorrentsRequest(torrent.Id, mutator));
             }
         }

@@ -149,6 +149,7 @@
     <Compile Include="Helpers\LayoutGridInfo.cs" />
     <Compile Include="Helpers\LayoutInfo.cs" />
     <Compile Include="Helpers\PasswordBoxAssistant.cs" />
+    <Compile Include="Helpers\PropertyHelpers.cs" />
     <Compile Include="Helpers\ServiceResolver.cs" />
     <Compile Include="Helpers\SettingBindingExtension.cs" />
     <Compile Include="Models\BrokerMessages\AddMagnetRequest.cs" />

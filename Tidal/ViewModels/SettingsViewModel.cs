@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Web.Routing;
 using System.Windows;
 using ControlzEx.Theming;
 using Humanizer;
@@ -12,6 +13,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 using Tidal.Client.Models;
 using Tidal.Core.Helpers;
+using Tidal.Helpers;
 using Tidal.Models.BrokerMessages;
 using Tidal.Models.Messages;
 using Tidal.Properties;
@@ -120,6 +122,17 @@ namespace Tidal.ViewModels
                 if (info != null)
                 {
                     var value = info.GetValue(session);
+                    var desc = PropertyHelpers.GetPropertyAttribute
+                                  <SessionMutator, DescriptionAttribute>(e.PropertyName, a => a.Description);
+
+                    // Special case for properties that are booleans to show
+                    // what is actually happening to the value
+
+                    if (value is bool b && !b)
+                        messenger.Send(new StatusInfoMessage($"Clearing {desc}", 1.Seconds()));
+                    else
+                        messenger.Send(new StatusInfoMessage($"Setting {desc}", 1.Seconds()));
+
                     messenger.Send(new SetSessionRequest(e.PropertyName, value));
                 }
                 else

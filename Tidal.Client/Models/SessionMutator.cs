@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Runtime.Serialization;
 using Tidal.Client.Constants;
 
@@ -82,7 +83,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// Are the Alternate speed settings currently in use?
         /// </summary>
-        [DataMember(Name = RpcConstants.AltSpeedEnabled)]
+        [DataMember(Name = RpcConstants.AltSpeedEnabled), Description("Alt Speed Enabled/Disabled")]
         public bool? AltSpeedEnabled
         {
             get => _AltSpeedEnabled;
@@ -94,7 +95,7 @@ namespace Tidal.Client.Models
         /// If the alternative speed settings are in use, this is the maximum
         /// global speed of downloads, expressed as KBps (50 would be 50KBps)
         /// </summary>
-        [DataMember(Name = RpcConstants.AltSpeedDown)]
+        [DataMember(Name = RpcConstants.AltSpeedDown), Description("Alt download speed")]
         public long? AltSpeedDown
         {
             get => _AltSpeedDown;
@@ -105,7 +106,7 @@ namespace Tidal.Client.Models
         /// If the alternative speed settings are in use, this is the maximum
         /// global speed of uploads, expressed as KBps (50 would be 50KBps)
         /// </summary>
-        [DataMember(Name = RpcConstants.AltSpeedUp)]
+        [DataMember(Name = RpcConstants.AltSpeedUp), Description("Alt upload speed")]
         public long? AltSpeedUp
         {
             get => _AltSpeedUp;
@@ -121,7 +122,7 @@ namespace Tidal.Client.Models
         /// This value is the unprocessed value from the client, expressed as
         /// the number of minutes after midnight.
         /// </remarks>
-        [DataMember(Name = RpcConstants.AltSpeedBegin)]
+        [DataMember(Name = RpcConstants.AltSpeedBegin), Description("Alt schedule starting time")]
         public long? AltScheduleBeginMinutes
         {
             get => _AltScheduleBeginMinutes;
@@ -154,7 +155,7 @@ namespace Tidal.Client.Models
         /// This value is the unprocessed value from the client, expressed as
         /// the number of minutes after midnight.
         /// </remarks>
-        [DataMember(Name = RpcConstants.AltSpeedEnd)]
+        [DataMember(Name = RpcConstants.AltSpeedEnd), Description("Alt schedule ending time")]
         public long? AltScheduleEndMinutes
         {
             get => _AltScheduleEndMinutes;
@@ -187,7 +188,7 @@ namespace Tidal.Client.Models
         /// value. The other controls whether or not alternate speeds are
         /// enabled; this controls whether to apply a schedule.
         /// </remarks>
-        [DataMember(Name = RpcConstants.AltSpeedTimeEnabled)]
+        [DataMember(Name = RpcConstants.AltSpeedTimeEnabled), Description("Alt schedule enable/disabled")]
         public bool? AltScheduleEnabled
         {
             get => _AltSpeedTimeEnabled;
@@ -203,7 +204,7 @@ namespace Tidal.Client.Models
         /// A value of 62 (binary: 0011 1110) would represent Mon-Fri engaged
         /// and the weekend not. The eighth bit is ignored, natch.
         /// </remarks>
-        [DataMember(Name = RpcConstants.AltSpeedTimeDays)]
+        [DataMember(Name = RpcConstants.AltSpeedTimeDays), Description("Alt schedule days of week")]
         public int? AltScheduleDays
         {
             get => _AltSpeedTimeDays;
@@ -221,7 +222,7 @@ namespace Tidal.Client.Models
         /// Setting an unreachable directory here will cause a cascade of
         /// errors.
         /// </remarks>
-        [DataMember(Name = RpcConstants.DownloadDir)]
+        [DataMember(Name = RpcConstants.DownloadDir), Description("Download directory")]
         public string DownloadDirectory
         {
             get => _DownloadDirectory;
@@ -234,7 +235,7 @@ namespace Tidal.Client.Models
         /// value of <see cref="DownloadQueueEnabled"/> is <see
         /// langword="true"/>.
         /// </summary>
-        [DataMember(Name = RpcConstants.DownloadQueueSize)]
+        [DataMember(Name = RpcConstants.DownloadQueueSize), Description("Download queue size")]
         public int? DownloadQueueSize
         {
             get => _DownloadQueueSize;
@@ -247,7 +248,7 @@ namespace Tidal.Client.Models
         /// torrents that can be downloaded simultaneously.
         /// </summary>
         /// <seealso cref="DownloadQueueSize"/>
-        [DataMember(Name = RpcConstants.DownloadQueueEnabled)]
+        [DataMember(Name = RpcConstants.DownloadQueueEnabled), Description("Download queue enabled/disabled")]
         public bool? DownloadQueueEnabled
         {
             get => _DownloadQueueEnabled;
@@ -260,7 +261,7 @@ namespace Tidal.Client.Models
         /// langword="true"/>, then partial downloads will be stored in this
         /// directory, then moved when finished.
         /// </summary>
-        [DataMember(Name = RpcConstants.IncompleteDir)]
+        [DataMember(Name = RpcConstants.IncompleteDir), Description("Incomplete downloads directory")]
         public string IncompleteDirectory
         {
             get => _IncompleteDirectory;
@@ -272,7 +273,7 @@ namespace Tidal.Client.Models
         /// If <see langword="true"/>, partial torrent downloads will be
         /// stored in <see cref="IncompleteDirectory"/>.
         /// </summary>
-        [DataMember(Name = RpcConstants.IncompleteDirEnabled)]
+        [DataMember(Name = RpcConstants.IncompleteDirEnabled), Description("Incomplte downloads directory enabled")]
         public bool? IncompleteDirectoryEnabled
         {
             get => _IncompleteDirectoryEnabled;
@@ -289,7 +290,7 @@ namespace Tidal.Client.Models
         /// cref="IncompleteDirectoryEnabled"/> is <see langword="true"/>, but
         /// there you go.
         /// </remarks>
-        [DataMember(Name = RpcConstants.RenamePartialFiles)]
+        [DataMember(Name = RpcConstants.RenamePartialFiles), Description("Rename partially downloaded files")]
         public bool? RenamePartialFiles
         {
             get => _RenamePartialFiles;
@@ -302,7 +303,7 @@ namespace Tidal.Client.Models
         /// I haven't the foggiest what it does, but if it's <see
         /// langword="true"/>, then DHT will be allowed in public torrents.
         /// </summary>
-        [DataMember(Name = RpcConstants.DHTEnabled)]
+        [DataMember(Name = RpcConstants.DHTEnabled), Description("DHT Enabled/Disabled")]
         public bool? DHTEnabled
         {
             get => _DHTEnabled;
@@ -313,7 +314,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// Local Peer Discovery on/off.
         /// </summary>
-        [DataMember(Name = RpcConstants.LPDEnabled)]
+        [DataMember(Name = RpcConstants.LPDEnabled), Description("LPD On/Off")]
         public bool? LPDEnabled
         {
             get => _LPDEnabled;
@@ -325,7 +326,7 @@ namespace Tidal.Client.Models
         /// I haven't the foggiest what it does, but if it's <see
         /// langword="true"/>, then PEX will be allowed in public torrents.
         /// </summary>
-        [DataMember(Name = RpcConstants.PEXEnabled)]
+        [DataMember(Name = RpcConstants.PEXEnabled), Description("PEX On/Off")]
         public bool? PEXEnabled
         {
             get => _PEXEnabled;
@@ -337,7 +338,7 @@ namespace Tidal.Client.Models
         /// I haven't the foggiest what it does, but if it's <see
         /// langword="true"/>, then UTP will be allowed in public torrents.
         /// </summary>
-        [DataMember(Name = RpcConstants.UTPEnabled)]
+        [DataMember(Name = RpcConstants.UTPEnabled), Description("UTP On/Off")]
         public bool? UTPEnabled
         {
             get => _UTPEnabled;
@@ -352,7 +353,7 @@ namespace Tidal.Client.Models
         /// The string representing the encryption level as presented by
         /// the client.
         /// </summary>
-        [DataMember(Name = RpcConstants.Encryption)]
+        [DataMember(Name = RpcConstants.Encryption), Description("Encryption level")]
         public string EncString
         {
             get => _EncString;
@@ -412,7 +413,7 @@ namespace Tidal.Client.Models
         /// This is the value as presented by the host, in the number of
         /// minutes.
         /// </remarks>
-        [DataMember(Name = RpcConstants.IdleSeedingLimit)]
+        [DataMember(Name = RpcConstants.IdleSeedingLimit), Description("Idle seeding limit")]
         public long? IdleSeedingLimitMinutes
         {
             get => _IdleSeedingLimitMinutes;
@@ -440,7 +441,7 @@ namespace Tidal.Client.Models
         /// If <see langword="true"/>, then torrents will be monitored for idle
         /// time and shutdown if the <see cref="IdleSeedingLimit"/> is reached.
         /// </summary>
-        [DataMember(Name = RpcConstants.IdleSeedingLimitEnabled)]
+        [DataMember(Name = RpcConstants.IdleSeedingLimitEnabled), Description("Idle seeding limit on/off")]
         public bool? IdleSeedingLimitEnabled
         {
             get => _IdleSeedingLimitEnabled;
@@ -453,7 +454,7 @@ namespace Tidal.Client.Models
         /// uploaded to amount downloaded reaches this value, it will be
         /// stopped.
         /// </summary>
-        [DataMember(Name = RpcConstants.SeedRatioLimit)]
+        [DataMember(Name = RpcConstants.SeedRatioLimit), Description("Idle ratio limit")]
         public double? SeedRatioLimit
         {
             get => _SeedRatioLimit;
@@ -465,7 +466,7 @@ namespace Tidal.Client.Models
         /// If <see langword="true"/>, the <see cref="SeedRatioLimit"/> will be
         /// honored.
         /// </summary>
-        [DataMember(Name = RpcConstants.SeedRatioLimited)]
+        [DataMember(Name = RpcConstants.SeedRatioLimited), Description("Idle ratio limit on/off")]
         public bool? SeedRatioLimited
         {
             get => _SeedRatioLimitEnabled;
@@ -478,7 +479,7 @@ namespace Tidal.Client.Models
         /// The maximum number of peers the client will allow, spread across all
         /// active torrents.
         /// </summary>
-        [DataMember(Name = RpcConstants.PeerLimitGlobal)]
+        [DataMember(Name = RpcConstants.PeerLimitGlobal), Description("Peer limit globally")]
         public int? PeerLimitGlobal
         {
             get => _PeerLimitGlobal;
@@ -491,7 +492,7 @@ namespace Tidal.Client.Models
         /// may be exceeded on occasion and that each torrent also has its own
         /// changeable figure.
         /// </summary>
-        [DataMember(Name = RpcConstants.PeerLimitPerTorrent)]
+        [DataMember(Name = RpcConstants.PeerLimitPerTorrent), Description("Peer limit for a torrent")]
         public int? PeerLimitPerTorrent
         {
             get => _PeerLimitPerTorrent;
@@ -507,7 +508,7 @@ namespace Tidal.Client.Models
         /// <remarks>
         /// Default value as this is written is 51413.
         /// </remarks>
-        [DataMember(Name = RpcConstants.PeerPort)]
+        [DataMember(Name = RpcConstants.PeerPort), Description("Startup peer port")]
         public int? PeerPort
         {
             get => _PeerPort;
@@ -522,7 +523,7 @@ namespace Tidal.Client.Models
         /// and stop frequently. On a server, where the app will run for weeks
         /// or months between restarts, it isn't as useful.
         /// </summary>
-        [DataMember(Name = RpcConstants.PeerPortRandomize)]
+        [DataMember(Name = RpcConstants.PeerPortRandomize), Description("Randomize startup peer port")]
         public bool? PeerPortRandomize
         {
             get => _PeerPortRandomize;
@@ -536,7 +537,7 @@ namespace Tidal.Client.Models
         /// If <see cref="SpeedLimitDownEnabled"/> is <see langword="true"/>, then
         /// this represents the global, non-alt-mode download speed in KB/s.
         /// </summary>
-        [DataMember(Name = RpcConstants.SpeedLimitDown)]
+        [DataMember(Name = RpcConstants.SpeedLimitDown), Description("Download speed limit")]
         public long? SpeedLimitDown
         {
             get => _SpeedLimitDown;
@@ -548,7 +549,7 @@ namespace Tidal.Client.Models
         /// If <see cref="SpeedLimitUpEnabled"/> is <see langword="true"/>, then
         /// this represents the global, non-alt-mode upload speed in KB/s.
         /// </summary>
-        [DataMember(Name = RpcConstants.SpeedLimitUp)]
+        [DataMember(Name = RpcConstants.SpeedLimitUp), Description("Upload speed limit")]
         public long? SpeedLimitUp
         {
             get => _SpeedLimitUp;
@@ -559,7 +560,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// If <see langword="true"/>, the download speed will be limited.
         /// </summary>
-        [DataMember(Name = RpcConstants.SpeedLimitDownEnabled)]
+        [DataMember(Name = RpcConstants.SpeedLimitDownEnabled), Description("Download speed limit on/off")]
         public bool? SpeedLimitDownEnabled
         {
             get => _SpeedLimitDownEnabled;
@@ -570,7 +571,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// If <see langword="true"/>, the upload speed will be limited.
         /// </summary>
-        [DataMember(Name = RpcConstants.SpeedLimitUpEnabled)]
+        [DataMember(Name = RpcConstants.SpeedLimitUpEnabled), Description("Upload speed limit on/off")]
         public bool? SpeedLimitUpEnabled
         {
             get => _SpeedLimitUpEnabled;

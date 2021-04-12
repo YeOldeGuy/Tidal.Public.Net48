@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -134,7 +133,7 @@ namespace Tidal.ViewModels
             // Okay, here's the thing. I've figured out that unless you actually
             // use the command line, you know, like type the command in, Windows
             // handles the activation of your app rather oddly in the case where
-            // you've selected say, five torrents, then right clicked "Open" in
+            // you've selected say five torrents, then right clicked "Open" in
             // the shell.
             //
             // At this point, Windows will simply activate your app five times,
@@ -486,7 +485,7 @@ namespace Tidal.ViewModels
             // actual up/down speed are both zero, go back to the title.
 
             if (actual != 0 && avgUp + avgDn > 0)
-                Title = string.Format("↑{0} ↓{1}", avgUp.HumanSpeed(), avgDn.HumanSpeed());
+                Title = string.Format("▲{0} ▼{1}", avgUp.HumanSpeed(), avgDn.HumanSpeed());
             else
                 Title = $"{Resources.ShellViewMode_NormalTitle}-{hostService.ActiveHost.Name}";
         }

@@ -11,7 +11,6 @@ using MaxMind.GeoIP2.Exceptions;
 using Prism.Mvvm;
 using Tidal.Core.Collections;
 using Tidal.Core.Helpers;
-using Tidal.Helpers;
 using Tidal.Models;
 using Tidal.Models.Messages;
 using Tidal.Properties;
