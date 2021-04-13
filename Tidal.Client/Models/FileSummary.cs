@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Tidal.Client.Models
 {
@@ -95,6 +96,7 @@ namespace Tidal.Client.Models
         /// The number of bytes downloaded so far. Equal to <see cref="Length"/> if
         /// the file is complete.
         /// </summary>
+        [Description("Bytes Completed")]
         public long BytesCompleted
         {
             get => _BytesCompleted;
@@ -108,6 +110,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// The size of this file in bytes.
         /// </summary>
+        [Description("Size in Bytes")]
         public long Length
         {
             get => _Length;
@@ -121,6 +124,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// Just the name of the file, without directory path info
         /// </summary>
+        [Description("File Name")]
         public string Name
         {
             get => _Name;
@@ -131,6 +135,7 @@ namespace Tidal.Client.Models
         /// The name of the file with directory path info, as presented from
         /// the <see cref="FileInfo.Name"/>.
         /// </summary>
+        [Description("File Name")]
         public string FullName
         {
             get => _FullName;
@@ -141,6 +146,7 @@ namespace Tidal.Client.Models
         /// If <see langword="true"/>, then the file will be downloaded. Partial
         /// downloads will stop. Completed downloads are not affected.
         /// </summary>
+        [Description("Download File?")]
         public bool Wanted
         {
             get => _Wanted;
@@ -150,6 +156,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// One of the <see cref="BandwidthPriority"/> values.
         /// </summary>
+        [Description("Bandwidth Priority")]
         public BandwidthPriority Priority
         {
             get => _Priority;
@@ -160,6 +167,7 @@ namespace Tidal.Client.Models
         /// Ratio of <see cref="BytesCompleted"/> to <see cref="Length"/>; i.e.,
         /// the percentage complete, expressed as a value from 0 to 1.
         /// </summary>
+        [Description("Percent Completed")]
         public double Progress
         {
             get => _Progress;

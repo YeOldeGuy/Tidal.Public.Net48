@@ -18,14 +18,6 @@ namespace Tidal.Controls
         private readonly IMessenger messenger;
         private SubscriptionToken token;
 
-        private readonly Dictionary<string, string> columnsMap = new Dictionary<string, string>()
-        {
-            { nameof(FileSummary.Wanted), Properties.Resources.FileGrid_Friendly_Wanted },
-            { nameof(FileSummary.Name), Properties.Resources.FileGrid_Friendly_Name },
-            { nameof(FileSummary.Length), Properties.Resources.FileGrid_Friendly_Size }
-        };
-
-
         public FileGrid()
         {
             InitializeComponent();
@@ -112,12 +104,11 @@ namespace Tidal.Controls
                     // menu selection text. Why is SortMemberPath not set here if
                     // the XAML has it? WPF has many mysteries.
 
-                    var header = column.SortMemberPath;
-                    columnsMap.TryGetValue(column.SortMemberPath, out header);
+                    var header = PropertyHelpers.GetDescription<FileSummary>(column.SortMemberPath);
 
-                    // Very much a kludge:
+                    // Very much a kludge (this column has no SortMember value)
                     if (string.IsNullOrEmpty(header) && column == fileGrid.Columns[0])
-                        header = columnsMap[nameof(FileSummary.Wanted)];
+                        header = PropertyHelpers.GetDescription<FileSummary>(nameof(FileSummary.Wanted));
 
                     var item = new MenuItem
                     {

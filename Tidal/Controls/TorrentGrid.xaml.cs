@@ -23,19 +23,6 @@ namespace Tidal.Controls
         private bool restoring = false;
         private bool updating = true;
 
-        // Maps the SortMemberPath to a pretty column name
-        private readonly Dictionary<string, string> columnsMap = new Dictionary<string, string>()
-        {
-            { nameof(Torrent.Name), Properties.Resources.TorrentGrid_Friendly_Name },
-            { nameof(Torrent.PeersConnected), Properties.Resources.TorrentGrid_Friendly_Peers },
-            { nameof(Torrent.UploadRatio), Properties.Resources.TorrentGrid_Friendly_UploadRatio },
-            { nameof(Torrent.AverageRateUpload), Properties.Resources.TorrentGrid_Friendly_UploadRate },
-            { nameof(Torrent.AverageRateDownload), Properties.Resources.TorrentGrid_Friendly_DownloadRate },
-            { nameof(Torrent.TotalSize), Properties.Resources.TorrentGrid_Friendly_Size },
-            { nameof(Torrent.ETA), Properties.Resources.TorrentGrid_Friendly_ETA },
-            { nameof(Torrent.ActivityDate), Properties.Resources.TorrentGrid_Friendly_Activity },
-        };
-
         public TorrentGrid()
         {
             InitializeComponent();
@@ -142,10 +129,7 @@ namespace Tidal.Controls
 
                 foreach (var column in torrentGrid.GetHeaderMenuInfo())
                 {
-                    var header = column.SortMemberPath;
-                    columnsMap.TryGetValue(column.SortMemberPath, out header);
-                    if (string.IsNullOrEmpty(header))
-                        header = column.SortMemberPath;
+                    var header = PropertyHelpers.GetDescription<Torrent>(column.SortMemberPath);
                     var item = new MenuItem
                     {
                         Header = header,

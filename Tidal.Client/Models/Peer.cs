@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Runtime.Serialization;
 using Tidal.Client.Constants;
 using Tidal.Core.Helpers;
@@ -109,7 +110,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// A <see cref="MovingAverage"/> of the download rate.
         /// </summary>
-        [IgnoreDataMember]
+        [IgnoreDataMember, Description("Average Download Rate")]
         public long AverageToClient
         {
             get => _AverageToClient == 0 && RateToClient > 0 ? RateToClient : _AverageToClient;
@@ -120,7 +121,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// A <see cref="MovingAverage"/> of the upload rate.
         /// </summary>
-        [IgnoreDataMember]
+        [IgnoreDataMember, Description("Average Upload Rate")]
         public long AverageToPeer
         {
             get => _AverageToPeer == 0 && RateToPeer > 0 ? RateToPeer : _AverageToPeer;
@@ -143,7 +144,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// A string representing the peer's location.
         /// </summary>
-        [IgnoreDataMember]
+        [IgnoreDataMember, Description("Location")]
         public string Location
         {
             get => _Location;
@@ -166,7 +167,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// The IP address (dotted notation) of the peer.
         /// </summary>
-        [DataMember(Name = RpcConstants.Address)]
+        [DataMember(Name = RpcConstants.Address), Description("IP Address")]
         public string Address
         {
             get => _Address;
@@ -178,7 +179,7 @@ namespace Tidal.Client.Models
         /// The client the peer is using. This may be garbage for certain peers
         /// who try to disguise the app being used.
         /// </summary>
-        [DataMember(Name = RpcConstants.ClientName)]
+        [DataMember(Name = RpcConstants.ClientName), Description("Client Name")]
         public string ClientName
         {
             get => _ClientName;

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
+﻿using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,36 +6,11 @@ using System.Windows.Data;
 using Tidal.Client.Models;
 using Tidal.Collections;
 using Tidal.Helpers;
-using Tidal.Properties;
 
 namespace Tidal.Controls
 {
-    internal class BoolToEncryptedString : IValueConverter
-    {
-        public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is bool enc)
-                return enc ? Resources.EncryptedConnection : Resources.UnencryptedConnection;
-
-            return null;
-        }
-
-        public object ConvertBack(object value, System.Type targetType, object parameter, CultureInfo culture)
-        {
-            return Binding.DoNothing;
-        }
-    }
-
     public partial class PeerGrid : UserControl
     {
-        private readonly Dictionary<string, string> columnsMap = new Dictionary<string, string>()
-        {
-            { nameof(Peer.Address), Properties.Resources.PeerGrid_Friendly_Address },
-            { nameof(Peer.Location), Properties.Resources.PeerGrid_Friendly_Location },
-            { nameof(Peer.AverageToPeer), Properties.Resources.PeerGrid_Friendly_UploadRate },
-            { nameof(Peer.AverageToClient), Properties.Resources.PeerGrid_Friendly_DownloadRate },
-        };
-
         public PeerGrid()
         {
             InitializeComponent();
@@ -122,8 +95,7 @@ namespace Tidal.Controls
 
                 foreach (var column in peerGrid.GetHeaderMenuInfo())
                 {
-                    var header = column.SortMemberPath;
-                    columnsMap.TryGetValue(column.SortMemberPath, out header);
+                    var header = PropertyHelpers.GetDescription<Peer>(column.SortMemberPath);
                     var item = new MenuItem
                     {
                         Header = header,
