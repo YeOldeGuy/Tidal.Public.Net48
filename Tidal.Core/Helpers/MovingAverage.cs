@@ -40,7 +40,7 @@ namespace Tidal.Core.Helpers
             queue.Enqueue(value);
             while (queue.Count > runLength)
             {
-                _ = queue.Dequeue();
+                queue.Dequeue();
             }
             return Average;
         }

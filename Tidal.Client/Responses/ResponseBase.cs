@@ -34,7 +34,7 @@ namespace Tidal.Client.Responses
 
         public virtual void InPlaceDeserialize(string json)
         {
-            var _ = Deserialize<ResponseBase>(json);
+            Deserialize<ResponseBase>(json);
         }
 
         protected void AssignCommonProperties(IResponse response)
