@@ -13,6 +13,9 @@ namespace Tidal.Client.Requests
         }
 
         [DataMember(Name = RpcConstants.Ids)]
-        public IList<int> Ids { get; }
+        public IList<int> Ids
+        {
+            get;
+        }
     }
 }

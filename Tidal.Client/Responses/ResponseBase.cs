@@ -13,10 +13,16 @@ namespace Tidal.Client.Responses
     public class ResponseBase : IResponse
     {
         [DataMember(Name = RpcConstants.Result)]
-        public string Result { get; set; }
+        public string Result
+        {
+            get; set;
+        }
 
         [DataMember(Name = RpcConstants.Tag)]
-        public long? Tag { get; set; }
+        public long? Tag
+        {
+            get; set;
+        }
 
         protected T Deserialize<T>(string json)
             where T : IResponse

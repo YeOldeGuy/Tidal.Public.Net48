@@ -14,7 +14,10 @@ namespace Tidal.Client.Contracts
         /// value, usually "success".
         /// </summary>
         [DataMember(Name = RpcConstants.Result)]
-        string Result { get; }
+        string Result
+        {
+            get;
+        }
 
         /// <summary>
         /// Matches the <see cref="IRpcRequest.Tag"/> value set by the
@@ -22,7 +25,10 @@ namespace Tidal.Client.Contracts
         /// not specified in the corresponding request.
         /// </summary>
         [DataMember(Name = RpcConstants.Tag)]
-        long? Tag { get; set; }
+        long? Tag
+        {
+            get; set;
+        }
 
         void InPlaceDeserialize(string json);
     }

@@ -33,12 +33,12 @@ namespace Tidal.Client.Requests
         }
 
         [DataMember(Name = RpcConstants.Arguments)]
-        public SessionMutator Mutator { get; }
-
-        public override string Serialize()
+        public SessionMutator Mutator
         {
-            return Json.ToJSON(this);
+            get;
         }
+
+        public override string Serialize() => Json.ToJSON(this);
 
         protected override string GetMethodName() => RpcConstants.SetSession;
     }

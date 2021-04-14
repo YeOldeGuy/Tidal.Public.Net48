@@ -30,16 +30,25 @@ namespace Tidal.Client.Responses
     public class TorrentsResponseArgs
     {
         [DataMember(Name = RpcConstants.Torrents)]
-        public IList<Torrent> Torrents { get; set; }
+        public IList<Torrent> Torrents
+        {
+            get; set;
+        }
     }
 
     public class TorrentsResponse : ResponseBase
     {
         [DataMember(Name = RpcConstants.Arguments)]
-        public TorrentsResponseArgs Arguments { get; set; }
+        public TorrentsResponseArgs Arguments
+        {
+            get; set;
+        }
 
         [IgnoreDataMember]
-        public IList<Torrent> Torrents { get; private set; }
+        public IList<Torrent> Torrents
+        {
+            get; private set;
+        }
 
         public override void InPlaceDeserialize(string json)
         {

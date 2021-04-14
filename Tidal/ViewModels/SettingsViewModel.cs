@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Web.Routing;
 using System.Windows;
 using ControlzEx.Theming;
 using Humanizer;
@@ -18,6 +17,7 @@ using Tidal.Models.BrokerMessages;
 using Tidal.Models.Messages;
 using Tidal.Properties;
 using Tidal.Services.Abstract;
+
 
 namespace Tidal.ViewModels
 {
@@ -227,7 +227,7 @@ namespace Tidal.ViewModels
             get => _EncryptionIsRequired;
             set
             {
-                if (SetProperty(ref _EncryptionIsRequired, value) && value == true)
+                if (SetProperty(ref _EncryptionIsRequired, value) && value)
                     Setter.Encryption = EncryptionLevel.Required;
             }
         }
@@ -237,7 +237,7 @@ namespace Tidal.ViewModels
             get => _EncryptionIsPreferred;
             set
             {
-                if (SetProperty(ref _EncryptionIsPreferred, value) && value == true)
+                if (SetProperty(ref _EncryptionIsPreferred, value) && value)
                     Setter.Encryption = EncryptionLevel.Preferred;
             }
         }
@@ -247,7 +247,7 @@ namespace Tidal.ViewModels
             get => _EncryptionIsTolerated;
             set
             {
-                if (SetProperty(ref _EncryptionIsTolerated, value) && value == true)
+                if (SetProperty(ref _EncryptionIsTolerated, value) && value)
                     Setter.Encryption = EncryptionLevel.Tolerated;
             }
         }

@@ -10,7 +10,9 @@ namespace Tidal.Client.Requests
     /// </summary>
     public class AddMagnetRequest : RequestBase
     {
-        public AddMagnetRequest() { }
+        public AddMagnetRequest()
+        {
+        }
 
 
         /// <summary>
@@ -31,13 +33,13 @@ namespace Tidal.Client.Requests
         }
 
         [DataMember(Name = RpcConstants.Arguments)]
-        public AddTorrentArgs Args { get; set; }
-
-
-        public override string Serialize()
+        public AddTorrentArgs Args
         {
-            return Json.ToJSON(this);
+            get; set;
         }
+
+
+        public override string Serialize() => Json.ToJSON(this);
 
         protected override string GetMethodName() => RpcConstants.AddMagnet;
     }

@@ -6,6 +6,9 @@
     /// </summary>
     public interface ITag
     {
-        object Tag { get; set; }
+        object Tag
+        {
+            get; set;
+        }
     }
 }

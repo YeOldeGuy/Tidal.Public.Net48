@@ -33,7 +33,7 @@
         <ContextMenu x:Name="ColumnContextMenu"
                      x:Key="ColumnHeaderMenu"
                      Opened="ColumnHeaderMenuOpened">
-            <MenuItem Header="Prob filled in code-behind" />
+            <MenuItem Header="One element needed for code-behind to function" />
         </ContextMenu>
 
         <Style x:Key="FileGridHeaderStyle"

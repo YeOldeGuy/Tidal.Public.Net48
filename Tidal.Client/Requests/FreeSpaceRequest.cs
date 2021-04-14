@@ -12,13 +12,13 @@ namespace Tidal.Client.Requests
         }
 
         [DataMember(Name = RpcConstants.Arguments)]
-        public FreeSpaceArgs Arguments { get; set; }
+        public FreeSpaceArgs Arguments
+        {
+            get; set;
+        }
 
         protected override string GetMethodName() => RpcConstants.GetFreeSpace;
 
-        public override string Serialize()
-        {
-            return Json.ToJSON(this);
-        }
+        public override string Serialize() => Json.ToJSON(this);
     }
 }

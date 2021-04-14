@@ -38,7 +38,7 @@ namespace Tidal.Client
 
         public Uri Host
         {
-            get { return _Host; }
+            get => _Host;
             private set
             {
                 if (_Host != value)
@@ -75,10 +75,7 @@ namespace Tidal.Client
             httpClient.DefaultRequestHeaders.Authorization = header;
         }
 
-        public void ClearAuthorizationInfo()
-        {
-            httpClient.DefaultRequestHeaders.Authorization = null;
-        }
+        public void ClearAuthorizationInfo() => httpClient.DefaultRequestHeaders.Authorization = null;
 
         private static string CreateAuthorizationString(string username, string password)
         {
@@ -109,7 +106,7 @@ namespace Tidal.Client
             req.Tag = Interlocked.Increment(ref tagNumber);
 
             // Make the request into some really cool JSON stuff
-            string reqAsJson = req.Serialize();
+            var reqAsJson = req.Serialize();
 
             using (var cts = new CancellationTokenSource(Timeout))
             {
@@ -120,12 +117,14 @@ namespace Tidal.Client
                     // send a known-bad CSRF key, then the second to resend the
                     // request with the CSRF key received. If this fails after three
                     // tries, then all is lost and it's time to die.
-                    for (int i = 0; i < 3; i++)
+                    for (var i = 0; i < 3; i++)
                     {
                         using (var content = new StringContent(reqAsJson, Encoding.UTF8, "text/json"))
                         using (var httpresp = await httpClient.PostAsync(Host, content, cts.Token))
                         {
+#pragma warning disable IDE0010 // There are a gazillion codes here. I don't want to list them all
                             switch (httpresp.StatusCode)
+#pragma warning restore IDE0010
                             {
                                 case HttpStatusCode.OK:
                                     var respStream = await httpresp.Content.ReadAsStringAsync();
@@ -148,7 +147,7 @@ namespace Tidal.Client
 
                                     // Get rid of the bad CSRF value and put the good
                                     // one in:
-                                    httpClient.DefaultRequestHeaders.Remove(XTransSessIdHeader);
+                                    _ = httpClient.DefaultRequestHeaders.Remove(XTransSessIdHeader);
                                     httpClient.DefaultRequestHeaders.Add(XTransSessIdHeader, csrf);
 
                                     // Now that the CSRF stuff is "correct", try to post
@@ -185,7 +184,7 @@ namespace Tidal.Client
                 }
                 finally
                 {
-                    accessSemaphore.Release();
+                    _ = accessSemaphore.Release();
                 }
             }
         }
@@ -235,41 +234,23 @@ namespace Tidal.Client
             return resp?.SessionStats;
         }
 
-        public async Task SetSessionAsync(SessionMutator mutator)
-        {
-            await SendRequestAsync(new MutateSessionRequest(mutator),
+        public async Task SetSessionAsync(SessionMutator mutator) => await SendRequestAsync(new MutateSessionRequest(mutator),
                                    new ResponseBase());
-        }
 
-        public async Task SetTorrentAsync(TorrentMutator mutator)
-        {
-            await SendRequestAsync(new MutateTorrentRequest(mutator),
+        public async Task SetTorrentAsync(TorrentMutator mutator) => await SendRequestAsync(new MutateTorrentRequest(mutator),
                                    new ResponseBase());
-        }
 
-        public async Task RemoveTorrentsAsync(IEnumerable<int> ids, bool deleteData)
-        {
-            await SendRequestAsync(new RemoveTorrentsRequest(ids, deleteData),
+        public async Task RemoveTorrentsAsync(IEnumerable<int> ids, bool deleteData) => await SendRequestAsync(new RemoveTorrentsRequest(ids, deleteData),
                                    new ResponseBase());
-        }
 
-        public async Task ReannounceTorrentsAsync(IEnumerable<int> ids)
-        {
-            await SendRequestAsync(new TorrentActionRequest(ids, TorrentAction.Reannounce),
+        public async Task ReannounceTorrentsAsync(IEnumerable<int> ids) => await SendRequestAsync(new TorrentActionRequest(ids, TorrentAction.Reannounce),
                                    new ResponseBase());
-        }
 
-        public async Task StartTorrentsAsync(IEnumerable<int> ids)
-        {
-            await SendRequestAsync(new TorrentActionRequest(ids, TorrentAction.Start),
+        public async Task StartTorrentsAsync(IEnumerable<int> ids) => await SendRequestAsync(new TorrentActionRequest(ids, TorrentAction.Start),
                                    new ResponseBase());
-        }
 
-        public async Task StopTorrentsAsync(IEnumerable<int> ids)
-        {
-            await SendRequestAsync(new TorrentActionRequest(ids, TorrentAction.Stop),
+        public async Task StopTorrentsAsync(IEnumerable<int> ids) => await SendRequestAsync(new TorrentActionRequest(ids, TorrentAction.Stop),
                                    new ResponseBase());
-        }
 
         public async Task<(Torrent, bool)> AddMagnetAsync(string magnetLink, bool paused)
         {

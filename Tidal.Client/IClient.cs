@@ -11,38 +11,56 @@ namespace Tidal.Client
         /// Gets the <see cref="Uri"/> of the host as specified by
         /// <see cref="SetHost(string, int, bool)"/>.
         /// </summary>
-        Uri Host { get; }
+        Uri Host
+        {
+            get;
+        }
 
         /// <summary>
         /// Gets only the IP address of the <see cref="Host"/>.
         /// </summary>
-        string IpAddress { get; }
+        string IpAddress
+        {
+            get;
+        }
 
 
         /// <summary>
         /// If <see langword="true"/>, the last communication with the
         /// host was successful.
         /// </summary>
-        bool IsOpen { get; }
+        bool IsOpen
+        {
+            get;
+        }
 
 
         /// <summary>
         /// Gets the port number used to connect to the host.
         /// </summary>
-        int Port { get; }
+        int Port
+        {
+            get;
+        }
 
         /// <summary>
         /// If <see langword="true"/>, the connection to the host is
         /// using secure protocols.
         /// </summary>
-        bool SecureConnection { get; }
+        bool SecureConnection
+        {
+            get;
+        }
 
 
         /// <summary>
         /// Gets or sets the time that can elapse without a response
         /// from the host.
         /// </summary>
-        TimeSpan Timeout { get; set; }
+        TimeSpan Timeout
+        {
+            get; set;
+        }
 
 
         /// <summary>

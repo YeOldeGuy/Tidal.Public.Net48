@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using Tidal.Client.Contracts;
 
 namespace Tidal.Client.Models
@@ -26,15 +25,15 @@ namespace Tidal.Client.Models
                                      object propertyVal)
         {
             // find out the type
-            Type type = inputObject.GetType();
+            var type = inputObject.GetType();
 
             // get the property information based on the type
-            PropertyInfo propertyInfo = type.GetProperty(propertyName);
+            var propertyInfo = type.GetProperty(propertyName);
             if (propertyInfo == null)
                 return;
 
             // find the property type
-            Type propertyType = propertyInfo.PropertyType;
+            var propertyType = propertyInfo.PropertyType;
 
             // Convert.ChangeType does not handle conversion to nullable types
             // if the property type is nullable, we need to get the underlying
@@ -51,12 +50,11 @@ namespace Tidal.Client.Models
             propertyInfo.SetValue(inputObject, propertyVal, null);
         }
 
-        private static bool IsNullableType(Type type)
-        {
-            return type.IsGenericType &&
+        private static bool IsNullableType(Type type) => type.IsGenericType &&
                    type.GetGenericTypeDefinition().Equals(typeof(Nullable<>));
-        }
 
-        protected override void AssignInternal(MutatorBase other) { }
+        protected override void AssignInternal(MutatorBase other)
+        {
+        }
     }
 }

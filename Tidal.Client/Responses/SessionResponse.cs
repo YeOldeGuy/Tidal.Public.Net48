@@ -26,7 +26,10 @@ namespace Tidal.Client.Responses
     public class SessionResponse : ResponseBase
     {
         [DataMember(Name = RpcConstants.Arguments)]
-        public Session Session { get; set; }
+        public Session Session
+        {
+            get; set;
+        }
 
         public override void InPlaceDeserialize(string json)
         {

@@ -14,6 +14,9 @@ namespace Tidal.Client.Requests
         /// server.
         /// </summary>
         [DataMember(Name = RpcConstants.Path)]
-        public string Path { get; set; }
+        public string Path
+        {
+            get; set;
+        }
     }
 }

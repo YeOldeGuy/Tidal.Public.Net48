@@ -7,15 +7,9 @@ namespace Tidal.Client.Helpers
 {
     public static class Json
     {
-        public static async Task<T> ToObjectAsync<T>(string value)
-        {
-            return await Task.Run(() => ToObject<T>(value));
-        }
+        public static async Task<T> ToObjectAsync<T>(string value) => await Task.Run(() => ToObject<T>(value));
 
-        public static async Task<string> ToJSONAsync(object value)
-        {
-            return await Task.Run(() => ToJSON(value));
-        }
+        public static async Task<string> ToJSONAsync(object value) => await Task.Run(() => ToJSON(value));
 
 
         /// <summary>
@@ -53,7 +47,7 @@ namespace Tidal.Client.Helpers
                 if (bytes == null)
                     return default;
 
-                T temp = JsonSerializer.Deserialize<T>(bytes, StandardResolver.AllowPrivate);
+                var temp = JsonSerializer.Deserialize<T>(bytes, StandardResolver.AllowPrivate);
                 return temp;
             }
             catch (JsonParsingException)
@@ -67,20 +61,14 @@ namespace Tidal.Client.Helpers
         /// </summary>
         /// <param name="value">Any object.</param>
         /// <returns>A JSON-encoded representation of the <paramref name="value"/>.</returns>
-        public static string ToJSON(object value)
-        {
-            return Encoding.UTF8.GetString(JsonSerializer.Serialize(value, StandardResolver.ExcludeNull));
-        }
+        public static string ToJSON(object value) => Encoding.UTF8.GetString(JsonSerializer.Serialize(value, StandardResolver.ExcludeNull));
 
         /// <summary>
         /// Convert the <paramref name="value"/> to a JSON-encoded byte array.
         /// </summary>
         /// <param name="value">Any object.</param>
         /// <returns>A JSON-encoded representation of the <paramref name="value"/>.</returns>
-        public static byte[] ToJSONBytes(object value)
-        {
-            return JsonSerializer.Serialize(value, StandardResolver.ExcludeNull);
-        }
+        public static byte[] ToJSONBytes(object value) => JsonSerializer.Serialize(value, StandardResolver.ExcludeNull);
 
         /// <summary>
         /// Convert the <paramref name="value"/> to a JSON-encoded string, but
@@ -88,10 +76,7 @@ namespace Tidal.Client.Helpers
         /// </summary>
         /// <param name="value">Any object.</param>
         /// <returns>A JSON-encoded representation of the <paramref name="value"/>.</returns>
-        public static string ToJsonKeepNulls(object value)
-        {
-            return Encoding.UTF8.GetString(JsonSerializer.Serialize(value));
-        }
+        public static string ToJsonKeepNulls(object value) => Encoding.UTF8.GetString(JsonSerializer.Serialize(value));
 
         /// <summary>
         /// Convert the <paramref name="value"/> to a JSON-encoded byte array,
@@ -99,9 +84,6 @@ namespace Tidal.Client.Helpers
         /// </summary>
         /// <param name="value">Any object.</param>
         /// <returns>A JSON-encoded representation of the <paramref name="value"/>.</returns>
-        public static byte[] ToJSONBytesKeepNulls(object value)
-        {
-            return JsonSerializer.Serialize(value);
-        }
+        public static byte[] ToJSONBytesKeepNulls(object value) => JsonSerializer.Serialize(value);
     }
 }

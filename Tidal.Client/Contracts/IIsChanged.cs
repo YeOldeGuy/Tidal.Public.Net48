@@ -9,6 +9,9 @@
         /// <summary>
         /// Set to <see langword="true"/> if a property is changed.
         /// </summary>
-        bool IsChanged { get; set; }
+        bool IsChanged
+        {
+            get; set;
+        }
     }
 }

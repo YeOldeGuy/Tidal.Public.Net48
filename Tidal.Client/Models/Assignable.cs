@@ -14,21 +14,18 @@ namespace Tidal.Client.Models
         #endregion
 
         [IgnoreDataMember]
-        public object Tag { get => _Tag; set => SetProperty(ref _Tag, value); }
+        public object Tag
+        {
+            get => _Tag; set => SetProperty(ref _Tag, value);
+        }
         #endregion
 
         #region INPC
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
-        }
+        protected void RaisePropertyChanged([CallerMemberName] string propertyName = null) => OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
 
-        protected virtual void OnPropertyChanged(PropertyChangedEventArgs args)
-        {
-            PropertyChanged?.Invoke(this, args);
-        }
+        protected virtual void OnPropertyChanged(PropertyChangedEventArgs args) => PropertyChanged?.Invoke(this, args);
 
         /// <summary>
         ///   Deriving classes should use this to raise events on property

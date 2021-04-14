@@ -6,37 +6,58 @@ namespace Tidal.Client.Responses
     public class CommonArgs
     {
         [DataMember(Name = RpcConstants.HashString)]
-        public string HashString { get; set; }
+        public string HashString
+        {
+            get; set;
+        }
 
         [DataMember(Name = RpcConstants.Id)]
-        public int Id { get; set; }
+        public int Id
+        {
+            get; set;
+        }
 
         [DataMember(Name = RpcConstants.Name)]
-        public string Name { get; set; }
+        public string Name
+        {
+            get; set;
+        }
     }
 
     public class TorrentAdded
     {
         [DataMember(Name = RpcConstants.TorrentAdded)]
-        public CommonArgs Args { get; set; }
+        public CommonArgs Args
+        {
+            get; set;
+        }
     }
 
     public class TorrentDuplicate
     {
         [DataMember(Name = RpcConstants.TorrentDuped)]
-        public CommonArgs Args { get; set; }
+        public CommonArgs Args
+        {
+            get; set;
+        }
     }
 
     public class AddTorrentAdded : ResponseBase
     {
         [DataMember(Name = RpcConstants.Arguments)]
-        public TorrentAdded TorrentAdded { get; set; }
+        public TorrentAdded TorrentAdded
+        {
+            get; set;
+        }
     }
 
     public class DupTorrentAdded : ResponseBase
     {
         [DataMember(Name = RpcConstants.Arguments)]
-        public TorrentDuplicate TorrentDuplicate { get; set; }
+        public TorrentDuplicate TorrentDuplicate
+        {
+            get; set;
+        }
     }
 
     /// <summary>
@@ -63,13 +84,25 @@ namespace Tidal.Client.Responses
     /// </remarks>
     public class AddTorrentResponse : ResponseBase
     {
-        public int Id { get; set; }
+        public int Id
+        {
+            get; set;
+        }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get; set;
+        }
 
-        public string HashString { get; set; }
+        public string HashString
+        {
+            get; set;
+        }
 
-        public bool IsDuplicate { get; set; }
+        public bool IsDuplicate
+        {
+            get; set;
+        }
 
 
         public override void InPlaceDeserialize(string json)

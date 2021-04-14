@@ -6,7 +6,10 @@ namespace Tidal.Client.Responses
     public class FSRespArgs
     {
         [DataMember(Name = RpcConstants.FreeSpaceSize)]
-        public long FreeSpace { get; set; }
+        public long FreeSpace
+        {
+            get; set;
+        }
     }
 
     public class FreeSpaceResponse : ResponseBase
@@ -18,10 +21,16 @@ namespace Tidal.Client.Responses
         }
 
         [DataMember(Name = RpcConstants.Arguments)]
-        public FSRespArgs Args { get; set; }
+        public FSRespArgs Args
+        {
+            get; set;
+        }
 
 
         [IgnoreDataMember]
-        public long FreeSpace { get; set; }
+        public long FreeSpace
+        {
+            get; set;
+        }
     }
 }

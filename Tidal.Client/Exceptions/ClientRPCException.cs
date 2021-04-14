@@ -8,7 +8,10 @@ namespace Tidal.Client.Exceptions
     /// </summary>
     public class ClientRPCException : ClientException
     {
-        public string Header { get; }
+        public string Header
+        {
+            get;
+        }
 
         public ClientRPCException()
             : base("Remote Procedure Call exception")

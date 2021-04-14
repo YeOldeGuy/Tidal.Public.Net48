@@ -43,15 +43,9 @@ namespace Tidal.Client.Models
         private MovingAverage downAverage;
 
         #region IEquatable
-        public bool Equals(Peer other)
-        {
-            return !(other is null) && GetHashCode().Equals(other.GetHashCode());
-        }
+        public bool Equals(Peer other) => !(other is null) && GetHashCode().Equals(other.GetHashCode());
 
-        public override bool Equals(object obj)
-        {
-            return !(obj is null) && obj is Peer peer && Equals(peer);
-        }
+        public override bool Equals(object obj) => !(obj is null) && obj is Peer peer && Equals(peer);
 
         public override int GetHashCode()
         {
@@ -64,7 +58,7 @@ namespace Tidal.Client.Models
         #endregion
 
         #region Overrides
-        override protected void AssignInternal(Peer other)
+        protected override void AssignInternal(Peer other)
         {
             Address = other.Address;
             ClientName = other.ClientName;

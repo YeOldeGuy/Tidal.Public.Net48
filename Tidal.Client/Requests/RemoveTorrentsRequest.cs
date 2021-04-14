@@ -18,12 +18,12 @@ namespace Tidal.Client.Requests
         }
 
         [DataMember(Name = RpcConstants.Arguments)]
-        public RemoveTorrentsArgs Arguments { get; }
-
-        public override string Serialize()
+        public RemoveTorrentsArgs Arguments
         {
-            return Json.ToJSON(this);
+            get;
         }
+
+        public override string Serialize() => Json.ToJSON(this);
 
         protected override string GetMethodName() => RpcConstants.RemoveTorrent;
     }

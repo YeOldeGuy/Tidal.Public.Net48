@@ -112,7 +112,7 @@ namespace Tidal.Dialogs.ViewModels
                 if (e.PropertyChangedArgs.PropertyName == nameof(TorrentFileWanted.Wanted))
                 {
                     foreach (var f in changedItem.Files)
-                        f.Wanted = changedItem.Wanted == true;
+                        f.Wanted = changedItem.Wanted;
                 }
                 else if (e.PropertyChangedArgs.PropertyName == nameof(TorrentFileWanted.Files))
                 {

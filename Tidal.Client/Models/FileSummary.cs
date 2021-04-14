@@ -19,7 +19,9 @@ namespace Tidal.Client.Models
         private BandwidthPriority _Priority;
         private double _Progress;
 
-        public FileSummary() { }
+        public FileSummary()
+        {
+        }
 
         /// <summary>
         /// Create a <see cref="FileSummary"/> instance from the data in
@@ -50,7 +52,7 @@ namespace Tidal.Client.Models
             hashCode = $"{ownerId}:{Name}".GetHashCode();
         }
 
-        override protected void AssignInternal(FileSummary other)
+        protected override void AssignInternal(FileSummary other)
         {
             if (other == null)
                 return;
@@ -72,10 +74,7 @@ namespace Tidal.Client.Models
         #region IEquatable
         public bool Equals(FileSummary other) => GetHashCode().Equals(other.GetHashCode());
 
-        public override bool Equals(object obj)
-        {
-            return obj is null || (obj is FileSummary fs && Equals(fs));
-        }
+        public override bool Equals(object obj) => obj is null || (obj is FileSummary fs && Equals(fs));
 
         public override int GetHashCode() => hashCode;
         #endregion
@@ -83,14 +82,20 @@ namespace Tidal.Client.Models
         /// <summary>
         /// The value of <see cref="Torrent.Id"/> of the owning torrent.
         /// </summary>
-        public int OwnerId { get => _OwnerId; set => SetProperty(ref _OwnerId, value); }
+        public int OwnerId
+        {
+            get => _OwnerId; set => SetProperty(ref _OwnerId, value);
+        }
 
 
         /// <summary>
         /// This file's offset into the array of <see cref="FileInfo"/> values.
         /// Needed for modifying priorities or wanted status.
         /// </summary>
-        public int Index { get; set; }
+        public int Index
+        {
+            get; set;
+        }
 
         /// <summary>
         /// The number of bytes downloaded so far. Equal to <see cref="Length"/> if
@@ -171,11 +176,7 @@ namespace Tidal.Client.Models
         public double Progress
         {
             get => _Progress;
-            set
-            {
-                SetProperty(ref _Progress, value);
-                RaisePropertyChanged(nameof(Progress));
-            }
+            set => SetProperty(ref _Progress, value);
         }
     }
 }

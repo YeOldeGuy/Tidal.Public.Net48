@@ -46,7 +46,10 @@ namespace Tidal.Client.Requests
         /// This app does not use this. Extremely Danger!
         /// </summary>
         [DataMember(Name = RpcConstants.DownloadDir)]
-        public string DownloadDir { get; set; }
+        public string DownloadDir
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Not really a filename, but a URI for a magnet link.
@@ -58,26 +61,38 @@ namespace Tidal.Client.Requests
         ///   file system.
         /// </remarks>
         [DataMember(Name = RpcConstants.FileName)]
-        public string FileName { get; set; }
+        public string FileName
+        {
+            get; set;
+        }
 
         /// <summary>
         /// The base64 encoded contents of a ".torrent" file.
         /// </summary>
         [DataMember(Name = RpcConstants.MetaInfo)]
-        public string MetaInfo { get; set; }
+        public string MetaInfo
+        {
+            get; set;
+        }
 
         /// <summary>
         /// If set, then the torrent or magnet will be added to the system, but
         /// not started. It will show up as "Stopped" in the status field.
         /// </summary>
         [DataMember(Name = RpcConstants.Paused)]
-        public bool Paused { get; set; }
+        public bool Paused
+        {
+            get; set;
+        }
 
         /// <summary>
         /// An array of file indices of the files in a multi-file torrent that
         /// should <b>not</b> be downloaded.
         /// </summary>
         [DataMember(Name = RpcConstants.Unwanted)]
-        public IList<int> Unwanted { get; set; }
+        public IList<int> Unwanted
+        {
+            get; set;
+        }
     }
 }

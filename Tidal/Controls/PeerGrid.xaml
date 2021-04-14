@@ -49,7 +49,7 @@
         <ContextMenu x:Name="ColumnContextMenu"
                      x:Key="ColumnHeaderMenu"
                      Opened="ColumnHeaderMenuOpened">
-            <MenuItem Header="Prob filled in code-behind" />
+            <MenuItem Header="Need one element to make the code-behind work" />
         </ContextMenu>
 
         <Style x:Key="ColumnHeaderStyle"

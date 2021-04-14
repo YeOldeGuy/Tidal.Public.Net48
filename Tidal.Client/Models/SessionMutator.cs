@@ -30,7 +30,9 @@ namespace Tidal.Client.Models
         /// Create a <see cref="SessionMutator"/> with all properties
         /// set to <see langword="null"/>.
         /// </summary>
-        public SessionMutator() { }
+        public SessionMutator()
+        {
+        }
 
         /// <summary>
         /// Create a <see cref="SessionMutator"/>, with only the specified
@@ -377,10 +379,9 @@ namespace Tidal.Client.Models
                 {
                     case RpcConstants.EncryptionRequired:
                         return EncryptionLevel.Required;
-                    case RpcConstants.EncryptionPreferred:
-                        return EncryptionLevel.Preferred;
                     case RpcConstants.EncryptionTolerated:
                         return EncryptionLevel.Tolerated;
+                    case RpcConstants.EncryptionPreferred:
                     default:
                         return EncryptionLevel.Preferred;
                 }
@@ -395,6 +396,7 @@ namespace Tidal.Client.Models
                     case EncryptionLevel.Required:
                         EncString = RpcConstants.EncryptionRequired;
                         break;
+                    case EncryptionLevel.Tolerated:
                     default:
                         EncString = RpcConstants.EncryptionTolerated;
                         break;

@@ -28,7 +28,10 @@ namespace Tidal.Client.Requests
         /// <see cref="Client"/> and checked there.
         /// </remarks>
         [DataMember(Name = RpcConstants.Tag)]
-        public long? Tag { get; set; }
+        public long? Tag
+        {
+            get; set;
+        }
 
 
         /// <summary>

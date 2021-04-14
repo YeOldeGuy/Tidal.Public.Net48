@@ -41,7 +41,10 @@ namespace Tidal.Client.Responses
     public class StatsResponse : ResponseBase
     {
         [DataMember(Name = RpcConstants.Arguments)]
-        public SessionStats SessionStats { get; set; }
+        public SessionStats SessionStats
+        {
+            get; set;
+        }
 
         public override void InPlaceDeserialize(string json)
         {

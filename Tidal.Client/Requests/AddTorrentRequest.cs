@@ -13,10 +13,15 @@ namespace Tidal.Client.Requests
     public class AddTorrentRequest : RequestBase
     {
         [DataMember(Name = RpcConstants.Arguments)]
-        public AddTorrentArgs Args { get; set; }
+        public AddTorrentArgs Args
+        {
+            get; set;
+        }
 
 
-        public AddTorrentRequest() { } // for testing
+        public AddTorrentRequest()
+        {
+        } // for testing
 
 
         /// <summary>
@@ -38,10 +43,7 @@ namespace Tidal.Client.Requests
                 Args.Unwanted = unwantedFiles.ToList();
         }
 
-        public override string Serialize()
-        {
-            return Json.ToJSON(this);
-        }
+        public override string Serialize() => Json.ToJSON(this);
 
         protected override string GetMethodName() => RpcConstants.AddTorrent;
     }

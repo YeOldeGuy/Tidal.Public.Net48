@@ -115,6 +115,11 @@ namespace Tidal.Client.Models
             AverageRateDownload = (long)downAverage.Push(other.RateDownload);
         }
 
+        private static DateTime RawToDate(long unixDate) =>
+            DateTimeOffset.FromUnixTimeSeconds(unixDate).ToLocalTime().DateTime;
+
+
+
         #region overrides
         public override int GetHashCode() => HashString.GetHashCode();
 
@@ -122,42 +127,89 @@ namespace Tidal.Client.Models
 
         public bool Equals(Torrent other) => HashString.Equals(other.HashString);
 
-        public override bool Equals(object obj)
-        {
-            return obj != null && obj is Torrent tor && Equals(tor);
-        }
+        public override bool Equals(object obj) => obj != null && obj is Torrent tor && Equals(tor);
         #endregion
 
 
         [DataMember(Name = RpcConstants.DownloadedEver)]
-        public long DownloadedEver { get => _DownloadedEver; set => SetProperty(ref _DownloadedEver, value); }
+        public long DownloadedEver
+        {
+            get => _DownloadedEver;
+            set => SetProperty(ref _DownloadedEver, value);
+        }
+
 
         [DataMember(Name = RpcConstants.DownloadLimit)]
-        public long DownloadLimit { get => _DownloadLimit; set => SetProperty(ref _DownloadLimit, value); }
+        public long DownloadLimit
+        {
+            get => _DownloadLimit;
+            set => SetProperty(ref _DownloadLimit, value);
+        }
+
 
         [DataMember(Name = RpcConstants.DownloadLimited)]
-        public bool DownloadLimited { get => _DownloadLimited; set => SetProperty(ref _DownloadLimited, value); }
+        public bool DownloadLimited
+        {
+            get => _DownloadLimited;
+            set => SetProperty(ref _DownloadLimited, value);
+        }
+
 
         [DataMember(Name = RpcConstants.HashString)]
-        public string HashString { get => _HashString; set => SetProperty(ref _HashString, value); }
+        public string HashString
+        {
+            get => _HashString;
+            set => SetProperty(ref _HashString, value);
+        }
+
 
         [DataMember(Name = RpcConstants.Name), Description("Torrent Name")]
-        public string Name { get => _Name; set => SetProperty(ref _Name, value); }
+        public string Name
+        {
+            get => _Name;
+            set => SetProperty(ref _Name, value);
+        }
+
 
         [DataMember(Name = RpcConstants.TotalSize), Description("Total Size")]
-        public long TotalSize { get => _TotalSize; set => SetProperty(ref _TotalSize, value); }
+        public long TotalSize
+        {
+            get => _TotalSize;
+            set => SetProperty(ref _TotalSize, value);
+        }
+
 
         [DataMember(Name = RpcConstants.Priorities)]
-        public IList<int> Priorities { get => _Priorities; set => SetProperty(ref _Priorities, value); }
+        public IList<int> Priorities
+        {
+            get => _Priorities;
+            set => SetProperty(ref _Priorities, value);
+        }
+
 
         [DataMember(Name = RpcConstants.UploadedEver)]
-        public long UploadedEver { get => _UploadedEver; set => SetProperty(ref _UploadedEver, value); }
+        public long UploadedEver
+        {
+            get => _UploadedEver;
+            set => SetProperty(ref _UploadedEver, value);
+        }
+
 
         [DataMember(Name = RpcConstants.UploadLimit)]
-        public long UploadLimit { get => _UploadLimit; set => SetProperty(ref _UploadLimit, value); }
+        public long UploadLimit
+        {
+            get => _UploadLimit;
+            set => SetProperty(ref _UploadLimit, value);
+        }
+
 
         [DataMember(Name = RpcConstants.UploadLimited)]
-        public bool UploadLimited { get => _UploadLimited; set => SetProperty(ref _UploadLimited, value); }
+        public bool UploadLimited
+        {
+            get => _UploadLimited;
+            set => SetProperty(ref _UploadLimited, value);
+        }
+
 
         [DataMember(Name = RpcConstants.UploadRatio), Description("Upload Ratio")]
         public double UploadRatio
@@ -172,27 +224,40 @@ namespace Tidal.Client.Models
             }
         }
 
-        [DataMember(Name = RpcConstants.Id)]
-        public int Id { get => _Id; set => SetProperty(ref _Id, value); }
 
-        private static DateTime RawToDate(long unixDate) =>
-            DateTimeOffset.FromUnixTimeSeconds(unixDate).ToLocalTime().DateTime;
+        [DataMember(Name = RpcConstants.Id)]
+        public int Id
+        {
+            get => _Id;
+            set => SetProperty(ref _Id, value);
+        }
+
 
         [DataMember(Name = RpcConstants.ActivityDate)]
         public long ActivityDateUnixTime
         {
             get => _ActivityDateUnitTime;
-            set { if (SetProperty(ref _ActivityDateUnitTime, value)) RaisePropertyChanged(nameof(ActivityDate)); }
+            set
+            {
+                if (SetProperty(ref _ActivityDateUnitTime, value)) RaisePropertyChanged(nameof(ActivityDate));
+            }
         }
+
         [Description("Activity Date/Time")]
         public DateTime ActivityDate => RawToDate(ActivityDateUnixTime);
+
 
         [DataMember(Name = RpcConstants.AddedDate)]
         public long AddedDateUnixTime
         {
             get => _AddedDateUnixTime;
-            set { if (SetProperty(ref _AddedDateUnixTime, value)) RaisePropertyChanged(nameof(AddedDate)); }
+            set
+            {
+                if (SetProperty(ref _AddedDateUnixTime, value)) RaisePropertyChanged(nameof(AddedDate));
+            }
         }
+
+        [Description("Date Added")]
         public DateTime AddedDate => RawToDate(AddedDateUnixTime);
 
 
@@ -200,8 +265,12 @@ namespace Tidal.Client.Models
         public long DoneDateUnixTime
         {
             get => _DoneDateUnixTime;
-            set { if (SetProperty(ref _DoneDateUnixTime, value)) RaisePropertyChanged(nameof(DoneDate)); }
+            set
+            {
+                if (SetProperty(ref _DoneDateUnixTime, value)) RaisePropertyChanged(nameof(DoneDate));
+            }
         }
+
         [Description("Completed Date/Time")]
         public DateTime DoneDate => RawToDate(DoneDateUnixTime);
 
@@ -416,15 +485,24 @@ namespace Tidal.Client.Models
 
 
         [DataMember(Name = RpcConstants.Files)]
-        public IList<FileInfo> Files { get; set; }
+        public IList<FileInfo> Files
+        {
+            get; set;
+        }
 
 
         [DataMember(Name = RpcConstants.FileStats)]
-        public IList<FileStats> Stats { get; set; }
+        public IList<FileStats> Stats
+        {
+            get; set;
+        }
 
 
         [DataMember(Name = RpcConstants.Peers)]
-        public IList<Peer> PeersRaw { get; set; }
+        public IList<Peer> PeersRaw
+        {
+            get; set;
+        }
 
 
         public IEnumerable<Peer> Peers
@@ -441,7 +519,10 @@ namespace Tidal.Client.Models
         }
 
         [DataMember(Name = RpcConstants.TrackerStats)]
-        public IList<Tracker> Trackers { get; set; }
+        public IList<Tracker> Trackers
+        {
+            get; set;
+        }
 
 
         #region synthetic properties
@@ -449,7 +530,7 @@ namespace Tidal.Client.Models
         {
             get
             {
-                for (int i = 0; i < Files.Count; i++)
+                for (var i = 0; i < Files.Count; i++)
                     yield return new FileSummary(Id, i, Files[i], Stats[i]);
             }
         }
@@ -462,7 +543,7 @@ namespace Tidal.Client.Models
         {
             get
             {
-                double progress = 0.0;
+                var progress = 0.0;
 
                 switch (SeedRatioMode)
                 {
@@ -474,6 +555,8 @@ namespace Tidal.Client.Models
                         break;
                     case SeedLimitMode.OverrideGlobalSettings:
                         progress = UploadRatio / (SeedRatioLimit > 0 ? SeedRatioLimit : 1);
+                        break;
+                    default:
                         break;
                 }
                 return progress < 0 ? 0 : progress;
@@ -490,7 +573,7 @@ namespace Tidal.Client.Models
                 if (Trackers == null || Trackers.Count <= 0)
                     return 0;
 
-                int count = 0;
+                var count = 0;
                 foreach (var tracker in Trackers)
                     count += tracker.IsBackup ? 0 : tracker.SeederCount;
                 return count < 0 ? 0 : count;
@@ -508,7 +591,7 @@ namespace Tidal.Client.Models
                 if (Trackers == null || Trackers.Count <= 0)
                     return 0;
 
-                int count = 0;
+                var count = 0;
                 foreach (var tracker in Trackers)
                     count += tracker.IsBackup ? 0 : tracker.LeecherCount;
                 return count < 0 ? 0 : count;
@@ -529,6 +612,7 @@ namespace Tidal.Client.Models
                     case SeedLimitMode.FollowGlobalSettings:
                     case SeedLimitMode.OverrideGlobalSettings:
                         return (long)(TotalSize * (SeedRatioLimit > 0 ? SeedRatioLimit : 1));
+                    case SeedLimitMode.Unlimited:
                     default:
                         return TotalSize;
                 }
@@ -576,6 +660,8 @@ namespace Tidal.Client.Models
                     case TorrentStatus.Queued:
                     case TorrentStatus.QueuedToSeed:
                         t |= TorrentState.Inactive | TorrentState.Waiting;
+                        break;
+                    default:
                         break;
                 }
                 return t;

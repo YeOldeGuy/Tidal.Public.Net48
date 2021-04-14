@@ -39,7 +39,9 @@ namespace Tidal.Client.Models
         /// Create an all-null <see cref="TorrentMutator"/>, suitable for
         /// passing to the client in an RPC. Set values as appropriate.
         /// </summary>
-        public TorrentMutator() { }
+        public TorrentMutator()
+        {
+        }
 
         /// <summary>
         /// A constructor that sets one property in the <see cref="TorrentMutator"/>.

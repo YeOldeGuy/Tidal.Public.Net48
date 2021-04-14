@@ -7,9 +7,6 @@ namespace Tidal.Client.Requests
     {
         protected override string GetMethodName() => RpcConstants.GetStats;
 
-        public override string Serialize()
-        {
-            return Json.ToJSON(this);
-        }
+        public override string Serialize() => Json.ToJSON(this);
     }
 }

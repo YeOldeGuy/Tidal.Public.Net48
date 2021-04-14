@@ -58,9 +58,7 @@ namespace Tidal.Converters
         {
             try
             {
-                if (Equals(value, parameter ?? When))
-                    return Value;
-                return Otherwise;
+                return Equals(value, parameter ?? When) ? Value : Otherwise;
             }
             catch
             {
@@ -70,14 +68,14 @@ namespace Tidal.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (OtherwiseValueBack == null)
+            if (OtherwiseValueBack is null)
+            {
                 throw new InvalidOperationException("Cannot ConvertBack without OtherwiseValueBack defined");
+            }
 
             try
             {
-                if (object.Equals(value, Value))
-                    return When;
-                return OtherwiseValueBack;
+                return Equals(value, Value) ? When : OtherwiseValueBack;
             }
             catch
             {

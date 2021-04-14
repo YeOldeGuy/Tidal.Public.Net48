@@ -11,7 +11,10 @@ namespace Tidal.Client.Requests
         private readonly TorrentAction action;
 
         [DataMember(Name = RpcConstants.Arguments)]
-        public TorrentActionArgs Arguments { get; set; }
+        public TorrentActionArgs Arguments
+        {
+            get; set;
+        }
 
         public TorrentActionRequest(IEnumerable<int> ids, TorrentAction requestType)
         {
@@ -20,10 +23,7 @@ namespace Tidal.Client.Requests
         }
 
 
-        public override string Serialize()
-        {
-            return Json.ToJSON(this);
-        }
+        public override string Serialize() => Json.ToJSON(this);
 
         protected override string GetMethodName() => action.GetAttributeOfType<DescriptionAttribute>().Description;
     }

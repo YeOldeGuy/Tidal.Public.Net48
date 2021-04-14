@@ -10,10 +10,16 @@ namespace Tidal.Client.Requests
     public class GetTorrentsArgs
     {
         [DataMember(Name = RpcConstants.Fields)]
-        public IList<string> Fields { get; set; }
+        public IList<string> Fields
+        {
+            get; set;
+        }
 
         [DataMember(Name = RpcConstants.Ids)]
-        public IList<int> Ids { get; set; }
+        public IList<int> Ids
+        {
+            get; set;
+        }
     }
 
     public class TorrentsRequest : RequestBase
@@ -21,7 +27,10 @@ namespace Tidal.Client.Requests
         protected override string GetMethodName() => RpcConstants.GetTorrents;
 
         [DataMember(Name = RpcConstants.Arguments)]
-        public GetTorrentsArgs Arguments { get; set; }
+        public GetTorrentsArgs Arguments
+        {
+            get; set;
+        }
 
         private static IList<string> allCodedFields;
 
@@ -44,9 +53,6 @@ namespace Tidal.Client.Requests
                 : new GetTorrentsArgs { Ids = ids.ToList(), Fields = fields.ToList() };
         }
 
-        public override string Serialize()
-        {
-            return Json.ToJSON(this);
-        }
+        public override string Serialize() => Json.ToJSON(this);
     }
 }
