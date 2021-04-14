@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Prism;
 
 namespace Tidal.Helpers
@@ -14,16 +15,19 @@ namespace Tidal.Helpers
         ///   application's Container.
         /// </summary>
         /// <returns>
-        ///   The implementation of the interface or the default value
-        ///   if not found.
+        ///   The implementation of the interface.
         /// </returns>
+        /// <exception cref="InvalidOperationException">
+        ///   Thrown if the <typeparamref name="TInterface"/> cannot be
+        ///   resolved.
+        /// </exception>
         public static TInterface Resolve<TInterface>()
         {
             // This check is needed for design time:
             if (Application.Current is PrismApplicationBase app)
                 return (TInterface)app.Container.Resolve(typeof(TInterface));
 
-            return default;
+            throw new InvalidOperationException($"Cannot locate {typeof(TInterface)}. Did you define it in App.xaml.cs?");
         }
     }
 }

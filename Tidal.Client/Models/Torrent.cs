@@ -343,6 +343,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// The elapsed time a torrent has been downloading
         /// </summary>
+        [Description("Time Downloading")]
         public TimeSpan TimeDownloading => TimeSpan.FromSeconds(SecondsDownloading);
 
 
@@ -367,7 +368,7 @@ namespace Tidal.Client.Models
         /// <summary>
         /// The seed ratio mode as a <see cref="SeedRatioMode"/> value.
         /// </summary>
-        [IgnoreDataMember]
+        [IgnoreDataMember, Description("Seed Ratio Mode")]
         public SeedLimitMode SeedRatioMode
         {
             get => (SeedLimitMode)SeedRatioModeInt;
@@ -379,7 +380,7 @@ namespace Tidal.Client.Models
         /// The upload/download ratio, that when reached, will cause the
         /// torrent to stop seeding.
         /// </summary>
-        [DataMember(Name = RpcConstants.SeedRatioLimit)]
+        [DataMember(Name = RpcConstants.SeedRatioLimit), Description("Seed Ratio Limit")]
         public double SeedRatioLimit
         {
             get => _SeedRatioLimit;
@@ -406,7 +407,7 @@ namespace Tidal.Client.Models
         }
 
 
-        [IgnoreDataMember]
+        [IgnoreDataMember, Description("Seed Idle Mode")]
         public SeedLimitMode SeedIdleMode
         {
             get => (SeedLimitMode)SeedIdleModeInt;
@@ -417,11 +418,14 @@ namespace Tidal.Client.Models
         [DataMember(Name = RpcConstants.Files)]
         public IList<FileInfo> Files { get; set; }
 
+
         [DataMember(Name = RpcConstants.FileStats)]
         public IList<FileStats> Stats { get; set; }
 
+
         [DataMember(Name = RpcConstants.Peers)]
         public IList<Peer> PeersRaw { get; set; }
+
 
         public IEnumerable<Peer> Peers
         {
@@ -438,6 +442,7 @@ namespace Tidal.Client.Models
 
         [DataMember(Name = RpcConstants.TrackerStats)]
         public IList<Tracker> Trackers { get; set; }
+
 
         #region synthetic properties
         public IEnumerable<FileSummary> FileSummaries

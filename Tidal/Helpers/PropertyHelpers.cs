@@ -29,7 +29,7 @@ namespace Tidal.Helpers
         /// <returns>
         ///   The value from the <paramref name="selector"/>. Returns the
         ///   property name if the specified property doesn't have the
-        ///   attribute.
+        ///   proper attribute.
         /// </returns>
         public static string GetPropertyAttribute<TObj, TAttr>(string propertyName, Func<TAttr, string> selector)
             where TObj : class
