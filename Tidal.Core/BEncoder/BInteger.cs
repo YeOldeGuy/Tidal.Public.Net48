@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Tidal.Core.BEncoder
 {
-    public class BInteger : IBElement, IComparable<BInteger>
+    internal class BInteger : IBElement, IComparable<BInteger>
     {
         public BInteger(long value) { Value = value; }
 

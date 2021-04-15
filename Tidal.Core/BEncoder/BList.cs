@@ -7,7 +7,7 @@ namespace Tidal.Core.BEncoder
     /// <summary>
     /// Represents a list of <see cref="IBElement"/> values.
     /// </summary>
-    class BList : List<IBElement>, IBElement
+    internal class BList : List<IBElement>, IBElement
     {
         /// <summary>
         /// Writes the list to the <see cref="StringBuilder"/>, surrounded

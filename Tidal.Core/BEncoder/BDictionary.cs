@@ -9,7 +9,7 @@ namespace Tidal.Core.BEncoder
     /// instances, the values are any <see cref="IBElement"/>, including another
     /// <see cref="BDictionary"/>.
     /// </summary>
-    public class BDictionary : Dictionary<BString, IBElement>, IBElement
+    internal class BDictionary : Dictionary<BString, IBElement>, IBElement
     {
         /// <summary>
         /// Add a keyed <see cref="IBElement"/> to the dictionary.

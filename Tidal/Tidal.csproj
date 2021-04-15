@@ -39,7 +39,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <NoWarn>IDE0010, IDE0011, IDE0058, IDE0008, IDE0022</NoWarn>
+    <NoWarn>1701;1702;IDE0010;IDE0011;IDE0058;IDE0008;IDE0022;IDE0055</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>

@@ -234,32 +234,38 @@ namespace Tidal.Client
 
         public async Task SetSessionAsync(SessionMutator mutator)
         {
-            await SendRequestAsync(new MutateSessionRequest(mutator), new ResponseBase());
+            await SendRequestAsync(new MutateSessionRequest(mutator),
+                                   new ResponseBase());
         }
 
         public async Task SetTorrentAsync(TorrentMutator mutator)
         {
-            await SendRequestAsync(new MutateTorrentRequest(mutator), new ResponseBase());
+            await SendRequestAsync(new MutateTorrentRequest(mutator),
+                                   new ResponseBase());
         }
 
         public async Task RemoveTorrentsAsync(IEnumerable<int> ids, bool deleteData)
         {
-            await SendRequestAsync(new RemoveTorrentsRequest(ids, deleteData), new ResponseBase());
+            await SendRequestAsync(new RemoveTorrentsRequest(ids, deleteData),
+                                   new ResponseBase());
         }
 
         public async Task ReannounceTorrentsAsync(IEnumerable<int> ids)
         {
-            await SendRequestAsync(new TorrentActionRequest(ids, TorrentAction.Reannounce), new ResponseBase());
+            await SendRequestAsync(new TorrentActionRequest(ids, TorrentAction.Reannounce),
+                                   new ResponseBase());
         }
 
         public async Task StartTorrentsAsync(IEnumerable<int> ids)
         {
-            await SendRequestAsync(new TorrentActionRequest(ids, TorrentAction.Start), new ResponseBase());
+            await SendRequestAsync(new TorrentActionRequest(ids, TorrentAction.Start),
+                                   new ResponseBase());
         }
 
         public async Task StopTorrentsAsync(IEnumerable<int> ids)
         {
-            await SendRequestAsync(new TorrentActionRequest(ids, TorrentAction.Stop), new ResponseBase());
+            await SendRequestAsync(new TorrentActionRequest(ids, TorrentAction.Stop),
+                                   new ResponseBase());
         }
 
         public async Task<(Torrent, bool)> AddMagnetAsync(string magnetLink, bool paused)

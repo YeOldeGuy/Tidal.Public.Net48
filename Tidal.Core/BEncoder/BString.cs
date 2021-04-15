@@ -8,7 +8,7 @@ namespace Tidal.Core.BEncoder
     /// Represents a string value. String values are escaped in
     /// a Json-compatible fashion.
     /// </summary>
-    public class BString : IBElement, IComparable<BString>
+    internal class BString : IBElement, IComparable<BString>
     {
         public BString(string value) { Value = value; }
 

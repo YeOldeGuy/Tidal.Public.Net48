@@ -5,7 +5,7 @@ namespace Tidal.Core.BEncoder
     /// <summary>
     /// Base definition for all BEncoded elements
     /// </summary>
-    public interface IBElement
+    internal interface IBElement
     {
         /// <summary>
         ///   Write our data to the <see cref="StringBuilder"/> in a
