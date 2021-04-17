@@ -46,17 +46,17 @@ namespace Tidal.Core.Helpers
         ///   not be closed or disposed.
         /// </param>
         /// <param name="outputDir">
-        ///   The directory to write the extracted file to. The output file
-        ///   will have the same name as in the tarball.
+        ///   The directory to write the extracted file to. The output file will
+        ///   have the same name as in the tarball.
         /// </param>
         /// <param name="fileToExtract">
         ///   The name of the file within the tar file to extract. This is the
         ///   name the extracted file will have.
         /// </param>
         /// <param name="setModDate"></param>
-        ///   If <see langword="true"/>, sets the file modification
-        ///   date to be that supplied by the tar file, otherwise
-        ///   it will be set to <see cref="DateTime.Now"/>.
+        ///   If <see langword="true"/>, sets the file modification date to be
+        ///   that supplied by the tar file, otherwise it will be set to <see
+        ///   cref="DateTime.Now"/>.
         /// <returns>
         ///   <see langword="true"/> if the file was extracted successfully. If
         ///   an error occurs, a partially written file may exist.

@@ -61,8 +61,8 @@ namespace Tidal.Controls
 
         public FileCollection Files
         {
-            get { return (FileCollection)GetValue(FilesProperty); }
-            set { SetValue(FilesProperty, value); }
+            get => (FileCollection)GetValue(FilesProperty);
+            set => SetValue(FilesProperty, value);
         }
         public static readonly DependencyProperty FilesProperty =
             DependencyProperty.Register("Files",

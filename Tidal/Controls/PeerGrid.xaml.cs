@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using Tidal.AttachedProperties;
 using Tidal.Client.Models;
 using Tidal.Collections;
 using Tidal.Helpers;
@@ -19,8 +20,8 @@ namespace Tidal.Controls
 
         public PeerCollection Peers
         {
-            get { return (PeerCollection)GetValue(PeersProperty); }
-            set { SetValue(PeersProperty, value); }
+            get => (PeerCollection)GetValue(PeersProperty);
+            set => SetValue(PeersProperty, value);
         }
         public static readonly DependencyProperty PeersProperty =
             DependencyProperty.Register(nameof(Peers),
@@ -55,7 +56,7 @@ namespace Tidal.Controls
             // Because when we call the HandleSorting method, it will reverse it
             // again (like clicking on the header).
 
-            var col = peerGrid.Columns.Where(c => c.SortMemberPath == sortMemberPath).FirstOrDefault();
+            var col = peerGrid.Columns.FirstOrDefault(c => SortMember.GetName(c) == sortMemberPath);
             if (col != null && col.SortDirection.HasValue)
             {
                 col.SortDirection = col.SortDirection == ListSortDirection.Ascending
@@ -95,7 +96,7 @@ namespace Tidal.Controls
 
                 foreach (var column in peerGrid.GetHeaderMenuInfo())
                 {
-                    var header = PropertyHelpers.GetDescription<Peer>(column.SortMemberPath);
+                    var header = PropertyHelpers.GetDescription<Peer>(SortMember.GetName(column));
                     var item = new MenuItem
                     {
                         Header = header,

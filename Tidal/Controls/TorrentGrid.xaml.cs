@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Prism.Commands;
+using Tidal.AttachedProperties;
 using Tidal.Client.Models;
 using Tidal.Collections;
 using Tidal.Helpers;
@@ -47,8 +48,8 @@ namespace Tidal.Controls
 
         public TorrentCollection Torrents
         {
-            get { return (TorrentCollection)GetValue(TorrentsProperty); }
-            set { SetValue(TorrentsProperty, value); }
+            get => (TorrentCollection)GetValue(TorrentsProperty);
+            set => SetValue(TorrentsProperty, value);
         }
 
         public static readonly DependencyProperty TorrentsProperty =
@@ -129,7 +130,7 @@ namespace Tidal.Controls
 
                 foreach (var column in torrentGrid.GetHeaderMenuInfo())
                 {
-                    var header = PropertyHelpers.GetDescription<Torrent>(column.SortMemberPath);
+                    var header = PropertyHelpers.GetDescription<Torrent>(SortMember.GetName(column));
                     var item = new MenuItem
                     {
                         Header = header,

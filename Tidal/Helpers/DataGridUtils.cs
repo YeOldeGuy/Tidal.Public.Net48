@@ -20,7 +20,7 @@ namespace Tidal.Helpers
         /// <param name="starColumn">The SortMemberPath of the column.</param>
         public static void FixStarColumn(DataGrid grid, string starColumn)
         {
-            var col = grid.Columns.Where(c => c.SortMemberPath == starColumn).FirstOrDefault();
+            var col = grid.Columns.FirstOrDefault(c => c.SortMemberPath == starColumn);
             var width = col.Width.Value;
             if (col != null)
                 col.Width = new DataGridLength(width, DataGridLengthUnitType.Star);

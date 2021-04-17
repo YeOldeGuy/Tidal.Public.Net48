@@ -2,6 +2,7 @@
              x:Class="Tidal.Controls.TorrentGrid"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ap="clr-namespace:Tidal.AttachedProperties"
              xmlns:conv="clr-namespace:Tidal.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
@@ -132,7 +133,7 @@
                 <!--  Name and progress column  -->
                 <DataGridTemplateColumn Width="*"
                                         Header="Name/Info"
-                                        SortMemberPath="Name">
+                                        ap:SortMember.Name="Name">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Grid>
@@ -239,7 +240,7 @@
                 <!--  Peers column  -->
                 <DataGridTemplateColumn Width="80"
                                         Header="Peers"
-                                        SortMemberPath="PeersConnected">
+                                        ap:SortMember.Name="PeersConnected">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Grid HorizontalAlignment="Center"
@@ -275,7 +276,7 @@
                 <!--  Seed ratio column  -->
                 <DataGridTemplateColumn Width="Auto"
                                         Header="Seed Ratio"
-                                        SortMemberPath="UploadRatio">
+                                        ap:SortMember.Name="UploadRatio">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock HorizontalAlignment="Center"
@@ -288,7 +289,7 @@
 
                 <!--  Upload rate column  -->
                 <DataGridTemplateColumn Width="80"
-                                        SortMemberPath="AverageRateUpload">
+                                        ap:SortMember.Name="AverageRateUpload">
                     <DataGridTemplateColumn.HeaderStyle>
                         <Style BasedOn="{StaticResource ColumnHeaderStyle}"
                                TargetType="DataGridColumnHeader">
@@ -348,7 +349,7 @@
 
                 <!--  Download rate column  -->
                 <DataGridTemplateColumn Width="80"
-                                        SortMemberPath="AverageRateDownload">
+                                        ap:SortMember.Name="AverageRateDownload">
                     <DataGridTemplateColumn.HeaderStyle>
                         <Style BasedOn="{StaticResource ColumnHeaderStyle}"
                                TargetType="DataGridColumnHeader">
@@ -409,7 +410,7 @@
                 <!--  Torrent Size Column  -->
                 <DataGridTemplateColumn Width="70"
                                         Header="Size"
-                                        SortMemberPath="TotalSize">
+                                        ap:SortMember.Name="TotalSize">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock HorizontalAlignment="Center"
@@ -423,7 +424,7 @@
                 <!--  ETA Column  -->
                 <DataGridTemplateColumn Width="70"
                                         Header="ETA"
-                                        SortMemberPath="ETA">
+                                        ap:SortMember.Name="ETA">
                     <DataGridTemplateColumn.HeaderStyle>
                         <Style BasedOn="{StaticResource GridColumnHeader}"
                                TargetType="DataGridColumnHeader">
@@ -471,7 +472,7 @@
                 <!--  Activity Column  -->
                 <DataGridTemplateColumn Width="*"
                                         Header="Active"
-                                        SortMemberPath="ActivityDate">
+                                        ap:SortMember.Name="ActivityDate">
                     <DataGridTemplateColumn.HeaderStyle>
                         <Style BasedOn="{StaticResource GridColumnHeader}"
                                TargetType="DataGridColumnHeader">

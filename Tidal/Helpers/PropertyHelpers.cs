@@ -40,11 +40,7 @@ namespace Tidal.Helpers
                 return propertyName;
 
             var attrs = prop.GetCustomAttributes(typeof(TAttr), false);
-            if (attrs != null && attrs.Count() > 0)
-            {
-                return selector((TAttr)attrs[0]);
-            }
-            return propertyName;
+            return attrs != null && attrs.Count() > 0 ? selector((TAttr)attrs[0]) : propertyName;
         }
 
         public static string GetDescription<TObj>(string propertyName)

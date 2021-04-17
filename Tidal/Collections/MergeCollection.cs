@@ -79,6 +79,9 @@ namespace Tidal.Collections
             // Do any last-minute massaging of the new data
             BeforeMerge(newData);
 
+            // Use the Tag property to store a boolean marking if the 
+            // element is to be removed.
+            //
             // Assume that all the elements are going to be removed, which
             // is not atypical, actually. Peers can go from like 37 to 0 in
             // one update.
@@ -105,7 +108,7 @@ namespace Tidal.Collections
                 }
             }
 
-            // Find all of the elements that didn't have Keep toggled,
+            // Find all of the elements that didn't have the Tag value toggled,
             // meaning that they're to be deleted.
             var removals = Items.Where(t => (bool)t.Tag == false).ToList();
             foreach (var rem in removals)
