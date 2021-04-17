@@ -14,6 +14,7 @@ using Tidal.Constants;
 using Tidal.Dialogs.ViewModels;
 using Tidal.Models.BrokerMessages;
 using Tidal.Models.Messages;
+using Tidal.Properties;
 using Tidal.Services.Abstract;
 
 namespace Tidal.ViewModels
@@ -111,11 +112,22 @@ namespace Tidal.ViewModels
                     indexes.AddRange(msg.SelectedFiles.Select(f => f.Index));
 
                 var mutator = new TorrentMutator();
+                string wanted;
                 if (summary.Wanted)
+                {
                     mutator.FilesWanted = indexes;
+                    wanted = Resources.Wanted_LC;
+                }
                 else
+                {
                     mutator.FilesUnwanted = indexes;
+                    wanted = Resources.Unwanted_LC;
+                }
 
+                messenger.Send(
+                    new StatusInfoMessage(
+                        string.Format(Resources.MainVM_ChangeWantedStatus_1, wanted), 
+                        1.Seconds()));
                 messenger.Send(new SetTorrentsRequest(summary.OwnerId, mutator));
             }
         }

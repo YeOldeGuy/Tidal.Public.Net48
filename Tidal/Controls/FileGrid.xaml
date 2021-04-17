@@ -5,28 +5,17 @@
              xmlns:ap="clr-namespace:Tidal.AttachedProperties"
              xmlns:conv="clr-namespace:Tidal.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Tidal.Controls"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              d:DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="450"
              d:DesignWidth="800"
              mc:Ignorable="d">
 
     <UserControl.Resources>
-        <conv:ValueWhenConverter x:Key="Bool2Wanted">
-            <conv:ValueWhenConverter.When>
-                <sys:Boolean>True</sys:Boolean>
-            </conv:ValueWhenConverter.When>
-            <conv:ValueWhenConverter.Value>
-                <sys:String>Wanted</sys:String>
-            </conv:ValueWhenConverter.Value>
-            <conv:ValueWhenConverter.Otherwise>
-                <sys:String>Skip</sys:String>
-            </conv:ValueWhenConverter.Otherwise>
-        </conv:ValueWhenConverter>
-
+        <conv:BoolToObjectConverter x:Key="Bool2Wanted"
+                                    FalseValue="Skip"
+                                    TrueValue="Wanted" />
         <conv:SizeConverter x:Key="Size" />
         <conv:PercentConverter x:Key="Percent" />
 

@@ -26,7 +26,7 @@ using Tidal.Services.Abstract;
 
 namespace Tidal.ViewModels
 {
-    class ShellViewModel : BindableBase
+    internal class ShellViewModel : BindableBase
     {
         private readonly IRegionManager regionManager;
         private readonly ISettingsService settingsService;
@@ -460,7 +460,7 @@ namespace Tidal.ViewModels
                 AssemblyName assemblyName = assembly.GetName();
                 Version version = assemblyName.Version;
 
-                return $"Tidal - {version}";
+                return version.ToString();
             }
         }
         #endregion
@@ -484,10 +484,9 @@ namespace Tidal.ViewModels
             // weird. It's like, *who* am I uploading at 15Kbps to? So, if the
             // actual up/down speed are both zero, go back to the title.
 
-            if (actual != 0 && avgUp + avgDn > 0)
-                Title = string.Format("▲{0} ▼{1}", avgUp.HumanSpeed(), avgDn.HumanSpeed());
-            else
-                Title = $"{Resources.ShellViewMode_NormalTitle}-{hostService.ActiveHost.Name}";
+            Title = actual != 0 && avgUp + avgDn > 0
+                ? string.Format("▲{0} ▼{1}", avgUp.HumanSpeed(), avgDn.HumanSpeed())
+                : $"{Resources.ShellViewMode_NormalTitle}-{hostService.ActiveHost.Name}";
         }
 
         private void SetAltLabel(Session session)
@@ -530,10 +529,7 @@ namespace Tidal.ViewModels
         #endregion
 
         #region upload speed limit menu stuff
-        internal long UploadSpeedLimit
-        {
-            get => Session.SpeedLimitUpEnabled == false ? -1 : Session.SpeedLimitUp;
-        }
+        internal long UploadSpeedLimit => Session.SpeedLimitUpEnabled == false ? -1 : Session.SpeedLimitUp;
 
         private IEnumerable<long> PresetUploadSpeeds
         {
@@ -605,13 +601,7 @@ namespace Tidal.ViewModels
         #endregion
 
         #region download speed limit menu stuff
-        internal long DownloadSpeedLimit
-        {
-            get
-            {
-                return Session.SpeedLimitDownEnabled == false ? -1 : Session.SpeedLimitDown;
-            }
-        }
+        internal long DownloadSpeedLimit => Session.SpeedLimitDownEnabled == false ? -1 : Session.SpeedLimitDown;
 
         private IEnumerable<long> PresetDownloadSpeeds
         {
@@ -724,14 +714,12 @@ namespace Tidal.ViewModels
         /// <paramref name="pageName"/>.
         /// </summary>
         /// <param name="pageName">
-        /// One of the constants in <see cref="Constants.PageKeys"/>
+        /// One of the constants in <see cref="PageKeys"/>
         /// </param>
         /// <returns></returns>
         private bool IsOnPage(string pageName)
         {
-            if (navigationService is null)
-                return false;
-            return navigationService.Journal.CurrentEntry.Uri.OriginalString == pageName;
+            return !(navigationService is null) && navigationService.Journal.CurrentEntry.Uri.OriginalString == pageName;
         }
 
         public DelegateCommand LoadedCommand =>

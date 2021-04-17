@@ -25,8 +25,8 @@ namespace Tidal.Converters
 
         public string InfiniteValue
         {
-            get { return (string)GetValue(InfiniteValueProperty); }
-            set { SetValue(InfiniteValueProperty, value); }
+            get => (string)GetValue(InfiniteValueProperty);
+            set => SetValue(InfiniteValueProperty, value);
         }
         public static readonly DependencyProperty InfiniteValueProperty =
             DependencyProperty.Register(nameof(InfiniteValue), typeof(string),

@@ -18,8 +18,8 @@ namespace Tidal.Converters
         /// </summary>
         public double MaxValue
         {
-            get { return (double)GetValue(MaxValueProperty); }
-            set { SetValue(MaxValueProperty, value); }
+            get => (double)GetValue(MaxValueProperty);
+            set => SetValue(MaxValueProperty, value);
         }
 
         /// <summary>
@@ -27,8 +27,8 @@ namespace Tidal.Converters
         /// </summary>
         public double MinValue
         {
-            get { return (double)GetValue(MinValueProperty); }
-            set { SetValue(MinValueProperty, value); }
+            get => (double)GetValue(MinValueProperty);
+            set => SetValue(MinValueProperty, value);
         }
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace Tidal.Converters
         /// </summary>
         public double Epsilon
         {
-            get { return (double)GetValue(EpsilonProperty); }
-            set { SetValue(EpsilonProperty, value); }
+            get => (double)GetValue(EpsilonProperty);
+            set => SetValue(EpsilonProperty, value);
         }
 
         /// <summary>
@@ -47,8 +47,8 @@ namespace Tidal.Converters
         /// </summary>
         public int DecimalPlaces
         {
-            get { return (int)GetValue(DecimalPlacesProperty); }
-            set { SetValue(DecimalPlacesProperty, value); }
+            get => (int)GetValue(DecimalPlacesProperty);
+            set => SetValue(DecimalPlacesProperty, value);
         }
 
 

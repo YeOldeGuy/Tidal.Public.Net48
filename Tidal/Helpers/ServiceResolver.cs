@@ -27,7 +27,7 @@ namespace Tidal.Helpers
             if (Application.Current is PrismApplicationBase app)
                 return (TInterface)app.Container.Resolve(typeof(TInterface));
 
-            throw new InvalidOperationException($"Cannot locate {typeof(TInterface)}. Did you define it in App.xaml.cs?");
+            return default;
         }
     }
 }

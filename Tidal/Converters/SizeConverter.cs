@@ -22,8 +22,8 @@ namespace Tidal.Converters
     {
         public SizeSuffixes Suffix
         {
-            get { return (SizeSuffixes)GetValue(SuffixesProperty); }
-            set { SetValue(SuffixesProperty, value); }
+            get => (SizeSuffixes)GetValue(SuffixesProperty);
+            set => SetValue(SuffixesProperty, value);
         }
 
         public static readonly DependencyProperty SuffixesProperty =

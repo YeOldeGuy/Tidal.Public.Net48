@@ -99,9 +99,6 @@ namespace Tidal.Client.Models
         /// cref="SecondsActive"/>.
         /// </summary>
         [IgnoreDataMember]
-        public TimeSpan TimeActive
-        {
-            get => TimeSpan.FromSeconds(_SecondsActive);
-        }
+        public TimeSpan TimeActive => TimeSpan.FromSeconds(_SecondsActive);
     }
 }

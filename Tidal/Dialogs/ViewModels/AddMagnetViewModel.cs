@@ -56,10 +56,7 @@ namespace Tidal.Dialogs.ViewModels
                     _Trackers = new ObservableCollection<string>();
                 return _Trackers;
             }
-            private set
-            {
-                _Trackers = value;
-            }
+            private set => _Trackers = value;
         }
 
         /// <summary>

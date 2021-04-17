@@ -25,8 +25,8 @@ namespace Tidal.Converters
         /// </summary>
         public TimeSpanPresentation Presentation
         {
-            get { return (TimeSpanPresentation)GetValue(PresentationProperty); }
-            set { SetValue(PresentationProperty, value); }
+            get => (TimeSpanPresentation)GetValue(PresentationProperty);
+            set => SetValue(PresentationProperty, value);
         }
 
 
@@ -37,8 +37,8 @@ namespace Tidal.Converters
         /// </summary>
         public int Precision
         {
-            get { return (int)GetValue(PrecisionProperty); }
-            set { SetValue(PrecisionProperty, value); }
+            get => (int)GetValue(PrecisionProperty);
+            set => SetValue(PrecisionProperty, value);
         }
 
         /// <summary>
@@ -47,8 +47,8 @@ namespace Tidal.Converters
         /// </summary>
         public double Tolerance
         {
-            get { return (double)GetValue(ToleranceProperty); }
-            set { SetValue(ToleranceProperty, value); }
+            get => (double)GetValue(ToleranceProperty);
+            set => SetValue(ToleranceProperty, value);
         }
 
 
@@ -58,8 +58,8 @@ namespace Tidal.Converters
         /// </summary>
         public string NearZero
         {
-            get { return (string)GetValue(NearZeroProperty); }
-            set { SetValue(NearZeroProperty, value); }
+            get => (string)GetValue(NearZeroProperty);
+            set => SetValue(NearZeroProperty, value);
         }
 
 
@@ -68,6 +68,9 @@ namespace Tidal.Converters
         {
             if (value == null)
                 return null;
+
+            if (value is long tsSeconds)
+                value = TimeSpan.FromSeconds(tsSeconds);
 
             if (value is TimeSpan ts)
             {
@@ -85,6 +88,7 @@ namespace Tidal.Converters
             }
             return null;
         }
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

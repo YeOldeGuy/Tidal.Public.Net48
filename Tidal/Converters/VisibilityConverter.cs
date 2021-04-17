@@ -36,8 +36,8 @@ namespace Tidal.Converters
     {
         public Visibility TrueVisibility
         {
-            get { return (Visibility)GetValue(TrueVisibilityProperty); }
-            set { SetValue(TrueVisibilityProperty, value); }
+            get => (Visibility)GetValue(TrueVisibilityProperty);
+            set => SetValue(TrueVisibilityProperty, value);
         }
         public static readonly DependencyProperty TrueVisibilityProperty =
             DependencyProperty.Register("TrueVisibility", typeof(Visibility),
@@ -46,8 +46,8 @@ namespace Tidal.Converters
 
         public Visibility FalseVisibility
         {
-            get { return (Visibility)GetValue(FalseVisibilityProperty); }
-            set { SetValue(FalseVisibilityProperty, value); }
+            get => (Visibility)GetValue(FalseVisibilityProperty);
+            set => SetValue(FalseVisibilityProperty, value);
         }
         public static readonly DependencyProperty FalseVisibilityProperty =
             DependencyProperty.Register("FalseVisibility", typeof(Visibility),
@@ -56,8 +56,8 @@ namespace Tidal.Converters
 
         public Visibility NullVisibility
         {
-            get { return (Visibility)GetValue(NullVisibilityProperty); }
-            set { SetValue(NullVisibilityProperty, value); }
+            get => (Visibility)GetValue(NullVisibilityProperty);
+            set => SetValue(NullVisibilityProperty, value);
         }
         public static readonly DependencyProperty NullVisibilityProperty =
             DependencyProperty.Register(nameof(NullVisibility), typeof(Visibility),

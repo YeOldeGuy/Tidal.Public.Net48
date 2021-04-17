@@ -10,7 +10,6 @@
                       xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notifications.Wpf"
                       xmlns:prism="http://prismlibrary.com/"
                       xmlns:properties="clr-namespace:Tidal.Properties"
-                      xmlns:sys="clr-namespace:System;assembly=mscorlib"
                       xmlns:viewmodels="clr-namespace:Tidal.ViewModels"
                       Title="{Binding Title}"
                       Width="{helpers:SettingBinding Width}"
@@ -28,17 +27,12 @@
         <conv:SizeConverter x:Key="TiBConverter"
                             Suffix="Binary" />
         <conv:SpeedConverter x:Key="speedConverter" />
-        <conv:ValueWhenConverter x:Key="Bool2Vis">
-            <conv:ValueWhenConverter.When>
-                <sys:Boolean>True</sys:Boolean>
-            </conv:ValueWhenConverter.When>
-            <conv:ValueWhenConverter.Value>
-                <Visibility>Visible</Visibility>
-            </conv:ValueWhenConverter.Value>
-            <conv:ValueWhenConverter.Otherwise>
-                <Visibility>Collapsed</Visibility>
-            </conv:ValueWhenConverter.Otherwise>
-        </conv:ValueWhenConverter>
+        <conv:TimeSpanConverter x:Key="TimeSpanConverter"
+                                Precision="3"
+                                Presentation="Humanize" />
+        <conv:VisibilityConverter x:Key="Bool2Vis"
+                                  FalseVisibility="Collapsed"
+                                  TrueVisibility="Visible" />
     </Window.Resources>
 
 
@@ -177,7 +171,50 @@
                             </StackPanel>
                         </Button.Content>
                         <Button.ToolTip>
-                            <TextBlock Text="{Binding AssemblyVersion}" />
+                            <StackPanel>
+                                <TextBlock>
+                                    <Run FontWeight="SemiBold"
+                                         Text="Tidal app version:" />
+                                    <Run FontWeight="Normal"
+                                         Text="{Binding AssemblyVersion,
+                                                        Mode=OneWay}" />
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run FontWeight="SemiBold"
+                                         Text="Client up time:" />
+                                    <Run FontWeight="Normal"
+                                         Text="{Binding SessionStats.CurrentStats.TimeActive,
+                                                        Mode=OneWay,
+                                                        Converter={StaticResource TimeSpanConverter}}" />
+                                </TextBlock>
+                                <Rectangle Height="1"
+                                           Margin="0,3"
+                                           Fill="{DynamicResource MahApps.Brushes.Accent}" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock FontWeight="SemiBold"
+                                               Text="Downloaded" />
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding SessionStats.CumulativeStats.DownloadedBytes,
+                                                              Mode=OneWay,
+                                                              Converter={StaticResource sizeConverter}}" />
+                                    <TextBlock Grid.Row="1"
+                                               FontWeight="SemiBold"
+                                               Text="Uploaded" />
+                                    <TextBlock Grid.Row="1"
+                                               Grid.Column="1"
+                                               Text="{Binding SessionStats.CumulativeStats.UploadedBytes,
+                                                              Mode=OneWay,
+                                                              Converter={StaticResource sizeConverter}}" />
+                                </Grid>
+                            </StackPanel>
                         </Button.ToolTip>
                     </Button>
 

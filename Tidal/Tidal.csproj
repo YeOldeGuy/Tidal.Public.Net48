@@ -106,7 +106,7 @@
     <Compile Include="Controls\TorrentGrid.xaml.cs">
       <DependentUpon>TorrentGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\BoolToStrConverter.cs" />
+    <Compile Include="Converters\BoolToObjectConverter.cs" />
     <Compile Include="Converters\BoolToTextDecoration.cs" />
     <Compile Include="Converters\DateFormatConverter.cs" />
     <Compile Include="Converters\ETAConverter.cs" />

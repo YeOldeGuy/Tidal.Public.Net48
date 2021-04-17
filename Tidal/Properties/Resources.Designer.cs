@@ -1195,6 +1195,15 @@ namespace Tidal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Changing status to {0}.
+        /// </summary>
+        public static string MainVM_ChangeWantedStatus_1 {
+            get {
+                return ResourceManager.GetString("MainVM_ChangeWantedStatus_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Location Lookup Settings.
         /// </summary>
         public static string MaxMindGroupHeader {
@@ -2833,6 +2842,15 @@ namespace Tidal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to unwanted.
+        /// </summary>
+        public static string Unwanted_LC {
+            get {
+                return ResourceManager.GetString("Unwanted_LC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upload limit in KBps.
         /// </summary>
         public static string UploadLimit {
@@ -2883,6 +2901,15 @@ namespace Tidal.Properties {
         public static string UtpOn {
             get {
                 return ResourceManager.GetString("UtpOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to wanted.
+        /// </summary>
+        public static string Wanted_LC {
+            get {
+                return ResourceManager.GetString("Wanted_LC", resourceCulture);
             }
         }
     }

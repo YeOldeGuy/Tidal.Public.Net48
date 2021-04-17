@@ -36,8 +36,8 @@ namespace Tidal.Converters
     {
         public ETAForm ETAForm
         {
-            get { return (ETAForm)GetValue(ETAFormProperty); }
-            set { SetValue(ETAFormProperty, value); }
+            get => (ETAForm)GetValue(ETAFormProperty);
+            set => SetValue(ETAFormProperty, value);
         }
         public static readonly DependencyProperty ETAFormProperty =
             DependencyProperty.Register(nameof(ETAForm), typeof(ETAForm), typeof(ETAConverter),

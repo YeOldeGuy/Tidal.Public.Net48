@@ -16,8 +16,8 @@ namespace Tidal.Converters
     {
         public string ZeroTime
         {
-            get { return (string)GetValue(ZeroTimeProperty); }
-            set { SetValue(ZeroTimeProperty, value); }
+            get => (string)GetValue(ZeroTimeProperty);
+            set => SetValue(ZeroTimeProperty, value);
         }
         public static readonly DependencyProperty ZeroTimeProperty =
             DependencyProperty.Register(nameof(ZeroTime), typeof(string),

@@ -1126,4 +1126,13 @@
     <value>Setting</value>
     <comment>As in "Setting Bool Value"</comment>
   </data>
+  <data name="Wanted_LC" xml:space="preserve">
+    <value>wanted</value>
+  </data>
+  <data name="Unwanted_LC" xml:space="preserve">
+    <value>unwanted</value>
+  </data>
+  <data name="MainVM_ChangeWantedStatus_1" xml:space="preserve">
+    <value>Changing status to {0}</value>
+  </data>
 </root>
