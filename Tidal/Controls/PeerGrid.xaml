@@ -24,8 +24,8 @@
         <FontStyle x:Key="Normal">Normal</FontStyle>
 
         <conv:BoolToObjectConverter x:Key="BoolToItalic"
-                                    FalseValue="{StaticResource Normal}"
-                                    TrueValue="{StaticResource Italic}" />
+                                    FalseValue="{StaticResource Italic}"
+                                    TrueValue="{StaticResource Normal}" />
 
         <conv:BoolToObjectConverter x:Key="BoolToEncryptedString"
                                     FalseValue="Unencrypted Connection"
