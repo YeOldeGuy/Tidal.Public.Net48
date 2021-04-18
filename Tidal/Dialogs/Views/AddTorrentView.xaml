@@ -16,7 +16,9 @@
 
     <UserControl.Resources>
         <converters:SizeConverter x:Key="SizeConverter" />
-        <converters:BoolToTextDecoration x:Key="BoolToTextDecoration" />
+        <converters:BoolToTextDecoration x:Key="BoolToStrikeThru"
+                                         Invert="True"
+                                         Kind="StrikeThrough" />
 
         <DataTemplate x:Key="SubFile"
                       DataType="{x:Type models:TorrentSubFile}">
@@ -70,8 +72,7 @@
                                    Text="{Binding Name,
                                                   Mode=OneWay}"
                                    TextDecorations="{Binding Wanted,
-                                                             ConverterParameter='StrikeThrough',
-                                                             Converter={StaticResource BoolToTextDecoration}}" />
+                                                             Converter={StaticResource BoolToStrikeThru}}" />
                         <TextBlock Grid.Column="2"
                                    HorizontalAlignment="Right"
                                    VerticalAlignment="Center"

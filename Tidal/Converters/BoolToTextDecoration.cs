@@ -5,49 +5,84 @@ using System.Windows.Data;
 
 namespace Tidal.Converters
 {
+    public enum DecorationKind
+    {
+        StrikeThrough,
+        Underline,
+        Overline,
+        Baseline,
+        None,
+    }
+
+
     /// <summary>
     ///   Translates a boolean value to a <see cref="TextDecoration"/> for use
-    ///   in TextBlocks. Boolean value is inverted, assuming no decoration for
-    ///   <see langword="true"/> values, and the specified decoration for <see
-    ///   langword="false"/>.
+    ///   in TextBlocks.
     /// </summary>
     /// <remarks>
-    ///   Typical usage:
-    ///   <code>
+    ///   Typical usage (in the Resources section):
+    /// <code>
+    ///     &lt;converters:BoolToTextDecoration x:Key="BoolToStrikeThru"
+    ///                                         Invert="True"
+    ///                                         Kind="StrikeThrough" /&gt;
+    /// </code>
+    ///   Then, elsewhere, in a TextBlock:
+    /// <code>
     ///   TextDecorations="{Binding Wanted,
-    ///                             ConverterParameter='StrikeThrough',
-    ///                             Converter={StaticResource
-    ///                             BoolToTextDecoration}}"
-    ///   </code>
+    ///                             Converter={StaticResource BoolToStrikeThru}}"
+    /// </code>
     ///   If "Wanted" is <see langword="false"/>, the text will have a strike through.
     /// </remarks>
-    public class BoolToTextDecoration : IValueConverter
+    public class BoolToTextDecoration : DependencyObject, IValueConverter
     {
+        public DecorationKind Kind
+        {
+            get => (DecorationKind)GetValue(KindProperty);
+            set => SetValue(KindProperty, value);
+        }
+        public static readonly DependencyProperty KindProperty =
+            DependencyProperty.Register(nameof(Kind),
+                                        typeof(DecorationKind),
+                                        typeof(BoolToTextDecoration),
+                                        new PropertyMetadata(DecorationKind.StrikeThrough));
+
+
+        public bool Invert
+        {
+            get => (bool)GetValue(InvertProperty);
+            set => SetValue(InvertProperty, value);
+        }
+        public static readonly DependencyProperty InvertProperty =
+            DependencyProperty.Register(nameof(Invert),
+                                        typeof(bool),
+                                        typeof(BoolToTextDecoration),
+                                        new PropertyMetadata(false));
+
+
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            TextDecorationCollection decoration = TextDecorations.Strikethrough;
+            TextDecorationCollection decoration;
 
-            if (parameter is string s)
+            switch (Kind)
             {
-                switch (s.ToLower())
-                {
-                    case "strikethrough":
-                    case "strikethru":
-                        decoration = TextDecorations.Strikethrough;
-                        break;
-                    case "underline":
-                    case "underscore":
-                        decoration = TextDecorations.Underline;
-                        break;
-                    case "overline":
-                        decoration = TextDecorations.OverLine;
-                        break;
-                    case "baseline":
-                        decoration = TextDecorations.Baseline;
-                        break;
-                }
+                case DecorationKind.StrikeThrough:
+                    decoration = TextDecorations.Strikethrough;
+                    break;
+                case DecorationKind.Underline:
+                    decoration = TextDecorations.Underline;
+                    break;
+                case DecorationKind.Baseline:
+                    decoration = TextDecorations.Baseline;
+                    break;
+                case DecorationKind.Overline:
+                    decoration = TextDecorations.OverLine;
+                    break;
+                default:
+                    decoration = null;
+                    break;
             }
-            if (value is bool b && !b)
+            if (value is bool b && (Invert ? !b : b))
                 return decoration;
 
             return null;
