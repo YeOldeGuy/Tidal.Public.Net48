@@ -7,7 +7,6 @@
              xmlns:models="clr-namespace:Tidal.Models"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:properties="clr-namespace:Tidal.Properties"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:viewmodels="clr-namespace:Tidal.Dialogs.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:AddTorrentViewModel}"
              d:DesignHeight="550"
@@ -17,7 +16,7 @@
 
     <UserControl.Resources>
         <converters:SizeConverter x:Key="SizeConverter" />
-        <converters:BoolToTextDecoration x:Key="TextDec" />
+        <converters:BoolToTextDecoration x:Key="BoolToTextDecoration" />
 
         <DataTemplate x:Key="SubFile"
                       DataType="{x:Type models:TorrentSubFile}">
@@ -71,7 +70,8 @@
                                    Text="{Binding Name,
                                                   Mode=OneWay}"
                                    TextDecorations="{Binding Wanted,
-                                                             Converter={StaticResource TextDec}}" />
+                                                             ConverterParameter='StrikeThrough',
+                                                             Converter={StaticResource BoolToTextDecoration}}" />
                         <TextBlock Grid.Column="2"
                                    HorizontalAlignment="Right"
                                    VerticalAlignment="Center"
