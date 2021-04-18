@@ -82,7 +82,7 @@ namespace Tidal.Converters
                     decoration = null;
                     break;
             }
-            if (value is bool b && (Invert ? !b : b))
+            if (value is bool b && (Invert ^ b))
                 return decoration;
 
             return null;
