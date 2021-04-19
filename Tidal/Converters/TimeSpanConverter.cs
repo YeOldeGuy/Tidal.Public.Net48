@@ -69,8 +69,11 @@ namespace Tidal.Converters
             if (value == null)
                 return null;
 
-            if (value is long tsSeconds)
+            if (value.GetType().IsPrimitive)
+            {
+                var tsSeconds = System.Convert.ToInt64(value);
                 value = TimeSpan.FromSeconds(tsSeconds);
+            }
 
             if (value is TimeSpan ts)
             {

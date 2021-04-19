@@ -5,6 +5,9 @@ using System.Windows.Data;
 
 namespace Tidal.Converters
 {
+    /// <summary>
+    /// The various kinds of text decorations available.
+    /// </summary>
     public enum DecorationKind
     {
         StrikeThrough,

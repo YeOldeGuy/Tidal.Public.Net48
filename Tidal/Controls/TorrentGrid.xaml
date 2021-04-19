@@ -7,7 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:properties="clr-namespace:Tidal.Properties" xmlns:sys="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:properties="clr-namespace:Tidal.Properties"
              d:DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="450"
              d:DesignWidth="800"
@@ -132,8 +132,8 @@
             <DataGrid.Columns>
                 <!--  Name and progress column  -->
                 <DataGridTemplateColumn Width="*"
-                                        Header="Name/Info"
-                                        ap:SortMember.Name="Name">
+                                        ap:SortMember.Name="Name"
+                                        Header="Name/Info">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Grid>
@@ -239,8 +239,8 @@
 
                 <!--  Peers column  -->
                 <DataGridTemplateColumn Width="80"
-                                        Header="Peers"
-                                        ap:SortMember.Name="PeersConnected">
+                                        ap:SortMember.Name="PeersConnected"
+                                        Header="Peers">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Grid HorizontalAlignment="Center"
@@ -275,8 +275,8 @@
 
                 <!--  Seed ratio column  -->
                 <DataGridTemplateColumn Width="Auto"
-                                        Header="Seed Ratio"
-                                        ap:SortMember.Name="UploadRatio">
+                                        ap:SortMember.Name="UploadRatio"
+                                        Header="Seed Ratio">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock HorizontalAlignment="Center"
@@ -409,8 +409,8 @@
 
                 <!--  Torrent Size Column  -->
                 <DataGridTemplateColumn Width="70"
-                                        Header="Size"
-                                        ap:SortMember.Name="TotalSize">
+                                        ap:SortMember.Name="TotalSize"
+                                        Header="Size">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock HorizontalAlignment="Center"
@@ -423,8 +423,8 @@
 
                 <!--  ETA Column  -->
                 <DataGridTemplateColumn Width="70"
-                                        Header="ETA"
-                                        ap:SortMember.Name="ETA">
+                                        ap:SortMember.Name="ETA"
+                                        Header="ETA">
                     <DataGridTemplateColumn.HeaderStyle>
                         <Style BasedOn="{StaticResource GridColumnHeader}"
                                TargetType="DataGridColumnHeader">
@@ -471,8 +471,8 @@
 
                 <!--  Activity Column  -->
                 <DataGridTemplateColumn Width="*"
-                                        Header="Active"
-                                        ap:SortMember.Name="ActivityDate">
+                                        ap:SortMember.Name="ActivityDate"
+                                        Header="Active">
                     <DataGridTemplateColumn.HeaderStyle>
                         <Style BasedOn="{StaticResource GridColumnHeader}"
                                TargetType="DataGridColumnHeader">
