@@ -33,7 +33,6 @@ namespace Tidal.Collections
         // the list, over and over. 
         private readonly HashSet<T> lookupSet;
 
-
         /// <summary>
         /// Create a new <see cref="MergeCollection{T}"./>
         /// </summary>
@@ -53,7 +52,7 @@ namespace Tidal.Collections
         /// prior to exiting the <see cref="Merge(IEnumerable{T})"/> method.
         /// </summary>
         /// <param name="rems">A collection of the elements that were removed.</param>
-        /// 
+        ///
         protected virtual void AfterMerge(IEnumerable<T> rems) { }
 
         protected override void ClearItems()
@@ -110,7 +109,7 @@ namespace Tidal.Collections
 
             // Find all of the elements that didn't have the Tag value toggled,
             // meaning that they're to be deleted.
-            var removals = Items.Where(t => (bool)t.Tag == false).ToList();
+            var removals = Items.Where(t => !(bool)t.Tag).ToList();
             foreach (var rem in removals)
             {
                 Remove(rem);
@@ -126,7 +125,7 @@ namespace Tidal.Collections
         {
             var sb = new StringBuilder($"Count: {Count};");
             for (int i = 0; i < 3; i++)
-                sb.Append($" {Items[i]},");
+                sb.Append(' ').Append(Items[i]).Append(',');
             if (Count >= 3)
                 sb.Append("...");
             return sb.ToString();

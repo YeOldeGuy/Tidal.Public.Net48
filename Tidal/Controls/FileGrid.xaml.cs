@@ -23,13 +23,8 @@ namespace Tidal.Controls
             InitializeComponent();
             messenger = ServiceResolver.Resolve<IMessenger>();
             Loaded += (s, e) =>
-            {
                 token = messenger.Subscribe<GetSelectedFilesMessage>(GetSelectedFiles, ThreadOption.PublisherThread);
-            };
-            Unloaded += (s, e) =>
-            {
-                token?.Dispose();
-            };
+            Unloaded += (s, e) => token?.Dispose();
         }
 
         private void GetSelectedFiles(GetSelectedFilesMessage getSelectionMessage)
@@ -82,7 +77,8 @@ namespace Tidal.Controls
                 if (menu.Items.Count <= 0)
                     return;
 
-                (menu.Items[0] as MenuItem).Click -= ClearSorting;
+                if (menu.Items[0] != null)
+                    ((MenuItem)menu.Items[0]).Click -= ClearSorting;
 
                 foreach (var item in menu.Items)
                 {

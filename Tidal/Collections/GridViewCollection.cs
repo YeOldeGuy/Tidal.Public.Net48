@@ -41,12 +41,10 @@ namespace Tidal.Collections
             View = collectionView.View;
         }
 
-
         /// <summary>
-        /// Return a collection of the property names that are live-sorted in the grid. 
+        /// Return a collection of the property names that are live-sorted in the grid.
         /// </summary>
         public virtual IEnumerable<string> GetSortColumns() => new[] { "" };
-
 
         /// <summary>
         /// The collection, exposed for use in DataGrids.
@@ -55,12 +53,11 @@ namespace Tidal.Collections
         /// </summary>
         public ICollectionView View { get; }
 
-
         /// <summary>
         ///   This should be called in response to the "Sorting" event of the
         ///   associated grid.
         ///   <para/>
-        ///   Ex: <code>Sorting="CodeBehindHandleSorting"</code> in the DataGrid xaml element,
+        ///   Ex: <c>Sorting="CodeBehindHandleSorting"</c> in the DataGrid xaml element,
         ///   which then invokes this method:
         ///   <example>
         ///   <code>
@@ -78,7 +75,6 @@ namespace Tidal.Collections
             var direction = args.Column.SortDirection != ListSortDirection.Ascending
                 ? ListSortDirection.Ascending
                 : ListSortDirection.Descending;
-
 
             args.Column.SortDirection = direction;
 

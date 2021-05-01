@@ -13,7 +13,6 @@ namespace Tidal.Services.Abstract
         SystemDefault,
     }
 
-
     public interface ISettingsService
     {
         /// <summary>
@@ -86,7 +85,6 @@ namespace Tidal.Services.Abstract
 
         string DownloadPresets { get; set; }
 
-
         /// <summary>
         /// Contains information necessary to restore the layout of the
         /// XAML grids of the main page.
@@ -110,6 +108,5 @@ namespace Tidal.Services.Abstract
         /// sort order of the file grid.
         /// </summary>
         string FileGridInfo { get; set; }
-
     }
 }

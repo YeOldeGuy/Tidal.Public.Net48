@@ -12,14 +12,12 @@ namespace Tidal.Converters
         Humanize,   // produces something line "12 hours, 35 minutes"
     }
 
-
     /// <summary>
     /// An <see cref="IValueConverter"/> to convert a <see cref="TimeSpan"/> to a
     /// <see cref="string"/>.
     /// </summary>
     public class TimeSpanConverter : DependencyObject, IValueConverter
     {
-
         /// <summary>
         /// Determines the way the <see cref="TimeSpan"/> is presented.
         /// </summary>
@@ -28,7 +26,6 @@ namespace Tidal.Converters
             get => (TimeSpanPresentation)GetValue(PresentationProperty);
             set => SetValue(PresentationProperty, value);
         }
-
 
         /// <summary>
         /// Determines how many values are returned. For a timespan of 01:23:45,
@@ -51,7 +48,6 @@ namespace Tidal.Converters
             set => SetValue(ToleranceProperty, value);
         }
 
-
         /// <summary>
         /// If a <see cref="TimeSpan"/> value is less than the <see cref="Tolerance"/>
         /// value, then this string will be returned.
@@ -61,8 +57,6 @@ namespace Tidal.Converters
             get => (string)GetValue(NearZeroProperty);
             set => SetValue(NearZeroProperty, value);
         }
-
-
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -92,10 +86,11 @@ namespace Tidal.Converters
             return null;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
+        public object ConvertBack(object value,
+                                  Type targetType,
+                                  object parameter,
+                                  CultureInfo culture) =>
             throw new NotImplementedException();
-        }
 
         public static readonly DependencyProperty ToleranceProperty =
             DependencyProperty.Register(nameof(Tolerance),

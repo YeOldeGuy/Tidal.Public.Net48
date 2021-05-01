@@ -49,11 +49,7 @@ namespace Tidal.Client.Models
 
         public override int GetHashCode()
         {
-            if (hashCode is null)
-            {
-                hashCode = $"{OwnerId}:{Address}".GetHashCode();
-            }
-            return hashCode.Value;
+            return hashCode ?? (hashCode = $"{OwnerId}:{Address}".GetHashCode()).Value;
         }
         #endregion
 
@@ -89,7 +85,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _OwnerId, value);
         }
 
-
         /// <summary>
         /// The torrent name that this peer is associated with.
         /// </summary>
@@ -99,7 +94,6 @@ namespace Tidal.Client.Models
             get => _OwnerName;
             set => SetProperty(ref _OwnerName, value);
         }
-
 
         /// <summary>
         /// A <see cref="MovingAverage"/> of the download rate.
@@ -111,7 +105,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _AverageToClient, value);
         }
 
-
         /// <summary>
         /// A <see cref="MovingAverage"/> of the upload rate.
         /// </summary>
@@ -121,7 +114,6 @@ namespace Tidal.Client.Models
             get => _AverageToPeer == 0 && RateToPeer > 0 ? RateToPeer : _AverageToPeer;
             set => SetProperty(ref _AverageToPeer, value);
         }
-
 
         /// <summary>
         /// The GeoIP2 location as found. This is an <see cref="object"/> so
@@ -134,7 +126,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _Geo, value);
         }
 
-
         /// <summary>
         /// A string representing the peer's location.
         /// </summary>
@@ -144,7 +135,6 @@ namespace Tidal.Client.Models
             get => _Location;
             set => SetProperty(ref _Location, value);
         }
-
 
         /// <summary>
         /// Is the location for the peer a valid one?
@@ -168,7 +158,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _Address, value);
         }
 
-
         /// <summary>
         /// The client the peer is using. This may be garbage for certain peers
         /// who try to disguise the app being used.
@@ -179,7 +168,6 @@ namespace Tidal.Client.Models
             get => _ClientName;
             set => SetProperty(ref _ClientName, value);
         }
-
 
         /// <summary>
         /// A string of single character flags.
@@ -260,7 +248,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _Flags, value);
         }
 
-
         /// <summary>
         /// Is the connection to the peer encrypted?
         /// </summary>
@@ -270,7 +257,6 @@ namespace Tidal.Client.Models
             get => _IsEncrypted;
             set => SetProperty(ref _IsEncrypted, value);
         }
-
 
         /// <summary>
         /// What port is the peer using?
@@ -282,7 +268,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _Port, value);
         }
 
-
         /// <summary>
         /// How far along is the peer's download progress?
         /// </summary>
@@ -293,7 +278,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _Progress, value);
         }
 
-
         /// <summary>
         /// This is the download rate from the peer to the client
         /// </summary>
@@ -303,7 +287,6 @@ namespace Tidal.Client.Models
             get => _RateToClient;
             set => SetProperty(ref _RateToClient, value);
         }
-
 
         /// <summary>
         /// This is the upload rate from the client to the peer.

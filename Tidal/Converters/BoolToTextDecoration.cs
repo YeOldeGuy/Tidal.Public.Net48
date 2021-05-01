@@ -50,6 +50,10 @@ namespace Tidal.Converters
                                         new PropertyMetadata(DecorationKind.StrikeThrough));
 
 
+        /// <summary>
+        /// If <see langword="true"/>, then invert the bound value to
+        /// determine if the decoration should be applied.
+        /// </summary>
         public bool Invert
         {
             get => (bool)GetValue(InvertProperty);

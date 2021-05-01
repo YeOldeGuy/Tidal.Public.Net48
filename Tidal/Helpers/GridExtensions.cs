@@ -12,7 +12,7 @@ namespace Tidal.Helpers
     public static class GridExtensions
     {
         /// <summary>
-        /// Setup the <paramref name="grid"/> to the values in 
+        /// Setup the <paramref name="grid"/> to the values in
         /// <paramref name="json"/>.
         /// </summary>
         /// <param name="grid">The grid to initialize</param>
@@ -30,7 +30,6 @@ namespace Tidal.Helpers
 
             using (var _ = grid.Items.DeferRefresh())
             {
-
                 // Clear out any sort descriptions:
                 grid.Items.SortDescriptions.Clear();
 

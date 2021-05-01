@@ -6,7 +6,6 @@ namespace Tidal.Models.Messages
     /// The base class for all of the various error messages that the
     /// <see cref="Services.Abstract.IBrokerService"/> can emit.
     /// </summary>
-
     internal abstract class ErrorMessage
     {
         public ErrorMessage(string message, string header = null, TimeSpan timeout = default)
@@ -22,7 +21,6 @@ namespace Tidal.Models.Messages
 
         public TimeSpan Timeout { get; }
     }
-
 
     /// <summary>
     /// Represents an error that cannot be recovered from without
@@ -40,7 +38,6 @@ namespace Tidal.Models.Messages
         {
         }
     }
-
 
     /// <summary>
     /// A type of error message that isn't fatal but isn't exactly just

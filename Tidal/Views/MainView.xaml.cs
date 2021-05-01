@@ -44,7 +44,6 @@ namespace Tidal.Views
             torrentGrid.Deserialize(settingsService.TorrentGridInfo);
             peerGrid.Deserialize(settingsService.PeerGridInfo);
             fileGrid.Deserialize(settingsService.FileGridInfo);
-
         }
 
         public void OnNavigatedFrom(NavigationContext navigationContext)

@@ -140,6 +140,7 @@
     <Compile Include="Dialogs\Views\TorrentPropertiesView.xaml.cs">
       <DependentUpon>TorrentPropertiesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\AsyncUtils.cs" />
     <Compile Include="Helpers\DataGridColumnInfo.cs" />
     <Compile Include="Helpers\DataGridUtils.cs" />

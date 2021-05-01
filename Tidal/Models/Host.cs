@@ -46,10 +46,8 @@ namespace Tidal.Models
 
         public override int GetHashCode() => Id.GetHashCode();
 
-
         [IgnoreDataMember]
         public object Tag { get; set; }
-
 
         public void Assign(Host other)
         {
@@ -87,7 +85,6 @@ namespace Tidal.Models
             host.MarkAsClean();
             return host;
         }
-
 
         private static void ValidateHost(IValidatableModel model)
         {
