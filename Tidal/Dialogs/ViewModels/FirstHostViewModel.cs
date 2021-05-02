@@ -22,7 +22,6 @@ namespace Tidal.Dialogs.ViewModels
         // Do not localize
         public const string HostParameter = "host";
 
-
         public string Title
         {
             get => _Title;
@@ -34,7 +33,6 @@ namespace Tidal.Dialogs.ViewModels
             get => _SelectedHost;
             set => SetProperty(ref _SelectedHost, value);
         }
-
 
         public event Action<IDialogResult> RequestClose;
 

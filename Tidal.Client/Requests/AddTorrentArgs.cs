@@ -27,7 +27,6 @@ namespace Tidal.Client.Requests
             FileName = link;
         }
 
-
         /// <summary>
         /// Create the arguments section of the command.
         /// </summary>

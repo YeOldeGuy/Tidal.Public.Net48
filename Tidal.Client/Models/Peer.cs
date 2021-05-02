@@ -32,13 +32,14 @@ namespace Tidal.Client.Models
         private long _RateToClient;
         private long _RateToPeer;
         private object _Geo;
-        #endregion
+        #endregion Backing Store
 
         // These MovingAverage values are only allocated on demand. The peers that
         // are being retrieved from the client won't need them. One other instance
         // will be the one that is being displayed somewhere; that one gets values
         // assigned to it via Assign(), and will get the averages created there.
         //
+
         private MovingAverage upAverage;
         private MovingAverage downAverage;
 
@@ -51,7 +52,7 @@ namespace Tidal.Client.Models
         {
             return hashCode ?? (hashCode = $"{OwnerId}:{Address}".GetHashCode()).Value;
         }
-        #endregion
+        #endregion IEquatable
 
         #region Overrides
         protected override void AssignInternal(Peer other)
@@ -71,7 +72,7 @@ namespace Tidal.Client.Models
             AverageToClient = (long)downAverage.Push(other.RateToClient);
             AverageToPeer = (long)upAverage.Push(other.RateToPeer);
         }
-        #endregion
+        #endregion Overrides
 
         #region Synthetic Properties
 
@@ -145,7 +146,7 @@ namespace Tidal.Client.Models
             get => _LocationValid;
             set => SetProperty(ref _LocationValid, value);
         }
-        #endregion
+        #endregion Synthetic Properties
 
         #region JSON Properties
         /// <summary>
@@ -297,6 +298,6 @@ namespace Tidal.Client.Models
             get => _RateToPeer;
             set => SetProperty(ref _RateToPeer, value);
         }
-        #endregion
+        #endregion JSON Properties
     }
 }

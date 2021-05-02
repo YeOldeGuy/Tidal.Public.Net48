@@ -11,14 +11,14 @@ namespace Tidal.Client.Models
         #region ITag
         #region Backing Store
         private object _Tag;
-        #endregion
+        #endregion Backing Store
 
         [IgnoreDataMember]
         public object Tag
         {
             get => _Tag; set => SetProperty(ref _Tag, value);
         }
-        #endregion
+        #endregion ITag
 
         #region INPC
         public event PropertyChangedEventHandler PropertyChanged;
@@ -61,13 +61,13 @@ namespace Tidal.Client.Models
 
             return true;
         }
-        #endregion
+        #endregion INPC
 
         #region IAssignable
         /// <summary>
         /// Assign one intance's values (usually the same type) to another
         /// instance, causing the <see cref="INotifyPropertyChanged"/> events to
-        /// fire off for each change. 
+        /// fire off for each change.
         /// </summary>
         /// <remarks>
         /// The <see cref="ITag.Tag"/> value is copied if <typeparamref
@@ -81,12 +81,11 @@ namespace Tidal.Client.Models
                 Tag = tag.Tag;
         }
 
-
         /// <summary>
         /// Does the actual leg work of the assignment in <see cref="Assign(T)"/>
         /// </summary>
         /// <param name="other">An instance whose values we covet.</param>
         protected abstract void AssignInternal(T other);
-        #endregion
+        #endregion IAssignable
     }
 }

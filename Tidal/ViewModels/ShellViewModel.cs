@@ -42,7 +42,6 @@ namespace Tidal.ViewModels
         private readonly SynchronizationContext context;
         private bool inFatality;
 
-
         public ShellViewModel(IRegionManager regionManager,
                               IMessenger messenger,
                               IBrokerService brokerService,
@@ -93,7 +92,7 @@ namespace Tidal.ViewModels
                     break;
             }
 
-            messenger.Subscribe<ShutdownMessage>((p) => { taskService.Stop(); brokerService.Stop(); });
+            messenger.Subscribe<ShutdownMessage>((_) => { taskService.Stop(); brokerService.Stop(); });
 
             // Misc subscriptions
             messenger.Subscribe<StartupMessage>(OnStartup);
@@ -116,7 +115,7 @@ namespace Tidal.ViewModels
 
         private void UiInvoke(Action action)
         {
-            context.Post(o => action.Invoke(), null);
+            context.Post(_ => action.Invoke(), null);
         }
 
         #region Startup Stuff
@@ -213,7 +212,7 @@ namespace Tidal.ViewModels
                 ProcessCommandLine(startupMessage);
             }
         }
-        #endregion
+        #endregion Startup Stuff
 
         #region Scheduled Tasks
         //
@@ -263,7 +262,7 @@ namespace Tidal.ViewModels
             GC.WaitForPendingFinalizers();
             await Task.CompletedTask;
         }
-        #endregion
+        #endregion Scheduled Tasks
 
         #region Client Subscriptions
         //
@@ -306,7 +305,7 @@ namespace Tidal.ViewModels
                 notificationService.ShowInfo(msg, hdr, 10.Seconds());
             }
         }
-        #endregion
+        #endregion Client Subscriptions
 
         #region Error Subscriptions and handling
         //
@@ -366,7 +365,7 @@ namespace Tidal.ViewModels
             displayStack.AddMessage(info.Message, info.Timeout);
         }
 
-        #endregion
+        #endregion Error Subscriptions and handling
 
         #region Other Subscriptions
         private async void OnHostChanged(HostChangedMessage hostChangedMessage)
@@ -376,7 +375,7 @@ namespace Tidal.ViewModels
                 IsOpen = await brokerService.OpenAsync(host);
         }
 
-        #endregion
+        #endregion Other Subscriptions
 
         #region Properties Visible to XAML
         #region Backing Store
@@ -390,7 +389,7 @@ namespace Tidal.ViewModels
         private string _AltModeGlyph;
         private bool _CanGoBack;
         private string _StatusInfo;
-        #endregion
+        #endregion Backing Store
 
         public string Title
         {
@@ -463,7 +462,7 @@ namespace Tidal.ViewModels
                 return version.ToString();
             }
         }
-        #endregion
+        #endregion Properties Visible to XAML
 
         #region Helpers for Properties
         private void SetTitle(SessionStats stats)
@@ -526,7 +525,7 @@ namespace Tidal.ViewModels
             AltModeGlyph = MDLConsts.Updating;
             AltModeLabel = Resources.ShellStandby;
         }
-        #endregion
+        #endregion Helpers for Properties
 
         #region upload speed limit menu stuff
         internal long UploadSpeedLimit => Session.SpeedLimitUpEnabled == false ? -1 : Session.SpeedLimitUp;
@@ -535,8 +534,7 @@ namespace Tidal.ViewModels
         {
             get
             {
-                var vals = settingsService.UploadPresets.Split(',');
-                foreach (string val in vals)
+                foreach (string val in settingsService.UploadPresets.Split(','))
                 {
                     if (long.TryParse(val, out var speed))
                         yield return speed;
@@ -598,7 +596,7 @@ namespace Tidal.ViewModels
             AltModePause();
             messenger.Send(new SetSessionRequest(session));
         }
-        #endregion
+        #endregion upload speed limit menu stuff
 
         #region download speed limit menu stuff
         internal long DownloadSpeedLimit => Session.SpeedLimitDownEnabled == false ? -1 : Session.SpeedLimitDown;
@@ -607,8 +605,7 @@ namespace Tidal.ViewModels
         {
             get
             {
-                var vals = settingsService.DownloadPresets.Split(new[] { ',' });
-                foreach (string val in vals)
+                foreach (string val in settingsService.DownloadPresets.Split(new[] { ',' }))
                 {
                     if (long.TryParse(val, out var speed))
                         yield return speed;
@@ -661,7 +658,7 @@ namespace Tidal.ViewModels
             AltModePause();
             messenger.Send(new SetSessionRequest(session));
         }
-        #endregion
+        #endregion download speed limit menu stuff
 
         #region Navigation Methods
         private void OnMouseNav(MouseNavMessage navMsg)
@@ -695,7 +692,7 @@ namespace Tidal.ViewModels
             SettingsCommand.RaiseCanExecuteChanged();
             CanGoBack = navigationService.Journal.CanGoBack;
         }
-        #endregion
+        #endregion Navigation Methods
 
         #region ICommands and helpers
         #region ICommand Backing
@@ -707,7 +704,7 @@ namespace Tidal.ViewModels
         private DelegateCommand _AddTorrentCommand;
         private DelegateCommand _AddMagnetCommand;
         private DelegateCommand _ToggleAltMode;
-        #endregion
+        #endregion ICommand Backing
 
         /// <summary>
         /// Returns true if the currently displayed page is the one specified in
@@ -770,8 +767,6 @@ namespace Tidal.ViewModels
             messenger.Send(new SetSessionRequest(nameof(SessionMutator.AltSpeedEnabled), IsAltModeEnabled));
         }, () => true);
 
-
-
         private IEnumerable<TorrentFileWanted> ParseTorrentFiles(IEnumerable<string> files)
         {
             foreach (var file in files)
@@ -802,9 +797,7 @@ namespace Tidal.ViewModels
                     {
                         var action = r.Parameters.GetValue<AddTorrentDisposition>(AddTorrentViewModel.ActionParameter);
                         var paused = action == AddTorrentDisposition.Pause;
-                        var files = r.Parameters.GetValue<IEnumerable<AddTorrentInfo>>(AddTorrentViewModel.FilesParameter);
-
-                        foreach (var file in files)
+                        foreach (var file in r.Parameters.GetValue<IEnumerable<AddTorrentInfo>>(AddTorrentViewModel.FilesParameter))
                         {
                             messenger.Send(new AddTorrentRequest(file.Path, file.UnwantedIndexes, paused));
                         }
@@ -830,7 +823,6 @@ namespace Tidal.ViewModels
             openFileDialog = null;
         }, () => true);
 
-
         public DelegateCommand AddMagnetCommand =>
             _AddMagnetCommand = _AddMagnetCommand ?? new DelegateCommand(() =>
         {
@@ -851,6 +843,6 @@ namespace Tidal.ViewModels
                 }
             });
         }, () => true);
-        #endregion
+        #endregion ICommands and helpers
     }
 }

@@ -26,7 +26,6 @@ namespace Tidal.Dialogs.ViewModels
         }
     }
 
-
     public class AddTorrentViewModel : BindableBase, IDialogAware
     {
         // Not user visible. Do not translate
@@ -59,7 +58,6 @@ namespace Tidal.Dialogs.ViewModels
         public event Action<IDialogResult> RequestClose;
 
         public bool CanCloseDialog() => true;
-
 
         public virtual void RaiseRequestClose(IDialogResult dialogResult)
         {
@@ -181,6 +179,6 @@ namespace Tidal.Dialogs.ViewModels
             {
                 CloseDialog(p);
             }, (p) => p == AddTorrentDisposition.Cancel || IsValid);
-        #endregion
+        #endregion Commands
     }
 }

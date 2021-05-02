@@ -17,7 +17,7 @@ namespace Tidal.Client.Models
         private int _SessionCount;
         private int _FilesAdded;
         private long _SecondsActive;
-        #endregion
+        #endregion Backing Store
 
         protected override void AssignInternal(TemporalStats other)
         {
@@ -31,7 +31,6 @@ namespace Tidal.Client.Models
             SecondsActive = other.SecondsActive;
         }
 
-
         /// <summary>
         /// Total number of bytes uploaded, across all torrents, current and
         /// removed.
@@ -42,7 +41,6 @@ namespace Tidal.Client.Models
             get => _UploadedBytes;
             set => SetProperty(ref _UploadedBytes, value);
         }
-
 
         /// <summary>
         /// Total number of bytes downloaded, across all torrents, current and
@@ -55,7 +53,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _DownloadedBytes, value);
         }
 
-
         /// <summary>
         /// Number of files that have been added to the client since either the
         /// client was installed, or since the last startup.
@@ -67,7 +64,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _FilesAdded, value);
         }
 
-
         /// <summary>
         /// Number of times the client has been started up.
         /// </summary>
@@ -77,7 +73,6 @@ namespace Tidal.Client.Models
             get => _SessionCount;
             set => SetProperty(ref _SessionCount, value);
         }
-
 
         /// <summary>
         /// Amount of time, in seconds, that the client has been running.
@@ -92,7 +87,6 @@ namespace Tidal.Client.Models
                     RaisePropertyChanged(nameof(TimeActive));
             }
         }
-
 
         /// <summary>
         /// A <see cref="TimeSpan"/> representation of <see

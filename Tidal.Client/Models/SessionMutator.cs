@@ -49,7 +49,6 @@ namespace Tidal.Client.Models
             SetProperty(propertyName, value);
         }
 
-
         #region Backing Store
         private long? _AltScheduleBeginMinutes;
         private long? _AltScheduleEndMinutes;
@@ -79,7 +78,7 @@ namespace Tidal.Client.Models
         private long? _SpeedLimitUp;
         private bool? _SpeedLimitDownEnabled;
         private bool? _SpeedLimitUpEnabled;
-        #endregion
+        #endregion Backing Store
 
         #region Alt Speed Properties
         /// <summary>
@@ -91,7 +90,6 @@ namespace Tidal.Client.Models
             get => _AltSpeedEnabled;
             set => SetProperty(ref _AltSpeedEnabled, value);
         }
-
 
         /// <summary>
         /// If the alternative speed settings are in use, this is the maximum
@@ -115,7 +113,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _AltSpeedUp, value);
         }
 
-
         /// <summary>
         /// If an automatic schedule is enabled for setting the alternate speed
         /// settings, this will be the time each day it is engaged.
@@ -135,7 +132,6 @@ namespace Tidal.Client.Models
             }
         }
 
-
         /// <summary>
         /// A processed representation of the <see cref="AltScheduleBeginMinutes"/>
         /// value, expressed as a <see cref="TimeSpan"/>.
@@ -146,7 +142,6 @@ namespace Tidal.Client.Models
             get => TimeSpan.FromMinutes(AltScheduleBeginMinutes.GetValueOrDefault());
             set => AltScheduleBeginMinutes = (long)value.GetValueOrDefault().TotalMinutes;
         }
-
 
         /// <summary>
         /// If an automatic schedule is enabled for setting the alternate speed
@@ -168,7 +163,6 @@ namespace Tidal.Client.Models
             }
         }
 
-
         /// <summary>
         /// A processed representation of the <see cref="AltScheduleEndMinutes"/>
         /// value, expressed as a time after the current date's midnight.
@@ -179,7 +173,6 @@ namespace Tidal.Client.Models
             get => TimeSpan.FromMinutes(AltScheduleEndMinutes.GetValueOrDefault());
             set => AltScheduleEndMinutes = (long)value.GetValueOrDefault().TotalMinutes;
         }
-
 
         /// <summary>
         /// If <see langword="true"/>, then the alternative speeds will be
@@ -197,7 +190,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _AltSpeedTimeEnabled, value);
         }
 
-
         /// <summary>
         /// A bitmap of the days of the week that the alternate speed schedule
         /// should be applied, bit 0 = Sunday, bit 1 = Monday, bit 6 = Saturday.
@@ -212,7 +204,7 @@ namespace Tidal.Client.Models
             get => _AltSpeedTimeDays;
             set => SetProperty(ref _AltSpeedTimeDays, value);
         }
-        #endregion
+        #endregion Alt Speed Properties
 
         #region Download Properties
         /// <summary>
@@ -231,7 +223,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _DownloadDirectory, value);
         }
 
-
         /// <summary>
         /// The maximum number of torrents to download simultaneously, if the
         /// value of <see cref="DownloadQueueEnabled"/> is <see
@@ -243,7 +234,6 @@ namespace Tidal.Client.Models
             get => _DownloadQueueSize;
             set => SetProperty(ref _DownloadQueueSize, value);
         }
-
 
         /// <summary>
         /// If <see langword="true"/>, there will be a maximum number of
@@ -257,7 +247,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _DownloadQueueEnabled, value);
         }
 
-
         /// <summary>
         /// If <see cref="IncompleteDirectoryEnabled"/> is <see
         /// langword="true"/>, then partial downloads will be stored in this
@@ -270,7 +259,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _IncompleteDirectory, value);
         }
 
-
         /// <summary>
         /// If <see langword="true"/>, partial torrent downloads will be
         /// stored in <see cref="IncompleteDirectory"/>.
@@ -281,7 +269,6 @@ namespace Tidal.Client.Models
             get => _IncompleteDirectoryEnabled;
             set => SetProperty(ref _IncompleteDirectoryEnabled, value);
         }
-
 
         /// <summary>
         /// if <see langword="true"/>, then partial downloads will have a suffix
@@ -298,7 +285,7 @@ namespace Tidal.Client.Models
             get => _RenamePartialFiles;
             set => SetProperty(ref _RenamePartialFiles, value);
         }
-        #endregion
+        #endregion Download Properties
 
         #region Protocol Settings
         /// <summary>
@@ -312,7 +299,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _DHTEnabled, value);
         }
 
-
         /// <summary>
         /// Local Peer Discovery on/off.
         /// </summary>
@@ -322,7 +308,6 @@ namespace Tidal.Client.Models
             get => _LPDEnabled;
             set => SetProperty(ref _LPDEnabled, value);
         }
-
 
         /// <summary>
         /// I haven't the foggiest what it does, but if it's <see
@@ -335,7 +320,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _PEXEnabled, value);
         }
 
-
         /// <summary>
         /// I haven't the foggiest what it does, but if it's <see
         /// langword="true"/>, then UTP will be allowed in public torrents.
@@ -347,7 +331,7 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _UTPEnabled, value);
         }
 
-        #endregion
+        #endregion Protocol Settings
 
         #region Encryption
         private string _EncString;
@@ -365,7 +349,6 @@ namespace Tidal.Client.Models
                     RaisePropertyChanged(nameof(Encryption));
             }
         }
-
 
         /// <summary>
         /// The encryption level that the client enforces.
@@ -403,7 +386,7 @@ namespace Tidal.Client.Models
                 }
             }
         }
-        #endregion
+        #endregion Encryption
 
         #region Seeding Limits
         private long? _IdleSeedingLimitMinutes;
@@ -426,7 +409,6 @@ namespace Tidal.Client.Models
             }
         }
 
-
         /// <summary>
         /// The amount of time that a seeding torrent can idle, not uploading to
         /// a peer before the seeding is stopped.
@@ -438,7 +420,6 @@ namespace Tidal.Client.Models
             set => IdleSeedingLimitMinutes = (long)value.GetValueOrDefault().TotalMinutes;
         }
 
-
         /// <summary>
         /// If <see langword="true"/>, then torrents will be monitored for idle
         /// time and shutdown if the <see cref="IdleSeedingLimit"/> is reached.
@@ -449,7 +430,6 @@ namespace Tidal.Client.Models
             get => _IdleSeedingLimitEnabled;
             set => SetProperty(ref _IdleSeedingLimitEnabled, value);
         }
-
 
         /// <summary>
         /// If enabled, torrents will be monitored and once the ratio of amount
@@ -463,7 +443,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _SeedRatioLimit, value);
         }
 
-
         /// <summary>
         /// If <see langword="true"/>, the <see cref="SeedRatioLimit"/> will be
         /// honored.
@@ -474,7 +453,7 @@ namespace Tidal.Client.Models
             get => _SeedRatioLimitEnabled;
             set => SetProperty(ref _SeedRatioLimitEnabled, value);
         }
-        #endregion
+        #endregion Seeding Limits
 
         #region Peer limits and ports
         /// <summary>
@@ -488,7 +467,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _PeerLimitGlobal, value);
         }
 
-
         /// <summary>
         /// The maximum number of peers a torrent can have. Note that the number
         /// may be exceeded on occasion and that each torrent also has its own
@@ -500,7 +478,6 @@ namespace Tidal.Client.Models
             get => _PeerLimitPerTorrent;
             set => SetProperty(ref _PeerLimitPerTorrent, value);
         }
-
 
         /// <summary>
         /// Gets the port number that peers may connect to the host on. This
@@ -517,7 +494,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _PeerPort, value);
         }
 
-
         /// <summary>
         /// If <see langword="true"/>, then when the host is restarted, it will
         /// choose a <see cref="PeerPort"/> value at random. This is kinda
@@ -532,7 +508,7 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _PeerPortRandomize, value);
         }
 
-        #endregion
+        #endregion Peer limits and ports
 
         #region Speed Limits
         /// <summary>
@@ -546,7 +522,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _SpeedLimitDown, value);
         }
 
-
         /// <summary>
         /// If <see cref="SpeedLimitUpEnabled"/> is <see langword="true"/>, then
         /// this represents the global, non-alt-mode upload speed in KB/s.
@@ -558,7 +533,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _SpeedLimitUp, value);
         }
 
-
         /// <summary>
         /// If <see langword="true"/>, the download speed will be limited.
         /// </summary>
@@ -568,7 +542,6 @@ namespace Tidal.Client.Models
             get => _SpeedLimitDownEnabled;
             set => SetProperty(ref _SpeedLimitDownEnabled, value);
         }
-
 
         /// <summary>
         /// If <see langword="true"/>, the upload speed will be limited.
@@ -580,6 +553,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _SpeedLimitUpEnabled, value);
         }
 
-        #endregion
+        #endregion Speed Limits
     }
 }

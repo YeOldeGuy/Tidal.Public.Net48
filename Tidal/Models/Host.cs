@@ -136,7 +136,7 @@ namespace Tidal.Models
 
         [IgnoreDataMember]
         public bool HasErrors => !IsValid;
-        #endregion
+        #endregion INotifyDataErrorInfo
 
         #region Properties
 
@@ -231,6 +231,6 @@ namespace Tidal.Models
             get => Read(false);
             set => Write(value);
         }
-        #endregion
+        #endregion Properties
     }
 }

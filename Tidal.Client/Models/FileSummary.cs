@@ -70,14 +70,13 @@ namespace Tidal.Client.Models
             hashCode = other.hashCode;
         }
 
-
         #region IEquatable
         public bool Equals(FileSummary other) => GetHashCode().Equals(other.GetHashCode());
 
         public override bool Equals(object obj) => obj is null || (obj is FileSummary fs && Equals(fs));
 
         public override int GetHashCode() => hashCode;
-        #endregion
+        #endregion IEquatable
 
         /// <summary>
         /// The value of <see cref="Torrent.Id"/> of the owning torrent.
@@ -86,7 +85,6 @@ namespace Tidal.Client.Models
         {
             get => _OwnerId; set => SetProperty(ref _OwnerId, value);
         }
-
 
         /// <summary>
         /// This file's offset into the array of <see cref="FileInfo"/> values.

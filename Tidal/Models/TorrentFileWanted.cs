@@ -29,7 +29,6 @@ namespace Tidal.Models
         public long Length { get => _Length; set => SetProperty(ref _Length, value); }
     }
 
-
     public class TorrentFileWanted : BindableBase, IDisposable
     {
         private bool _Wanted;

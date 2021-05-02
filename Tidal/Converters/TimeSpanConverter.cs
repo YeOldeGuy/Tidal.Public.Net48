@@ -8,8 +8,14 @@ namespace Tidal.Converters
 {
     public enum TimeSpanPresentation
     {
-        Normal,     // produces something like "0.12:34:56.0172"
-        Humanize,   // produces something line "12 hours, 35 minutes"
+        /// <summary>
+        /// produces something like "0.12:34:56.0172"
+        /// </summary>
+        Normal = 0,
+        /// <summary>
+        /// produces something line "12 hours, 35 minutes"
+        /// </summary>
+        Humanize = 1,
     }
 
     /// <summary>

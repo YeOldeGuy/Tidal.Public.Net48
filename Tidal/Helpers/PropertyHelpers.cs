@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq;
 
 namespace Tidal.Helpers
 {
@@ -40,7 +39,7 @@ namespace Tidal.Helpers
                 return propertyName;
 
             var attrs = prop.GetCustomAttributes(typeof(TAttr), false);
-            return attrs != null && attrs.Count() > 0 ? selector((TAttr)attrs[0]) : propertyName;
+            return attrs?.Length > 0 ? selector((TAttr)attrs[0]) : propertyName;
         }
 
         public static string GetDescription<TObj>(string propertyName)

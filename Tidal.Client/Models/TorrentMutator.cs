@@ -33,7 +33,7 @@ namespace Tidal.Client.Models
         private double? _SeedRatioLimit;
         private long? _UploadLimit;
         private bool? _UploadLimited;
-        #endregion
+        #endregion Backing Store
 
         /// <summary>
         /// Create an all-null <see cref="TorrentMutator"/>, suitable for
@@ -52,7 +52,6 @@ namespace Tidal.Client.Models
         {
             SetProperty(propertyName, value);
         }
-
 
         public void Assign(Torrent tor)
         {
@@ -109,7 +108,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _IsChanged, value);
         }
 
-
         /// <summary>
         /// Set the <see cref="BandwidthPriority"/> of the <see cref="Torrent"/>.
         /// </summary>
@@ -119,7 +117,6 @@ namespace Tidal.Client.Models
             get => _BandwidthPriority;
             set => SetProperty(ref _BandwidthPriority, value);
         }
-
 
         /// <summary>
         /// Change the maximum download speed a torrent can achieve.
@@ -131,7 +128,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _DownloadLimit, value);
         }
 
-
         /// <summary>
         /// Is the download speed of this <see cref="Torrent"/> limited?
         /// </summary>
@@ -141,7 +137,6 @@ namespace Tidal.Client.Models
             get => _DownloadLimited;
             set => SetProperty(ref _DownloadLimited, value);
         }
-
 
         /// <summary>
         /// The index numbers of the files in the torrent that should be
@@ -155,7 +150,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _FilesWanted, value);
         }
 
-
         /// <summary>
         /// The index numbers of the files in the torrent that should <b>not</b>
         /// be downloaded. Zero-based, naturally, and the index values are
@@ -167,7 +161,6 @@ namespace Tidal.Client.Models
             get => _FilesUnwanted;
             set => SetProperty(ref _FilesUnwanted, value);
         }
-
 
         /// <summary>
         /// If <see langword="true"/>, then the <see cref="Torrent"/> will pay
@@ -186,7 +179,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _HonorsSessionLimits, value);
         }
 
-
         /// <summary>
         /// A list of <see cref="Torrent.Id"/> values that the changes within
         /// this mutator will effect.
@@ -197,7 +189,6 @@ namespace Tidal.Client.Models
             get => _Ids;
             set => SetProperty(ref _Ids, value);
         }
-
 
         /// <summary>
         /// The directory that the torrent will be placed in when completed.
@@ -210,10 +201,9 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _Location, value);
         }
 
-
         /// <summary>
         /// Sets the maximum number of peers that can be connected to the
-        /// <see cref="Torrent"/>. 
+        /// <see cref="Torrent"/>.
         /// </summary>
         /// <seealso cref="HonorsSessionLimits"/>
         [DataMember(Name = RpcConstants.PeerLimit), Description("Peer Limit")]
@@ -222,7 +212,6 @@ namespace Tidal.Client.Models
             get => _PeerLimit;
             set => SetProperty(ref _PeerLimit, value);
         }
-
 
         /// <summary>
         /// A list of <see cref="Torrent.Id"/> values to set to <see
@@ -235,7 +224,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _PriorityHigh, value);
         }
 
-
         /// <summary>
         /// A list of <see cref="Torrent.Id"/> values to set to <see
         /// cref="BandwidthPriority.Normal"/>
@@ -246,7 +234,6 @@ namespace Tidal.Client.Models
             get => _PriorityNormal;
             set => SetProperty(ref _PriorityNormal, value);
         }
-
 
         /// <summary>
         /// A list of <see cref="Torrent.Id"/> values to set to <see
@@ -259,7 +246,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _PriorityLow, value);
         }
 
-
         /// <summary>
         /// The value used by the client to set the <see cref="SeedIdleMode"/>
         /// of the torrent, as it balks at enumerations.
@@ -270,7 +256,6 @@ namespace Tidal.Client.Models
             get => _SeedIdleMode;
             set => SetProperty(ref _SeedIdleMode, value);
         }
-
 
         /// <summary>
         /// Convenience property for settings the <see cref="SeedLimitMode"/>
@@ -283,14 +268,12 @@ namespace Tidal.Client.Models
             set => SeedIdleModeRaw = (int)value.GetValueOrDefault();
         }
 
-
         [DataMember(Name = RpcConstants.SeedRatioMode), Description("Seeding Ratio Mode")]
         public int? SeedRatioModeRaw
         {
             get => _SeedRatioMode;
             set => SetProperty(ref _SeedRatioMode, value);
         }
-
 
         /// <summary>
         /// Set the <see cref="SeedLimitMode"/> for the seed ratio.
@@ -302,14 +285,12 @@ namespace Tidal.Client.Models
             set => SeedRatioModeRaw = (int)value.GetValueOrDefault();
         }
 
-
         [DataMember(Name = RpcConstants.SeedIdleLimit), Description("Seed Idle Limit")]
         public long? SeedIdleLimitRaw
         {
             get => _SeedIdleLimit;
             set => SetProperty(ref _SeedIdleLimit, value);
         }
-
 
         /// <summary>
         /// The time that a seeding torrent can sit idle before being paused.
@@ -320,7 +301,6 @@ namespace Tidal.Client.Models
             get => TimeSpan.FromMinutes(SeedIdleLimitRaw.GetValueOrDefault());
             set => SeedIdleLimitRaw = (long)value.GetValueOrDefault().TotalMinutes;
         }
-
 
         /// <summary>
         /// The seed ratio (amount uploaded / amount downloaded) that when reached
@@ -333,7 +313,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _SeedRatioLimit, value);
         }
 
-
         /// <summary>
         /// Maximum upload speed.
         /// </summary>
@@ -343,7 +322,6 @@ namespace Tidal.Client.Models
             get => _UploadLimit;
             set => SetProperty(ref _UploadLimit, value);
         }
-
 
         /// <summary>
         /// If <see langword="true"/>, the torrent will not exceed the <see

@@ -52,7 +52,7 @@ namespace Tidal.Views
             SerializeLayoutGrid(settingsService);
             SerializeDataGrids(settingsService);
         }
-        #endregion
+        #endregion INavigationAware Methods
 
         #region Persistence Methods
         private void OnSaveSettings(SaveSettingsMessage saveMessage)
@@ -75,6 +75,6 @@ namespace Tidal.Views
             info.AddLayout(nameof(details), details.ColumnDefinitions);
             settings.MainPageLayout = info;
         }
-        #endregion
+        #endregion Persistence Methods
     }
 }

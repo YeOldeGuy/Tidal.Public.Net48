@@ -167,6 +167,6 @@ namespace Tidal.Services.Actual
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
         }
-        #endregion
+        #endregion IDisposable Support
     }
 }

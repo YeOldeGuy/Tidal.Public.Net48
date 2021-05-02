@@ -18,7 +18,6 @@ using Tidal.Models.Messages;
 using Tidal.Properties;
 using Tidal.Services.Abstract;
 
-
 namespace Tidal.ViewModels
 {
     public class SettingsViewModel : BindableBase, INavigationAware
@@ -74,7 +73,7 @@ namespace Tidal.ViewModels
             foreach (var disposable in disposables)
                 disposable.Dispose();
         }
-        #endregion
+        #endregion INavigationAware Methods
 
         #region Message handlers
         private void OnSession(SessionResponse obj)
@@ -100,7 +99,7 @@ namespace Tidal.ViewModels
                 Setter.PropertyChanged += Setter_PropertyChanged;
             }
         }
-        #endregion
+        #endregion Message handlers
 
         #region Property Helpers
         private void WatchForDLComplete(object sender, PropertyChangedEventArgs e)
@@ -158,7 +157,7 @@ namespace Tidal.ViewModels
                 MMDBStatusReport = string.Format(Resources.GeoDBFileNotFound_1, settingsService.GeoDbFileName);
             }
         }
-        #endregion
+        #endregion Property Helpers
 
         #region Visible Properties
         private string _MMDBStatusReport;
@@ -170,7 +169,7 @@ namespace Tidal.ViewModels
         private DateTime _AltSpeedTimeBegin;
         private DateTime _AltSpeedTimeEnd;
         #region Backing Store
-        #endregion
+        #endregion Backing Store
 
         public Session Setter { get; set; }
 
@@ -341,14 +340,14 @@ namespace Tidal.ViewModels
                 FetchMMDBCommand.RaiseCanExecuteChanged();
             }
         }
-        #endregion
+        #endregion Visible Properties
 
         #region Commands
         #region Backing Store
         private DelegateCommand _LoadMMDBCommand;
         private DelegateCommand _FetchMMDBCommand;
         private DelegateCommand<string> _VisitUrl;
-        #endregion
+        #endregion Backing Store
 
         public DelegateCommand LoadMMDBCommand =>
             _LoadMMDBCommand = _LoadMMDBCommand ?? new DelegateCommand(async () =>
@@ -366,7 +365,6 @@ namespace Tidal.ViewModels
             }
         }, () => !geoService.IsDownloading);
 
-
         private bool HasMMInfo =>
             !string.IsNullOrEmpty(MaxMindUserName) &&
             !string.IsNullOrEmpty(MaxMindPassword) &&
@@ -381,12 +379,11 @@ namespace Tidal.ViewModels
                                                   MaxMindLicenseKey);
         }, () => !geoService.IsDownloading && HasMMInfo);
 
-
         public DelegateCommand<string> VisitUrl =>
             _VisitUrl = _VisitUrl ?? new DelegateCommand<string>((uri) =>
         {
             Process.Start(new ProcessStartInfo(uri) { UseShellExecute = true });
         }, (s) => true);
-        #endregion
+        #endregion Commands
     }
 }

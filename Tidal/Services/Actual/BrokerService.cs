@@ -35,7 +35,6 @@ namespace Tidal.Services.Actual
         private Task queueProcessor;
         private bool isOpen;
 
-
         public BrokerService(IClient client, IHostService hostService, IMessenger messenger)
         {
             disposables = new List<IDisposable>();
@@ -70,7 +69,6 @@ namespace Tidal.Services.Actual
 
             disposables.Add(messenger.Subscribe<ShutdownMessage>((m) => cts?.Cancel(), ThreadOption.PublisherThread));
         }
-
 
         public async Task<bool> OpenAsync(string ipAddr,
                                           bool useAuth = false,
@@ -109,7 +107,6 @@ namespace Tidal.Services.Actual
                 client.SetAuthorizationInfo(host.UserName, host.Password);
             }
         }
-
 
         private void QueueRequest(BrokerRequestBase request)
         {
@@ -152,7 +149,6 @@ namespace Tidal.Services.Actual
             isOpen = false;
         }
 
-
         private async void ProcessRequests()
         {
             // This is run as a background task with a simple Task.Start() and
@@ -182,7 +178,6 @@ namespace Tidal.Services.Actual
             while (requests.Count > 0)
                 requests.TryTake(out var _);
         }
-
 
         #region IDisposable Support
         private void CheckDisposed()
@@ -215,6 +210,6 @@ namespace Tidal.Services.Actual
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
         }
-        #endregion
+        #endregion IDisposable Support
     }
 }

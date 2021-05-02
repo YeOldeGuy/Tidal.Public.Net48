@@ -39,7 +39,6 @@ namespace Tidal.Services.Actual
         private readonly LurchTable<string, GeoLocation> geoCache =
             new LurchTable<string, GeoLocation>(LurchTableOrder.Access, 500);
 
-
         public GeoService(IFileService fileService,
                           ISettingsService settings,
                           IMessenger messenger,
@@ -167,7 +166,6 @@ namespace Tidal.Services.Actual
             }
         }
 
-
         /// <summary>
         /// Return the "City,St", "City, Country" or "Country" of the specified
         /// <see cref="CityResponse"/> value. Only the US and Canada get the
@@ -212,7 +210,6 @@ namespace Tidal.Services.Actual
 
             return $"{geo.City}, {geo.Country}";
         }
-
 
         private async Task<DatabaseReader> GetDatabaseReader()
         {
@@ -537,6 +534,6 @@ namespace Tidal.Services.Actual
         {
             Dispose(true);
         }
-        #endregion
+        #endregion IDisposable Support
     }
 }

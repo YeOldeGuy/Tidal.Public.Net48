@@ -15,7 +15,7 @@ namespace Tidal.Controls
         public PeerGrid()
         {
             InitializeComponent();
-            Loaded += (s, x) => { AttachCustomSorters(); };
+            Loaded += (s, x) => AttachCustomSorters();
         }
 
         public PeerCollection Peers
@@ -47,7 +47,6 @@ namespace Tidal.Controls
             CheckSortDirection("Location");
         }
 
-
         private void CheckSortDirection(string sortMemberPath)
         {
             // We're going to force the grid to perform the sort, if needed. So,
@@ -57,7 +56,7 @@ namespace Tidal.Controls
             // again (like clicking on the header).
 
             var col = peerGrid.Columns.FirstOrDefault(c => SortMember.GetName(c) == sortMemberPath);
-            if (col != null && col.SortDirection.HasValue)
+            if (col?.SortDirection.HasValue == true)
             {
                 col.SortDirection = col.SortDirection == ListSortDirection.Ascending
                     ? ListSortDirection.Descending
@@ -78,7 +77,7 @@ namespace Tidal.Controls
                 if (menu.Items.Count <= 0)
                     return;
 
-                (menu.Items[0] as MenuItem).Click -= ClearSorting;
+                ((MenuItem)menu.Items[0]).Click -= ClearSorting;
 
                 foreach (var item in menu.Items)
                 {

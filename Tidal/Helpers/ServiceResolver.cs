@@ -14,6 +14,7 @@ namespace Tidal.Helpers
         ///   Find (resolve) the specified service interface in the
         ///   application's Container.
         /// </summary>
+        /// <typeparam name="TInterface"></typeparam>
         /// <returns>
         ///   The implementation of the interface.
         /// </returns>

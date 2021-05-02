@@ -25,7 +25,6 @@ namespace Tidal.Client.Models
             SeederCount = other.SeederCount;
         }
 
-
         /// <summary>
         /// The tracker's name, a host URI, normally.
         /// </summary>
@@ -35,7 +34,6 @@ namespace Tidal.Client.Models
             get => _Host;
             set => SetProperty(ref _Host, value);
         }
-
 
         /// <summary>
         /// A client-assigned ID number for the tracker
@@ -47,7 +45,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _Id, value);
         }
 
-
         /// <summary>
         /// Is this a backup tracker?
         /// </summary>
@@ -57,7 +54,6 @@ namespace Tidal.Client.Models
             get => _IsBackup;
             set => SetProperty(ref _IsBackup, value);
         }
-
 
         /// <summary>
         /// Total number of downloads on this tracker
@@ -69,7 +65,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _DownloadCount, value);
         }
 
-
         /// <summary>
         /// Current number of incomplete downloads for the torrent that this
         /// tracker is for.
@@ -80,7 +75,6 @@ namespace Tidal.Client.Models
             get => _LeecherCount;
             set => SetProperty(ref _LeecherCount, value);
         }
-
 
         /// <summary>
         /// Current number of seeding peers with completed downloads for this

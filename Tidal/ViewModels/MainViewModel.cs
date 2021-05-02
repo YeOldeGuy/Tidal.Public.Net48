@@ -47,13 +47,13 @@ namespace Tidal.ViewModels
         private TorrentCollection _Torrents;
         private PeerCollection _Peers;
         private FileCollection _Files;
-        #endregion
+        #endregion Backing Store
 
         public string Title { get => _Title; set => SetProperty(ref _Title, value); }
         public TorrentCollection Torrents { get => _Torrents; set => SetProperty(ref _Torrents, value); }
         public PeerCollection Peers { get => _Peers; set => SetProperty(ref _Peers, value); }
         public FileCollection Files { get => _Files; set => SetProperty(ref _Files, value); }
-        #endregion
+        #endregion Properties Visible to XAML
 
         #region INavigationAware stuff
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -63,7 +63,7 @@ namespace Tidal.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            settingsService.SelectedHashes = selectedTorrents.Select(t => t.HashString).ToList();
+            settingsService.SelectedHashes = selectedTorrents.ConvertAll(t => t.HashString);
 
             foreach (var disposable in disposables)
                 disposable.Dispose();
@@ -126,12 +126,12 @@ namespace Tidal.ViewModels
 
                 messenger.Send(
                     new StatusInfoMessage(
-                        string.Format(Resources.MainVM_ChangeWantedStatus_1, wanted), 
+                        string.Format(Resources.MainVM_ChangeWantedStatus_1, wanted),
                         1.Seconds()));
                 messenger.Send(new SetTorrentsRequest(summary.OwnerId, mutator));
             }
         }
-        #endregion
+        #endregion INavigationAware stuff
 
         #region Subscription Handlers
         private void ClearCollections()
@@ -157,7 +157,6 @@ namespace Tidal.ViewModels
             messenger.Send(new TorrentRequest());
         }
 
-
         private string addedTorrentHashString = string.Empty;
 
         private void OnTorrents(TorrentResponse torrentResponse)
@@ -175,7 +174,7 @@ namespace Tidal.ViewModels
                                           select t);
 
                 // persist the list again in case there's an added torrent in it now
-                settingsService.SelectedHashes = selectedTorrents.Select(t => t.HashString).ToList();
+                settingsService.SelectedHashes = selectedTorrents.ConvertAll(t => t.HashString);
 
                 messenger.Send(new RestoreSelectionsMessage(settingsService.SelectedHashes));
                 needsSelectionsRefreshed = false;
@@ -195,14 +194,14 @@ namespace Tidal.ViewModels
 
         private void OnSaveSettings(SaveSettingsMessage saveSettingsMessage)
         {
-            settingsService.SelectedHashes = selectedTorrents.Select(t => t.HashString).ToList();
+            settingsService.SelectedHashes = selectedTorrents.ConvertAll(t => t.HashString);
         }
 
         private void OnSelectedTorrentsChanged(SelectionUpdateMessage selectionUpdateMessage)
         {
             var hashes = selectionUpdateMessage.SelectedHashes;
 
-            if (hashes != null && hashes.Any())
+            if (hashes?.Any() == true)
             {
                 var tors = from t in Torrents
                            from h in hashes
@@ -218,7 +217,7 @@ namespace Tidal.ViewModels
             UpdateFromSelected();
             RaiseCanExecuteChanged();
         }
-        #endregion
+        #endregion Subscription Handlers
 
         #region Helpers
         private void UpdateFromSelected()
@@ -239,7 +238,7 @@ namespace Tidal.ViewModels
         {
             StringBuilder titleBuilder = new StringBuilder();
 
-            if (Torrents is null || !Torrents.Any())
+            if (Torrents?.Any() != true)
             {
                 Title = "No Torrents";
                 return;
@@ -262,7 +261,7 @@ namespace Tidal.ViewModels
             QuickNormalCommand.RaiseCanExecuteChanged();
             QuickUnlimitedCommand.RaiseCanExecuteChanged();
         }
-        #endregion
+        #endregion Helpers
 
         #region ICommands
         #region Backing store for ICommands
@@ -272,27 +271,22 @@ namespace Tidal.ViewModels
         private DelegateCommand _QuickUnlimitedCommand;
         private DelegateCommand _QuickNormalCommand;
         private DelegateCommand _RemoveTorrentsCommand;
-        #endregion
+        #endregion Backing store for ICommands
 
         public DelegateCommand StartCommand =>
-            _StartCommand = _StartCommand ?? new DelegateCommand(() =>
-            {
-                messenger.Send(new StartTorrentsRequest(selectedTorrents));
-            }, () => selectedTorrents?.Any(t => t.Status == TorrentStatus.Stopped) == true);
-
+            _StartCommand = _StartCommand ?? new DelegateCommand(
+                () => messenger.Send(new StartTorrentsRequest(selectedTorrents)),
+                () => selectedTorrents?.Any(t => t.Status == TorrentStatus.Stopped) == true);
 
         public DelegateCommand StopCommand =>
-            _StopCommand = _StopCommand ?? new DelegateCommand(() =>
-            {
-                messenger.Send(new StopTorrentsRequest(selectedTorrents));
-            }, () => selectedTorrents?.Any(t => t.Status != TorrentStatus.Stopped) == true);
+            _StopCommand = _StopCommand ?? new DelegateCommand(
+                () => messenger.Send(new StopTorrentsRequest(selectedTorrents)),
+                () => selectedTorrents?.Any(t => t.Status != TorrentStatus.Stopped) == true);
 
         public DelegateCommand ReannounceCommand =>
-            _ReannounceCommand = _ReannounceCommand ?? new DelegateCommand(() =>
-            {
-                messenger.Send(new ReannounceTorrentsRequest(selectedTorrents));
-            }, () => selectedTorrents?.Any(t => t.Status != TorrentStatus.Stopped) == true);
-
+            _ReannounceCommand = _ReannounceCommand ?? new DelegateCommand(
+                () => messenger.Send(new ReannounceTorrentsRequest(selectedTorrents)), 
+                () => selectedTorrents?.Any(t => t.Status != TorrentStatus.Stopped) == true);
 
         public DelegateCommand QuickUnlimitedCommand =>
             _QuickUnlimitedCommand = _QuickUnlimitedCommand ?? new DelegateCommand(() =>
@@ -301,11 +295,10 @@ namespace Tidal.ViewModels
             {
                 SeedRatioMode = SeedLimitMode.Unlimited,
                 SeedIdleMode = SeedLimitMode.Unlimited,
-                Ids = selectedTorrents.Select(t => t.Id).ToList()
+                Ids = selectedTorrents.ConvertAll(t => t.Id)
             };
             messenger.Send(new SetTorrentsRequest(mutator));
         }, () => selectedTorrents?.Any() == true);
-
 
         public DelegateCommand QuickNormalCommand =>
             _QuickNormalCommand = _QuickNormalCommand ?? new DelegateCommand(() =>
@@ -314,11 +307,10 @@ namespace Tidal.ViewModels
             {
                 SeedRatioMode = SeedLimitMode.FollowGlobalSettings,
                 SeedIdleMode = SeedLimitMode.FollowGlobalSettings,
-                Ids = selectedTorrents.Select(t => t.Id).ToList()
+                Ids = selectedTorrents.ConvertAll(t => t.Id)
             };
             messenger.Send(new SetTorrentsRequest(mutator));
         }, () => selectedTorrents?.Any() == true);
-
 
         public DelegateCommand RemoveTorrentsCommand =>
             _RemoveTorrentsCommand = _RemoveTorrentsCommand ?? new DelegateCommand(() =>
@@ -350,13 +342,13 @@ namespace Tidal.ViewModels
                 {
                     { TorrentPropertiesViewModel.TorrentParameter, selected },
                 };
-                dialogService.ShowDialog(PageKeys.TorrentProperties, parameters, r =>
+                dialogService.ShowDialog(PageKeys.TorrentProperties, parameters, _ =>
                 {
                     // There isn't any OK returned from the properties dialog,
                     // it simply makes the changes as they're selected by the
                     // user. The only button is "Dismiss"
                 });
             }, () => selectedTorrents?.Any() == true);
-        #endregion
+        #endregion ICommands
     }
 }

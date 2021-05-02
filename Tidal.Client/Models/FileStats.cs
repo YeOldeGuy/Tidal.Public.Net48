@@ -31,7 +31,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _BytesCompleted, value);
         }
 
-
         /// <summary>
         /// If <see langword="true"/>, then this file will be downloaded. No effect
         /// after the download is accomplished.
@@ -42,7 +41,6 @@ namespace Tidal.Client.Models
             get => _Wanted;
             set => SetProperty(ref _Wanted, value);
         }
-
 
         [DataMember(Name = RpcConstants.Priority)]
         public int PriorityRaw

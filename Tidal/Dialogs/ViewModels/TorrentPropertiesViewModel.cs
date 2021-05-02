@@ -20,7 +20,6 @@ namespace Tidal.Dialogs.ViewModels
         Cancel,
     }
 
-
     public class TorrentPropertiesViewModel : BindableBase, IDialogAware
     {
         private readonly IMessenger messenger;
@@ -30,7 +29,6 @@ namespace Tidal.Dialogs.ViewModels
         private bool _SeedRatioModeChangable;
         private DelegateCommand<TorrentPropsDisposition?> _CloseCommand;
 
-
         public const string TorrentParameter = "torrent";
 
         public TorrentPropertiesViewModel(IMessenger messenger)
@@ -38,7 +36,6 @@ namespace Tidal.Dialogs.ViewModels
             this.messenger = messenger;
             Torrent = new Torrent();
         }
-
 
         #region IDialogAware
         public event Action<IDialogResult> RequestClose;
@@ -74,7 +71,7 @@ namespace Tidal.Dialogs.ViewModels
                 SeedIdleModeChangable = Torrent.SeedIdleMode == SeedLimitMode.OverrideGlobalSettings;
             }
         }
-        #endregion
+        #endregion IDialogAware
 
         #region Public Properties
         public List<string> SeedIdleSettings { get; } =
@@ -131,11 +128,9 @@ namespace Tidal.Dialogs.ViewModels
             set => SetProperty(ref _SeedRatioModeChangable, value);
         }
 
-
         public string Title { get => _Title; set => SetProperty(ref _Title, value); }
         public Torrent Torrent { get => _Torrent; set => SetProperty(ref _Torrent, value); }
-        #endregion
-
+        #endregion Public Properties
 
         private void Torrent_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

@@ -27,7 +27,7 @@ namespace Tidal.ViewModels
         private DelegateCommand _RemoveHost;
         private DelegateCommand _RevertChanges;
         private DelegateCommand _ActivateHost;
-        #endregion
+        #endregion Backing Store
 
         private readonly IHostService hostService;
         private readonly IMessenger Messenger;
@@ -35,7 +35,6 @@ namespace Tidal.ViewModels
         private List<Host> revertList;
         private bool listChanged;
         private Host activeHostAtStart;
-
 
         public HostViewModel(IHostService hostService, IMessenger messenger)
         {
@@ -73,7 +72,7 @@ namespace Tidal.ViewModels
                 }
             }
         }
-        #endregion
+        #endregion Properties Visible to XAML
 
         #region INavigationAware Methods
         public void OnNavigatedTo(NavigationContext navigationContext)
@@ -140,7 +139,7 @@ namespace Tidal.ViewModels
             foreach (var disposable in disposables)
                 disposable.Dispose();
         }
-        #endregion
+        #endregion INavigationAware Methods
 
         #region Helpers for Properties
         private void Hosts_ItemPropertyChanged(object sender, ItemPropertyChangedEventArgs e)
@@ -170,7 +169,7 @@ namespace Tidal.ViewModels
         {
             Title = "Host".ToQuantity(Hosts.Count, ShowQuantityAs.Words).ApplyCase(LetterCasing.Sentence);
         }
-        #endregion
+        #endregion Helpers for Properties
 
         #region Commands
         public DelegateCommand AddHost => _AddHost = _AddHost ?? new DelegateCommand(() =>
@@ -232,6 +231,6 @@ namespace Tidal.ViewModels
             RaiseStatusChanged();
             SetTitle();
         }, () => IsDirty || listChanged);
-        #endregion
+        #endregion Commands
     }
 }

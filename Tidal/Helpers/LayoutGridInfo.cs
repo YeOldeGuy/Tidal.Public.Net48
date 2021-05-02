@@ -39,7 +39,6 @@ namespace Tidal.Helpers
             Length = colDef.Width.Value;
         }
 
-
         /// <summary>
         /// One of the types from <see cref="Windows.UI.Xaml.GridUnitType"/>.
         /// </summary>
@@ -50,10 +49,8 @@ namespace Tidal.Helpers
         /// </summary>
         public double Length { get; set; }
 
-
         [IgnoreDataMember]
         public RowDefinition RowDefinition => new RowDefinition() { Height = new GridLength(Length, UnitType) };
-
 
         [IgnoreDataMember]
         public ColumnDefinition ColumnDefinition => new ColumnDefinition() { Width = new GridLength(Length, UnitType) };

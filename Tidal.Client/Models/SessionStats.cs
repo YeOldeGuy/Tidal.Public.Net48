@@ -18,7 +18,6 @@ namespace Tidal.Client.Models
         private TemporalStats _CurrentStats;
         private TemporalStats _CumulativeStats;
 
-
         #region assign
         protected override void AssignInternal(SessionStats other)
         {
@@ -45,7 +44,7 @@ namespace Tidal.Client.Models
             AverageDownloadSpeed = (long)downAverage.Push(other.DownloadSpeed);
             AverageUploadSpeed = (long)upAverage.Push(other.UploadSpeed);
         }
-        #endregion
+        #endregion assign
 
         /// <summary>
         /// A <see cref="MovingAverage"/> of the <see cref="DownloadSpeed"/>.
@@ -57,7 +56,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _AverageDownloadSpeed, value);
         }
 
-
         /// <summary>
         /// A <see cref="MovingAverage"/> of the <see cref="UploadSpeed"/>.
         /// </summary>
@@ -67,7 +65,6 @@ namespace Tidal.Client.Models
             get => _AverageUploadSpeed;
             set => SetProperty(ref _AverageUploadSpeed, value);
         }
-
 
         /// <summary>
         /// Current number of torrents ready to up or download. Torrents
@@ -80,7 +77,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _ActiveTorrentCount, value);
         }
 
-
         /// <summary>
         /// Current overall download speed for the client.
         /// </summary>
@@ -91,7 +87,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _DownloadSpeed, value);
         }
 
-
         /// <summary>
         /// Current overall upload speed for the client.
         /// </summary>
@@ -101,7 +96,6 @@ namespace Tidal.Client.Models
             get => _UploadSpeed;
             set => SetProperty(ref _UploadSpeed, value);
         }
-
 
         /// <summary>
         /// Current number of torrents being maintained by the client, active
@@ -114,7 +108,6 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _TorrentCount, value);
         }
 
-
         /// <summary>
         /// Number of paused (stopped) torrents in the client.
         /// </summary>
@@ -124,7 +117,6 @@ namespace Tidal.Client.Models
             get => _PausedTorrentCount;
             set => SetProperty(ref _PausedTorrentCount, value);
         }
-
 
         /// <summary>
         /// The <see cref="TemporalStats"/> of the client since the last
@@ -136,7 +128,6 @@ namespace Tidal.Client.Models
             get => _CurrentStats;
             set => SetProperty(ref _CurrentStats, value);
         }
-
 
         /// <summary>
         /// The <see cref="TemporalStats"/> of the client since the client was
