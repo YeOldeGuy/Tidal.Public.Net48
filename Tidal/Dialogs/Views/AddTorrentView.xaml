@@ -24,9 +24,9 @@
                       DataType="{x:Type models:TorrentSubFile}">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="6*" />
-                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="260" />
+                    <ColumnDefinition Width="80" />
                 </Grid.ColumnDefinitions>
                 <CheckBox Grid.Column="0"
                           IsChecked="{Binding Wanted,
@@ -34,6 +34,7 @@
                 <TextBlock Grid.Column="1"
                            FontSize="11"
                            Foreground="{DynamicResource MahApps.Brushes.Text}"
+                           TextTrimming="CharacterEllipsis"
                            Text="{Binding Name,
                                           Mode=OneWay}" />
                 <TextBlock Grid.Column="2"
@@ -49,47 +50,42 @@
 
         <DataTemplate x:Key="FileWanted"
                       DataType="{x:Type models:TorrentFileWanted}">
-            <Grid>
+            <StackPanel>
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="6*" />
-                            <ColumnDefinition Width="2*" />
-                        </Grid.ColumnDefinitions>
-                        <CheckBox Grid.Column="0"
-                                  IsChecked="{Binding Wanted,
-                                                      Mode=TwoWay}" />
-                        <TextBlock Grid.Column="1"
-                                   VerticalAlignment="Center"
-                                   FontSize="13"
-                                   FontWeight="SemiBold"
-                                   Foreground="{DynamicResource MahApps.Brushes.Text}"
-                                   Text="{Binding Name,
-                                                  Mode=OneWay}"
-                                   TextDecorations="{Binding Wanted,
-                                                             Converter={StaticResource BoolToStrikeThru}}" />
-                        <TextBlock Grid.Column="2"
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Center"
-                                   FontSize="13"
-                                   FontWeight="SemiBold"
-                                   Foreground="{DynamicResource MahApps.Brushes.Text}"
-                                   Text="{Binding Size,
-                                                  Mode=OneWay,
-                                                  Converter={StaticResource SizeConverter}}" />
-                    </Grid>
-                    <ListView Grid.Row="1"
-                              Margin="15,0"
-                              ItemTemplate="{StaticResource SubFile}"
-                              ItemsSource="{Binding Files,
-                                                    Mode=TwoWay}" />
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="260" />
+                        <ColumnDefinition Width="80" />
+                    </Grid.ColumnDefinitions>
+                    <CheckBox Grid.Column="0"
+                              IsChecked="{Binding Wanted,
+                                                  Mode=TwoWay}" />
+                    <TextBlock Grid.Column="1"
+                               VerticalAlignment="Center"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource MahApps.Brushes.Text}"
+                               Text="{Binding Name,
+                                              Mode=OneWay}"
+                               TextTrimming="CharacterEllipsis"
+                               TextDecorations="{Binding Wanted,
+                                                         Converter={StaticResource BoolToStrikeThru}}" />
+                    <TextBlock Grid.Column="2"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource MahApps.Brushes.Text}"
+                               Text="{Binding Size,
+                                              Mode=OneWay,
+                                              Converter={StaticResource SizeConverter}}" />
                 </Grid>
-            </Grid>
+                <ListView Grid.Row="1"
+                          Margin="15,0"
+                          ItemTemplate="{StaticResource SubFile}"
+                          ItemsSource="{Binding Files,
+                                                Mode=TwoWay}"/>
+            </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
 
@@ -122,8 +118,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Margin="10">
+        <DockPanel Margin="10">
             <TextBlock Margin="0,10"
+                       DockPanel.Dock="Top"
                        FontSize="18"
                        Text="Files" />
             <ListView BorderBrush="Gray"
@@ -139,7 +136,7 @@
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>
-        </StackPanel>
+        </DockPanel>
 
 
         <UniformGrid Grid.Row="2"
