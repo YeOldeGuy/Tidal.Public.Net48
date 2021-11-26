@@ -25,6 +25,7 @@
                                 Presentation="Humanize"
                                 Tolerance="5.0" />
         <conv:VisibilityConverter x:Key="Visibility" />
+        <conv:KConverter x:Key="KConvert" />
 
         <Style x:Key="StatusIconSelector"
                TargetType="TextBlock">
@@ -243,7 +244,7 @@
                                         Header="Peers">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Grid HorizontalAlignment="Center"
+                            <Grid HorizontalAlignment="Left" Margin="10,0,0,0"
                                   VerticalAlignment="Center">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
@@ -261,12 +262,12 @@
                                                FontWeight="DemiBold"
                                                Text="S:" />
                                     <TextBlock FontSize="11"
-                                               Text="{Binding SeederCount}" />
+                                               Text="{Binding SeederCount, Converter={StaticResource KConvert}}" />
                                     <TextBlock FontSize="11"
                                                FontWeight="DemiBold"
                                                Text="/L:" />
                                     <TextBlock FontSize="11"
-                                               Text="{Binding LeecherCount}" />
+                                               Text="{Binding LeecherCount, Converter={StaticResource KConvert}}" />
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>

@@ -25,7 +25,7 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30" />
-                    <ColumnDefinition Width="260" />
+                    <ColumnDefinition Width="250" />
                     <ColumnDefinition Width="80" />
                 </Grid.ColumnDefinitions>
                 <CheckBox Grid.Column="0"
@@ -34,9 +34,9 @@
                 <TextBlock Grid.Column="1"
                            FontSize="11"
                            Foreground="{DynamicResource MahApps.Brushes.Text}"
-                           TextTrimming="CharacterEllipsis"
                            Text="{Binding Name,
-                                          Mode=OneWay}" />
+                                          Mode=OneWay}"
+                           TextTrimming="CharacterEllipsis" />
                 <TextBlock Grid.Column="2"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
@@ -50,11 +50,11 @@
 
         <DataTemplate x:Key="FileWanted"
                       DataType="{x:Type models:TorrentFileWanted}">
-            <StackPanel>
-                <Grid>
+            <DockPanel>
+                <Grid DockPanel.Dock="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30" />
-                        <ColumnDefinition Width="260" />
+                        <ColumnDefinition Width="290" />
                         <ColumnDefinition Width="80" />
                     </Grid.ColumnDefinitions>
                     <CheckBox Grid.Column="0"
@@ -67,9 +67,9 @@
                                Foreground="{DynamicResource MahApps.Brushes.Text}"
                                Text="{Binding Name,
                                               Mode=OneWay}"
-                               TextTrimming="CharacterEllipsis"
                                TextDecorations="{Binding Wanted,
-                                                         Converter={StaticResource BoolToStrikeThru}}" />
+                                                         Converter={StaticResource BoolToStrikeThru}}"
+                               TextTrimming="CharacterEllipsis" />
                     <TextBlock Grid.Column="2"
                                HorizontalAlignment="Right"
                                VerticalAlignment="Center"
@@ -82,10 +82,11 @@
                 </Grid>
                 <ListView Grid.Row="1"
                           Margin="15,0"
+                          DockPanel.Dock="Bottom"
                           ItemTemplate="{StaticResource SubFile}"
                           ItemsSource="{Binding Files,
-                                                Mode=TwoWay}"/>
-            </StackPanel>
+                                                Mode=TwoWay}" />
+            </DockPanel>
         </DataTemplate>
     </UserControl.Resources>
 

@@ -110,6 +110,7 @@
     <Compile Include="Converters\BoolToTextDecoration.cs" />
     <Compile Include="Converters\DateFormatConverter.cs" />
     <Compile Include="Converters\ETAConverter.cs" />
+    <Compile Include="Converters\KConverter.cs" />
     <Compile Include="Converters\MultiplyConverter.cs" />
     <Compile Include="Converters\PercentConverter.cs" />
     <Compile Include="Converters\SizeConverter.cs" />
