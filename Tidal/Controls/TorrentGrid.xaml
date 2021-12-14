@@ -169,7 +169,7 @@
                                                         <Setter Property="FontWeight"
                                                                 Value="SemiBold" />
                                                         <Setter Property="Foreground"
-                                                                Value="{StaticResource MahApps.Brushes.SystemControlErrorTextForeground}" />
+                                                                Value="{DynamicResource MahApps.Brushes.SystemControlErrorTextForeground}" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
