@@ -21,9 +21,11 @@ namespace Tidal.Helpers
         public static void FixStarColumn(DataGrid grid, string starColumn)
         {
             var col = grid.Columns.FirstOrDefault(c => c.SortMemberPath == starColumn);
-            var width = col.Width.Value;
             if (col != null)
+            {
+                var width = col.Width.Value;
                 col.Width = new DataGridLength(width, DataGridLengthUnitType.Star);
+            }
         }
     }
 }

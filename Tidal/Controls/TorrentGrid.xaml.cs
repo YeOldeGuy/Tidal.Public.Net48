@@ -66,8 +66,10 @@ namespace Tidal.Controls
 
         public void Deserialize(string json)
         {
-            torrentGrid.Deserialize(json);
+            if (string.IsNullOrEmpty(json))
+                return;
 
+            torrentGrid.Deserialize(json);
             DataGridUtils.FixStarColumn(torrentGrid, nameof(Torrent.Name));
         }
 
