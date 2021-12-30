@@ -96,6 +96,10 @@ namespace Tidal.ViewModels
 
         private void Files_ItemPropertyChanged(object sender, ValidationModel.ItemPropertyChangedEventArgs e)
         {
+            // In which we watch for change in the Files grid, looking for
+            // when the user clicks on the Wanted checkbox. This lets the user
+            // decide to download (or not) a specific file.
+
             if (e.PropertyChangedArgs.PropertyName != nameof(FileSummary.Wanted))
                 return;
 
@@ -104,31 +108,41 @@ namespace Tidal.ViewModels
                 var indexes = new List<int>();
                 var msg = new GetSelectedFilesMessage(summary.Wanted);
 
+                // Send a message to get the selected files. The subscriber must
+                // fill the message instance with a list of them. What this is
+                // for is so the user can select a bunch of files, click on one
+                // of the "WANTED" checkboxes, and have *all* of those files
+                // change their status to match.
+
                 messenger.Send(msg); // two-way message to request selected files
 
-                if (msg.SelectedFiles is null) // null if none selected, or no subscriber
+                // If no one is subscribed to the message, the SelectedFiles
+                // will come back unchanged, which is the null value. In that
+                // case we simply use the FileSummary of the one chosen.
+
+                if (msg.SelectedFiles is null)
                     indexes.Add(summary.Index);
                 else
                     indexes.AddRange(msg.SelectedFiles.Select(f => f.Index));
 
-                var mutator = new TorrentMutator();
-                string wanted;
-                if (summary.Wanted)
+                var owners = msg.SelectedFiles.Select(f => f.OwnerId).Distinct();
+                foreach (var owner in owners)
                 {
-                    mutator.FilesWanted = indexes;
-                    wanted = Resources.Wanted_LC;
+                    var indexesOfOwner = msg.SelectedFiles.Where(o => o.OwnerId == owner).Select(f => f.Index).ToList();
+                    var mutator = new TorrentMutator();
+                    string wanted;
+                    if (summary.Wanted)
+                    {
+                        mutator.FilesWanted = indexesOfOwner;
+                        wanted = Resources.Wanted_LC;
+                    }
+                    else
+                    {
+                        mutator.FilesUnwanted = indexesOfOwner;
+                        wanted = Resources.Unwanted_LC;
+                    }
+                    messenger.Send(new SetTorrentsRequest(owner, mutator));
                 }
-                else
-                {
-                    mutator.FilesUnwanted = indexes;
-                    wanted = Resources.Unwanted_LC;
-                }
-
-                messenger.Send(
-                    new StatusInfoMessage(
-                        string.Format(Resources.MainVM_ChangeWantedStatus_1, wanted),
-                        1.Seconds()));
-                messenger.Send(new SetTorrentsRequest(summary.OwnerId, mutator));
             }
         }
         #endregion INavigationAware stuff
