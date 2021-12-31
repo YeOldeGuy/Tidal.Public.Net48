@@ -1,5 +1,5 @@
-﻿using System;
-using Prism.Events;
+﻿using Prism.Events;
+using System;
 using Tidal.Services.Abstract;
 
 namespace Tidal.Services.Actual

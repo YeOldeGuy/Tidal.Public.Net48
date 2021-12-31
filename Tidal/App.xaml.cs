@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using Prism.Ioc;
+using Prism.Unity;
+using System;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Microsoft.Toolkit.Uwp.Notifications;
-using Prism.Ioc;
-using Prism.Unity;
 using Tidal.Client;
 using Tidal.Constants;
 using Tidal.Dialogs.ViewModels;

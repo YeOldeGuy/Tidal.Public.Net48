@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Prism.Commands;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using Prism.Commands;
 using Tidal.AttachedProperties;
 using Tidal.Client.Models;
 using Tidal.Collections;

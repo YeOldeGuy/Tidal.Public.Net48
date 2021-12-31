@@ -1,7 +1,7 @@
-﻿using System;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
+using System;
 
 namespace Tidal.Dialogs.ViewModels
 {

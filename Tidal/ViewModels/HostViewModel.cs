@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Humanizer;
+﻿using Humanizer;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Tidal.Collections;
 using Tidal.Models;
 using Tidal.Models.Messages;

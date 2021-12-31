@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Prism.Events;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Prism.Events;
 using Tidal.Client;
 using Tidal.Models;
 using Tidal.Models.BrokerMessages;

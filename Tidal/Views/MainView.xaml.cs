@@ -1,6 +1,6 @@
-﻿using System.Windows.Controls;
-using Prism.Events;
+﻿using Prism.Events;
 using Prism.Regions;
+using System.Windows.Controls;
 using Tidal.Helpers;
 using Tidal.Models.Messages;
 using Tidal.Services.Abstract;

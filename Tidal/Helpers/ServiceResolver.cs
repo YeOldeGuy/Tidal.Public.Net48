@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Prism;
+using System;
 using System.Windows;
-using Prism;
 
 namespace Tidal.Helpers
 {

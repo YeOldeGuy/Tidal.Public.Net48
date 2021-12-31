@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Humanizer;
+using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Humanizer;
-using Prism.Mvvm;
 using Tidal.Client.Helpers;
 using Tidal.Helpers;
 using Tidal.Models;

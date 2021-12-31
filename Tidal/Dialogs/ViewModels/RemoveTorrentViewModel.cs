@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
+using System;
+using System.Collections.Generic;
 using Tidal.Client.Models;
 using Tidal.Properties;
 

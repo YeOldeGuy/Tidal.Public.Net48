@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Humanizer;
+﻿using Humanizer;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Services.Dialogs;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Tidal.Client.Models;
 using Tidal.Collections;
 using Tidal.Constants;
 using Tidal.Dialogs.ViewModels;
 using Tidal.Models.BrokerMessages;
 using Tidal.Models.Messages;
-using Tidal.Properties;
 using Tidal.Services.Abstract;
 
 namespace Tidal.ViewModels
@@ -125,22 +124,23 @@ namespace Tidal.ViewModels
                 else
                     indexes.AddRange(msg.SelectedFiles.Select(f => f.Index));
 
+                // Look for multiple torrents selected:
                 var owners = msg.SelectedFiles.Select(f => f.OwnerId).Distinct();
+
+                // Then, for each of the different torrents, send the signal to
+                // change the state.
                 foreach (var owner in owners)
                 {
-                    var indexesOfOwner = msg.SelectedFiles.Where(o => o.OwnerId == owner).Select(f => f.Index).ToList();
+                    // This gets the indexes of the files belonging to a single
+                    // torrent (owner, here):
+                    var indexesOfOwner = msg.SelectedFiles.Where(o => o.OwnerId == owner)
+                                                          .Select(f => f.Index)
+                                                          .ToList();
                     var mutator = new TorrentMutator();
-                    string wanted;
                     if (summary.Wanted)
-                    {
                         mutator.FilesWanted = indexesOfOwner;
-                        wanted = Resources.Wanted_LC;
-                    }
                     else
-                    {
                         mutator.FilesUnwanted = indexesOfOwner;
-                        wanted = Resources.Unwanted_LC;
-                    }
                     messenger.Send(new SetTorrentsRequest(owner, mutator));
                 }
             }
@@ -299,7 +299,7 @@ namespace Tidal.ViewModels
 
         public DelegateCommand ReannounceCommand =>
             _ReannounceCommand = _ReannounceCommand ?? new DelegateCommand(
-                () => messenger.Send(new ReannounceTorrentsRequest(selectedTorrents)), 
+                () => messenger.Send(new ReannounceTorrentsRequest(selectedTorrents)),
                 () => selectedTorrents?.Any(t => t.Status != TorrentStatus.Stopped) == true);
 
         public DelegateCommand QuickUnlimitedCommand =>

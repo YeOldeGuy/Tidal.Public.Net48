@@ -1,9 +1,9 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using Prism.Regions;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using MahApps.Metro.Controls;
-using Prism.Regions;
 using Tidal.Constants;
 using Tidal.Core.Helpers;
 using Tidal.ViewModels;

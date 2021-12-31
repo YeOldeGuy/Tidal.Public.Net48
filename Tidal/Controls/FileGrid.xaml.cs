@@ -1,9 +1,9 @@
-﻿using System.ComponentModel;
+﻿using Prism.Events;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using Prism.Events;
 using Tidal.AttachedProperties;
 using Tidal.Client.Models;
 using Tidal.Collections;

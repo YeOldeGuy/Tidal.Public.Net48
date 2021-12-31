@@ -1,5 +1,5 @@
-﻿using System;
-using MaxMind.GeoIP2.Responses;
+﻿using MaxMind.GeoIP2.Responses;
+using System;
 
 namespace Tidal.Models
 {

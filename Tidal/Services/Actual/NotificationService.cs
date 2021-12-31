@@ -1,7 +1,7 @@
-﻿using System;
-using Humanizer;
+﻿using Humanizer;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Notification.Wpf;
+using System;
 using Tidal.Constants;
 using Tidal.Properties;
 using Tidal.Services.Abstract;

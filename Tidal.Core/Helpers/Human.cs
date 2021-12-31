@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Humanizer;
+using System;
 using System.Text;
-using Humanizer;
 
 namespace Tidal.Core.Helpers
 {
