@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
+using Tidal.AttachedProperties;
 
 namespace Tidal.Helpers
 {
@@ -21,6 +22,10 @@ namespace Tidal.Helpers
         public static void FixStarColumn(DataGrid grid, string starColumn)
         {
             var col = grid.Columns.FirstOrDefault(c => c.SortMemberPath == starColumn);
+            if (col == null)
+            {
+                col = grid.Columns.FirstOrDefault(c => SortMember.GetName(c) == starColumn);
+            }
             if (col != null)
             {
                 var width = col.Width.Value;

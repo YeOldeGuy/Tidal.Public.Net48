@@ -116,6 +116,18 @@ namespace Tidal.Client.Models
             set => SetProperty(ref _AverageToPeer, value);
         }
 
+        [IgnoreDataMember, Description("Average Upload Rate")]
+        public long AverageTopeer
+        {
+            // Somewhere out there, hidden safely away from prying eyes,
+            // is a binding reference to this particular misspelling of
+            // the AverageToPeer (note the lack of uppercase on "Peer")
+            // Damn if I can find it.
+
+            get => _AverageToPeer == 0 && RateToPeer > 0 ? RateToPeer : _AverageToPeer;
+            set => SetProperty(ref _AverageToPeer, value);
+        }
+
         /// <summary>
         /// The GeoIP2 location as found. This is an <see cref="object"/> so
         /// that the MaxMind library doesn't have to be referenced here.

@@ -155,7 +155,7 @@
                 <DataGridTemplateColumn
                     Width="80"
                     ap:SortMember.Name="AverageToPeer"
-                    SortMemberPath="AverageTopeer">
+                    SortMemberPath="AverageToPeer">
                     <DataGridTemplateColumn.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock
