@@ -138,6 +138,7 @@
                                         Margin="3,0,0,0"
                                         VerticalAlignment="Center"
                                         FontSize="14"
+                                        FontWeight="Medium"
                                         Text="{Binding Name, Mode=OneWay}">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
@@ -228,7 +229,7 @@
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontWeight="Bold">
+                                    <TextBlock FontWeight="DemiBold">
                                         <Run Text="Peers:" />
                                         <Run Text="{Binding PeersConnected}" />
                                     </TextBlock>
