@@ -443,7 +443,7 @@
 
                 <!--  Activity Column  -->
                 <DataGridTemplateColumn
-                    Width="*"
+                    Width="80"
                     ap:SortMember.Name="ActivityDate"
                     Header="Active"
                     SortMemberPath="ActivityDate">

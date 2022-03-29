@@ -10,7 +10,7 @@ namespace Tidal.Models.Messages
     internal class RestoreSelectionsMessage
     {
         /// <summary>
-        /// Create a message to select the torrents on the grid indentified by
+        /// Create a message to select the torrents on the grid identified by
         /// the torrent's hashString values.
         /// </summary>
         /// <remarks>

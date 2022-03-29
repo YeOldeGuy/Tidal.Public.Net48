@@ -48,7 +48,7 @@ namespace Tidal.Services.Abstract
     {
         /// <summary>
         /// If <see langword="true"/>, then the <see cref="IGeoService"/> is
-        /// currently downloading or is busy emplacing the MMDB file.
+        /// currently downloading or is busy reading the MMDB file.
         /// </summary>
         bool IsDownloading { get; }
 
