@@ -149,6 +149,7 @@
     <Compile Include="Helpers\GridExtensions.cs" />
     <Compile Include="Helpers\InfoDisplayStack.cs" />
     <Compile Include="Helpers\IRegionNavigationServiceExtensions.cs" />
+    <Compile Include="Helpers\Json.cs" />
     <Compile Include="Helpers\LayoutGrid.cs" />
     <Compile Include="Helpers\LayoutGridInfo.cs" />
     <Compile Include="Helpers\LayoutInfo.cs" />

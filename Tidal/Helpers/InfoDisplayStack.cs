@@ -27,7 +27,7 @@ namespace Tidal.Helpers
         private readonly ConcurrentStack<DisplayMessage> messageStack;
 
         /// <summary>
-        ///   Create a new insance of <see cref="InfoDisplayStack"/>.
+        ///   Create a new instance of <see cref="InfoDisplayStack"/>.
         /// </summary>
         /// <param name="displayAction">
         ///   The action to perform on the string in an added message.
