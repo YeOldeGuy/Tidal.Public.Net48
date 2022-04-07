@@ -204,6 +204,17 @@ namespace Tidal.Services.Abstract
                                     StorageStrategy strategy = StorageStrategy.Local);
 
         /// <summary>
+        /// Extracts the specified resource to a file.
+        /// </summary>
+        /// <param name="resourceName">A properly named embedded resource.</param>
+        /// <param name="fileName">A file name to write to</param>
+        /// <param name="strategy">Where to place the file</param>
+        /// <returns></returns>
+        Task<bool> ExtractEmbeddedResourceAsync(string resourceName,
+                                                string fileName,
+                                                StorageStrategy strategy = StorageStrategy.Local);
+
+        /// <s  ummary>
         ///   Deletes the specified file at the given location.
         /// </summary>
         /// <param name="filename">

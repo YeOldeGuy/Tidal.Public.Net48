@@ -208,14 +208,14 @@ namespace Tidal.ViewModels
 
         private void OnSaveSettings(SaveSettingsMessage saveSettingsMessage)
         {
-            settingsService.SelectedHashes = selectedTorrents.ConvertAll(t => t.HashString);
-        }
+            settingsService.SelectedHashes = selectedTorrents.Select(t => t.HashString).ToList();
+         }
 
         private void OnSelectedTorrentsChanged(SelectionUpdateMessage selectionUpdateMessage)
         {
             var hashes = selectionUpdateMessage.SelectedHashes;
 
-            if (hashes?.Any() == true)
+            if (hashes.Any() == true)
             {
                 var tors = from t in Torrents
                            from h in hashes

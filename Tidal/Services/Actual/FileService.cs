@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Tidal.Services.Abstract;
@@ -200,6 +201,23 @@ namespace Tidal.Services.Actual
                 await stream.CopyToAsync(outStream);
             }
             return await FileExistsAsync(filename, strategy);
+        }
+
+        public async Task<bool> ExtractEmbeddedResourceAsync(string resourceName,
+                                                             string fileName,
+                                                             StorageStrategy strategy = StorageStrategy.Local)
+        {
+            if (resourceName is null || fileName is null) return false;
+            string path = GetFilePath(fileName, strategy);
+            if (path is null) return false;
+
+            using (var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+            using (var file = new FileStream(path, FileMode.Create, FileAccess.Write))
+            {
+                await resource.CopyToAsync(file);
+            }
+
+            return await FileExistsAsync(fileName, strategy);
         }
 
         public bool Delete(string filename,

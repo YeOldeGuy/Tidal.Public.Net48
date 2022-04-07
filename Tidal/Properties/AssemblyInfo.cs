@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Tidal")]
-[assembly: AssemblyCopyright("Copyright © 2021 Keith Walker")]
+[assembly: AssemblyCopyright("Copyright © 2022 Keith Walker")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -47,6 +47,6 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2.3.9")]
-[assembly: AssemblyFileVersion("1.2.3.9")]
+[assembly: AssemblyVersion("1.2.3.10")]
+[assembly: AssemblyFileVersion("1.2.3.10")]
 [assembly: Guid("73942E11-CF52-42A8-9A5F-99CB2719D551")]

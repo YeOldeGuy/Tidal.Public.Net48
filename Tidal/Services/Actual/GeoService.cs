@@ -150,9 +150,13 @@ namespace Tidal.Services.Actual
                 if (!await fileService.FileExistsAsync(settings.GeoDbFileName,
                                                        storageStrategy))
                 {
-                    await DownloadMaxMindAsync(settings.MaxMindUserName,
-                                               settings.MaxMindPassword,
-                                               settings.MaxMindLicenseKey);
+                    if (!await DownloadMaxMindAsync(settings.MaxMindUserName,
+                                                    settings.MaxMindPassword,
+                                                    settings.MaxMindLicenseKey))
+                    {
+                        if (!await fileService.ExtractEmbeddedResourceAsync("Tidal.GeoLite2-City.mmdb", settings.GeoDbFileName))
+                            return;
+                    }    
                 }
                 else
                 {
